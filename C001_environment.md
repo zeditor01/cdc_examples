@@ -1,4 +1,4 @@
-[Table of Contents.  Back to README.md.](README.md)
+[Back to README.md and Table of Contents.](README.md)
 
 # Environment for CDC Worked Examples
 These CDC Worked Examples are based upon the systems landscape illustrated below. TCPIP addresses and ports are represented by the black boxes.
@@ -66,4 +66,4 @@ Kafka and Db2 Linux are chosen as a couple of examples of non-mainframe targets 
 <h3>Feedback</h3> 
 <p>These papers represent the personal experience and opinion of the author. I welcome any constructive feedback to help improve these articles,</p>
 
-[Table of Contents.  Back to README.md.](README.md)
+[Back to README.md and Table of Contents.](README.md)
