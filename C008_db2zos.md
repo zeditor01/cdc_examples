@@ -1,142 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>ZEDITOR</title> 
-<link rel="stylesheet" href="/recipes/styles.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head> 
-<style>
-html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
-.mySlides {display:none}
-.w3-tag, .fa {cursor:pointer}
-.w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
+[Back to README.md and Table of Contents.](README.md)
 
-.greendot {
-  height: 12px;
-  width: 12px;
-  background-color: #7CFC00;
-  border-radius: 50%;
-  display: inline-block;
-}
+# Setting Up CDC for Db2 z/OS - Worked Example
+This chapter is a worked example of setting up CDC for Db2 z/OS. 
 
-.greydot {
-  height: 12px;
-  width: 12px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-}
+## Contents
 
-spandarkblue {
-  background-color: #0000ff;
-  color: white;
-}
-
-spanlightblue {
-  background-color: #00ffff;
-  color: black;
-}
-
-</style>
-<body style="margin:0px;"> 
-
-<!-- Persistent Site Links (sit on top) -->
-<div class="w3-top">
-  <div class="w3-row w3-large w3-blue">
-	<div class="w3-col s3">
-      <a href="/recipes/index.html" class="w3-button w3-block"><img src="/recipes/images/ZICON.png" height=25px></a>
-    </div>
-    <div class="w3-col s3">
-      <a href="/recipes/index.html" class="w3-button w3-block">Home</a>
-    </div>
-    <div class="w3-col s3">
-      <a href="/recipes/index.html#zones" class="w3-button w3-block">Technical Zones</a>
-    </div>
-    <div class="w3-col s3">
-      <a href="/recipes/index.html#about" class="w3-button w3-block">About</a>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- Start of Page Content -->
-
-<!-- Common Header for CDC Papers -->
-
-<div class="w3-content w3-light-grey" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
-
-<h2>CDC Replication Worked Examples</h2>
-
-<!-- A Grid with hyperlinks to the CDC papers   -->
-  <div class="w3-row-padding">
-
-    <div class="w3-third">
-      <ul class="w3-ul w3-border w3-left w3-hover-shadow" style="width:100%">
-        <li class="w3-black w3-large w3-padding-4">Using CDC</li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu1.html"> Environment for CDC Worked Examples.</a></li> 
-		<li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu2.html"> Creating and Operating CDC Subscriptions.</a></li> 
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu3.html"> Devops Options for CDC.</a></li> 
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu4.html"> CHCCLP Scripting.</a></li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu5.html"> Security for CDC (LDAP and TLS).</a></li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu6.html"> Container Deployment.</a></li>
-		<li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcu7.html"> Monitoring and Managing outwith the Windows MC.</a></li>
-      </ul>
-    </div>
-
-    <div class="w3-third">
-      <ul class="w3-ul w3-border w3-left w3-hover-shadow" style="width:100%">
-        <li class="w3-black w3-large w3-padding-4">Deploying z/OS CDC Agents</li>
-        <li class="w3-small"><span class="greendot"></span><a href="/recipes/docs/NA_CDC/cdcz1.html"> Setting up CDC for Db2 on z/OS.</a></li> 
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcz2.html"> Setting up Classic CDC for IMS.</a></li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcz3.html"> Setting up Classic CDC for VSAM.</a></li> 
-		<li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcz4.html"> Setting up CDC for Kafka in zCX.</a></li> 
-      </ul>
-    </div>
-	
-    <div class="w3-third">
-      <ul class="w3-ul w3-border w3-left w3-hover-shadow" style="width:100%">
-        <li class="w3-black w3-large w3-padding-4">Deploying Linux CDC Agents</li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcl1.html"> Setting up CDC for Db2 on Linux.</a></li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcl2.html"> Setting up CDC for Kafka.</a></li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcl3.html"> Setting up remote CDC Capture for Db2 z/OS.</a></li>
-        <li class="w3-small"><span class="greydot"></span><a href="/recipes/docs/NA_CDC/cdcl4.html"> Setting up remote CDC Capture for VSAM.</a></li>
-      </ul>
-    </div>
-
-  </div>
-<!-- End Grid with hyperlinks to the CDC papers -->
-
-<hr>
-
-</div>
-
-<!-- Page Contents Here -->
-
-<div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
-
-<h2>Setting up CDC for Db2 z/OS.</h2>
-
-   <!-- Grid -->
-  <div class="w3-row-padding">
-
-    <div class="w3-third w3-margin-bottom" style="width:100%">
-      <ul class="w3-ul w3-border w3-left w3-hover-shadow">
-		<li>Author: Neale Armstrong</li>
-		<li>Date Last Updated: February 2022</li>
-      </ul>
-    </div>
-
-  </div>
-
-<hr>
-
-<div id="toc_container">
-
-<p class="toc_title">Table of Contents</p>
 <ul class="toc_list">
 <li><a href="#abstract">Abstract</a>   
 <li><a href="#1.0">1 Introduction to CDC for Db2/z/OS</a>
@@ -178,9 +46,9 @@ spanlightblue {
 </ul> 
 <li><a href="#App">Appendix</a>
 </ul>
-</div>
 
-<hr>
+
+## Abstract
 
 
 <h2 id="abstract"> Abstract</h2>
