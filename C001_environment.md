@@ -52,10 +52,5 @@ These documents are aimed at two groups of people:
 * Systems professionals who need to install, customize, connect, test and generally make CDC do what it is intended to do.
 
 
-### >Assumed Knowledge
-<p>These articles assume that the reader has a reasonable understanding of what the IBM CDC Software solutions do, and the likely use cases in their organisation.</p>
-<p>A series of links that explain the basics of CDC Replication is provided at the bottom of the page should you need some additional background information.</p>
-
-
 
 [Back to README.md and Table of Contents.](README.md)
