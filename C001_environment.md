@@ -5,14 +5,12 @@ These CDC Worked Examples are based upon the systems landscape illustrated below
 
 ![CDC Landscape for Worked Examples](images/cdc/cdc_landscape.PNG)
 
-## CDC Replication Concepts
-
 IBM InfoSphere Data Replication ( aka "CDC" ) provides a data replication capability between lots of heterogeneous data sources. 
 
-1. Some data sources ( like IMS and VSAM ) can only act as CDC sources (CDC Cap).
-2. Some data sources ( like Apache Kafka ) can only act as CDC targets (CDC App).
+1. Some data sources ( like IMS and VSAM ) can only act as CDC sources (CDC Cap - dark blue).
+2. Some data sources ( like Apache Kafka ) can only act as CDC targets (CDC App - light blue).
 3. Some data sources ( like DB2 z/OS ) can act as both CDC sources and CDC targets.
-4. A set of common tools operate with all CDC agents.
+4. A set of common tools operate with all CDC agents (yellow blocks).
 5. CDC integrates with industry standards to support common authentication and encryption services like LDAP and TLS.
 
 ## CDC Capture Sources
