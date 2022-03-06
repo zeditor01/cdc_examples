@@ -20,7 +20,7 @@ currency of the curated data by consuming streams of change data from the source
 The focus of the worked examples in this publication are for mainframe databases such Db2 z/OS, IMS and VSAM. IBM InfoSphere CDC can capture changes from these source systems 
 and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Digital Integration Hubs.
 
-Code samples for the demo application used in this Redpaper can be downloaded at [code samples](https://github.com/IBMRedbooks/REDP-5646-Db2-for-z-OS-DevOps-Experience/tree/main/code%20sample).
+Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
 <p align="center">
   <img alt="CDC and DIH" src="images/cdc/zdim.png">

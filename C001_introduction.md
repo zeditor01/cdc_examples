@@ -3,7 +3,24 @@ These CDC Worked Examples are based upon the systems landscape illustrated below
 
 ![CDC Landscape for Worked Examples](images/cdc/cdc_landscape.PNG)
 
-## **Stages of the** software development life cycle
+## CDC Replication Concepts
+
+IBM InfoSphere Data Replication ( aka "CDC" ) provides a data replication capability between lots of heterogeneous data sources. 
+
+1. Some data sources ( like IMS and VSAM ) can only act as CDC sources (CDC Cap).
+2. Some data sources ( like Apache Kafka ) can only act as CDC targets (CDC App).
+3. Some data sources ( like DB2 z/OS ) can act as both CDC sources and CDC targets.
+4. A set of common tools operate with all CDC agents.
+5. CDC integrates with industry standards to support common authentication and encryption services like LDAP and TLS.
+
+
+A CDC Capture Source (like Classic CDC for IMS shown below) can replicate data to any CDC Apply Target.</p>
+<center><img src="/recipes/images/neale/cdc/cdc_landscapeC.PNG" style="width:800px"></center>
+
+<p>A CDC Apply Target (like CDC for Kafka shown below) can receive replicated data from and CDC Capture Source.</p>
+<center><img src="/recipes/images/neale/cdc/cdc_landscapeA.PNG" style="width:800px"></center>
+
+
 
 The SDLC was developed as a formalized methodology and framework for building information systems and includes all aspects of planning, creating, testing, and deploying an application. 
 
