@@ -29,22 +29,21 @@ A CDC Apply Target (like CDC for Kafka shown below) can receive replicated data 
 
 ## About these Worked Examples
 
-The raison d'etre for these articles is to bridge the collaboration gaps that exist between mainframe, midrange and cloud teams in Enterprises today.
+The raison d'etre for these articles is to provide an illustration of a simple implementation of CDC solutions between mainframe sources and cloud/midrange targets.
+
+A secondary purpose is to bridge the collaboration gaps that exist between mainframe, midrange and cloud teams in Enterprises today.
 * Much of the core business data is created and maintained on mainframe systems.
 * Cloud and midrange systems want to consume that data for purposes like digital integration hubs.
 * Enterprises typically have separate operations and development teams for these platforms, who don't have a common set of verbs and nouns.
 
 It is assumed that the reader understands the scope of IBM InfoSphere CDC solutions, and is considering implementation.
 
-The worked examples serve as an illustration of a simple implementation of CDC solutions between mainframe sources and cloud/midrange targets.
-
 These worked examples are <b>categorically not</b> a substitute for the official IBM 
 documentation: <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=change-data-capture-cdc-replication">IBM CDC knowledge centre</a>
 
 The author of these documents has found the knowledge center to be a very comprehensive and accurate source of information for all CDC software products.
-However, the author sometimes struggled to see the wood for the trees as he followed the extensive documentation, and felt that some worked examples would 
-have been helpful to visualise the something similar to the end point he sought, and the journey to get there. The result was the series of documents linked at the 
-top of this page.
+However, sometimes the documentation can seem like a collection of lego bricks without a picture of the finished model. 
+Hopefully these articles can serve as the the visualisation of the end point, to make the planning and building phases a little easier.
  
 ### Target Audience
 These documents are aimed at two groups of people:
