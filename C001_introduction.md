@@ -1,5 +1,7 @@
-# Introduction
-Any discussion of the software development lifecycle (SDLC) should begin with a definition of the process itself, which we provide here along with an overview of the latest evolution of SDLC: the DevOps methodology and the framework and tools it provides for rapid software development and delivery.
+# Environment for CDC Worked Examples
+These CDC Worked Examples are based upon the systems landscape illustrated below. TCPIP addresses and ports are represented by the black boxes.
+
+![CDC Landscape for Worked Examples](images/cdc/cdc_landscape.PNG)
 
 ## **Stages of the** software development life cycle
 
