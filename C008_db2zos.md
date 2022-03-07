@@ -144,7 +144,7 @@ relate to external artefacts.</p>
 
 <p>All the services, and their governing parameters are documented in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-about-cdc-replication">knowledge centre</a>.
 
-<br><hr>
+
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>
 <p>There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for VSAM. 
@@ -152,15 +152,13 @@ It is helpful to establish a structured overview of the main installation and co
 diving into the technical details of very nut and bolt. 
 This paper identifies five separate stages of implementation</p>
 
-	<ol> 
-	<li>SMPE Installation of Code Libraries
-	<li>Creating the Customised CDC Instance
-	<li>Configure the z/OS Environment
-	<li>Configure the Db2 z/OS Environment
-	<li>Integrate with the wider CDC Landscape
-	</ol>
+1. SMPE Installation of Code Libraries
+2. Creating the Customised CDC Instance
+3. Configure the z/OS Environment
+4. Configure the Db2 z/OS Environment
+5. Integrate with the wider CDC Landscape
 
-<br><hr>
+
 
 <h2 id="3.0">3. SMPE Installation of Code Libraries</h2>
 <p>SMPE installation is a well documented, standardised process that every systems programming shop manages with 
