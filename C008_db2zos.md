@@ -192,24 +192,21 @@ This worked example will create a single instance, under the instance high level
 <p>Inside CDCD.SCHCDATA you will find four 'XX' template members (CHCCFGXX. CHCCMMXX, CHCDBMXX, CDCLDRXX and CHCUCSXX). Make copies of these members into a different 
 suffix (65) which will be the identity of the CDC for z/OS instance that we are going to create.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>CHCCFGXX                                                           </code>  
-<code>CHCCMMXX                                                           </code>
-<code>CHCDBMXX                                                           </code>
-<code>CHCLDRXX                                                           </code>
-<code>CHCUCSXX                                                           </code>
-<code>CHCCFG65                                                           </code>
-<code>CHCCMM65                                                           </code>
-<code>CHCDBM65                                                           </code>
-<code>CHCLDR65                                                           </code>
-<code>CHCUCS65                                                           </code>
-<code>CHCMTDIN                                                           </code>
-<code>CHCTMZON                                                           </code>
-<code>CHCUEIMP                                                           </code>
-<code>CHCUTIL                                                            </code>                                                           
-</pre>
-</div>
+```CHCCFGXX 
+CHCCMMXX
+CHCDBMXX
+CHCLDRXX
+CHCUCSXX
+CHCCFG65
+CHCCMM65
+CHCDBM65
+CHCLDR65
+CHCUCS65
+CHCMTDIN
+CHCTMZON
+CHCUEIMP
+CHCUTIL                                                          
+```
 
 ![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
