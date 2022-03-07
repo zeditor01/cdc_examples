@@ -192,8 +192,6 @@ This worked example will create a single instance, under the instance high level
 <p>Inside CDCD.SCHCDATA you will find four 'XX' template members (CHCCFGXX. CHCCMMXX, CHCDBMXX, CDCLDRXX and CHCUCSXX). Make copies of these members into a different 
 suffix (65) which will be the identity of the CDC for z/OS instance that we are going to create.</p>
 
-![CDC CHCCFG65](images/cdc/chccfg65.PNG)
-
 <div class="w3-container" style="color:#00FF00; background-color:#000000">   
 <pre> 
 <code>CHCCFGXX                                                           </code>  
@@ -213,6 +211,7 @@ suffix (65) which will be the identity of the CDC for z/OS instance that we are 
 </pre>
 </div>
 
+![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
 <p><b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup.</p>
 ![CDC CHCCFG65](images/cdc/chccfg65.PNG)
