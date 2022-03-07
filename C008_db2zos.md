@@ -147,16 +147,15 @@ relate to external artefacts.</p>
 
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>
-<p>There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for VSAM. 
+There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for VSAM. 
 It is helpful to establish a structured overview of the main installation and configuration activities before 
-diving into the technical details of very nut and bolt. 
-This paper identifies five separate stages of implementation</p>
+diving into the technical details of very nut and bolt. This paper identifies five separate stages of implementation
 
-1. SMPE Installation of Code Libraries
-2. Creating the Customised CDC Instance
-3. Configure the z/OS Environment
-4. Configure the Db2 z/OS Environment
-5. Integrate with the wider CDC Landscape
+1. SMPE Installation of Code Libraries.
+2. Creating the Customised CDC Instance.
+3. Configure the z/OS Environment.
+4. Configure the Db2 z/OS Environment.
+5. Integrate with the wider CDC Landscape.
 
 
 
