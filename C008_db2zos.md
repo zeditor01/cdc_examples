@@ -208,10 +208,11 @@ CHCUEIMP
 CHCUTIL                                                          
 ```
 
+
+
+<b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup. 
 ![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
-<p><b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup.</p>
-![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
 
 
