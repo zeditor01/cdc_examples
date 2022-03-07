@@ -50,13 +50,13 @@ This chapter is a worked example of setting up CDC for Db2 z/OS.
 
 
 <h2 id="abstract"> Abstract</h2>
-<p>This document is a basic worked example of setting up CDC for Db2 z/OS.</p> 
-<ul>
-<li>It deals with the practical considerations for implementing Db2 z/OS as a CDC data source. 
-<li>It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and Db2 z/OS practical experience).
-<li>Comprehensive details of the product's features are covered in 
-<a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-cdc-db2-zos">IBM CDC knowledge centre.</a>
-</ul> 
+
+This document is a basic worked example of setting up CDC for Db2 z/OS. 
+
+* It deals with the practical considerations for implementing Db2 z/OS as a CDC data source. 
+* It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and Db2 z/OS practical experience).
+* Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-cdc-db2-zos">IBM CDC knowledge centre.</a>
+
 
 
 
