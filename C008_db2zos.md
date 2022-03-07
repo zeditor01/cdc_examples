@@ -58,6 +58,8 @@ This chapter is a worked example of setting up CDC for Db2 z/OS.
 <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-cdc-db2-zos">IBM CDC knowledge centre.</a>
 </ul> 
 
+![CDC CHCCFG65](images/cdc/chccfg65.PNG)
+
 <p>It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
 The complete set of articles can be accessed using the links at the very top of this page</p> 
@@ -87,7 +89,7 @@ and then publish the committed changes over TCPIP sockets to a CDC Apply agent.<
 <li>Binding a plan and a few packages
 <li>Granting the started task ID sufficient privileges to access the Db2 Catalog and Log Interface
 <li>Altering source tables to enforce full row logging so that the log records contain enough information to support replication
-<li>
+</ol>
 
 
 <h3 id="1.2">1.2 The CDC Started Task</h3>
@@ -216,7 +218,7 @@ suffix (65) which will be the identity of the CDC for z/OS instance that we are 
 
 
 <p><b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup.</p>
-![CDC CHCCFG65](images/cdc/CDC_architecture.jpg)
+![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
 
 
