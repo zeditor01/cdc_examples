@@ -216,7 +216,8 @@ suffix (65) which will be the identity of the CDC for z/OS instance that we are 
 
 
 <p><b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup.</p>
-![CDC CHCCFG65](images/cdc/chccfg65.PNG)
+![CDC CHCCFG65](images/cdc/CDC_architecture.jpg)
+
 
 
 <p><b>CDCD.CHCCMM65</b> contains TCPIP information. Idefined the listener port as 6789.</p>
