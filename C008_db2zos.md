@@ -58,7 +58,7 @@ This chapter is a worked example of setting up CDC for Db2 z/OS.
 <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-cdc-db2-zos">IBM CDC knowledge centre.</a>
 </ul> 
 
-![CDC CHCCFG65](images/cdc/chccfg65.PNG)
+
 
 <p>It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
@@ -66,16 +66,18 @@ The complete set of articles can be accessed using the links at the very top of 
 
 <h2 id="1.0">1. Introduction to CDC for Db2 z/OS</h2>  
 
-<p>IBM InfoSphere Data Replication for z/OS (aka CDC for Db2 z/OS) is a full CDC implementation providing both CDC Capture and CDC Apply functionality.</p>
+IBM InfoSphere Data Replication for z/OS (aka CDC for Db2 z/OS) is a full CDC implementation providing both CDC Capture and CDC Apply functionality.
 
-<p>CDC Replication is a set of products that implement a common data replication architecture spanning 
+CDC Replication is a set of products that implement a common data replication architecture spanning 
 a large number of diverse data sources and targets. The CDC common architecture is based upon replication of 
 data that conforms to the relational model. Any CDC capture or apply agent that supports a non-relational data structure 
 must perform whatever conversion work that is necessary to implement a mapping between that data structure and the 
-relational model of data.</p> 
+relational model of data.
 
-<p>Since Db2 z/OS is a relational database with robust, well-documented interfaces for accessing data and logs, the implementation of CDC for Db2 z/OS 
-is very straightforward indeed, as this article will show.</p>
+Since Db2 z/OS is a relational database with robust, well-documented interfaces for accessing data and logs, the implementation of CDC for Db2 z/OS 
+is very straightforward indeed, as this article will show. 
+
+![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
 <h3 id="1.1">1.1 Requirements to Replicate Db2 z/OS Data</h3> 
 
