@@ -94,6 +94,8 @@ and then publish the committed changes over TCPIP sockets to a CDC Apply agent.<
 <p>The diagram below is a representation of the components within a CDC capture instance, a CDC Apply instance, and how they 
 relate to external artefacts.</p>
 
+![CDC Capture Sources](images/cdc/CDC_architecture.jpg)
+
 <center><img src="/recipes/images/neale/cdc/CDC_architecture.jpg"  style="border:1px solid black; width:800px"></center> 
 
 
