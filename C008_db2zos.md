@@ -213,21 +213,17 @@ CHCUTIL
 <b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup. 
 ![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
-
-
-
-<p><b>CDCD.CHCCMM65</b> contains TCPIP information. Idefined the listener port as 6789.</p>
+<b>CDCD.CHCCMM65</b> contains TCPIP information. Idefined the listener port as 6789.
 ![CDC CHCCMM65](images/cdc/chccmm65.PNG)
 
-
-<p><b>CDCD.CHCDBM65</b> contains Db2 z/OS connection paramaters. I identified my Db2 z/OS V12 system by providing SSID. 
-I also provided the configuration values for a basic log cache which helps performance when you have multiple subscriptions.</p>
+<b>CDCD.CHCDBM65</b> contains Db2 z/OS connection paramaters. I identified my Db2 z/OS V12 system by providing SSID. 
+I also provided the configuration values for a basic log cache which helps performance when you have multiple subscriptions.
 ![CDC CHCDBM65](images/cdc/chcdbm65.PNG)
 
-<p><b>CDCD.CHCLDR65</b> contains data loader configuration statements. The defaults are all fine for a basic first setup.</p>
+<b>CDCD.CHCLDR65</b> contains data loader configuration statements. The defaults are all fine for a basic first setup.
 ![CDC CHCLDR65](images/cdc/chcldr65.PNG)
 
-<p><b>CDCD.CHCUCS65</b> contains code page configuration parameters. The defaults were fine for my system.</p>
+<b>CDCD.CHCUCS65</b> contains code page configuration parameters. The defaults were fine for my system.
 ![CDC CHCUCS65](images/cdc/chcucs65.PNG)
 
 
