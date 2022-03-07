@@ -57,12 +57,9 @@ This document is a basic worked example of setting up CDC for Db2 z/OS.
 * It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and Db2 z/OS practical experience).
 * Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-cdc-db2-zos">IBM CDC knowledge centre.</a>
 
-
-
-
-<p>It is part of a series of documents providing practical worked examples and 
+It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the links at the very top of this page</p> 
+The complete set of articles can be accessed using the links at the very top of this page.
 
 <h2 id="1.0">1. Introduction to CDC for Db2 z/OS</h2>  
 
@@ -77,8 +74,6 @@ relational model of data.
 Since Db2 z/OS is a relational database with robust, well-documented interfaces for accessing data and logs, the implementation of CDC for Db2 z/OS 
 is very straightforward indeed, as this article will show. 
 
-![CDC CHCCFG65](images/cdc/chccfg65.PNG)
-
 <h3 id="1.1">1.1 Requirements to Replicate Db2 z/OS Data</h3> 
 
 <p>The core functionaility of any CDC Capture agent is to read the source database logs asynchronously, 
@@ -86,12 +81,13 @@ stage captured data (preferably in memory) until the Unit of Work is commited or
 and then publish the committed changes over TCPIP sockets to a CDC Apply agent.</p> 
 
 <p>Any supported version of Db2 z/OS is ready to go with CDC. The customisation of Db2 to support CDC is limited to:</p>
-<ol>
-<li>Creating a few CDC control tables insider Db2 z/OS
-<li>Binding a plan and a few packages
-<li>Granting the started task ID sufficient privileges to access the Db2 Catalog and Log Interface
-<li>Altering source tables to enforce full row logging so that the log records contain enough information to support replication
-</ol>
+
+
+1. Creating a few CDC control tables insider Db2 z/OS
+2. Binding a plan and a few packages
+3. Granting the started task ID sufficient privileges to access the Db2 Catalog and Log Interface
+4. Altering source tables to enforce full row logging so that the log records contain enough information to support replication
+
 
 
 <h3 id="1.2">1.2 The CDC Started Task</h3>
@@ -186,8 +182,6 @@ followng stages.</p>
 
 
 
-
-<br><hr>
 	
 <h2 id="4.0">4. Creating the CDC Instance</h2>
 <p>The installed product code can now be used to support one or more instances of CDC for Db2 z/OS. 
@@ -198,6 +192,7 @@ This worked example will create a single instance, under the instance high level
 <p>Inside CDCD.SCHCDATA you will find four 'XX' template members (CHCCFGXX. CHCCMMXX, CHCDBMXX, CDCLDRXX and CHCUCSXX). Make copies of these members into a different 
 suffix (65) which will be the identity of the CDC for z/OS instance that we are going to create.</p>
 
+![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
 <div class="w3-container" style="color:#00FF00; background-color:#000000">   
 <pre> 
