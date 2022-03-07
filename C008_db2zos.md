@@ -226,9 +226,9 @@ I also provided the configuration values for a basic log cache which helps perfo
 <b>CDCD.CHCUCS65</b> contains code page configuration parameters. The defaults were fine for my system.
 ![CDC CHCUCS65](images/cdc/chcucs65.PNG)
 
-
-<p>After you have got a basic CDC server up and running, you will want to review all the parameter settings in the context of your scenario. The documentation describes all the 
-paramaters that can be coded (and their default values) in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=ccdz-modifying-cdc-db2-zos-configuration-control-data-set">knowledge centre</a>.
+After you have got a basic CDC server up and running, you will want to review all the parameter settings in the context of your scenario. 
+The documentation describes all the paramaters that can be coded (and their default values) 
+in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=ccdz-modifying-cdc-db2-zos-configuration-control-data-set">knowledge centre</a>.
 
  
 
@@ -237,105 +237,99 @@ paramaters that can be coded (and their default values) in the <a href="https://
 <p>Customize the job CDCD.SCHCCNTL(CDCDFPAL) to create a VSAM cluster for the CDC Replication product administration log (PAL).</p>
 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>  DEFINE -                                                              </code> 
-<code>    CLUSTER -                                                           </code> 
-<code>     (NAME(CDCD.PAL)                                                  - </code> 
-<code>      VOL(USER0A)                                                     - </code> 
-<code>      SHAREOPTIONS(2 3) -                                               </code> 
-<code>      CYL(1 1)  -                                                       </code> 
-<code>      RECSZ(36 1024) -                                                  </code> 
-<code>      INDEXED -                                                         </code> 
-<code>      NOREUSE -                                                         </code> 
-<code>      KEYS(32 0)) -                                                     </code> 
-<code>    DATA -                                                              </code> 
-<code>     (NAME(CDCD.PAL.DATA))                                            - </code> 
-<code>    INDEX -                                                             </code> 
-<code>     (NAME(CDCD.PAL.INDEX))                                             </code> 
-<code>                                                                        </code> 
-<code>  REPRO -                                                               </code> 
-<code>    INFILE(CHCPALDT) -                                                  </code> 
-<code>    OUTDATASET(CDCD.PAL)                                                </code> 
-</pre>
-</div>
+```
+  DEFINE -                                                               
+    CLUSTER -                                                            
+     (NAME(CDCD.PAL)                                                  -  
+      VOL(USER0A)                                                     -  
+      SHAREOPTIONS(2 3) -                                                
+      CYL(1 1)  -                                                        
+      RECSZ(36 1024) -                                                   
+      INDEXED -                                                          
+      NOREUSE -                                                          
+      KEYS(32 0)) -                                                      
+    DATA -                                                               
+     (NAME(CDCD.PAL.DATA))                                            -  
+    INDEX -                                                              
+     (NAME(CDCD.PAL.INDEX))                                              
+                                                                         
+  REPRO -                                                                
+    INFILE(CHCPALDT) -                                                   
+    OUTDATASET(CDCD.PAL)                                                 
+```
 
 
 <h3 id="4.3">4.3 Create cluster for metadata</h3> 
 
 <p>Customize the job CDCD.SCHCCNTL(CDCDFMTD) to create the CDC Replication metadata VSAM cluster.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>  DEFINE -                                                              </code> 
-<code>    CLUSTER -                                                           </code> 
-<code>     (NAME(CDCD.META)                                                 - </code> 
-<code>      VOL(USER0A)                                                     - </code> 
-<code>      SHAREOPTIONS(3 3) -                                               </code> 
-<code>      CYL(20 20)  -                                                     </code> 
-<code>      RECSZ(512 2048) -                                                 </code>  
-<code>      CISZ(4096) -                                                      </code> 
-<code>      INDEXED -                                                         </code> 
-<code>      NOREUSE -                                                         </code> 
-<code>      KEYS(128 16)) -                                                   </code> 
-<code>    DATA -                                                              </code> 
-<code>     (NAME(CDCD.META.DATA))                                           - </code> 
-<code>    INDEX -                                                             </code> 
-<code>     (NAME(CDCD.META.INDEX))                                            </code> 
-<code>                                                                        </code> 
-<code>  REPRO -                                                               </code> 
-<code>    INFILE(VSAMINIT) -                                                  </code> 
-<code>    OUTDATASET(CDCD.META)                                               </code> 
-</pre>
-</div>
+```
+  DEFINE -                                                               
+    CLUSTER -                                                            
+     (NAME(CDCD.META)                                                 -  
+      VOL(USER0A)                                                     -  
+      SHAREOPTIONS(3 3) -                                                
+      CYL(20 20)  -                                                      
+      RECSZ(512 2048) -                                                   
+      CISZ(4096) -                                                       
+      INDEXED -                                                          
+      NOREUSE -                                                          
+      KEYS(128 16)) -                                                    
+    DATA -                                                               
+     (NAME(CDCD.META.DATA))                                           -  
+    INDEX -                                                              
+     (NAME(CDCD.META.INDEX))                                             
+                                                                         
+  REPRO -                                                                
+    INFILE(VSAMINIT) -                                                   
+    OUTDATASET(CDCD.META)                                                
+```
 
 
 <h3 id="4.4">4.4 Bind Packages for metadata utility</h3> 
 
 <p>Customize the job CDCD.SCHCCNTL(CDCMDMDB) to bind the packages and plan for the CHCMDMUT (metadata install and upgrade utility) program.</p> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>//SYSTSIN  DD *                                                         </code> 
-<code>  DSN SYSTEM(DBCG)                                                      </code> 
-<code>  BIND -                                                                </code> 
-<code>    PACKAGE(CHCPK165)                                                 - </code> 
-<code>    MEMBER(CHCMDMMN) -                                                  </code> 
-<code>    ACTION(REPLACE) -                                                   </code> 
-<code>    CURRENTDATA(NO) -                                                   </code> 
-<code>    ENCODING(UNICODE) -                                                 </code> 
-<code>    OWNER(IBMUSER)                                                    - </code> 
-<code>    QUALIFIER(IBMUSER)                                                  </code> 
-<code>  BIND -                                                                </code> 
-<code>    PACKAGE(CHCPK165)                                                 - </code> 
-<code>    MEMBER(CHCMDMDB) -                                                  </code> 
-<code>    ACTION(REPLACE) -                                                   </code> 
-<code>    CURRENTDATA(NO) -                                                   </code> 
-<code>    ENCODING(UNICODE) -                                                 </code> 
-<code>    OWNER(IBMUSER)                                                    - </code> 
-<code>    QUALIFIER(IBMUSER)                                                  </code> 
-<code>  BIND -                                                                </code> 
-<code>    PACKAGE(CHCPK265)                                                 - </code> 
-<code>    MEMBER(CHCDB2DL) -                                                  </code> 
-<code>    ACTION(REPLACE) -                                                   </code> 
-<code>    CURRENTDATA(NO) -                                                   </code> 
-<code>    ENCODING(UNICODE) -                                                 </code> 
-<code>    OWNER(IBMUSER)                                                    - </code> 
-<code>    QUALIFIER(IBMUSER)                                                  </code> 
-<code>  BIND -                                                                </code> 
-<code>    PLAN(CHCMDM65)                                                    - </code> 
-<code>    PKLIST(CHCPK165.CHCMDMMN -                                          </code> 
-<code>           CHCPK165.CHCMDMDB -                                          </code> 
-<code>           CHCPK265.CHCDB2DL -                                          </code> 
-<code>          ) -                                                           </code> 
-<code>    ACTION(REPLACE) RETAIN -                                            </code> 
-<code>    CACHESIZE(256) -                                                    </code> 
-<code>    ISOLATION(CS) -                                                     </code> 
-<code>    OWNER(IBMUSER)                                                    - </code> 
-<code>    RELEASE(COMMIT)                                                     </code> 
-<code>  END                                                                   </code> 
-</pre>
-</div>                                           
+```
+//SYSTSIN  DD *                                                          
+  DSN SYSTEM(DBCG)                                                       
+  BIND -                                                                 
+    PACKAGE(CHCPK165)                                                 -  
+    MEMBER(CHCMDMMN) -                                                   
+    ACTION(REPLACE) -                                                    
+    CURRENTDATA(NO) -                                                    
+    ENCODING(UNICODE) -                                                  
+    OWNER(IBMUSER)                                                    -  
+    QUALIFIER(IBMUSER)                                                   
+  BIND -                                                                 
+    PACKAGE(CHCPK165)                                                 -  
+    MEMBER(CHCMDMDB) -                                                   
+    ACTION(REPLACE) -                                                    
+    CURRENTDATA(NO) -                                                    
+    ENCODING(UNICODE) -                                                  
+    OWNER(IBMUSER)                                                    -  
+    QUALIFIER(IBMUSER)                                                   
+  BIND -                                                                 
+    PACKAGE(CHCPK265)                                                 -  
+    MEMBER(CHCDB2DL) -                                                   
+    ACTION(REPLACE) -                                                    
+    CURRENTDATA(NO) -                                                    
+    ENCODING(UNICODE) -                                                  
+    OWNER(IBMUSER)                                                    -  
+    QUALIFIER(IBMUSER)                                                   
+  BIND -                                                                 
+    PLAN(CHCMDM65)                                                    -  
+    PKLIST(CHCPK165.CHCMDMMN -                                           
+           CHCPK165.CHCMDMDB -                                           
+           CHCPK265.CHCDB2DL -                                           
+          ) -                                                            
+    ACTION(REPLACE) RETAIN -                                             
+    CACHESIZE(256) -                                                     
+    ISOLATION(CS) -                                                      
+    OWNER(IBMUSER)                                                    -  
+    RELEASE(COMMIT)                                                      
+  END                                                                    
+```                                         
 
 		   
 
@@ -345,76 +339,74 @@ paramaters that can be coded (and their default values) in the <a href="https://
 a CDC instance by identifying all the DB2 z/OS artefacts that the instance should refer to. The SYSIN data for this job is commented very 
 well, and the values used in this worked example are shown below.</p> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>//SYSIN    DD  *                                                       </code> 
-<code>*Lines with an '*' in column 1 are treated as comments.                </code> 
-<code>*                                                                      </code> 
-<code>* Subsystem or data sharing group name of the                          </code> 
-<code>* DB2 system which holds (or will hold) the metadata.                  </code> 
-<code>SUBSYS=DBCG                                                            </code> 
-<code>* The plan suffix used when the plan CHCMDMxx was bound.               </code> 
-<code>PLANSFX=65                                                             </code> 
-<code>* The name of the DB2 storage group which should be used               </code> 
-<code>* to create any metadata objects. This storage group                   </code> 
-<code>* will be created if it does not exist.                                </code> 
-<code>STOGROUP=SYSDEFLT                                                      </code> 
-<code>* The list of volume names to be used to create the                    </code> 
-<code>* storage group if it does not exist. Must be specified                </code> 
-<code>* if the storage group does not exist.                                 </code> 
-<code>*OLUMES=<CHCVOLSER>                                                    </code> 
-<code>* The name of the catalog to use in creating the                       </code> 
-<code>* storage group if it does not exist. Must be specified                </code> 
-<code>* if the storage group does not exist.                                 </code> 
-<code>*ATLG=<CHCCatlg>                                                       </code> 
-<code>* The name of the database which holds the metadata.                   </code> 
-<code>* This database will be created if it does not exist.                  </code> 
-<code>DBNAME=CHCDB                                                           </code> 
-<code>* The name of the table space which will contain the majority          </code> 
-<code>* of the metadata tables. This tablespace should be a Unicode          </code> 
-<code>* table space with a page size of 4K. This table space will            </code> 
-<code>* be created if it does not exist.                                     </code> 
-<code>TBSP01=CHCTBSP1                                                        </code> 
-<code>* The name of the table space which will contain metadata tables       </code> 
-<code>* which require a 32K page size. This tablespace should be a           </code> 
-<code>* Unicode table space with a page size of 32K. This table space        </code> 
-<code>* will be created if it does not exist.                                </code> 
-<code>TBSP02=CHCTBSP2                                                        </code> 
-<code>* The buffer pool to be used when creating a new database,             </code> 
-<code>* tablespaces and indexes requiring a 4k page size.                    </code> 
-<code>* By default, bufferpool BP0 will be used.                             </code> 
-<code>* If the database specified by DBNAME already exists then its          </code> 
-<code>* buffer pool will be used instead.                                    </code> 
-<code>BPOOL4K=BP0                                                            </code> 
-<code>* The  buffer pool to be used when creating a new tablespace,          </code> 
-<code>* and index that requires a 32k page size.                             </code> 
-<code>* By default, bufferpool BP32K will be used.                           </code> 
-<code>BPOOL32K=BP32K                                                         </code> 
-<code>* The user name which owns the metadata.                               </code> 
-<code>OWNER=IBMUSER                                                          </code> 
-<code>* The SQLID this job should operate under. By default, this            </code> 
-<code>* is the user ID this job is executing under.                          </code> 
-<code>SQLID=IBMUSER                                                          </code> 
-<code>* When set to Y, this option will cause all existing metadata          </code> 
-<code>* tables to be dropped and a completely new set of metadata            </code> 
-<code>* created. This option is intended to facilitate start over            </code> 
-<code>* scenarios, e.g. if re-running a fresh install or if running          </code> 
-<code>* an upgrade where metadata is not needed and will be recreated.       </code> 
-<code>* It should be set to N otherwise.                                     </code> 
-<code>* In general, it is not recommended to be set to Y for upgrade         </code> 
-<code>* since all existing product metadata will be lost.                    </code> 
-<code>DROPTBL=N                                                              </code> 
-<code>* When set to Y, this option will cause all DB2 system                 </code> 
-<code>* catalog tables indexes to be created. The storage group              </code> 
-<code>* used for the indexes will be the storage group specified.            </code> 
-<code>CRSYSIND=N                                                             </code> 
-<code>* When set to Y, this option will set DATA CAPTURE CHANGES             </code> 
-<code>* on selected DB2 system catalog tables.  This is necessary for        </code> 
-<code>* certain product features to function properly.                       </code> 
-<code>STSYSCAP=N                                                             </code> 
-<code>/*                                                                     </code> 
-</pre>
-</div>  
+``` 
+//SYSIN    DD  *                                                        
+*Lines with an '*' in column 1 are treated as comments.                 
+*                                                                       
+* Subsystem or data sharing group name of the                           
+* DB2 system which holds (or will hold) the metadata.                   
+SUBSYS=DBCG                                                             
+* The plan suffix used when the plan CHCMDMxx was bound.                
+PLANSFX=65                                                              
+* The name of the DB2 storage group which should be used                
+* to create any metadata objects. This storage group                    
+* will be created if it does not exist.                                 
+STOGROUP=SYSDEFLT                                                       
+* The list of volume names to be used to create the                     
+* storage group if it does not exist. Must be specified                 
+* if the storage group does not exist.                                  
+*OLUMES=<CHCVOLSER>                                                     
+* The name of the catalog to use in creating the                        
+* storage group if it does not exist. Must be specified                 
+* if the storage group does not exist.                                  
+*ATLG=<CHCCatlg>                                                        
+* The name of the database which holds the metadata.                    
+* This database will be created if it does not exist.                   
+DBNAME=CHCDB                                                            
+* The name of the table space which will contain the majority           
+* of the metadata tables. This tablespace should be a Unicode           
+* table space with a page size of 4K. This table space will             
+* be created if it does not exist.                                      
+TBSP01=CHCTBSP1                                                         
+* The name of the table space which will contain metadata tables        
+* which require a 32K page size. This tablespace should be a            
+* Unicode table space with a page size of 32K. This table space         
+* will be created if it does not exist.                                 
+TBSP02=CHCTBSP2                                                         
+* The buffer pool to be used when creating a new database,              
+* tablespaces and indexes requiring a 4k page size.                     
+* By default, bufferpool BP0 will be used.                              
+* If the database specified by DBNAME already exists then its           
+* buffer pool will be used instead.                                     
+BPOOL4K=BP0                                                             
+* The  buffer pool to be used when creating a new tablespace,           
+* and index that requires a 32k page size.                              
+* By default, bufferpool BP32K will be used.                            
+BPOOL32K=BP32K                                                          
+* The user name which owns the metadata.                                
+OWNER=IBMUSER                                                           
+* The SQLID this job should operate under. By default, this             
+* is the user ID this job is executing under.                           
+SQLID=IBMUSER                                                           
+* When set to Y, this option will cause all existing metadata           
+* tables to be dropped and a completely new set of metadata             
+* created. This option is intended to facilitate start over             
+* scenarios, e.g. if re-running a fresh install or if running           
+* an upgrade where metadata is not needed and will be recreated.        
+* It should be set to N otherwise.                                      
+* In general, it is not recommended to be set to Y for upgrade          
+* since all existing product metadata will be lost.                     
+DROPTBL=N                                                               
+* When set to Y, this option will cause all DB2 system                  
+* catalog tables indexes to be created. The storage group               
+* used for the indexes will be the storage group specified.             
+CRSYSIND=N                                                              
+* When set to Y, this option will set DATA CAPTURE CHANGES              
+* on selected DB2 system catalog tables.  This is necessary for         
+* certain product features to function properly.                        
+STSYSCAP=N                                                              
+/*                                                                      
+```  
 
 
 <h3 id="4.6">4.6 Grant Package Execution</h3> 
@@ -429,23 +421,21 @@ well, and the values used in this worked example are shown below.</p>
 <h3 id="4.8">4.8 Create Log Cache ( Single Scrape )</h3> 
 <p>Customize the job CDCD.SCHCCNTL(CDCCRCCH) to allocate the VSAM cluster that will back up the Log Cache (which was configured <b>CDCD.CHCDBM65</b>).</p> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>  DEFINE -                                                              </code> 
-<code>    CLUSTER -                                                           </code> 
-<code>     (NAME(CDCD.CHCCACHE)                                             - </code> 
-<code>      VOL(*) -                                                          </code> 
-<code>      RECORDSIZE(32760 32760) -                                         </code> 
-<code>      NUMBERED -                                                        </code> 
-<code>      SHAREOPTIONS(2))-                                                 </code> 
-<code>    DATA -                                                              </code> 
-<code>     (NAME(CDCD.CHCCACHE.DA)                                          - </code> 
-<code>      BUFFERSPACE(8388608) -                                            </code> 
-<code>      CYLINDERS(600))                                                   </code> 
-</pre>
-</div> 
+``` 
+  DEFINE -                                                               
+    CLUSTER -                                                            
+     (NAME(CDCD.CHCCACHE)                                             -  
+      VOL(*) -                                                           
+      RECORDSIZE(32760 32760) -                                          
+      NUMBERED -                                                         
+      SHAREOPTIONS(2))-                                                  
+    DATA -                                                               
+     (NAME(CDCD.CHCCACHE.DA)                                          -  
+      BUFFERSPACE(8388608) -                                             
+      CYLINDERS(600))                                                    
+```
 
-<br><hr>
+
 
 <h2 id="5.0">5. Configure the z/OS Environment</h2>
 <p>Every z/OS environment will have different constraints and considerations for deployment. 
@@ -456,15 +446,13 @@ The z/OS customizations that I needed to do were as follows</p>
 <p>The CDC Load Libraries need to be APF Authorized. 
 With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD)</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>/**********************************************/                      </code>
-<code>/*  IIDR 11.4                                 */                      </code>
-<code>/**********************************************/                      </code>
-<code>APF ADD                                                               </code>
-<code>    DSNAME(CDCD.SCHCLOAD)                               VOLUME(USER0B)</code>
-</pre>
-</div>	
+```
+/**********************************************/                      
+/*  IIDR 11.4                                 */                      
+/**********************************************/                      
+APF ADD                                                               
+    DSNAME(CDCD.SCHCLOAD)                               VOLUME(USER0B)
+```
 	
 <h3 id="5.2">5.2 TCPIP Ports</h3> 
 <p>CDC for Db2 z/OS is configured to listen on port 6789, as per the editing CDCD.CHCCMM65. 
@@ -476,14 +464,14 @@ I just added the PROC to ADCD.Z24C.PROCLIB and ran it as START1.</p>
 
 <h3 id="5.4">5.4 Test Start the CDC Server</h3> 
 <p>This is a good point to start the server and resolve any problems with the CDC Server.  
-You can test CDC as a Job using the JCL in <code style="color:#00FF00; background-color:#000000">CDCD.SCHCCNTL(CHCPROC)</code>, and then deploy it as a started task later on.
+You can test CDC as a Job using the JCL in <code style="color:#00FF00; background-color:#000000">CDCD.SCHCCNTL(CHCPROC), and then deploy it as a started task later on.
 Upon first start, you should expect to see the Classic CDC Server come up.
 </p>
 
 <center><img src="/recipes/images/neale/cdc/cdcd_startup.PNG" alt="CDC Startup Messages" style="border:1px solid black; width:800px"></center> 
 
 
-<br><hr>
+
 
 <h2 id="6.0">6. Configure the Db2 z/OS Environment</h2>
 <p>There is very little to do here.</p>
@@ -496,7 +484,7 @@ for all logged SQL operations.</p>
 <p>You don't even need to do this in advance, because the CDC administration tools will detect if "Data Capture None" is in force for any source table, and generate an ALTER 
 statement to make the change.</p>
 
-<p><code style="color:#00FF00; background-color:#000000">ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</code></p> 
+<p><code style="color:#00FF00; background-color:#000000">ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</p> 
 
 <h3 id="6.2">6.2 Db2 configuration considerations</h3> 
 <p>There is nothing else that needs to be done for a basic up and running exercise.</p>
@@ -519,7 +507,7 @@ to define Subscriptions from them to target systems. Section 7 covers these matt
 
 <h3 id="7.1">7.1 Deploy CDC as a Started Task</h3> 
 <p>Assuming you want to run CDC as a started task, rather than a batch job, you should copy 
-the contents of the JCL to run CDC as a batch job <code style="color:#00FF00; background-color:#000000">CDCD.SCHCCNTL(CHCPROC)</code> 
+the contents of the JCL to run CDC as a batch job <code style="color:#00FF00; background-color:#000000">CDCD.SCHCCNTL(CHCPROC) 
 to your PROCLIB, and follow your site standards for establishing a new started task.</p> 
 
 
