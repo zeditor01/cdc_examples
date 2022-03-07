@@ -468,7 +468,8 @@ You can test CDC as a Job using the JCL in <code style="color:#00FF00; backgroun
 Upon first start, you should expect to see the Classic CDC Server come up.
 </p>
 
-<center><img src="/recipes/images/neale/cdc/cdcd_startup.PNG" alt="CDC Startup Messages" style="border:1px solid black; width:800px"></center> 
+![CDC STARTUP](images/cdc/cdcd_startup.PNG)
+
 
 
 
