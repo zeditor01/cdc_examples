@@ -94,7 +94,7 @@ and then publish the committed changes over TCPIP sockets to a CDC Apply agent.<
 <p>The diagram below is a representation of the components within a CDC capture instance, a CDC Apply instance, and how they 
 relate to external artefacts.</p>
 
-![CDC Capture Sources](images/cdc/CDC_architecture.jpg)
+![CDC Started Task](images/cdc/CDC_architecture.jpg)
 
 
 <p>The CDC services are summarised in the table below.</p>
@@ -142,7 +142,7 @@ relate to external artefacts.</p>
 </table> 
 
 
-<p>All the services, and their governing parameters are documented in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-about-cdc-replication">knowledge centre</a>.
+All the services, and their governing parameters are documented in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-about-cdc-replication">knowledge centre</a>.
 
 
 
@@ -216,20 +216,23 @@ suffix (65) which will be the identity of the CDC for z/OS instance that we are 
 
 
 <p><b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup.</p>
-<center><img src="/recipes/images/neale/cdc/chccfg65.PNG" style="width:800px"></center>
+![CDC CHCCFG65](images/cdc/chccfg65.PNG)
+
 
 <p><b>CDCD.CHCCMM65</b> contains TCPIP information. Idefined the listener port as 6789.</p>
-<center><img src="/recipes/images/neale/cdc/chccmm65.PNG" style="width:800px"></center>
+![CDC CHCCMM65](images/cdc/chccmm65.PNG)
+
 
 <p><b>CDCD.CHCDBM65</b> contains Db2 z/OS connection paramaters. I identified my Db2 z/OS V12 system by providing SSID. 
 I also provided the configuration values for a basic log cache which helps performance when you have multiple subscriptions.</p>
-<center><img src="/recipes/images/neale/cdc/chcdbm65.PNG" style="width:800px"></center>
+![CDC CHCDBM65](images/cdc/chcdbm65.PNG)
 
 <p><b>CDCD.CHCLDR65</b> contains data loader configuration statements. The defaults are all fine for a basic first setup.</p>
-<center><img src="/recipes/images/neale/cdc/chcldr65.PNG" style="width:800px"></center>
+![CDC CHCLDR65](images/cdc/chcldr65.PNG)
 
 <p><b>CDCD.CHCUCS65</b> contains code page configuration parameters. The defaults were fine for my system.</p>
-<center><img src="/recipes/images/neale/cdc/chcucs65.PNG" style="width:800px"></center>
+![CDC CHCUCS65](images/cdc/chcucs65.PNG)
+
 
 <p>After you have got a basic CDC server up and running, you will want to review all the parameter settings in the context of your scenario. The documentation describes all the 
 paramaters that can be coded (and their default values) in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=ccdz-modifying-cdc-db2-zos-configuration-control-data-set">knowledge centre</a>.
