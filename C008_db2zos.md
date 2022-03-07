@@ -96,8 +96,6 @@ relate to external artefacts.</p>
 
 ![CDC Capture Sources](images/cdc/CDC_architecture.jpg)
 
-<center><img src="/recipes/images/neale/cdc/CDC_architecture.jpg"  style="border:1px solid black; width:800px"></center> 
-
 
 <p>The CDC services are summarised in the table below.</p>
 
@@ -154,13 +152,13 @@ It is helpful to establish a structured overview of the main installation and co
 diving into the technical details of very nut and bolt. 
 This paper identifies five separate stages of implementation</p>
 
-	<ul> 
+	<ol> 
 	<li>SMPE Installation of Code Libraries
 	<li>Creating the Customised CDC Instance
 	<li>Configure the z/OS Environment
 	<li>Configure the Db2 z/OS Environment
 	<li>Integrate with the wider CDC Landscape
-	</ul>
+	</ol>
 
 <br><hr>
 
