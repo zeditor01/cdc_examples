@@ -48,8 +48,9 @@ This chapter is a worked example of setting up CDC for Db2 z/OS.
 </ul>
 
 
+## id="abstract" Abstract
 
-<h2 id="abstract"> Abstract</h2>
+
 
 This document is a basic worked example of setting up CDC for Db2 z/OS. 
 
