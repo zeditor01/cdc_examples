@@ -1,42 +1,65 @@
 ## Description
 
-The goal of this document is to demonstrate the ability to perform single click automated deployments of multi-platform applications that include db2 for z/OS database schema changes. This is accomplished by exploiting process automation and capabilities delivered by IBM Db2 DevOps Experience for z/OS.
+The goal of this github respository is to provide practical worked examples of implementing IBM InfoSphere CDC solutions between mainframe, midrange and cloud systems. 
+It contains  
 
-By pushing the application and database code changes to a SCM, it triggers a single CI/CD pipeline execution for both types of changes, and therefore mitigating the dependency on the DBA to deploy those database changes in a separate process. At the same time, DBAs can safeguard the integrity of their organization's data by implementing site rules in Db2 DevOps Experience. DBAs define whether a schema change can be approved automatically after all site rules are satisfied or whether it must be approved manually.
+* 15 documents that illustrate a range of tasks from installation through to operations and monitoring
+* suppliemented with code samples for some of the  tasks.
 
-We describe the steps as they are relevant to the roles of the DevOps engineer who implements the enterprise CI/CD pipeline, the DBA who is responsible for database code changes in Db2 for z/OS and defines site rules changes need to adhere to for good quality in production, and the application developer who changes the application code and communicates requirements for changes in the database schema.
+Database replication is widely used by organisations to maintain copies of operational data on systems other than the primary source database. 
 
-Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/IBMRedbooks/REDP-5646-Db2-for-z-OS-DevOps-Experience/tree/main/code%20sample).
+Twenty years ago the most common use case was to maintain a reporting environment supporting data analytics in a dedicated reporting environment. 
+The justications for the effort and cost of replicating the data would include (a) protecting the operational service levels of the critical transaction systems and 
+(b) making use of hardware which was optimised for analytics.
+
+Nowadays the primary use case is to support digital integration hubs that serve data requests via Cloud APIs. As Enterprises seize upon the benefits of cloud computing, they 
+are compiling sets of APIs that are required support their Cloud applications. These business-focussed APIs do not care about the boundaries that exist between siloed 
+operational systemsby the business. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems, and they need maintain the 
+currency of the curated data by consuming streams of change data from the source systems.
+
+The focus of the worked examples in this publication are for mainframe databases such Db2 z/OS, IMS and VSAM. IBM InfoSphere CDC can capture changes from these source systems 
+and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Digital Integration Hubs.
+
+Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
 <p align="center">
-  <img alt="Git repository structure" src="images/cover.jpg">
+  <img alt="CDC and DIH" src="images/cdc/zdim.png">
 </p>
 
 ## Table of Contents
 
-[Chapter 1.  Introduction](C001_introduction.md)
+[Chapter 1.  Environment for CDC Worked Examples.](C001_environment.md)
 
-[Chapter 2.  Db2 database code changes in the CI/CD pipeline](C002_position.md)
+[Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)
 
-[Chapter 3.  Description of sample application](C003_description_sampleApp.md)
+[Chapter 3.  Devops Options for CDC.](C003_devops.md)
 
-[Chapter 4.  Architectural overview](C004_architecture.md)
+[Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)
 
-[Chapter 5.  Code repository organization](C005_codeRepoOrganization.md)
+[Chapter 5.  Security for CDC (LDAP and TLS).](C005_security.md)
 
-[Chapter 6.  Delivering database changes at the same speed as application changes](C006_doe_overall.md)
+[Chapter 6.  Container Deployment.](C006_containers.md)
 
-[Chapter 7.  IBM UrbanCode Deploy](C007_ucd_overall.md)
+[Chapter 7.  Monitoring and Managing outwith the Windows MC.](C007_dashboard.md)
 
-[Chapter 8.  Jenkins](C008_jenkins_overall.md)
+[Chapter 8.  Setting up CDC for Db2 on z/OS.](C008_db2zos.md)
 
-[Chapter 9.  Application development tools for z/OS](C009_devEnvironment.md)
+[Chapter 9.  Setting up Classic CDC for IMS.](C009_ims.md)
 
-[Chapter 10.  Application change execution, documentation of the demo](C010_demo_overall.md)
+[Chapter 10.  Setting up Classic CDC for VSAM.](C010_vsam.md)
 
-[Chapter 11.  Conclusion](C011_conclusion.md)
+[Chapter 11.  Setting up CDC for Kafka in zCX.](C011_zcx.md)
 
-[Appendix](C012_appendix.md)
+[Chapter 12.  Setting up CDC for Db2 on Linux.](C012_db2linux.md)
 
-[Glossary](C013_glossary.md)
+[Chapter 13.  Setting up CDC for Kafka.](C013_kafka.md)
+
+[Chapter 14.  Setting up remote CDC Capture for Db2 z/OS.](C014_rdb2zos.md)
+
+[Chapter 15.  Setting up remote CDC Capture for VSAM.](C015_rvsam.md)
+
+[Appendix](C016_appendix.md)
+
+[Glossary](C017_glossary.md)
+
 
