@@ -238,13 +238,15 @@ I also provided the configuration values for a basic log cache which helps perfo
 
 After you have got a basic CDC server up and running, you will want to review all the parameter settings in the context of your scenario. 
 The documentation describes all the paramaters that can be coded (and their default values) 
-in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=ccdz-modifying-cdc-db2-zos-configuration-control-data-set">knowledge centre</a>.
+in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=ccdz-modifying-cdc-db2-zos-configuration-control-data-set">knowledge centre</a>. However,
+the defaults will be fine for an initial setup.
 
  
 
 <h3 id="4.2">4.2 Create PAL ( Product Admin Log )</h3> 
 
-<p>Customize the job CDCD.SCHCCNTL(CDCDFPAL) to create a VSAM cluster for the CDC Replication product administration log (PAL).</p>
+Customize the job CDCD.SCHCCNTL(CDCDFPAL) to create a VSAM cluster for the CDC Replication product administration log (PAL). 
+The purpose of the PAL is to store messages for easy retrieval by the CDC Administration tools (Management Console and CHCCLP scripts).
 
 
 ```
@@ -271,7 +273,8 @@ in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=ccdz-modifying-cdc-
 
 <h3 id="4.3">4.3 Create cluster for metadata</h3> 
 
-<p>Customize the job CDCD.SCHCCNTL(CDCDFMTD) to create the CDC Replication metadata VSAM cluster.</p>
+Customize the job CDCD.SCHCCNTL(CDCDFMTD) to create the CDC Replication metadata VSAM cluster. Some of the metadata for CDC is stored in 
+Db2 z/OS tables. Some is kept in this VSAM cluster.
 
 ```
   DEFINE -                                                               
@@ -429,7 +432,10 @@ STSYSCAP=N
 <p>30 packages and 15 plans will be bound.</p>
 
 <h3 id="4.8">4.8 Create Log Cache ( Single Scrape )</h3> 
-<p>Customize the job CDCD.SCHCCNTL(CDCCRCCH) to allocate the VSAM cluster that will back up the Log Cache (which was configured <b>CDCD.CHCDBM65</b>).</p> 
+CDC for Db2 can be configured to use a log cache. The purpose of this log cache is to ensure that the Capture task only has to read the Db2 log once. For example, 
+if a subscription fails, then when the problem is resolved, CDC Capture does not need to re-read the Db2 log which is relatively expensive: it can just
+retried the cached change from this VSAM cluster.
+Customize the job CDCD.SCHCCNTL(CDCCRCCH) to allocate the VSAM cluster that will back up the Log Cache (which was configured <b>CDCD.CHCDBM65</b>). 
 
 ``` 
   DEFINE -                                                               
@@ -448,13 +454,13 @@ STSYSCAP=N
 
 
 <h2 id="5.0">5. Configure the z/OS Environment</h2>
-<p>Every z/OS environment will have different constraints and considerations for deployment. 
+Every z/OS environment will have different constraints and considerations for deployment. 
 This worked example was implement on a Z Development and Test v13 environment, using the z/OS v2.4 stack provided by ADCD v13. 
-The z/OS customizations that I needed to do were as follows</p>
+The z/OS customizations that I needed to do were as follows:
 
 <h3 id="5.1">5.1 APF Authorised Load Libraries</h3>
-<p>The CDC Load Libraries need to be APF Authorized. 
-With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD)</p>
+The CDC Load Libraries need to be APF Authorized. 
+With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD).
 
 ```
 /**********************************************/                      
@@ -465,23 +471,22 @@ APF ADD
 ```
 	
 <h3 id="5.2">5.2 TCPIP Ports</h3> 
-<p>CDC for Db2 z/OS is configured to listen on port 6789, as per the editing CDCD.CHCCMM65. 
-The ADCD z/OS v2.4 distribution does not lock high ports, so I didn’t have any network administration to perform to open port 6789.</p> 
+CDC for Db2 z/OS is configured to listen on port 6789, as per the editing CDCD.CHCCMM65. 
+The ADCD z/OS v2.4 distribution does not lock high ports, so I didn’t have any network administration to perform to open port 6789. 
+Most sites would need to explicitly unlock ports and change firewall rules in the network. 
 
 <h3 id="5.3">5.3 RACF Started Task ID</h3> 
-<p>For the ZD&T environment I didn’t bother the define a started task ID to RACF. 
-I just added the PROC to ADCD.Z24C.PROCLIB and ran it as START1.</p>
+For the ZD&T environment I didn’t bother the define a started task ID to RACF. 
+I just added the PROC to ADCD.Z24C.PROCLIB and ran it as START1. 
+Most sites would create a dedicated started task userid, and permit it the necessary privileges to operate.
 
 <h3 id="5.4">5.4 Test Start the CDC Server</h3> 
-<p>This is a good point to start the server and resolve any problems with the CDC Server.  
-You can test CDC as a Job using the JCL in <code style="color:#00FF00; background-color:#000000">CDCD.SCHCCNTL(CHCPROC), and then deploy it as a started task later on.
+This is a good point to start the server and resolve any problems with the CDC Server.  
+You can test CDC as a Job using the JCL in ```CDCD.SCHCCNTL(CHCPROC)```, and then deploy it as a started task later on.
 Upon first start, you should expect to see the Classic CDC Server come up.
-</p>
+
 
 ![CDC STARTUP](images/cdc/cdcd_startup.PNG)
-
-
-
 
 
 <h2 id="6.0">6. Configure the Db2 z/OS Environment</h2>
