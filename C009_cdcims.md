@@ -243,12 +243,15 @@ CECCUSPC
 
 
 <h3 id="4.2">4.2 Edit the Parameters member</h3> 
-<p>Editing the parameters member <code>CCDC.I1.USERSAMP(CECCUSPC)</code> is a critical step. It will generate 
+
+Editing the parameters member <code>CCDC.I1.USERSAMP(CECCUSPC)</code> is a critical step. It will generate 
 fully customised JCL for pretty much everything you need to do to deploy the Classic CDC instance in your environment. 
-You will need to gather configuration information for z/OS, TCPIP, IMS, MQ and so forth to populate the parameters member.</p>
-<p>Many of the default paramaters will be just fine. You should review the descriptions for each of the parameters that are 
+You will need to gather configuration information for z/OS, TCPIP, IMS, MQ and so forth to populate the parameters member. 
+
+Many of the default paramaters will be just fine. You should review the descriptions for each of the parameters that are 
 provided inside the parameters member to assess whether they need to be changed in your system. 
-In this worked example the parameters (and line numbers for V11.3) that we edited were as follows.</p> 
+In this worked example the parameters (and line numbers for V11.3) that we edited were as follows. 
+
 <ul>
 <li>Line 43, specify the installation HLQ <code style="color:#00FF00; background-color:#000000">CACINHLQ="CCDC"</code> 
 <li>Line 45, specify the instance HLQ <code style="color:#00FF00; background-color:#000000">CACUSHLQ="CCDC.I1"</code> 
