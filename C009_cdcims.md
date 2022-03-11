@@ -113,11 +113,9 @@ relate to external artefacts.
 
 ![Classic CDC Started Task](images/cdc/ccdc_services.PNG)
 
-<center><img src="/recipes/images/neale/cdc/ccdc_services.PNG" alt="Classic CDC Services" style="border:1px solid black; width:800px"></center> 
-
-<p>The services that are outlined in red are the ones that can be protected by the SAF Exit. 
+The services that are outlined in red are the ones that can be protected by the SAF Exit. 
 The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
-The following is a brief summary of what some of the key services do.</p>
+The following is a brief summary of what some of the key services do. 
  <table>
   <tr>
     <th width=300>Service</th>
@@ -162,24 +160,25 @@ The following is a brief summary of what some of the key services do.</p>
 </table> 
 
 
-<p>All the services, and their governing parameters are documented in the knowledge 
+All the services, and their governing parameters are documented in the knowledge 
 centre <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-configuration-parameters-classic-data-servers-services">Classic Services</a>.
 
 <br><hr>
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>
-<p>There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for IMS. 
+
+There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for IMS. 
 It is helpful to establish a structured overview of the main installation and configuration activities before 
 diving into the technical details of very nut and bolt. 
-This paper identifies five separate stages of implementation</p>
+This paper identifies five separate stages of implementation
 
-	<ul> 
-	<li>SMPE Installation of Code Libraries
-	<li>Creating the Customised Classic CDC Instance
-	<li>Configure the z/OS Environment
-	<li>Configure the IMS Environment
-	<li>Integrate with the wider CDC Landscape
-	</ul>
+
+1. SMPE Installation of Code Libraries
+2. Creating the Customised Classic CDC Instance
+3. Configure the z/OS Environment
+4. Configure the IMS Environment
+5. Integrate with the wider CDC Landscape
+
 
 <br><hr>
 
