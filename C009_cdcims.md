@@ -84,29 +84,34 @@ relational model of data.
 
 <h3 id="1.1">1.1 Requirements to Replicate IMS Data</h3> 
 
-<p>The core functionaility of any CDC Capture agent is to read the source database logs asynchronously, 
+The core functionaility of any CDC Capture agent is to read the source database logs asynchronously, 
 stage captured data (preferably in memory) until the Unit of Work is commited or rolled back, 
-and then publish the committed changes over TCPIP sockets to a CDC Apply agent.</p> 
-<p>In addition to the usual requirements, Classic CDC for IMS needs to handle the fact that IMS data is stored 
-in hierarchical structures (not relational), and the Log configurations supporting IMS workloads (online and batch) 
-are significantly different to a comparatively simple recovery log used by most relational databases.</p>
+and then publish the committed changes over TCPIP sockets to a CDC Apply agent.
 
-<p style="margin-left: 50px"><b>Regarding hierarchical data structures:</b> The Classic CDC for IMS product provides 
+In addition to the usual requirements, Classic CDC for IMS needs to handle the fact that IMS data is stored 
+in hierarchical structures (not relational), and the Log configurations supporting IMS workloads (online and batch) 
+are significantly different to a comparatively simple recovery log used by most relational databases.
+
+<b>Regarding hierarchical data structures:</b> The Classic CDC for IMS product provides 
 a tool (Classic Data Architect) to map the hierarchical data structures
 into relational projections of that data, for the purposes of acting as a CDC Replication capture agent. 
 The mappings of data structures are stored in a zFS dataset called the "Classic Catalog". This contains relational catalog tables 
 like Db2 ( sysibm.systables , sysibm.syscolumns etc... ) that contain the mapping between the fields in the relevant copybooks for the 
 IMS data, and their relational projection. The mapping information allows SQL access to the IMS database to retrieve the base data, 
 and also allows IMS log records to be consumed for the purposes of capturing IMS database changes.</p>
-<p style="margin-left: 50px"><b>Regarding IMS logs:</b>Interfaces must be established between Classic CDC and the IMS logging environment, which is managed by DBRC. 
+
+<b>Regarding IMS logs:</b> Interfaces must be established between Classic CDC and the IMS logging environment, which is managed by DBRC. 
 DBRC provides Classic CDC with information about all the IMS log datasets that it needs to track, and notifies Classic CDC when 
 log datasets become full and are switched. 
 Additionally, new log record types (Type 99) must be cut for IMS databases, because standard Type 50 log records do not contain enough 
-information for the purposes of data repliaction.</p> 
+information for the purposes of data repliaction.
+
 
 <h3 id="1.2">1.2 The Classic CDC Started Task</h3>
-<p>The diagram below is a representation of the components within a Classic CDC for IMS started task, and how they 
-relate to external artefacts.</p>
+The diagram below is a representation of the components within a Classic CDC for IMS started task, and how they 
+relate to external artefacts.
+
+![Classic CDC Started Task](images/cdc/ccdc_services.PNG)
 
 <center><img src="/recipes/images/neale/cdc/ccdc_services.PNG" alt="Classic CDC Services" style="border:1px solid black; width:800px"></center> 
 
