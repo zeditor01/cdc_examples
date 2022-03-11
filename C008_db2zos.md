@@ -489,6 +489,7 @@ Upon first start, you should expect to see the Classic CDC Server come up.
 
 ![CDC STARTUP](images/cdc/cdcd_startup.PNG)
 
+<br><hr>
 
 <h2 id="6.0">6. Configure the Db2 z/OS Environment</h2>
 There is very little to do here.
