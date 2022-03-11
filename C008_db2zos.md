@@ -533,106 +533,51 @@ to your PROCLIB, and follow your site standards for establishing a new started t
 This document is primarily concerned with everything that needs to be done to establish CDC for Db2 z/OS as a started task. 
 
 Using the the CDC administration tools is now a standard CDC task which is covered in 
-[Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)
+[Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)
 
 
 
 
 <h3 id="7.3">7.3 Use CHCCLP Scripting for z/OS</h3>
-<p>CDC Replication is traditionally a Windows-centric environment for operations and control, but it also has advanced scripting capabilities for automation.</p>
-<p>The CDC Management Console is a comprehensive GUI that addresses all parts of the devops 
-lifecycle ( access control, definition, operations, monitoring ).</p>
-<p>The CHCCLP Scripting tools offer automated devops controls using scripts. These can be executed from the Windows-based 
+CDC Replication is traditionally a Windows-centric environment for operations and control, but it also 
+has advanced scripting capabilities for automation. The CDC Management Console is a comprehensive GUI 
+that addresses all parts of the devops lifecycle ( access control, definition, operations, monitoring ). 
+
+The CHCCLP Scripting tools offer automated devops controls using scripts. These can be executed from the Windows-based 
 Management Console, or from the Access Server on Windows or Linux. 
 The CHCCLP scripting option will be attractive to all shops that wish to implement strong devops governance and control to their 
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
-inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler).<p>
-<p>All of these devops options are covered in the the <a href="/recipes/docs/NA_CDC/cdcu2.html">Devops Options for CDC.</a> paper 
-and <a href="/recipes/docs/NA_CDC/cdcu3.html">CHCCLP Scripting.</a> paper in this series of articles.</p>
+inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
+All of these devops options are covered in [Chapter 3.  Devops Options for CDC.](C003_devops.md)
+and [Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)
 
 <h3 id="7.4">7.4 Conforming to site standards for cross-platform devops and security.</h3> 
-<p>So far, this document has been primarily concerned with the mechanics of making CDC operate from VSAM to any number of heterogeneous targets. 
-It may be hard to believe, but that was the easy part!</p>
-<p>The author has worked with several mainframe customers deploying CDC for VSAM to feed a stream of changes to midrange and Cloud targets. 
-The challenges to overcome will include...</p>
-<ul>
-<li>different development and operational teams supporting the capture and apply services
-<li>co-ordinating devops tasks between cross-platform teams
-<li>change control procedures
-<li>implementing TLS encryption between the application-transparent z/OS platform and application-controlled LUW platforms
-</ul>
-<p>A good approach is to start by considering the non-functional requriements for the business service that CDC will support. If the business 
+
+Setting up CDC for z/OS is a relatively simple SMPE and customisation process. Most Db2 z/OS sites will handle that with ease. The bigger challenges 
+often arise when collaboration between mainframe and midrange/cloud operations teams commence. The challenges to overcome will include...
+ 
+* different development and operational teams supporting the capture and apply services
+* co-ordinating devops tasks between cross-platform teams
+* change control procedures
+*implementing TLS encryption between the application-transparent z/OS platform and application-controlled LUW platforms
+ 
+A good approach is to start by considering the non-functional requriements for the business service that CDC will support. If the business 
 requires a high level of service ( low latency, stringent monitoring and alerting, minimal downtime, fast recovery from outages etc... ) then
-an operational support model can be developed to meet those requirements.</p>
+an operational support model can be developed to meet those requirements. 
 
-<p>Once the required service levels are defined, that is a useful reference point for assessing whether the opertional 
-management controls and interfaces between different operations teams can satisfy those service levels</p>
-<p>In some cases, the co-operation between different operational teams can be adjusted to satisfy the required service levels</p>
-<p>In other cases, it may be helpful to use technology options to shift the CDC operations entirely to mainframe, or entirely to non-mainframe. 
-This case be done by selecting different CDC agents in many cases, as follows</p>
-<ul>
-<li>If a Windows/Linux operations hub is desired, then there are remote capture agent options for VSAM and DB2 z/OS.
-<li>If a z/OS operations hub is desired, then the Linux-based CDC agents can be deployed as software containers inside z/OS Container Extensions
-</ul>
-<p>Please be aware of the flexible CDC deployment options that exist, and take an early view on what choices may provide the best 
-devops lifecycle proposition for your organisation.</p>
+Once the required service levels are defined, that is a useful reference point for assessing whether the opertional 
+management controls and interfaces between different operations teams can satisfy those service levels.
 
-<p>This series of articles includes a heavy focus of worked deployment examples, but the articles in the "Using CDC" column do aim 
-to address the practical devops challenges with recommendations on how to address common challenges.</p>
+* In some cases, the co-operation between different operational teams can be adjusted to satisfy the required service levels 
+* In other cases, it may be helpful to use technology options to shift the CDC operations entirely to mainframe, or entirely to non-mainframe. This case be done by selecting different CDC agents in many cases, as follows 
 
 
-<br><hr>
+1. If a Windows/Linux operations hub is desired, then there are remote capture agent options for VSAM and DB2 z/OS.
+2. If a z/OS operations hub is desired, then the Linux-based CDC agents can be deployed as software containers inside z/OS Container Extensions
 
-<h2 id="App">Appendix</h2>
-<p>placeholder</p>
+Please be aware of the flexible CDC deployment options that exist, and take an early view on what choices may provide the best 
+devops lifecycle proposition for your organisation. 
 
 
 
-
-
-
-<!-- End of Page Content   -->
-
-	<div class="w3-center w3-dark-grey" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
-	<p>copyright &copy; zeditor.org</p>
-    </div>
-	
-</div>
-	
-<script>
-// Slideshow
-var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demodots");
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length} ;
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-white", "");
-  }
-  x[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " w3-white";
-}
-</script>
-	
-</body>
-</html>	
-	
-</body>
-</html>
-	
 
