@@ -42,9 +42,9 @@ Code samples for the demo application used in this Redpaper can be downloaded at
 
 [Chapter 7.  Monitoring and Managing outwith the Windows MC.](C007_dashboard.md)
 
-[Chapter 8.  Setting up CDC for Db2 on z/OS.](C008_db2zos.md)
+[Chapter 8.  Setting up CDC for Db2 on z/OS.](C008_cdcdb2zos.md)
 
-[Chapter 9.  Setting up Classic CDC for IMS.](C009_ims.md)
+[Chapter 9.  Setting up Classic CDC for IMS.](C009_cdcims.md)
 
 [Chapter 10.  Setting up Classic CDC for VSAM.](C010_vsam.md)
 
