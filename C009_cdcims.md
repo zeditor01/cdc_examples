@@ -769,125 +769,136 @@ The CECE1OPT module was assembled and linkedited using the job below
 ```
 
 <h3 id="6.3">6.3 Augment DBD to generate T99 Log Records</h3> 
-<p>A third difference between Classic CDC for IMS and CDC for a relational source is IMS logging.</p>
-<p>In order to perform data replication it is necessary that the database is instructed to 
+
+A third difference between Classic CDC for IMS and CDC for a relational source is IMS logging. 
+
+In order to perform data replication it is necessary that the database is instructed to 
 write log records with all the before and after images in the log record. 
-(Normally databases only write sufficient data into the log records to support recovery).</p>
-<p>For Db2 databases, the log records can simply be expanded for the tables of interest, by altering 
-the definition, with DDL such as:</p>
-<pre> 
+(Normally databases only write sufficient data into the log records to support recovery). 
+
+For Db2 databases, the log records can simply be expanded for the tables of interest, by altering 
+the definition, with DDL such as: 
+ 
 <code>ALTER TABLE MYSCHEMA.MYTABLE DATA CAPTURE CHANGES</code>.
-</pre>
-<p>IMS is different. IMS generates Type 50 log records by default. 
+
+IMS is different. IMS generates Type 50 log records by default. 
 In order to support data replication you need to augment the IMS database to write Type 99 log records, 
 which are designed for the purposes of data replication.
 This requires the IMS database to be “augmented” with an EXIT clause to specify the content 
-to be written to the Type 99 log records.</p> 
-<p>This worked example used the IBM-provided sample database (DI21PART) as the CDC source database. 
+to be written to the Type 99 log records. 
+
+This worked example used the IBM-provided sample database (DI21PART) as the CDC source database. 
 The DBD source is stored in <code>DFSF10.SDFSISRC(DI21PART)</code>. 
 This example only adds the EXIT clause to three specific segments (PARTROOT, STANINFO, STOKSTAT). 
 You can choose to augment whichever segments you want, or you could augment the entire database on the DBD statement. 
-This DBD source in this worked example was edited to specify Type 99 logging as follows.</p>
+This DBD source in this worked example was edited to specify Type 99 logging as follows. 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>         DBD   NAME=DI21PART,ACCESS=(HISAM,VSAM)                        </code>
-<code>      DATASET  DD1=DI21PART,DEVICE=3380,OVFLW=DI21PARO,                X</code>
-<code>               SIZE=(2048,2048),RECORD=(678,678)                        </code>
-<code>      SEGM     NAME=PARTROOT,PARENT=0,BYTES=50,FREQ=250,               X</code>
-<code>               EXIT=(*,NOKEY,DATA,NOPATH,(NOCASCADE))                   </code>
-<code>      FIELD    NAME=(PARTKEY,SEQ),TYPE=C,BYTES=17,START=1               </code>
-<code>      SEGM     NAME=STANINFO,PARENT=PARTROOT,BYTES=85,FREQ=1,          X</code>
-<code>               EXIT=(*,KEY,DATA,NOPATH,(NOCASCADE))                     </code>
-<code>      FIELD    NAME=(STANKEY,SEQ),TYPE=C,BYTES=2,START=1                </code>
-<code>      SEGM     NAME=STOKSTAT,PARENT=PARTROOT,BYTES=160,FREQ=2,         X</code>
-<code>               EXIT=(*,KEY,DATA,NOPATH,(NOCASCADE))                     </code>
-<code>      FIELD    NAME=(STOCKEY,SEQ),TYPE=C,BYTES=16,START=1               </code>
-<code>      SEGM     NAME=CYCCOUNT,PARENT=STOKSTAT,BYTES=25,FREQ=1            </code>
-<code>      FIELD    NAME=(CYCLKEY,SEQ),TYPE=C,BYTES=2,START=1                </code>
-<code>      SEGM     NAME=BACKORDR,PARENT=STOKSTAT,BYTES=75,FREQ=0            </code>
-<code>      FIELD    NAME=(BACKKEY,SEQ),TYPE=C,BYTES=10,START=1               </code>
-<code>      DBDGEN                                                            </code>
-<code>      FINISH                                                            </code>
-<code>      END                                                               </code>
-</pre>	
-</div>
+```
+         DBD   NAME=DI21PART,ACCESS=(HISAM,VSAM)                        
+      DATASET  DD1=DI21PART,DEVICE=3380,OVFLW=DI21PARO,                X
+               SIZE=(2048,2048),RECORD=(678,678)                        
+      SEGM     NAME=PARTROOT,PARENT=0,BYTES=50,FREQ=250,               X
+               EXIT=(*,NOKEY,DATA,NOPATH,(NOCASCADE))                   
+      FIELD    NAME=(PARTKEY,SEQ),TYPE=C,BYTES=17,START=1               
+      SEGM     NAME=STANINFO,PARENT=PARTROOT,BYTES=85,FREQ=1,          X
+               EXIT=(*,KEY,DATA,NOPATH,(NOCASCADE))                     
+      FIELD    NAME=(STANKEY,SEQ),TYPE=C,BYTES=2,START=1                
+      SEGM     NAME=STOKSTAT,PARENT=PARTROOT,BYTES=160,FREQ=2,         X
+               EXIT=(*,KEY,DATA,NOPATH,(NOCASCADE))                     
+      FIELD    NAME=(STOCKEY,SEQ),TYPE=C,BYTES=16,START=1               
+      SEGM     NAME=CYCCOUNT,PARENT=STOKSTAT,BYTES=25,FREQ=1            
+      FIELD    NAME=(CYCLKEY,SEQ),TYPE=C,BYTES=2,START=1                
+      SEGM     NAME=BACKORDR,PARENT=STOKSTAT,BYTES=75,FREQ=0            
+      FIELD    NAME=(BACKKEY,SEQ),TYPE=C,BYTES=10,START=1               
+      DBDGEN                                                            
+      FINISH                                                            
+      END                                                               
+```
   
-<p>After changing the DBD, an ACBGEN is required to cause the changes to be implemented. 
-The following job was submitted to perform the ACBGEN.</p>
+After changing the DBD, an ACBGEN is required to cause the changes to be implemented. 
+The following job was submitted to perform the ACBGEN.
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//IBMUSERS   JOB (CRTZFS),'CRTZFS',                      </code>
-<code>//            CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID          </code>
-<code>//USRPROC     JCLLIB ORDER=(DFSF10.SDFSPROC)             </code>
-<code>//IVPDB1    EXEC PROC=DFSDBDGN,SOUT='*',MBR=DI21PART,    </code>
-<code>//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        </code>
-<code>//C.SYSIN   DD DISP=SHR,DSN=DFSF10.SDFSISRC(&MBR)        </code>
-<code>//IVPPSB    EXEC PROC=DFSPSBGN,SOUT='*',MBR=DFSSAM14,    </code>
-<code>//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        </code>
-<code>//C.SYSIN   DD DISP=SHR,DSN=DFSF10.SDFSISRC(&MBR)        </code>
-<code>//IVPACB    EXEC PROC=ACBGEN,SOUT='*',                   </code>
-<code>//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        </code>
-<code>//G.SYSIN   DD *                                         </code>
-<code>  BUILD DBD=DI21PART                                     </code>
-<code>/*                                                       </code>
-<code>//ACBLIBA  EXEC PROC=OLCUTL,SOUT='*',TYPE=ACB,IN=S,OUT=A,</code>
-<code>//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        </code>
-<code>//ACBLIBB  EXEC PROC=OLCUTL,SOUT='*',TYPE=ACB,IN=S,OUT=B,</code>
-<code>//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        </code>
-</pre>
-</div>
+```
+//IBMUSERS   JOB (CRTZFS),'CRTZFS',                      
+//            CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID          
+//USRPROC     JCLLIB ORDER=(DFSF10.SDFSPROC)             
+//IVPDB1    EXEC PROC=DFSDBDGN,SOUT='*',MBR=DI21PART,    
+//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        
+//C.SYSIN   DD DISP=SHR,DSN=DFSF10.SDFSISRC(&MBR)        
+//IVPPSB    EXEC PROC=DFSPSBGN,SOUT='*',MBR=DFSSAM14,    
+//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        
+//C.SYSIN   DD DISP=SHR,DSN=DFSF10.SDFSISRC(&MBR)        
+//IVPACB    EXEC PROC=ACBGEN,SOUT='*',                   
+//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        
+//G.SYSIN   DD *                                         
+  BUILD DBD=DI21PART                                     
+/*                                                       
+//ACBLIBA  EXEC PROC=OLCUTL,SOUT='*',TYPE=ACB,IN=S,OUT=A,
+//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        
+//ACBLIBB  EXEC PROC=OLCUTL,SOUT='*',TYPE=ACB,IN=S,OUT=B,
+//          NODE1='DFSF10',NODE2='DFSF10',SYS2=''        
+```
   
 <h3 id="6.4">6.4 Copy the IBM-Supplied Exits into IMS RESLIB</h3> 
-<p>Having made the changes to support the Partner Program Notification interface, and the Enhanced IMS database logging, 
-you need to copy the IBM-Supplied Exits from CCDC.SCACLOAD into IMS RESLIB.</p>
-<ul>
-<li>Copy CCDC.SCACLOAD(SDFSRESL) to IMS RESLIB, or a concatenated library.
-<li>Copy DFSPPUE0 from wherever you created in to IMS RESLIB, or a concatenated library.
-</ul>
 
-<p>That's it for the Classic CDC Server !!!</p>
+Having made the changes to support the Partner Program Notification interface, and the Enhanced IMS database logging, 
+you need to copy the IBM-Supplied Exits from CCDC.SCACLOAD into IMS RESLIB. 
+
+1. Copy CCDC.SCACLOAD(SDFSRESL) to IMS RESLIB, or a concatenated library.
+2. Copy DFSPPUE0 from wherever you created in to IMS RESLIB, or a concatenated library.
+
+
+That's it for the Classic CDC Server !!! 
 
 <br><hr>
 
 <h2 id="7.0">7. Integrate with the wider CDC Landscape</h2>
-<p>Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
-to define "IMS Tables", and define Subscriptions from them to target systems. Section 7 covers this matters.</p>
+
+Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
+to define "IMS Tables", and define Subscriptions from them to target systems. Section 7 covers this matters. 
 
 <h3 id="7.1">7.1 Deploy Classic CDC as a Started Task</h3> 
-<p>Assuming you want to run Classic CDC as a started task, rather than a batch job, you should copy 
+
+Assuming you want to run Classic CDC as a started task, rather than a batch job, you should copy 
 the contents of the JCL to run Classic CDC as a batch job <code>CCDC.I1.USERSAMP(CECCDSRC)</code> 
-to your PROCLIB, and follow your site standards for establishing a new started task.</p> 
+to your PROCLIB, and follow your site standards for establishing a new started task. 
 
 <h3 id="7.2">7.2 Deploy and use the Classic Data Architect IDE</h3>
-<p>The next step is to create some "IMS Tables" to be used as CDC replication source objects.</p>
-<p>The Classic CDC Metadata catalog contains the mapping information from hierarchical IMS structures to the 
+
+The next step is to create some "IMS Tables" to be used as CDC replication source objects. 
+
+The Classic CDC Metadata catalog contains the mapping information from hierarchical IMS structures to the 
 a relational projection, as is required to participate in CDC data replication. The mapping process is enabled 
-by using an Eclipse-based tool called the Classic Data Architect to define the data mapping.</p>
-<p>The current release of the Classic Data Architect tool should be downloaded from IBM fix Central. 
-Installation to Windows is a standard setup.exe style of installer.</p>
-<p>Once CDA is installed, the tasks you will need to perform with it are as follows:</p>
-<ol>
-<li>Configure the connection to the Classic CDC started task
-<li>Create a data development project, and Import DBDs and Copybooks for the mapping work
-<li>Develop a relational model "IMS Table" based on the imported DBDs and copybooks 
-<li>Deploy the "IMS Table" to the Classic CDC for IMS Started Task
-<li>Test the validity of the IMS Table Mapping using SQL through the CDA
-<li>Make the IMS Table available for use as a source for CDC subscriptions 
-</ol> 
+by using an Eclipse-based tool called the Classic Data Architect to define the data mapping. 
+
+The current release of the Classic Data Architect tool should be downloaded from IBM fix Central. 
+Installation to Windows is a standard setup.exe style of installer. 
+
+Once CDA is installed, the tasks you will need to perform with it are as follows: 
+
+
+1. Configure the connection to the Classic CDC started task
+2. Create a data development project, and Import DBDs and Copybooks for the mapping work
+3. Develop a relational model "IMS Table" based on the imported DBDs and copybooks 
+4. Deploy the "IMS Table" to the Classic CDC for IMS Started Task
+5. Test the validity of the IMS Table Mapping using SQL through the CDA
+6. Make the IMS Table available for use as a source for CDC subscriptions 
+
 
 <h4>7.2.1 Configure the connection to the Classic CDC started task</h4>
 
-<p>Start up the CDA and choose a workspace on your PC filesystem.</p>
-<p>Verify that you are using the "Data Perspective" from the Action Bar : Window - Open Perspective - Data.</p>
-<p>The Data Perpective is shown in the screenshot below.</p>  
-<ul>
-<li>Top-Left Window : The project explorer
-<li>Top-Middle Window : Working subject pane (contents depend on what objects are selected)
-<li>Bottom-Left Window : Data Source Explorer (data soucre data access) and Console Explorer (data source configurations).
-</ul>
-<center><img src="/recipes/images/neale/cdc/CDA_Data_Perspective.png" alt="CDA Data Perspective" style="border:1px solid black; width:800px"></center> 
+Start up the CDA and choose a workspace on your PC filesystem. 
+
+Verify that you are using the "Data Perspective" from the Action Bar : Window - Open Perspective - Data. 
+
+The Data Perpective is shown in the screenshot below.  
+
+
+<b>Top-Left Window</b> : The project explorer
+<b>Top-Middle Window</b> : Working subject pane (contents depend on what objects are selected)
+<b>Bottom-Left Window</b> : Data Source Explorer (data soucre data access) and Console Explorer (data source configurations).
+ 
+![CDA Data Perspective](images/cdc/CDA_Data_Perspective.png)
 
 <p>In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
 (bottom left window in the Data Perspective), right click on "Database Connections" and choose "New". 
