@@ -77,14 +77,17 @@ is very straightforward indeed, as this article will show.
 
 <h3 id="1.1">1.1 Requirements to Replicate Db2 z/OS Data</h3> 
 
-<p>The core functionaility of any CDC Capture agent is to read the source database logs asynchronously, 
+The core functionality of any CDC Capture agent is to read the source database logs asynchronously, 
 stage captured data (preferably in memory) until the Unit of Work is commited or rolled back, 
-and then publish the committed changes over TCPIP sockets to a CDC Apply agent.</p> 
+and then publish the committed changes over TCPIP sockets to a CDC Apply agent.
 
-<p>Any supported version of Db2 z/OS is ready to go with CDC. The customisation of Db2 to support CDC is limited to:</p>
+The core functionality of any CDC Apply agent is to listen for changes from CDC source agents, process those 
+changes (along UoW boundaries) and generate write operations to apply the changes to the target according to whatever mapping 
+definitions have been specified in the subscription.
 
+Any supported version of Db2 z/OS is ready to go with CDC. The customisation of Db2 to support CDC is limited to:
 
-1. Creating a few CDC control tables insider Db2 z/OS
+1. Creating a few CDC control tables inside Db2 z/OS
 2. Binding a plan and a few packages
 3. Granting the started task ID sufficient privileges to access the Db2 Catalog and Log Interface
 4. Altering source tables to enforce full row logging so that the log records contain enough information to support replication
@@ -92,8 +95,9 @@ and then publish the committed changes over TCPIP sockets to a CDC Apply agent.<
 
 
 <h3 id="1.2">1.2 The CDC Started Task</h3>
-<p>The diagram below is a representation of the components within a CDC capture instance, a CDC Apply instance, and how they 
-relate to external artefacts.</p>
+
+The diagram below is a representation of the components within a CDC capture instance, a CDC Apply instance, and how they 
+relate to external artefacts. 
 
 ![CDC Started Task](images/cdc/CDC_architecture.jpg)
 
@@ -143,12 +147,12 @@ relate to external artefacts.</p>
 </table> 
 
 
-All the services, and their governing parameters are documented in the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-about-cdc-replication">knowledge centre</a>.
+All the services, and their governing parameters are documented in the knowledge centre <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-about-cdc-replication">here</a>.
 
 
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>
-There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for VSAM. 
+
 It is helpful to establish a structured overview of the main installation and configuration activities before 
 diving into the technical details of very nut and bolt. This paper identifies five separate stages of implementation
 
@@ -168,17 +172,17 @@ followng stages.</p>
 
  <table>
   <tr><td width=200><b>Library</b></td><td width=500><b>Contents</b></td></tr> 
-  <tr><td>CDCD.SCHCASM</td><td>?</td></tr> 
-  <tr><td>CDCD.SCHCC</td><td>?</td></tr>  
+  <tr><td>CDCD.SCHCASM</td><td>Assembler Samples</td></tr> 
+  <tr><td>CDCD.SCHCC</td><td>Samples</td></tr>  
   <tr><td>CDCD.SCHCCNTL</td><td>Sample JCL</td></tr>  
-  <tr><td>CDCD.SCHCCOB</td><td>?</td></tr>  
+  <tr><td>CDCD.SCHCCOB</td><td>COBOL Samples</td></tr>  
   <tr><td>CDCD.SCHCDATA</td><td>Configuration library</td></tr> 
   <tr><td>CDCD.SCHCDBRM</td><td>DBRM Library</td></tr>  
-  <tr><td>CDCD.SCHCH</td><td></td></tr>  
+  <tr><td>CDCD.SCHCH</td><td>Headers</td></tr>  
   <tr><td>CDCD.SCHCLOAD</td><td>Load Modules</td></tr>  
   <tr><td>CDCD.SCHCMAC</td><td>Macros</td></tr>  
-  <tr><td>CDCD.SCHCNOTC</td><td>?</td></tr>  
-  <tr><td>CDCD.SCHCTTL</td><td>?</td></tr>  
+  <tr><td>CDCD.SCHCNOTC</td><td>Samples</td></tr>  
+  <tr><td>CDCD.SCHCTTL</td><td>Data</td></tr>  
 </table> 
 
 
@@ -212,19 +216,24 @@ CHCUTIL
 
 
 <b>CDCD.CHCCFG65</b> contains the general configuration statements for this instance. The defaults are all fine for a basic first setup. 
+
 ![CDC CHCCFG65](images/cdc/chccfg65.PNG)
 
-<b>CDCD.CHCCMM65</b> contains TCPIP information. Idefined the listener port as 6789.
+<b>CDCD.CHCCMM65</b> contains TCPIP information. Idefined the listener port as 6789 in this example.
+
 ![CDC CHCCMM65](images/cdc/chccmm65.PNG)
 
 <b>CDCD.CHCDBM65</b> contains Db2 z/OS connection paramaters. I identified my Db2 z/OS V12 system by providing SSID. 
 I also provided the configuration values for a basic log cache which helps performance when you have multiple subscriptions.
+
 ![CDC CHCDBM65](images/cdc/chcdbm65.PNG)
 
 <b>CDCD.CHCLDR65</b> contains data loader configuration statements. The defaults are all fine for a basic first setup.
+
 ![CDC CHCLDR65](images/cdc/chcldr65.PNG)
 
 <b>CDCD.CHCUCS65</b> contains code page configuration parameters. The defaults were fine for my system.
+
 ![CDC CHCUCS65](images/cdc/chcucs65.PNG)
 
 After you have got a basic CDC server up and running, you will want to review all the parameter settings in the context of your scenario. 
