@@ -51,37 +51,36 @@ This chapter is a worked example of setting up Classic CDC for IMS.
 </ul>
 
 
-
+<br><hr>
 
 <h2 id="abstract"> Abstract</h2>
-<p>This document is a basic worked example of setting up Classic CDC for IMS as a CDC Source Server.</p> 
-<ul>
-<li>It deals with the practical considerations for implementing IMS as a CDC data source. 
-<li>It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and IMS practical experience).
-<li>It does not attempt to cover all the product's features.
-<li>It is categorically <b>not</b> a replacement for the  
-<a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos">IBM Classic CDC knowledge centre</a>, which is the comprehensive official product documentation.
-</ul> 
+This document is a basic worked example of setting up Classic CDC for IMS as a CDC Source Server. 
 
-<p>It is part of a series of documents providing practical worked examples and 
+* It deals with the practical considerations for implementing IMS as a CDC data source. 
+* It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and IMS practical experience).
+* It does not attempt to cover all the product's features.
+* Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos">IBM Classic CDC knowledge centre.</a>
+ 
+
+It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the links at the very top of this page</p> 
+The complete set of articles can be accessed using the README link at the very top of this page. 
 
 <br><hr>
 
 <h2 id="1.0">1. Introduction to Classic CDC for IMS</h2>  
 
-<p>Classic CDC for IMS is a CDC Capture Source only. It does not have CDC Apply functionality.</p>
+Classic CDC for IMS is a CDC Capture Source only. It does not have CDC Apply functionality.
 
-<p style="margin-left: 50px"><b>Aside:</b> Classic CDC for IMS is licensed seperately from Classic CDC for VSAM. However, these two 
-products share a lot of common components. The sister document <a href="/recipes/docs/NA_CDC/cdcz3.html">Setting up Classic CDC for VSAM.</a> follows the same pattern as this worked 
-example for much of the setup work, but has differences with regard to the services to access VSAM and capture changes from VSAM.</p>
+<b>Aside:</b> Classic CDC for IMS is licensed seperately from Classic CDC for VSAM. However, these two 
+products share a lot of common components. The sister document [Chapter 10.  Setting up Classic CDC for VSAM.](C010_vsam.md) follows the same pattern as this worked 
+example for much of the setup work, but has differences with regard to the services to access VSAM and capture changes from VSAM. 
 
-<p>CDC Replication is a set of products that implement a common data replication architecture spanning 
+CDC Replication is a set of products that implement a common data replication architecture spanning 
 a large number of diverse data sources and targets. The CDC common architecture is based upon replication of 
 data that conforms to the relational model. Any CDC capture or apply agent that supports a non-relational data structure 
 must perform whatever conversion work that is necessary to implement a mapping between that data structure and the 
-relational model of data.</p> 
+relational model of data. 
 
 <h3 id="1.1">1.1 Requirements to Replicate IMS Data</h3> 
 
