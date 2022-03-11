@@ -486,6 +486,7 @@ You can test CDC as a Job using the JCL in <code>CDCD.SCHCCNTL(CHCPROC)</code> a
 Upon first start, you should expect to see the Classic CDC Server come up.
 
 
+
 ![CDC STARTUP](images/cdc/cdcd_startup.PNG)
 
 
@@ -494,13 +495,14 @@ There is very little to do here.
 
 
 <h3 id="6.1">6.1 Alter Source Tables for full row logging</h3>
-<p>By default Db2 z/OS only logs enough data to perform rollforward and rollback recovery processing. Unchanged column values are not usually logged, but a data replication 
+By default Db2 z/OS only logs enough data to perform rollforward and rollback recovery processing. Unchanged column values are not usually logged, but a data replication 
 product needs to see all the before and after column values of the entire row. This is achieved by ALTERing the Db2 table to instruct Db2 to perform full row logging 
-for all logged SQL operations.</p>
-<p>You don't even need to do this in advance, because the CDC administration tools will detect if "Data Capture None" is in force for any source table, and generate an ALTER 
-statement to make the change.</p>
+for all logged SQL operations. 
 
-<p><code style="color:#00FF00; background-color:#000000">ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</p> 
+You don't even need to do this in advance, because the CDC administration tools will detect if "Data Capture None" is in force for any source table, and generate an ALTER 
+statement to make the change. 
+
+<p><code style="color:#00FF00; background-color:#000000">ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</code></p> 
 
 <h3 id="6.2">6.2 Db2 configuration considerations</h3> 
 <p>There is nothing else that needs to be done for a basic up and running exercise.</p>
