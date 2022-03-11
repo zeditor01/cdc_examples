@@ -253,113 +253,116 @@ provided inside the parameters member to assess whether they need to be changed 
 In this worked example the parameters (and line numbers for V11.3) that we edited were as follows. 
 
 <ul>
-<li>Line 43, specify the installation HLQ <code style="color:#00FF00; background-color:#000000">CACINHLQ="CCDC"</code> 
-<li>Line 45, specify the instance HLQ <code style="color:#00FF00; background-color:#000000">CACUSHLQ="CCDC.I1"</code> 
-<li>Line 47, specify the default UNIT for DSN creation <code style="color:#00FF00; background-color:#000000">CACDUNIT="SYSALLDA"</code> 
+<li>Line 43, specify the installation HLQ <code>CACINHLQ="CCDC"</code> 
+<li>Line 45, specify the instance HLQ <code>CACUSHLQ="CCDC.I1"</code> 
+<li>Line 47, specify the default UNIT for DSN creation <code>CACDUNIT="SYSALLDA"</code> 
 <li>Lines 58 and 59, provide a job card for all the JCLs that will be generated
-<li>Line 69, provide the HLQ for the various source datasets that will be created for this instance <code style="color:#00FF00; background-color:#000000">CDCPHLQD="CCDC.I1.CDCSRC"</code>
-<li>Line 81, provide the zFS path for the Metadata Catalog that will be created <code style="color:#00FF00; background-color:#000000">CATPATH="/opt/IBM/ccdci1/catalog"</code> 
-<li>Line 103, provide the TCPIP listener port for the Server <code style="color:#00FF00; background-color:#000000">CDCPPORT="9087"</code>  
-<li>Line 104, provide the Data Source Name for the Server <code style="color:#00FF00; background-color:#000000">CDCDSRCE="SAMPLEDS"</code>  
-<li>Line 104, provide the SYSADM ID for the Server <code style="color:#00FF00; background-color:#000000">CDCADMUS="ADMUSER"</code>  
-<li>Line 154, Accept the default supplied security exit name for the SAF-protected services <code style="color:#00FF00; background-color:#000000">CDCPSAFX="CACSX04"</code> 
-<li>Line 185 and 192, Comment the storage classes for the logstreams (which will result in DASD logstreams, rather than CF logstreams <code style="color:#00FF00; background-color:#000000">**CPLGSC="STG1"</code> and <code style="color:#00FF00; background-color:#000000">**CPEVSC="STG1"</code> 
-<li>Line 198, provide the HLQ for the IMS Libraries <code style="color:#00FF00; background-color:#000000">IMSINHLQ="DFSF10"</code> 
-<li>Line 208, provide the HLQ for the IMS RESLIB <code style="color:#00FF00; background-color:#000000">IMSSTEPL="&IMS..SDFSRESL"</code> 
-<li>Line 228, provide the HLQ for the IMS DBD Library <code style="color:#00FF00; background-color:#000000">IMSDBDLB="&IMS..DBDLIB"</code> 
-<li>Line 232, provide the TCPIP port for the Log Reader Notification Exit <code style="color:#00FF00; background-color:#000000">IMCPNPRT="5003"</code>
-<li>Line 235, provide the Userid that will access IMS via DRA <code style="color:#00FF00; background-color:#000000">IMSDRAUS="IBMUSER"</code>
-<li>Line 236, provide the identification suffix for the DRA Table to use <code style="color:#00FF00; background-color:#000000">IMSDRASX="00"</code> 
-</ul>
-<p>... and optionally, if you also want to use the ability to publish changes to MQ (in addition to CDC Apply agents)</p>
-<ul>
-<li>Line 249, provide the HLQ for the MQ Libraries <code style="color:#00FF00; background-color:#000000">CDCMQHLQ="CSQ911"</code>
-<li>Line 250, provide the name of the Queue Manager to connect to for MQ publishing<code style="color:#00FF00; background-color:#000000">CDCMQMGR="CSQ9"</code>
-<li>Line 255, provide the name of the Bookmark Queue to use for MQ publishing <code style="color:#00FF00; background-color:#000000">CDCBKMKQ="CCDC.BOOKMARK"</code> 
-<li>Line 260, provide the name of the Subscription Queue to use for MQ publishing <code style="color:#00FF00; background-color:#000000">CDCSUBLQ="CCDC.IMSPUB"</code>
+<li>Line 69, provide the HLQ for the various source datasets that will be created for this instance <code>CDCPHLQD="CCDC.I1.CDCSRC"</code>
+<li>Line 81, provide the zFS path for the Metadata Catalog that will be created <code>CATPATH="/opt/IBM/ccdci1/catalog"</code> 
+<li>Line 103, provide the TCPIP listener port for the Server <code>CDCPPORT="9087"</code>  
+<li>Line 104, provide the Data Source Name for the Server <code>CDCDSRCE="SAMPLEDS"</code>  
+<li>Line 104, provide the SYSADM ID for the Server <code>CDCADMUS="ADMUSER"</code>  
+<li>Line 154, Accept the default supplied security exit name for the SAF-protected services <code>CDCPSAFX="CACSX04"</code> 
+<li>Line 185 and 192, Comment the storage classes for the logstreams (which will result in DASD logstreams, rather than CF logstreams <code>**CPLGSC="STG1"</code> and <code>**CPEVSC="STG1"</code> 
+<li>Line 198, provide the HLQ for the IMS Libraries <code>IMSINHLQ="DFSF10"</code> 
+<li>Line 208, provide the HLQ for the IMS RESLIB <code>IMSSTEPL="&IMS..SDFSRESL"</code> 
+<li>Line 228, provide the HLQ for the IMS DBD Library <code>IMSDBDLB="&IMS..DBDLIB"</code> 
+<li>Line 232, provide the TCPIP port for the Log Reader Notification Exit <code>IMCPNPRT="5003"</code>
+<li>Line 235, provide the Userid that will access IMS via DRA <code>IMSDRAUS="IBMUSER"</code>
+<li>Line 236, provide the identification suffix for the DRA Table to use <code>IMSDRASX="00"</code> 
 </ul>
 
-<p>Browse the entire PARMS file in the github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/CECCUSPC_IMS.TXT" target="_blank">here.</a></p>
+... and optionally, if you also want to use the ability to publish changes to MQ (in addition to CDC Apply agents) 
+
+<ul>
+<li>Line 249, provide the HLQ for the MQ Libraries <code>CDCMQHLQ="CSQ911"</code>
+<li>Line 250, provide the name of the Queue Manager to connect to for MQ publishing<code>CDCMQMGR="CSQ9"</code>
+<li>Line 255, provide the name of the Bookmark Queue to use for MQ publishing <code>CDCBKMKQ="CCDC.BOOKMARK"</code> 
+<li>Line 260, provide the name of the Subscription Queue to use for MQ publishing <code>CDCSUBLQ="CCDC.IMSPUB"</code>
+</ul>
+
+Browse the entire PARMS file in the github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/CECCUSPC_IMS.TXT" target="_blank">here.</a>
 
 <h3 id="4.3">4.3 Generate the Customised JCL members</h3> 
-<p>The list of parameters above is enough to completely define the Classic CDC instance. All you need is to run a program 
+
+The list of parameters above is enough to completely define the Classic CDC instance. All you need is to run a program 
 that will merge those paramaters with some skeleton files in order to generate all the customised JCL and configuration members from them. 
-Simply edit and submit <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CECCUSC2)</code> to do this.</p>
-<p>You should end up with 4 configuration members in <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERCONF</code> and 43 JCL members in <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP</code>.</p>
+Simply edit and submit <code>CCDC.I1.USERSAMP(CECCUSC2)</code> to do this. 
+
+You should end up with 4 configuration members in <code">CCDC.I1.USERCONF</code> and 43 JCL members in <code>CCDC.I1.USERSAMP</code>. 
 
 
 <h3 id="4.4">4.4 Define CDC Logstreams</h3> 
-<p>Classic CDC uses z/OS Logstreams for the diagnostic log and the event log. The logstreams can be either CF logstreams or DASD logstreams. 
-By commenting out the Logstream Storage Class they will ge generated as DASD logstreams in this simple example.</p> 
-<p>Review and submit member <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CECCDSLS)</code> to define these as DASD logstreams.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>//*********************************************</code>
-<code>//* ALLOCATE THE LOG STREAM FOR THE EVENT LOG *</code>
-<code>//*********************************************</code>
-<code>//ALLOCEV    EXEC  PGM=IXCMIAPU                </code>
-<code>//SYSPRINT DD SYSOUT=*                         </code>
-<code>//SYSOUT   DD SYSOUT=*                         </code>
-<code>//SYSIN    DD *                                </code>
-<code>   DATA TYPE(LOGR) REPORT(NO)                  </code>
-<code>   DEFINE LOGSTREAM NAME(CDCSRC.EVENTS)        </code>
-<code>          DASDONLY(YES)                        </code>
-<code>          MAXBUFSIZE(4096)                     </code>
-<code>          LS_SIZE(1024)                        </code>
-<code>          STG_SIZE(512)                        </code>
-<code>          RETPD(14) AUTODELETE(YES)            </code>
-<code>/*                                             </code>
-</pre>
-</div>
+Classic CDC uses z/OS Logstreams for the diagnostic log and the event log. The logstreams can be either CF logstreams or DASD logstreams. 
+By commenting out the Logstream Storage Class they will ge generated as DASD logstreams in this simple example. 
 
-<p>and</p>
+Review and submit member <code>CCDC.I1.USERSAMP(CECCDSLS)</code> to define these as DASD logstreams. 
+```
+//*********************************************
+//* ALLOCATE THE LOG STREAM FOR THE EVENT LOG *
+//*********************************************
+//ALLOCEV    EXEC  PGM=IXCMIAPU                
+//SYSPRINT DD SYSOUT=*                         
+//SYSOUT   DD SYSOUT=*                         
+//SYSIN    DD *                                
+   DATA TYPE(LOGR) REPORT(NO)                  
+   DEFINE LOGSTREAM NAME(CDCSRC.EVENTS)        
+          DASDONLY(YES)                        
+          MAXBUFSIZE(4096)                     
+          LS_SIZE(1024)                        
+          STG_SIZE(512)                        
+          RETPD(14) AUTODELETE(YES)            
+/*                                             
+```
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<pre>
-<code>//************************************************</code>
-<code>//* ALLOCATE THE LOG STREAM FOR THE DIAGNOSTIC LOG</code>
-<code>//************************************************</code>
-<code>//ALLOCDG    EXEC  PGM=IXCMIAPU                   </code>
-<code>//SYSPRINT DD SYSOUT=*                            </code>
-<code>//SYSOUT   DD SYSOUT=*                            </code>
-<code>//SYSIN    DD *                                   </code>
-<code>   DATA TYPE(LOGR) REPORT(NO)                     </code>
-<code>   DEFINE LOGSTREAM NAME(CDCSRC.DIAGLOG)          </code>
-<code>          DASDONLY(YES)                           </code>
-<code>          LS_SIZE(1024)                           </code>
-<code>          STG_SIZE(512)                           </code>
-<code>          RETPD(7) AUTODELETE(YES)                </code>
-<code>/*                                                </code>
-</pre>
-</div>
+and 
+
+```
+//************************************************
+//* ALLOCATE THE LOG STREAM FOR THE DIAGNOSTIC LOG
+//************************************************
+//ALLOCDG    EXEC  PGM=IXCMIAPU                   
+//SYSPRINT DD SYSOUT=*                            
+//SYSOUT   DD SYSOUT=*                            
+//SYSIN    DD *                                   
+   DATA TYPE(LOGR) REPORT(NO)                     
+   DEFINE LOGSTREAM NAME(CDCSRC.DIAGLOG)          
+          DASDONLY(YES)                           
+          LS_SIZE(1024)                           
+          STG_SIZE(512)                           
+          RETPD(7) AUTODELETE(YES)                
+/*                                                
+```
 
 <h3 id="4.5">4.5 Define and Mount the Classic Catalog zFS</h3> 
-<p>The Metadata Catalog is conceptually similar to the Db2 catalog ( SYSTABLES, SYSCOLUMNS etc… ). 
-Not only does it store metadata about IMS Tables, but it also contains the details of the IMS to relational model mapping.</p> 
-<p>The Metadata catalog is deployed as a zFS which needs to be mounted at the path specified for “CATPATH” in CECCUSPC.</p>
-<p>The zFS is allocated with generated job CECCRZCT. 
-The VSAM cluster is defined in the first job step as <code>CCDC.I1.ZFS</code>, and the zFS is formatted in the second job step. 
-Review the submit <code>CCDC.I1.USERSAMP(CECCRZCT)</code> to define the Metadata Catalog.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code> DEFINE CLUSTER ( -    </code>
-<code>   NAME(CCDC.I1.ZFS) - </code>
-<code>   LINEAR -            </code>
-<code>   MEGABYTES(150 128) -</code>
-<code>   VOLUMES(*) -        </code>
-<code>   SHAREOPTIONS(3 3)  -</code>
-<code>   CISZ(4096))         </code>
-</pre>
-<p>and</p>
-<pre>   
-<code>//FORMAT EXEC PGM=IOEAGFMT,REGION=0M,       </code>
-<code>//    COND=(0,LT),                          </code>
-<code>//    PARM='-aggregate CCDC.I1.ZFS  -compat'</code>
-</pre> 
-</div>
+The Metadata Catalog is conceptually similar to the Db2 catalog ( SYSTABLES, SYSCOLUMNS etc… ). 
+Not only does it store metadata about IMS Tables, but it also contains the details of the IMS to relational model mapping. 
+
+The Metadata catalog is deployed as a zFS which needs to be mounted at the path specified for “CATPATH” in CECCUSPC. 
+
+The zFS is allocated with generated job CECCRZCT. 
+The VSAM cluster is defined in the first job step as <code>CCDC.I1.ZFS</code>, and the zFS is formatted in the second job step. 
+Review the submit <code>CCDC.I1.USERSAMP(CECCRZCT)</code> to define the Metadata Catalog. 
+
+``` 
+ DEFINE CLUSTER ( -    
+   NAME(CCDC.I1.ZFS) - 
+   LINEAR -            
+   MEGABYTES(150 128) -
+   VOLUMES(*) -        
+   SHAREOPTIONS(3 3)  -
+   CISZ(4096))         
+``` 
+
+and
+
+```   
+//FORMAT EXEC PGM=IOEAGFMT,REGION=0M,       
+//    COND=(0,LT),                          
+//    PARM='-aggregate CCDC.I1.ZFS  -compat'
+```
 
 
 
@@ -368,122 +371,122 @@ Review the submit <code>CCDC.I1.USERSAMP(CECCRZCT)</code> to define the Metadata
 Parameters governing threads, memory, tcpip ports and so forth, as documented in the knowledge centre. 
 The creation and population of the configuration datasets is controlled by job CECCDCFG. Review the generated JCL and submit when happy.</p>
  
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//CFGALLOC     EXEC PGM=IEFBR14                       </code>
-<code>//CACCFGD      DD  DSN=&CPHLQ..CACCFGD,               </code>
-<code>//             UNIT=&DISKU,                           </code>
-<code>//             STORCLAS=&STGCL,                       </code>
-<code>//             MGMTCLAS=&MGTCL,                       </code>
-<code>//             SPACE=(TRK,(20,10)),                   </code>
-<code>//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),</code>
-<code>//             DISP=(NEW,CATLG,DELETE)                </code>
-<code>//CACCFGX  DD  DSN=&CPHLQ..CACCFGX,                   </code>
-<code>//             UNIT=&DISKU,                           </code>
-<code>//             STORCLAS=&STGCL,                       </code>
-<code>//             MGMTCLAS=&MGTCL,                       </code>
-<code>//             SPACE=(TRK,(10,5)),                    </code>
-<code>//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),</code>
-<code>//             DISP=(NEW,CATLG,DELETE)                </code>
-<code>//*                                                   </code>
-</pre>
-</div>
+```
+//CFGALLOC     EXEC PGM=IEFBR14                       
+//CACCFGD      DD  DSN=&CPHLQ..CACCFGD,               
+//             UNIT=&DISKU,                           
+//             STORCLAS=&STGCL,                       
+//             MGMTCLAS=&MGTCL,                       
+//             SPACE=(TRK,(20,10)),                   
+//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),
+//             DISP=(NEW,CATLG,DELETE)                
+//CACCFGX  DD  DSN=&CPHLQ..CACCFGX,                   
+//             UNIT=&DISKU,                           
+//             STORCLAS=&STGCL,                       
+//             MGMTCLAS=&MGTCL,                       
+//             SPACE=(TRK,(10,5)),                    
+//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),
+//             DISP=(NEW,CATLG,DELETE)                
+//*                                                   
+```
 
-<p>and the final step imports the default parameter values into the configuration datasets</p>
+and the final step imports the default parameter values into the configuration datasets
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//ALLOCATE EXEC ALLOCFG                         </code>
-<code>//CFGINIT.SYSIN DD *                            </code>
-<code>IMPORT,CONFIG,FILENAME=DDN:IMPORTCF(CECCDXFG)   </code>
-<code>REPORT                                          </code>
-<code>QUIT                                            </code>
-<code>/*                                              </code>
-</pre>
-</div>
+```
+//ALLOCATE EXEC ALLOCFG                         
+//CFGINIT.SYSIN DD *                            
+IMPORT,CONFIG,FILENAME=DDN:IMPORTCF(CECCDXFG)   
+REPORT                                          
+QUIT                                            
+/*                                              
+```
 
 <h3 id="4.7">4.7 Create the Metadata Catalog</h3> 
 <p>The Metadata Catalog is a zFS that holds catalog tables ( systables, syscolumns etc... ). 
 The CACCATUT utility is used to create the metadata catalog tables in the Metadata Catalog. 
 This is performed using job CECCDCAT. Review the generated JCL and submit when happy.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//INIT     EXEC PGM=CACCATUT,PARM='INIT',REGION=&RGN       </code>
-<code>//STEPLIB  DD  DISP=SHR,DSN=&CAC..SCACLOAD                 </code>
-<code>//SYSOUT   DD  SYSOUT=&SOUT                                </code>
-<code>//SYSPRINT DD  SYSOUT=&SOUT                                </code>
-<code>//MSGCAT   DD  DISP=SHR,DSN=&CAC..SCACMSGS                 </code>
-<code>//CACCAT   DD  PATHDISP=(KEEP,KEEP),                       </code>
-<code>//             PATH='/opt/IBM/isclassic113/catalog/caccat' </code>
-<code>//CACINDX  DD  PATHDISP=(KEEP,KEEP),                       </code>
-<code>//             PATH='/opt/IBM/isclassic113/catalog/cacindx'</code>
-</pre>
-</div>
+```
+//INIT     EXEC PGM=CACCATUT,PARM='INIT',REGION=&RGN       
+//STEPLIB  DD  DISP=SHR,DSN=&CAC..SCACLOAD                 
+//SYSOUT   DD  SYSOUT=&SOUT                                
+//SYSPRINT DD  SYSOUT=&SOUT                                
+//MSGCAT   DD  DISP=SHR,DSN=&CAC..SCACMSGS                 
+//CACCAT   DD  PATHDISP=(KEEP,KEEP),                       
+//             PATH='/opt/IBM/isclassic113/catalog/caccat' 
+//CACINDX  DD  PATHDISP=(KEEP,KEEP),                       
+//             PATH='/opt/IBM/isclassic113/catalog/cacindx'
+```
 
 <h3 id="4.8">4.8 Create the Replication Mapping Datasets</h3> 
-<p>The Replication Mapping datasets are used to hold the metadata to support subscriptions from IMS to targets like Kafka. 
-These mapping datasets will be empty until you start defining subscriptions using Management Console or CHCCLP scripts. 
-This is performed using job CECCDSUB. Review the generated JCL and submit when happy.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code> DEFINE CLUSTER                  - </code>
-<code>    (NAME(&CPHLQ..SUB)        -    </code>
-<code>     RECSZ(1024 2048)            - </code>
-<code>     KEY(80 12)                  - </code>
-<code>     CYL(2 1)                    - </code>
-<code>     SPEED REUSE)                - </code>
-<code>  DATA                           - </code>
-<code>    (NAME(&CPHLQ..SUB.DATA)   -    </code>
-<code>     CISZ(8192)                  - </code>
-<code>     FSPC(20 5))                 - </code>
-<code>  INDEX                          - </code>
-<code>    (NAME(&CPHLQ..SUB.INDEX)  -    </code>
-<code>     CISZ(6144))                   </code>
-<code> /**/                              </code>
-<code> DEFINE CLUSTER                  - </code>
-<code>    (NAME(&CPHLQ..RM)        -     </code>
-<code>     RECSZ(512 2432)             - </code>
-<code>     KEY(20 12)                  - </code>
-<code>     CYL(15 5)                   - </code>
-<code>     SPEED REUSE)                - </code>
-<code>   DATA                          - </code>
-<code>     (NAME(&CPHLQ..RM.DATA)   -    </code>
-<code>      CISZ(8192)                 - </code>
-<code>      FSPC(20 5))                - </code>
-<code>   INDEX                         - </code>
-<code>     (NAME(&CPHLQ..RM.INDEX)  -    </code>
-<code>      CISZ(2048))                  </code>
-<code>/*                                 </code>
-</pre>
-</div>
+The Replication Mapping datasets are used to hold the metadata to support subscriptions from IMS to targets like Kafka. 
+These mapping datasets will be empty until you start defining subscriptions using Management Console or CHCCLP scripts. 
+This is performed using job CECCDSUB. Review the generated JCL and submit when happy. 
+
+```
+ DEFINE CLUSTER                  - 
+    (NAME(&CPHLQ..SUB)        -    
+     RECSZ(1024 2048)            - 
+     KEY(80 12)                  - 
+     CYL(2 1)                    - 
+     SPEED REUSE)                - 
+  DATA                           - 
+    (NAME(&CPHLQ..SUB.DATA)   -    
+     CISZ(8192)                  - 
+     FSPC(20 5))                 - 
+  INDEX                          - 
+    (NAME(&CPHLQ..SUB.INDEX)  -    
+     CISZ(6144))                   
+ /**/                              
+ DEFINE CLUSTER                  - 
+    (NAME(&CPHLQ..RM)        -     
+     RECSZ(512 2432)             - 
+     KEY(20 12)                  - 
+     CYL(15 5)                   - 
+     SPEED REUSE)                - 
+   DATA                          - 
+     (NAME(&CPHLQ..RM.DATA)   -    
+      CISZ(8192)                 - 
+      FSPC(20 5))                - 
+   INDEX                         - 
+     (NAME(&CPHLQ..RM.INDEX)  -    
+      CISZ(2048))                  
+/*                                 
+```
 
 
 <h3 id="4.8">4.9 Setup Encrypted Passwords</h3> 
-<p>Assuming that you enabled security in the CACCUSPC parameters file earlier: <code style="color:#00FF00; background-color:#000000">CDCPSAFX="CACSX04"</code> 
-you will need to setup encrypted passwords for connections to the Classic CDC instance. (Enabling security requires providing a password for all user access. 
-The utilities used in the validation job require encrypted passwords to access the Classic data server.)</p>
-<p>The following steps are required to generate an encrypted password for the userid that will run jobs to access Classic CDC, and save it in a referencable PDS member.</p>
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.</p>
-<center><img src="/recipes/images/neale/cdc/encrypt01.PNG" style="width:800px"></center>
+Assuming that you enabled security in the CACCUSPC parameters file earlier: <code>CDCPSAFX="CACSX04"</code> you will need to setup 
+encrypted passwords for connections to the Classic CDC instance. (Enabling security requires providing a password for all user access. 
+The utilities used in the validation job require encrypted passwords to access the Classic data server.) 
 
-<p>Submit <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERCONF(CACPWDIN)</code> with the encrypted value.</p>
-<center><img src="/recipes/images/neale/cdc/encrypt02.PNG" style="width:800px"></center>
+The following steps are required to generate an encrypted password for the userid that will run jobs to access Classic CDC, and save it in a referencable PDS member.
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.</p>
-<center><img src="/recipes/images/neale/cdc/encrypt03.PNG" style="width:800px"></center>
+Edit <code>CCDC.I1.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.</p>
-<center><img src="/recipes/images/neale/cdc/encrypt04.PNG" style="width:800px"></center>
+![Encryp01](images/cdc/encrypt01.PNG)
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.</p>
-<center><img src="/recipes/images/neale/cdc/encrypt05.PNG" style="width:800px"></center>
+Submit <code>CCDC.I1.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code>CCDC.I1.USERCONF(CACPWDIN)</code> with the encrypted value.
+
+![Encryp02](images/cdc/encrypt02.PNG)
+
+Edit <code>CCDC.I1.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.
+
+![Encryp03](images/cdc/encrypt03.PNG)
+
+Edit <code>CCDC.I1.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.
+
+![Encryp04](images/cdc/encrypt04.PNG)
+
+Edit <code>CCDC.I1.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.
+
+![Encryp05](images/cdc/encrypt05.PNG)
 
 
 
-<p><code style="color:#00FF00; background-color:#000000">CCDC.I1.USERCONF(CACMUCON)</code> and <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CACQRSYS)</code> will be 
+<p><code>CCDC.I1.USERCONF(CACMUCON)</code> and <code>CCDC.I1.USERSAMP(CACQRSYS)</code> will be 
 referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above</p)
 
 
@@ -634,8 +637,8 @@ My example below was used to assemble and link edit a DRA Table called DFSPZP01,
 <p>Download JCL from github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/asmbldra.jcl" target="_blank">here.</a></p>
 <p><b>Note the deliberate mistake! </b></p>
 <sl>
-<li>We just generated a DRA Table with suffix 01 <code style="color:#00FF00; background-color:#000000">NAME DFSPZP01 (R)</code></p>
-<li>Back in section 4.2 I coded my parameters member with suffix 00 <code style="color:#00FF00; background-color:#000000">IMSDRASX="00"</code>
+<li>We just generated a DRA Table with suffix 01 <code>NAME DFSPZP01 (R)</code></p>
+<li>Back in section 4.2 I coded my parameters member with suffix 00 <code>IMSDRASX="00"</code>
 </sl>
 <p>That "mistake" serves to force us to review how to change the Classic CDC Service parameters.</p>
 <p>One way of changing service parameters is by modifying the started task. The MTO commands below 
@@ -658,8 +661,8 @@ So, Classic CDC for IMS requires that IMS tells it about log activations, deacti
 <p>This is done with the <b>IMS Partner Program User Exit</b> (PPUE). 
 <p>A modified PPUE must be created and deployed into IMS RESLIB. 
 The module CEC1OPT must be assembled, and contain the TCPIP Log Reader Notification Port 
-that was defined in the CECCUSPC parameters module <code style="color:#00FF00; background-color:#000000">IMCPNPRT="5003"</code>.</p>
-<p>A sample assembler source module (CECE1OPT) is provided for the PPUE here :  <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CECE1OPT)</code>.</p> 
+that was defined in the CECCUSPC parameters module <code>IMCPNPRT="5003"</code>.</p>
+<p>A sample assembler source module (CECE1OPT) is provided for the PPUE here :  <code>CCDC.I1.USERSAMP(CECE1OPT)</code>.</p> 
 <p>You need to edit the module to suit your environment. 
 In the worked example below the TCPIP address of the z/OS system was 192.168.1.191 and 
 Classic CDC Server is configured to listen on port 5003.</p>  
@@ -769,7 +772,7 @@ write log records with all the before and after images in the log record.
 <p>For Db2 databases, the log records can simply be expanded for the tables of interest, by altering 
 the definition, with DDL such as:</p>
 <pre> 
-<code style="color:#00FF00; background-color:#000000">ALTER TABLE MYSCHEMA.MYTABLE DATA CAPTURE CHANGES</code>.
+<code>ALTER TABLE MYSCHEMA.MYTABLE DATA CAPTURE CHANGES</code>.
 </pre>
 <p>IMS is different. IMS generates Type 50 log records by default. 
 In order to support data replication you need to augment the IMS database to write Type 99 log records, 
@@ -777,7 +780,7 @@ which are designed for the purposes of data replication.
 This requires the IMS database to be “augmented” with an EXIT clause to specify the content 
 to be written to the Type 99 log records.</p> 
 <p>This worked example used the IBM-provided sample database (DI21PART) as the CDC source database. 
-The DBD source is stored in <code style="color:#00FF00; background-color:#000000">DFSF10.SDFSISRC(DI21PART)</code>. 
+The DBD source is stored in <code>DFSF10.SDFSISRC(DI21PART)</code>. 
 This example only adds the EXIT clause to three specific segments (PARTROOT, STANINFO, STOKSTAT). 
 You can choose to augment whichever segments you want, or you could augment the entire database on the DBD statement. 
 This DBD source in this worked example was edited to specify Type 99 logging as follows.</p>
@@ -850,7 +853,7 @@ to define "IMS Tables", and define Subscriptions from them to target systems. Se
 
 <h3 id="7.1">7.1 Deploy Classic CDC as a Started Task</h3> 
 <p>Assuming you want to run Classic CDC as a started task, rather than a batch job, you should copy 
-the contents of the JCL to run Classic CDC as a batch job <code style="color:#00FF00; background-color:#000000">CCDC.I1.USERSAMP(CECCDSRC)</code> 
+the contents of the JCL to run Classic CDC as a batch job <code>CCDC.I1.USERSAMP(CECCDSRC)</code> 
 to your PROCLIB, and follow your site standards for establishing a new started task.</p> 
 
 <h3 id="7.2">7.2 Deploy and use the Classic Data Architect IDE</h3>
