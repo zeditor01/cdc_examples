@@ -212,38 +212,34 @@ and populate the instance library with a parameters file and a job to generate f
 <p>Just edit CCDC.SCACSAMP(CECCUSC1) to specify the high level qualifier for 
 the installation library (CACINHLQ=CCDC) and the instance library (CACUSHLQ=CCDC.I1), and submit the job to create the instance libraries.</p> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>//GENSAMPE EXEC GENSAMP                                          </code>
-<code>//CRTSAMP.SYSTSIN  DD *                                          </code>
-<code> PROFILE NOPREFIX  MSGID                                         </code>
-<code>                                                                 </code>
-<code> ISPSTART CMD(%CACCUSX1                                         +</code>
-<code>      CACDUNIT=SYSALLDA                                         +</code>
-<code>      CACINHLQ=CCDC                                             +</code>
-<code>      CACUSHLQ=CCDC.I1                                          +</code>
-<code>      ISPFHLQ=ISP                                               +</code>
-<code>      ISPFLANG=ENU                                              +</code>
-<code>      SERVERROLE=(CDC_IMS_SRC)                                  +</code>
-<code> )                                                               </code>
-<code>/*                                                               </code>                                                              
-</pre>
-</div>
+```
+//GENSAMPE EXEC GENSAMP                                          
+//CRTSAMP.SYSTSIN  DD *                                          
+ PROFILE NOPREFIX  MSGID                                         
+                                                                 
+ ISPSTART CMD(%CACCUSX1                                         +
+      CACDUNIT=SYSALLDA                                         +
+      CACINHLQ=CCDC                                             +
+      CACUSHLQ=CCDC.I1                                          +
+      ISPFHLQ=ISP                                               +
+      ISPFLANG=ENU                                              +
+      SERVERROLE=(CDC_IMS_SRC)                                  +
+ )                                                               
+/*                                                                                                                             
+```
 
 
-<p>The result should be to allocate the following libraries.</p>
+The result should be to allocate the following libraries. 
  <table>
   <tr><td width=200>Library</td><td width=500>Initial Contents</td></tr> 
   <tr><td>CCDC.I1.USERCONF</td><td>empty</td></tr> 
   <tr><td>CCDC.I1.USERSAMP</td><td>just a parameters member plus generation job, listed below:</td></tr>  
 </table> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>CECCUSC2                                                         </code>
-<code>CECCUSPC                                                         </code>                                                          
-</pre>
-</div>
+```
+CECCUSC2                                                         
+CECCUSPC                                                                                                                   
+```
 
 
 <h3 id="4.2">4.2 Edit the Parameters member</h3> 
