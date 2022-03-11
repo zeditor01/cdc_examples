@@ -485,284 +485,288 @@ Edit <code>CCDC.I1.USERSAMP(CACQRSYS)</code> and replace the second line of the 
 ![Encryp05](images/cdc/encrypt05.PNG)
 
 
-
-<p><code>CCDC.I1.USERCONF(CACMUCON)</code> and <code>CCDC.I1.USERSAMP(CACQRSYS)</code> will be 
-referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above</p)
+<code>CCDC.I1.USERCONF(CACMUCON)</code> and <code>CCDC.I1.USERSAMP(CACQRSYS)</code> will be 
+referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above.
 
 
 <br><hr>
 
 <h2 id="5.0">5. Configure the z/OS Environment</h2>
-<p>Every z/OS environment will have different constraints and considerations for deployment. 
+
+Every z/OS environment will have different constraints and considerations for deployment. 
 This worked example was implement on a Z Development and Test v13 environment, using the z/OS v2.4 stack provided by ADCD v13. 
-The z/OS customizations that I needed to do were as follows</p>
+The z/OS customizations that I needed to do were as follows.
 
 <h3 id="5.1">5.1 APF Authorised Load Libraries</h3>
-<p>The Classic CDC Load Libraries need to be APF Authorized. 
-With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD)</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>/**********************************************/                      </code>
-<code>/*  CCDC 11.4                                 */                      </code>
-<code>/**********************************************/                      </code>
-<code>APF ADD                                                               </code>
-<code>    DSNAME(CCDC.SCACLOAD)                               VOLUME(USER0B)</code>
-</pre>
-</div>	
+The Classic CDC Load Libraries need to be APF Authorized. 
+With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD)
+
+```
+/**********************************************/                      
+/*  CCDC 11.4                                 */                      
+/**********************************************/                      
+APF ADD                                                               
+    DSNAME(CCDC.SCACLOAD)                               VOLUME(USER0B)
+```
 	
 <h3 id="5.2">5.2 TCPIP Ports</h3> 
-<p>Classic CDC for IMS is configured to listen on one port. I used the default port of 9087. 
-The ADCD z/OS v2.4 distribution does not lock high ports, so I didn’t have any network administration to perform to open port 9087.</p> 
+
+Classic CDC for IMS is configured to listen on one port. I used the default port of 9087. 
+The ADCD z/OS v2.4 distribution does not lock high ports, so I didn’t have any network administration to perform to open port 9087. 
 
 <h3 id="5.3">5.3 RACF Started Task ID</h3> 
-<p>For the ZD&T environment I didn’t bother the define a started task ID to RACF. 
-I just added the PROC to ADCD.Z24B.PROCLIB and ran it as START1.</p>
+
+For the ZD&T environment I didn’t bother the define a started task ID to RACF. 
+I just added the PROC to ADCD.Z24B.PROCLIB and ran it as START1.
 
 <h3 id="5.4">5.4 Test Start the Classic CDC Server</h3> 
-<p>The Classic CDC Server has not yet been configured to attach to the various IMS interfaces that are neeed. 
+
+The Classic CDC Server has not yet been configured to attach to the various IMS interfaces that are neeed. 
 However, this is a good point to start the server and resolve any problems with the Classic CDC Server.  
 You can test the Classic CDC as a Job using the JCL in member CECCDSRC, and then deploy it as a started task later on.
 Upon first start, you should expect to see the Classic CDC Server come up, but report failures on connection to IMS DRA
-</p>
 
-<img src="/recipes/images/neale/cdc//cdc01_16.png" alt="Classic CDC Startup Messages" style="border:1px solid black"> 
+![Classic CDC Startup Messages](images/cdc/cdc01_16.png)
 
-<p>Further down the job output you may spot more detailed error messages and return codes which will give you more insight into any problems. 
-Specifically the SpcRC codes can be particularly useful.</p> 
 
-<img src="/recipes/images/neale/cdc//cdc01_17.png" alt="Classic CDC Startup SpcRC codes" style="border:1px solid black"> 
+Further down the job output you may spot more detailed error messages and return codes which will give you more insight into any problems. 
+Specifically the SpcRC codes can be particularly useful. 
 
-<p>Specifically, if you lookup SPcRC(00570082) in the Classic CDC Messages 
-publication you will see the following explanation:</p>
+![Classic CDC Startup SpcRC codes](images/cdc/cdc01_17.png)
 
-<p style="margin-left: 50px"><b>0x00570082</b> (5701762) The DRA initialization failed.
+Specifically, if you lookup SPcRC(00570082) in the Classic CDC Messages 
+publication you will see the following explanation: 
+
+<b>0x00570082</b> (5701762) The DRA initialization failed.
 User response: See the system log from the data
 server for more information on the cause. This is
 usually a problem in either the JCL for the data server
 or the task parameters for the service information entry
-of the DRA service.</p>
+of the DRA service. 
 
-<p>It should be expected that Classic CDC will initially have errors connecting to IMS, which will be resolved when you have completed the IMS configuration work, which is 
-covered in the next section.</p>
+It should be expected that Classic CDC will initially have errors connecting to IMS, which will be resolved when you have completed the IMS configuration work, which is 
+covered in the next section.
 
-<p>Additionally, if you configured the CECCUSPC parameters to include an MQ target, then you are likely to experience MQ connection errors until you resolve
-RACF permissions.</p>
+Additionally, if you configured the CECCUSPC parameters to include an MQ target, then you are likely to experience MQ connection errors until you resolve
+RACF permissions.
 
 <br><hr>
 
 <h2 id="6.0">6. Configure the IMS Environment</h2>
-<p>This is the section where Classic CDC differs from deploying CDC for a relational data source. 
-CDC needs the following 3 things that are more complex to provide from IMS than Db2.</p>
-<ul>
-<li>SQL Access to IMS databases (for development work, and cdc initialization of target)
-<li>Access to IMS Logs, and notifications when logs are activated and deactivated
-<li>Additional IMS logging, with sufficient information for replication purposes.
-</ul>
+
+This is the section where Classic CDC differs from deploying CDC for a relational data source. 
+CDC needs the following 3 things that are more complex to provide from IMS than Db2.
+
+
+* SQL Access to IMS databases (for development work, and cdc initialization of target)
+* Access to IMS Logs, and notifications when logs are activated and deactivated
+* Additional IMS logging, with sufficient information for replication purposes.
+ 
 
 <h3 id="6.1">6.1 DRA Startup Module</h3>
-<p>When a CDC Capture agent works with a relational database it uses the SQL interface to the database 
+
+When a CDC Capture agent works with a relational database it uses the SQL interface to the database 
 to obtain the data structures in the development phase, and to perform a full refresh in the operational phase. 
-With Classic CDC for IMS we use the IMS DRA interface to achieve these tasks.</p>
-<p>You need to assemble a DRA Table with an assemble and link edit job. 
-My example below was used to assemble and link edit a DRA Table called DFSPZP01, which is written to the IMS RESLIB.</p>
+With Classic CDC for IMS we use the IMS DRA interface to achieve these tasks. 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//IBMUSERS   JOB (ASMDRA),'ASMDRA',                                     </code>
-<code>//            CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID                         </code>
-<code>//ASM EXEC PGM=ASMA90,                                                  </code>
-<code>//       PARM='DECK,NOOBJECT,LIST,XREF(SHORT),ALIGN',                   </code>
-<code>//       REGION=4096K                                                   </code>
-<code>//SYSLIB DD DSN=DFSF10.OPTIONS,DISP=SHR                                 </code>
-<code>//       DD DSN=DFSF10.SDFSMAC,DISP=SHR                                 </code>
-<code>//       DD DSN=SYS1.MACLIB,DISP=SHR                                    </code>
-<code>//*                                                                     </code>
-<code>//SYSUT1 DD UNIT=SYSDA,SPACE=(1700,(400,400))                           </code>
-<code>//SYSUT2 DD UNIT=SYSDA,SPACE=(1700,(400,400))                           </code>
-<code>//SYSUT3 DD UNIT=SYSDA,SPACE=(1700,(400,400))                           </code>
-<code>//SYSPUNCH DD DSN=&&OBJMOD,                                             </code>
-<code>//       DISP=(,PASS),UNIT=SYSDA,                                       </code>
-<code>//       DCB=(RECFM=FB,LRECL=80,BLKSIZE=400),                           </code>
-<code>//       SPACE=(400,(100,100))                                          </code>
-<code>//SYSPRINT DD SYSOUT=*                                                  </code>
-<code>//SYSIN DD *                                                            </code>
-<code>PZP      TITLE 'DATABASE RESOURCE ADAPTER STARTUP PARAMETER TABLE'      </code>
-<code>DFSPZP00 CSECT                                                          </code>
-<code>**********************************************************************  </code>
-<code>*        MODULE NAME: DFSPZP00                                       *  </code>
-<code>*                                                                    *  </code>
-<code>*        DESCRIPTIVE NAME: DATABASE RESOURCE ADAPTER (DRA)           *  </code>
-<code>*                  STARTUP PARAMETER TABLE.                          *  </code>
-<code>*                                                                    *  </code>
-<code>*        FUNCTION: TO PROVIDE THE VARIOUS DEFINITIONAL PARAMETERS    *  </code>
-<code>*                  FOR THE COORDINATOR CONTROL REGION. THIS          *  </code>
-<code>*                  MODULE MAY BE ASSEMBLED BY A USER SPECIFYING      *  </code>
-<code>*                  THEIR PARTICULAR NAMES, ETC. AND LINKEDITED       *  </code>
-<code>*                  INTO THE USER RESLIB AS DFSPZPXX.  WHERE XX       *  </code>
-<code>*                  IS EITHER 00 FOR THE DEFAULT, OR ANY OTHER ALPHA- *  </code>
-<code>*                  NUMERIC CHARACTERS.                               *  </code>
-<code>*                                                                    *  </code>
-<code>**********************************************************************  </code>
-<code>         EJECT                                                          </code>
-<code>         DFSPRP DSECT=NO,                                              X</code>
-<code>               DBCTLID=IVP1,                                           X</code>
-<code>               DDNAME=CCTLDD,                                          X</code>
-<code>               DSNAME=DFSF10.SDFSRESL,                                 X</code>
-<code>               MAXTHRD=99,                                             X</code>
-<code>               MINTHRD=10,                                             X</code>
-<code>               TIMER=60,                                               X</code>
-<code>               USERID=,                                                X</code>
-<code>               CNBA=10,                                                X</code>
-<code>               FPBUF=,                                                 X</code>
-<code>               FPBOF=,                                                 X</code>
-<code>               TIMEOUT=60,                                             X</code>
-<code>               SOD=A,                                                  X</code>
-<code>               AGN=                                                     </code>
-<code>         END                                                            </code>
-<code>/*                                                                      </code>
-<code>//LNKEDT EXEC PGM=IEWL,                                                 </code>
-<code>//       PARM='LIST,XREF,LET,NCAL'                                      </code>
-<code>//SYSUT1 DD UNIT=SYSDA,SPACE=(1024,(100,50))                            </code>
-<code>//SYSPRINT DD SYSOUT=*                                                  </code>
-<code>//SYSLMOD  DD DSN=DFSF10.SDFSRESL,DISP=SHR                              </code>
-<code>//SYSLIN   DD DISP=(OLD,DELETE),DSN=&&OBJMOD                            </code>
-<code>//         DD DDNAME=SYSIN                                              </code>
-<code>//SYSIN    DD *                                                         </code>
-<code>   NAME  DFSPZP01(R)                                                    </code>
-<code>/*                                                                      </code>
-</pre>
-</div>
+You need to assemble a DRA Table with an assemble and link edit job. 
+My example below was used to assemble and link edit a DRA Table called DFSPZP01, which is written to the IMS RESLIB.
 
-<p>Download JCL from github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/asmbldra.jcl" target="_blank">here.</a></p>
-<p><b>Note the deliberate mistake! </b></p>
-<sl>
-<li>We just generated a DRA Table with suffix 01 <code>NAME DFSPZP01 (R)</code></p>
-<li>Back in section 4.2 I coded my parameters member with suffix 00 <code>IMSDRASX="00"</code>
-</sl>
-<p>That "mistake" serves to force us to review how to change the Classic CDC Service parameters.</p>
-<p>One way of changing service parameters is by modifying the started task. The MTO commands below 
-show example of how to edit the DRA Userid and the DRA Suffix</p> 
+```
+//IBMUSERS   JOB (ASMDRA),'ASMDRA',                                     
+//            CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID                         
+//ASM EXEC PGM=ASMA90,                                                  
+//       PARM='DECK,NOOBJECT,LIST,XREF(SHORT),ALIGN',                   
+//       REGION=4096K                                                   
+//SYSLIB DD DSN=DFSF10.OPTIONS,DISP=SHR                                 
+//       DD DSN=DFSF10.SDFSMAC,DISP=SHR                                 
+//       DD DSN=SYS1.MACLIB,DISP=SHR                                    
+//*                                                                     
+//SYSUT1 DD UNIT=SYSDA,SPACE=(1700,(400,400))                           
+//SYSUT2 DD UNIT=SYSDA,SPACE=(1700,(400,400))                           
+//SYSUT3 DD UNIT=SYSDA,SPACE=(1700,(400,400))                           
+//SYSPUNCH DD DSN=&&OBJMOD,                                             
+//       DISP=(,PASS),UNIT=SYSDA,                                       
+//       DCB=(RECFM=FB,LRECL=80,BLKSIZE=400),                           
+//       SPACE=(400,(100,100))                                          
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN DD *                                                            
+PZP      TITLE 'DATABASE RESOURCE ADAPTER STARTUP PARAMETER TABLE'      
+DFSPZP00 CSECT                                                          
+**********************************************************************  
+*        MODULE NAME: DFSPZP00                                       *  
+*                                                                    *  
+*        DESCRIPTIVE NAME: DATABASE RESOURCE ADAPTER (DRA)           *  
+*                  STARTUP PARAMETER TABLE.                          *  
+*                                                                    *  
+*        FUNCTION: TO PROVIDE THE VARIOUS DEFINITIONAL PARAMETERS    *  
+*                  FOR THE COORDINATOR CONTROL REGION. THIS          *  
+*                  MODULE MAY BE ASSEMBLED BY A USER SPECIFYING      *  
+*                  THEIR PARTICULAR NAMES, ETC. AND LINKEDITED       *  
+*                  INTO THE USER RESLIB AS DFSPZPXX.  WHERE XX       *  
+*                  IS EITHER 00 FOR THE DEFAULT, OR ANY OTHER ALPHA- *  
+*                  NUMERIC CHARACTERS.                               *  
+*                                                                    *  
+**********************************************************************  
+         EJECT                                                          
+         DFSPRP DSECT=NO,                                              X
+               DBCTLID=IVP1,                                           X
+               DDNAME=CCTLDD,                                          X
+               DSNAME=DFSF10.SDFSRESL,                                 X
+               MAXTHRD=99,                                             X
+               MINTHRD=10,                                             X
+               TIMER=60,                                               X
+               USERID=,                                                X
+               CNBA=10,                                                X
+               FPBUF=,                                                 X
+               FPBOF=,                                                 X
+               TIMEOUT=60,                                             X
+               SOD=A,                                                  X
+               AGN=                                                     
+         END                                                            
+/*                                                                      
+//LNKEDT EXEC PGM=IEWL,                                                 
+//       PARM='LIST,XREF,LET,NCAL'                                      
+//SYSUT1 DD UNIT=SYSDA,SPACE=(1024,(100,50))                            
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSLMOD  DD DSN=DFSF10.SDFSRESL,DISP=SHR                              
+//SYSLIN   DD DISP=(OLD,DELETE),DSN=&&OBJMOD                            
+//         DD DDNAME=SYSIN                                              
+//SYSIN    DD *                                                         
+   NAME  DFSPZP01(R)                                                    
+/*                                                                      
+```
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>F CCDC,SET,CONFIG,SERVICE=IMSDRA,DRATABLESUFFIX=’01’</code>
-<code>F CCDC,SET,CONFIG,SERVICE=IMSDRA,DRAUSERID=’IBMUSER’</code>
-</pre> 
-</div>
+Download JCL from github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/asmbldra.jcl" target="_blank">here.</a> 
 
-<p>Another way of changing the Classic CDC Service paramters is by using the Classic Data Architect IDE, which is 
-shown later on in section 7.2 of this paper.</p>
+<b>Note the deliberate mistake! </b> 
+
+* We just generated a DRA Table with suffix 01 <code>NAME DFSPZP01 (R)</code></p>
+* Back in section 4.2 I coded my parameters member with suffix 00 <code>IMSDRASX="00"</code>
+ 
+
+That "mistake" serves to force us to review how to change the Classic CDC Service parameters. 
+One way of changing service parameters is by modifying the started task. The MTO commands below 
+show example of how to edit the DRA Userid and the DRA Suffix 
+
+```
+F CCDC,SET,CONFIG,SERVICE=IMSDRA,DRATABLESUFFIX=’01’
+F CCDC,SET,CONFIG,SERVICE=IMSDRA,DRAUSERID=’IBMUSER’
+```
+
+Another way of changing the Classic CDC Service paramters is by using the Classic Data Architect IDE, which is 
+shown later on in section 7.2 of this paper.
 
 <h3 id="6.2">6.2 IMS Logging and Notification Exits</h3> 
-<p>When a CDC Capture agent works with a relational database, it normally only has a single database log to deal with. 
+
+When a CDC Capture agent works with a relational database, it normally only has a single database log to deal with. 
 IMS can be different, with multiple regions, the (small) possibility of DLI Batch jobs and so forth. 
-So, Classic CDC for IMS requires that IMS tells it about log activations, deactivations and switches.</p>
-<p>This is done with the <b>IMS Partner Program User Exit</b> (PPUE). 
-<p>A modified PPUE must be created and deployed into IMS RESLIB. 
+So, Classic CDC for IMS requires that IMS tells it about log activations, deactivations and switches. 
+This is done with the <b>IMS Partner Program User Exit</b> (PPUE). 
+
+A modified PPUE must be created and deployed into IMS RESLIB. 
 The module CEC1OPT must be assembled, and contain the TCPIP Log Reader Notification Port 
-that was defined in the CECCUSPC parameters module <code>IMCPNPRT="5003"</code>.</p>
-<p>A sample assembler source module (CECE1OPT) is provided for the PPUE here :  <code>CCDC.I1.USERSAMP(CECE1OPT)</code>.</p> 
-<p>You need to edit the module to suit your environment. 
+that was defined in the CECCUSPC parameters module <code>IMCPNPRT="5003"</code>.
+
+A sample assembler source module (CECE1OPT) is provided for the PPUE here :  <code>CCDC.I1.USERSAMP(CECE1OPT)</code>.
+
+You need to edit the module to suit your environment. 
 In the worked example below the TCPIP address of the z/OS system was 192.168.1.191 and 
-Classic CDC Server is configured to listen on port 5003.</p>  
+Classic CDC Server is configured to listen on port 5003. 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>**********************************************************************  </code>
-<code>*                                                                    *  </code>
-<code>* NAME:        CECE1OPT                                              *  </code>
-<code>*                                                                    *  </code>
-<code>* DESCRIPTION: CHANGE CAPTURE RECOVERY AGENT MESSAGES AND OPTIONS    *  </code>
-<code>*                                                                    *  </code>
-<code>**********************************************************************  </code>
-<code>CECE1OPT CSECT                                                          </code>
-<code>CECE1OPT AMODE 31                                                       </code>
-<code>CECE1OPT RMODE ANY                                                      </code>
-<code>         DC    A(VECTORS)                                               </code>
-<code>         DC    C'CECE1OPT',C' '   |                                     </code>
-<code>         DC    C'&SYSDATE',C' '   |                                     </code>
-<code>         DC    C'&SYSTIME',C' '   |                                     </code>
-<code>         DS    0H                                                       </code>
-<code>VECTORS  DC    A(PFXOPTS)         | PREFIX OPTIONS                      </code>
-<code>VERSION  DC    AL2(1)             | VERSION                             </code>
-<code>**********************************************************************  </code>
-<code>* Set RESPTOUT (The number of seconds for notification time-out).    *  </code>
-<code>* It must contain a number from 1 to 60. The Default is 30 seconds.  *  </code>
-<code>**********************************************************************  </code>
-<code>RESPTOUT DC    AL2(30)            | 30 seconds = DEFAULT                </code>
-<code>*                                                                       </code>
-<code>         DC    6A(0)              | RESERVED FOR FUTURE USE             </code>
-<code>PFXOPTS  DS    0F                                                       </code>
-<code>         DC    AL2(PFXOPTSL)      | LENGTH OF OPTION AREA               </code>
-<code>**********************************************************************  </code>
-<code>**********************************************************************  </code>
-<code>* Set IPVSN to 4 to connect to the server using IPv4.                *  </code>
-<code>* Set IPVSN to 6 to connect to the server using IPv6.                *  </code>
-<code>**********************************************************************  </code>
-<code>IPVSN    DC    AL1(4)             | 4=IPv4, 6=IPv6                      </code>
-<code>         DC    AL1(0)             | Reserved                            </code>
-<code>                                                                        </code>
-<code>**********************************************************************  </code>
-<code>* The IPV6 field is ignored when IPVSN is set to 4, and the          *  </code>
-<code>* IPV4 field is ignored when IPVSN is set to 6.                      *  </code>
-<code>*                                                                    *  </code>
-<code>* The IPv4 address format is 0.0.0.0.                                *  </code>
-<code>*                                                                    *  </code>
-<code>* The IPv6 address format is 9:3155:3155:3155:0:0:0:0.               *  </code>
-<code>**********************************************************************  </code>
-<code>TCPADDR4 DC    AL1(192),AL1(168),AL1(1),AL1(191)   IPv4 addr            </code>
-<code>TCPADDR6 DC    AL2(9)               IPv6 addr - 1st 16 bits             </code>
-<code>         DC    AL2(3155)            IPv6 addr - 2nd 16 bits             </code>
-<code>         DC    AL2(3155)            IPv6 addr - 3rd 16 bits             </code>
-<code>         DC    AL2(3155)            IPv6 addr - 4th 16 bits             </code>
-<code>         DC    AL2(0)               IPv6 addr - 5th 16 bits             </code>
-<code>         DC    AL2(0)               IPv6 addr - 6th 16 bits             </code>
-<code>         DC    AL2(0)               IPv6 addr - 7th 16 bits             </code>
-<code>         DC    AL2(0)               IPv6 addr - 8th 16 bits             </code>
-<code>**********************************************************************  </code>
-<code>* Set the PORT field to the port number (decimal)                    *  </code>
-<code>**********************************************************************  </code>
-<code>PORT     DC    AL2(5003)                     TCP PORT                   </code>
-<code>PFXOPTSL EQU   *-PFXOPTS                                                </code>
-<code>         END                                                            </code>
-</pre>	 
-</div>		 
+```
+**********************************************************************  
+*                                                                    *  
+* NAME:        CECE1OPT                                              *  
+*                                                                    *  
+* DESCRIPTION: CHANGE CAPTURE RECOVERY AGENT MESSAGES AND OPTIONS    *  
+*                                                                    *  
+**********************************************************************  
+CECE1OPT CSECT                                                          
+CECE1OPT AMODE 31                                                       
+CECE1OPT RMODE ANY                                                      
+         DC    A(VECTORS)                                               
+         DC    C'CECE1OPT',C' '   |                                     
+         DC    C'&SYSDATE',C' '   |                                     
+         DC    C'&SYSTIME',C' '   |                                     
+         DS    0H                                                       
+VECTORS  DC    A(PFXOPTS)         | PREFIX OPTIONS                      
+VERSION  DC    AL2(1)             | VERSION                             
+**********************************************************************  
+* Set RESPTOUT (The number of seconds for notification time-out).    *  
+* It must contain a number from 1 to 60. The Default is 30 seconds.  *  
+**********************************************************************  
+RESPTOUT DC    AL2(30)            | 30 seconds = DEFAULT                
+*                                                                       
+         DC    6A(0)              | RESERVED FOR FUTURE USE             
+PFXOPTS  DS    0F                                                       
+         DC    AL2(PFXOPTSL)      | LENGTH OF OPTION AREA               
+**********************************************************************  
+**********************************************************************  
+* Set IPVSN to 4 to connect to the server using IPv4.                *  
+* Set IPVSN to 6 to connect to the server using IPv6.                *  
+**********************************************************************  
+IPVSN    DC    AL1(4)             | 4=IPv4, 6=IPv6                      
+         DC    AL1(0)             | Reserved                            
+                                                                        
+**********************************************************************  
+* The IPV6 field is ignored when IPVSN is set to 4, and the          *  
+* IPV4 field is ignored when IPVSN is set to 6.                      *  
+*                                                                    *  
+* The IPv4 address format is 0.0.0.0.                                *  
+*                                                                    *  
+* The IPv6 address format is 9:3155:3155:3155:0:0:0:0.               *  
+**********************************************************************  
+TCPADDR4 DC    AL1(192),AL1(168),AL1(1),AL1(191)   IPv4 addr            
+TCPADDR6 DC    AL2(9)               IPv6 addr - 1st 16 bits             
+         DC    AL2(3155)            IPv6 addr - 2nd 16 bits             
+         DC    AL2(3155)            IPv6 addr - 3rd 16 bits             
+         DC    AL2(3155)            IPv6 addr - 4th 16 bits             
+         DC    AL2(0)               IPv6 addr - 5th 16 bits             
+         DC    AL2(0)               IPv6 addr - 6th 16 bits             
+         DC    AL2(0)               IPv6 addr - 7th 16 bits             
+         DC    AL2(0)               IPv6 addr - 8th 16 bits             
+**********************************************************************  
+* Set the PORT field to the port number (decimal)                    *  
+**********************************************************************  
+PORT     DC    AL2(5003)                     TCP PORT                   
+PFXOPTSL EQU   *-PFXOPTS                                                
+         END                                                            
+```		 
 	
-<p>The CECE1OPT module was assembled and linkedited using the job below</p>
+The CECE1OPT module was assembled and linkedited using the job below
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//IBMUSERN JOB 1,IBMUSERN,MSGCLASS=A,MSGLEVEL=(1,1),  </code>
-<code>//         CLASS=A,NOTIFY=$SYSUID                     </code>
-<code>//ASM EXEC PGM=ASMA90,                                </code>
-<code>//       PARM='DECK,NOOBJECT,LIST,XREF(SHORT),ALIGN', </code>
-<code>//       REGION=4096K                                 </code>
-<code>//SYSLIB DD DSN=DFSF10.OPTIONS,DISP=SHR               </code>
-<code>//       DD DSN=DFSF10.SDFSMAC,DISP=SHR               </code>
-<code>//       DD DSN=SYS1.MACLIB,DISP=SHR                  </code>
-<code>//*                                                   </code>
-<code>//SYSUT1 DD UNIT=SYSDA,SPACE=(1700,(400,400))         </code>
-<code>//SYSUT2 DD UNIT=SYSDA,SPACE=(1700,(400,400))         </code>
-<code>//SYSUT3 DD UNIT=SYSDA,SPACE=(1700,(400,400))         </code>
-<code>//SYSPUNCH DD DSN=&&OBJMOD,                           </code>
-<code>//       DISP=(,PASS),UNIT=SYSDA,                     </code>
-<code>//       DCB=(RECFM=FB,LRECL=80,BLKSIZE=400),         </code>
-<code>//       SPACE=(400,(100,100))                        </code>
-<code>//SYSPRINT DD SYSOUT=*                                </code>
-<code>//SYSIN DD DSN=CCDC.I1.USERSAMP(CECE1OPT),DISP=SHR    </code>
-<code>//LNKEDT EXEC PGM=IEWL,                               </code>
-<code>//       PARM='LIST,XREF,LET,NCAL'                    </code>
-<code>//SYSUT1 DD UNIT=SYSDA,SPACE=(1024,(100,50))          </code>
-<code>//SYSPRINT DD SYSOUT=*                                </code>
-<code>//SYSLMOD  DD DSN=DFSF10.SDFSRESL,DISP=SHR            </code>
-<code>//SYSLIN   DD DISP=(OLD,DELETE),DSN=&&OBJMOD          </code>
-<code>//         DD DDNAME=SYSIN                            </code>
-<code>//SYSIN    DD *                                       </code>
-<code>   NAME  CECE1OPT(R)                                  </code>
-<code>/*                                                    </code>
-</pre>	
-</div>
+```
+//IBMUSERN JOB 1,IBMUSERN,MSGCLASS=A,MSGLEVEL=(1,1),  
+//         CLASS=A,NOTIFY=$SYSUID                     
+//ASM EXEC PGM=ASMA90,                                
+//       PARM='DECK,NOOBJECT,LIST,XREF(SHORT),ALIGN', 
+//       REGION=4096K                                 
+//SYSLIB DD DSN=DFSF10.OPTIONS,DISP=SHR               
+//       DD DSN=DFSF10.SDFSMAC,DISP=SHR               
+//       DD DSN=SYS1.MACLIB,DISP=SHR                  
+//*                                                   
+//SYSUT1 DD UNIT=SYSDA,SPACE=(1700,(400,400))         
+//SYSUT2 DD UNIT=SYSDA,SPACE=(1700,(400,400))         
+//SYSUT3 DD UNIT=SYSDA,SPACE=(1700,(400,400))         
+//SYSPUNCH DD DSN=&&OBJMOD,                           
+//       DISP=(,PASS),UNIT=SYSDA,                     
+//       DCB=(RECFM=FB,LRECL=80,BLKSIZE=400),         
+//       SPACE=(400,(100,100))                        
+//SYSPRINT DD SYSOUT=*                                
+//SYSIN DD DSN=CCDC.I1.USERSAMP(CECE1OPT),DISP=SHR    
+//LNKEDT EXEC PGM=IEWL,                               
+//       PARM='LIST,XREF,LET,NCAL'                    
+//SYSUT1 DD UNIT=SYSDA,SPACE=(1024,(100,50))          
+//SYSPRINT DD SYSOUT=*                                
+//SYSLMOD  DD DSN=DFSF10.SDFSRESL,DISP=SHR            
+//SYSLIN   DD DISP=(OLD,DELETE),DSN=&&OBJMOD          
+//         DD DDNAME=SYSIN                            
+//SYSIN    DD *                                       
+   NAME  CECE1OPT(R)                                  
+/*                                                    
+```
 
 <h3 id="6.3">6.3 Augment DBD to generate T99 Log Records</h3> 
 <p>A third difference between Classic CDC for IMS and CDC for a relational source is IMS logging.</p>
