@@ -149,7 +149,7 @@ relate to external artefacts.
 
 All the services, and their governing parameters are documented in the knowledge centre <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-about-cdc-replication">here</a>.
 
-
+<br><hr>
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>
 
@@ -162,7 +162,7 @@ diving into the technical details of very nut and bolt. This paper identifies fi
 4. Configure the Db2 z/OS Environment.
 5. Integrate with the wider CDC Landscape.
 
-
+<br><hr>
 
 <h2 id="3.0">3. SMPE Installation of Code Libraries</h2>
 <p>SMPE installation is a well documented, standardised process that every systems programming shop manages with 
@@ -185,7 +185,7 @@ followng stages.</p>
   <tr><td>CDCD.SCHCTTL</td><td>Data</td></tr>  
 </table> 
 
-
+<br><hr>
 
 	
 <h2 id="4.0">4. Creating the CDC Instance</h2>
@@ -451,7 +451,7 @@ Customize the job CDCD.SCHCCNTL(CDCCRCCH) to allocate the VSAM cluster that will
       CYLINDERS(600))                                                    
 ```
 
-
+<br><hr>
 
 <h2 id="5.0">5. Configure the z/OS Environment</h2>
 Every z/OS environment will have different constraints and considerations for deployment. 
@@ -517,22 +517,25 @@ As you progress with CDC for Db2 z/OS you may need to perform some Db2 tuning. E
 
 That's it for the CDC Server !!! 
 
-<hr>
+<br><hr>
 
 <h2 id="7.0">7. Integrate with the wider CDC Landscape</h2>
-<p>Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
-to define Subscriptions from them to target systems. Section 7 covers these matters.</p>
+Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
+to define Subscriptions from them to target systems. Section 7 covers these matters. 
 
 <h3 id="7.1">7.1 Deploy CDC as a Started Task</h3> 
-<p>Assuming you want to run CDC as a started task, rather than a batch job, you should copy 
-the contents of the JCL to run CDC as a batch job <code style="color:#00FF00; background-color:#000000">CDCD.SCHCCNTL(CHCPROC) 
-to your PROCLIB, and follow your site standards for establishing a new started task.</p> 
+Assuming you want to run CDC as a started task, rather than a batch job, you should copy 
+the contents of the JCL to run CDC as a batch job <code>CDCD.SCHCCNTL(CHCPROC)</code>  
+to your PROCLIB, and follow your site standards for establishing a new started task. 
 
 
 <h3 id="7.2">7.2 Connect from Management Console to CDC Started Task</h3>
-<p>This document is primarily concerned with everything that needs to be done to establish CDC for Db2 z/OS as a started task.</p>
-<p>Using the the CDC administration tools is now a standard CDC task which is covered in 
-the <a href="/recipes/docs/NA_CDC/cdcu2.html">Devops Options for CDC.</a> paper.</p>
+This document is primarily concerned with everything that needs to be done to establish CDC for Db2 z/OS as a started task. 
+
+Using the the CDC administration tools is now a standard CDC task which is covered in 
+[Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)
+
+
 
 
 <h3 id="7.3">7.3 Use CHCCLP Scripting for z/OS</h3>
