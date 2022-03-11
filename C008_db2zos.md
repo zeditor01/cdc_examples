@@ -502,22 +502,21 @@ for all logged SQL operations.
 You don't even need to do this in advance, because the CDC administration tools will detect if "Data Capture None" is in force for any source table, and generate an ALTER 
 statement to make the change. 
 
-<p><code>ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</code></p> 
+<code>ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</code> 
 
 <h3 id="6.2">6.2 Db2 configuration considerations</h3> 
-<p>There is nothing else that needs to be done for a basic up and running exercise.</p>
-<p>As you progress with CDC for Db2 z/OS you may need to perform some Db2 tuning. Examples of the sorts of work you may need to do are:</p>
+There is nothing else that needs to be done for a basic up and running exercise. 
+As you progress with CDC for Db2 z/OS you may need to perform some Db2 tuning. Examples of the sorts of work you may need to do are: 
 
-<ul> 
-<li>Db2 log buffer configuration should be adjusted to ensure that all log reads for Db2 are satisfied from memory
-<li>For Ultra-active Db2 systems you will want to schedule the ALTER TABLE commands for a quiet time
-<li>If you replicate a lot of tables, the increase in logging may prompt you to review your log configuration.
-</ul>
+ 
+* Db2 log buffer configuration should be adjusted to ensure that all log reads for Db2 are satisfied from memory
+* For Ultra-active Db2 systems you will want to schedule the ALTER TABLE commands for a quiet time
+* If you replicate a lot of tables, the increase in logging may prompt you to review your log configuration.
 
 
-<p>That's it for the CDC Server !!!</p>
+That's it for the CDC Server !!! 
 
-<br><hr>
+<hr>
 
 <h2 id="7.0">7. Integrate with the wider CDC Landscape</h2>
 <p>Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
