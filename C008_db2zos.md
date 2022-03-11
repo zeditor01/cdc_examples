@@ -482,7 +482,7 @@ Most sites would create a dedicated started task userid, and permit it the neces
 
 <h3 id="5.4">5.4 Test Start the CDC Server</h3> 
 This is a good point to start the server and resolve any problems with the CDC Server.  
-You can test CDC as a Job using the JCL in <pre>CDCD.SCHCCNTL(CHCPROC)</pre>, and then deploy it as a started task later on.
+You can test CDC as a Job using the JCL in <code>CDCD.SCHCCNTL(CHCPROC)</code> and then deploy it as a started task later on.
 Upon first start, you should expect to see the Classic CDC Server come up.
 
 
@@ -490,7 +490,7 @@ Upon first start, you should expect to see the Classic CDC Server come up.
 
 
 <h2 id="6.0">6. Configure the Db2 z/OS Environment</h2>
-<p>There is very little to do here.</p>
+There is very little to do here.
 
 
 <h3 id="6.1">6.1 Alter Source Tables for full row logging</h3>
