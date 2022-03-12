@@ -6,22 +6,6 @@ It contains
 * 15 documents that illustrate a range of tasks from installation through to operations and monitoring
 * suppliemented with code samples for some of the  tasks.
 
-Database replication is widely used by organisations to maintain copies of operational data on systems other than the primary source database. 
-
-Twenty years ago the most common use case was to maintain a reporting environment supporting data analytics in a dedicated reporting environment. 
-The justications for the effort and cost of replicating the data would include (a) protecting the operational service levels of the critical transaction systems and 
-(b) making use of hardware which was optimised for analytics.
-
-Nowadays the primary use case is to support digital integration hubs that serve data requests via Cloud APIs. As Enterprises seize upon the benefits of cloud computing, they 
-are compiling sets of APIs that are required support their Cloud applications. These business-focussed APIs do not care about the boundaries that exist between siloed 
-operational systemsby the business. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems, and they need maintain the 
-currency of the curated data by consuming streams of change data from the source systems.
-
-The focus of the worked examples in this publication are for mainframe databases such Db2 z/OS, IMS and VSAM. IBM InfoSphere CDC can capture changes from these source systems 
-and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Digital Integration Hubs.
-
-Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
-
 <p align="center">
   <img alt="CDC and DIH" src="images/cdc/zdim.png">
 </p>
@@ -61,5 +45,22 @@ Code samples for the demo application used in this Redpaper can be downloaded at
 [Appendix](C016_appendix.md)
 
 [Glossary](C017_glossary.md)
+
+
+Database replication is widely used by organisations to maintain copies of operational data on systems other than the primary source database. 
+
+Twenty years ago the most common use case was to maintain a reporting environment supporting data analytics in a dedicated reporting environment. 
+The justications for the effort and cost of replicating the data would include (a) protecting the operational service levels of the critical transaction systems and 
+(b) making use of hardware which was optimised for analytics.
+
+Nowadays the primary use case is to support digital integration hubs that serve data requests via Cloud APIs. As Enterprises seize upon the benefits of cloud computing, they 
+are compiling sets of APIs that are required support their Cloud applications. These business-focussed APIs do not care about the boundaries that exist between siloed 
+operational systemsby the business. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems, and they need maintain the 
+currency of the curated data by consuming streams of change data from the source systems.
+
+The focus of the worked examples in this publication are for mainframe databases such Db2 z/OS, IMS and VSAM. IBM InfoSphere CDC can capture changes from these source systems 
+and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Digital Integration Hubs.
+
+Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
 
