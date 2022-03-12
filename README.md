@@ -67,5 +67,5 @@ Code samples for the demo application used in this Redpaper can be downloaded at
 
 | Command | Description |
 | --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| [Chapter 1.  Environment for CDC Worked Examples.](C001_environment.md) | [Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md) |
+| [Chapter 8.  Setting up CDC for Db2 on z/OS.](C008_cdcdb2zos.md) | [Chapter 3.  Devops Options for CDC.](C003_devops.md) |
