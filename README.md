@@ -63,3 +63,9 @@ and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Di
 
 Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
+
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
