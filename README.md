@@ -12,9 +12,7 @@ It contains
 
 ## Table of Contents
 
-[Chapter 1.  Environment for CDC Worked Examples.](C001_environment.md)
-
-[Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)
+[Chapter 1.  Environment for CDC Worked Examples.](C001_environment.md) [Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)
 
 [Chapter 3.  Devops Options for CDC.](C003_devops.md)
 
