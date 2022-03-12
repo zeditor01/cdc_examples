@@ -13,7 +13,9 @@ It contains
 ## Table of Contents
 
 [Chapter 1.  Environment for CDC Worked Examples.](C001_environment.md) 
+
 [Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)
+
 [Chapter 3.  Devops Options for CDC.](C003_devops.md)
 
 [Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)
@@ -61,18 +63,3 @@ and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Di
 
 Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
-
-## Contents
-
- <table>
-  <tr><td><b>Installing and Configuring CDC Agents</b></td><td><b>Using CDC</b></td></tr> 
-  <tr><td>[Chapter 1.  Environment for CDC Worked Examples.](C001_environment.md)</td><td>[Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)</td></tr> 
-  <tr><td>[Chapter 8.  Setting up CDC for Db2 on z/OS.](C008_cdcdb2zos.md)</td><td>[Chapter 3.  Devops Options for CDC.](C003_devops.md)</td></tr>  
-  <tr><td>[Chapter 9.  Setting up Classic CDC for IMS.](C009_cdcims.md)</td><td>[Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)</td></tr>  
-  <tr><td>[Chapter 10.  Setting up Classic CDC for VSAM.](C010_vsam.md)</td><td>[Chapter 5.  Security for CDC (LDAP and TLS).](C005_security.md)</td></tr>  
-  <tr><td>[Chapter 11.  Setting up CDC for Kafka in zCX.](C011_zcx.md)</td><td>[Chapter 6.  Container Deployment.](C006_containers.md)</td></tr> 
-  <tr><td>[Chapter 12.  Setting up CDC for Db2 on Linux.](C012_db2linux.md)</td><td>[Chapter 7.  Monitoring and Managing outwith the Windows MC.](C007_dashboard.md)</td></tr>  
-  <tr><td>[Chapter 13.  Setting up CDC for Kafka.](C013_kafka.md)</td><td> </td></tr>  
-  <tr><td>[Chapter 14.  Setting up remote CDC Capture for Db2 z/OS.](C014_rdb2zos.md)</td><td> </td></tr>   
-   <tr><td>[Chapter 15.  Setting up remote CDC Capture for VSAM.](C015_rvsam.md)</td><td> </td></tr> 
-</table> 
