@@ -996,27 +996,34 @@ Screenshot 16 of 17 :  Specify the target server (SAMPLEDS) and Finish
 Screenshot 17 of 17 :  Review object in Data Source Explorer for accuracy
 ![CDA Imported Artefacts](images/cdc/imsgen05.PNG)
 
-
-End of New stuff 
-
  
   
 <br>
 
 <h4>7.2.3 Test the validity of the IMS Table Mapping using SQL through the CDA</h4>
-<p>Once you have deployed the IMS Table to the Classic CDC Server, you should validate that the table mapping is correct. 
+
+Once you have deployed the IMS Table to the Classic CDC Server, you should validate that the table mapping is correct. 
 The simplest way to do this is to run an SQL query against the mapped IMS Table. 
-Right Click on the Table, and either "return all rows" or choose "sample contents" to eyeball the data for validity</p>
-<center><img src="/recipes/images/neale/cdc/cdc01_31.png" alt="Classic CDC Services" style="border:1px solid black; width:800px"></center> 
+Right Click on the Table, and either "return all rows" or choose "sample contents" to eyeball the data for validity 
 
-<p>You can dig deeper into data validation with more probing SQL through the Classic Data Architect. 
-Just click the SQL icon in the Data Source Exporer window (bottom-right) and SQL away.</p>
 
-<p>Be mindful of the fact that many test IMS systems have "dirty data". 
+![CDA Verify Data](images/cdc/cdc01_31.png)
+
+You can dig deeper into data validation with more probing SQL through the Classic Data Architect. 
+Just click the SQL icon in the Data Source Exporer window (bottom-right) and SQL away. 
+
+Be mindful of the fact that many test IMS systems have "dirty data". 
 If this is true for your environment, you can overcome dirty data with some forgiving Classic CDC parameters. 
-However, at some point before deploying to production, you must take responsibility for validating the data and the accuracy of the mapping.</p>
+However, at some point before deploying to production, you must take responsibility for validating the data and the accuracy of the mapping. 
 
-<p>The "forgiving" Classic CDC parameters that are available to you are as follows</p>
+The "forgiving" Classic CDC parameters that are available to you are as follows 
+
+
+| Parameter | Purpose |
+| --- | --- |
+| DATACONVERRACT | 1 will convert invalid numeric data to -9s for query actions |
+| CSDATAVALIDATEAC | 1 will convert invalid numeric data to -9s for change data capture actions | 
+
 
  <table>
   <tr>
