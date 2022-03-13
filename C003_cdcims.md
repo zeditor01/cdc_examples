@@ -950,21 +950,28 @@ Create a new Data Design Project (Zeditor)
 Inside the project, create a new Physical Data Model
 ![CDA Imported Artefacts](images/cdc/imstab02.PNG)
 
+Use the Classic Integration template for this data model
+![CDA Imported Artefacts](images/cdc/imstab03.PNG)
+
+Highlight IMS DBDs, right mouse click, import files
+![CDA Imported Artefacts](images/cdc/imstab04.PNG)
+
+Import either from 3270 or Local PC, and Review artefact
+![CDA Imported Artefacts](images/cdc/imstab05.PNG)
+
+Repeat process to import COBOL Copybooks
+![CDA Imported Artefacts](images/cdc/imstab06.PNG)
+
+Highlight the Physical Data Model, Create an IMS Table
+![CDA Imported Artefacts](images/cdc/imstab07.PNG)
+
+
 End of New stuff 
 
   <!-- Slideshow -->
-  <div class="w3-container"> 
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab01.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Create a new Data Design Project (Zeditor)</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab02.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Inside the project, create a new Physical Data Model</span>
-      </div>
+
+
+
     </div>
      <div class="w3-display-container mySlides">
       <img src="/recipes/images/neale/cdc/imstab03.PNG" style="width:100%">
@@ -996,6 +1003,8 @@ End of New stuff
         <span class="w3-yellow w3-padding-large w3-animate-bottom">Highlight the Physical Data Model, Create an IMS Table</span>
       </div>
     </div>
+	
+	
      <div class="w3-display-container mySlides">
       <img src="/recipes/images/neale/cdc/imstab08.PNG" style="width:100%">
       <div class="w3-display-bottomright w3-container w3-padding-32">
