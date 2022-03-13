@@ -6,10 +6,6 @@ It contains
 * 15 documents that illustrate a range of tasks from installation through to operations and monitoring
 * suppliemented with code samples for some of the  tasks.
 
-<p align="center">
-  <img alt="CDC and DIH" src="images/cdc/zdim.png">
-</p>
-
 ![ZDIM](images/cdc/zdim.png)
 
 ## Contents
