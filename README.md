@@ -12,15 +12,15 @@ It contains
 
 | Installing and Configuring CDC Agents | Using CDC |
 | --- | --- |
-| [Environment for CDC Worked Examples.](C001_environment.md) | [Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md) |
-| [Setting up CDC for Db2 on z/OS.](C008_cdcdb2zos.md) | [Chapter 3.  Devops Options for CDC.](C003_devops.md) | 
-| [Setting up Classic CDC for IMS.](C009_cdcims.md) | [Chapter 4.  CHCCLP Scripting.](C004_chcclp.md) |
-| [Setting up Classic CDC for VSAM.](C010_vsam.md) | [Chapter 5.  Security for CDC (LDAP and TLS).](C005_security.md) |
-| [Setting up CDC for Kafka in zCX.](C011_zcx.md) | [Chapter 6.  Container Deployment.](C006_containers.md) |
-| [Setting up CDC for Db2 on Linux.](C012_db2linux.md) | [Chapter 7.  Monitoring and Managing outwith the Windows MC.](C007_dashboard.md) |
-| [Setting up CDC for Kafka.](C013_kafka.md) |    |
-| [Setting up remote CDC Capture for Db2 z/OS.](C014_rdb2zos.md) |     |
-| [Setting up remote CDC Capture for VSAM.](C015_rvsam.md) |     |    
+| [1. Environment for CDC Worked Examples.](C001_environment.md) | [10. Creating and Operating CDC Subscriptions.](C002_administration.md) |
+| [2. Setting up CDC for Db2 on z/OS.](C008_cdcdb2zos.md) | [11. Devops Options for CDC.](C003_devops.md) | 
+| [3. Setting up Classic CDC for IMS.](C009_cdcims.md) | [12. CHCCLP Scripting.](C004_chcclp.md) |
+| [4. Setting up Classic CDC for VSAM.](C010_vsam.md) | [13. Security for CDC (LDAP and TLS).](C005_security.md) |
+| [5. Setting up CDC for Kafka in zCX.](C011_zcx.md) | [14. Container Deployment.](C006_containers.md) |
+| [6. Setting up CDC for Db2 on Linux.](C012_db2linux.md) | [15. Monitoring and Managing outwith the Windows MC.](C007_dashboard.md) |
+| [7. Setting up CDC for Kafka.](C013_kafka.md) |    |
+| [8. Setting up remote CDC Capture for Db2 z/OS.](C014_rdb2zos.md) |     |
+| [9. Setting up remote CDC Capture for VSAM.](C015_rvsam.md) |     |    
 
 
 Database replication is widely used by organisations to maintain copies of operational data on systems other than the primary source database. 
