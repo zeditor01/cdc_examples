@@ -31,11 +31,11 @@ The justications for the effort and cost of replicating the data would typically
 
 Nowadays the primary use case is to support digital integration hubs that serve data requests via Cloud APIs. As Enterprises seize upon the benefits of cloud computing, they 
 are compiling sets of APIs that are required support their Cloud applications. These business-focussed APIs do not care about the boundaries that exist between siloed 
-operational systems. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems, and they need maintain the 
+operational systems. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems. They need maintain the 
 currency of the curated data by consuming streams of change data from the source systems.
 
 The focus of the worked examples in this publication are for mainframe databases such Db2 z/OS, IMS and VSAM. IBM InfoSphere CDC can capture changes from these source systems 
-and publish them to targets such as Kafka, Db2 and Oracle, for consumption by Digital Integration Hubs.
+and publish them to targets such as Kafka, Db2 and Oracle.
 
 Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
