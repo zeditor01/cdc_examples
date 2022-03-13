@@ -944,154 +944,62 @@ Go to the "Data Project Explorer" (top left window) and create a new project, su
 
 Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
 
-Create a new Data Design Project (Zeditor)
+Screenshot 1 of 17 : Create a new Data Design Project (Zeditor)
 ![CDA Imported Artefacts](images/cdc/imstab01.PNG)
 
-Inside the project, create a new Physical Data Model
+Screenshot 2 of 17 :  Inside the project, create a new Physical Data Model
 ![CDA Imported Artefacts](images/cdc/imstab02.PNG)
 
-Use the Classic Integration template for this data model
+Screenshot 3 of 17 :  Use the Classic Integration template for this data model
 ![CDA Imported Artefacts](images/cdc/imstab03.PNG)
 
-Highlight IMS DBDs, right mouse click, import files
+Screenshot 4 of 17 :  Highlight IMS DBDs, right mouse click, import files
 ![CDA Imported Artefacts](images/cdc/imstab04.PNG)
 
-Import either from 3270 or Local PC, and Review artefact
+Screenshot 5 of 17 :  Import either from 3270 or Local PC, and Review artefact
 ![CDA Imported Artefacts](images/cdc/imstab05.PNG)
 
-Repeat process to import COBOL Copybooks
+Screenshot 6 of 17 :  Repeat process to import COBOL Copybooks
 ![CDA Imported Artefacts](images/cdc/imstab06.PNG)
 
-Highlight the Physical Data Model, Create an IMS Table
+Screenshot 7 of 17 :  Highlight the Physical Data Model, Create an IMS Table
 ![CDA Imported Artefacts](images/cdc/imstab07.PNG)
+
+
+Screenshot 8 of 17 :  Specify the DBD, assign the desired Schema Name
+![CDA Imported Artefacts](images/cdc/imstab08.PNG)
+
+Screenshot 9 of 17 :  Specify Segments, SSID, PSB, and choose Table Name and Usage
+![CDA Imported Artefacts](images/cdc/imstab09.PNG)
+
+Screenshot 10 of 17 :  Specify root segment copybook and choose fields
+![CDA Imported Artefacts](images/cdc/imstab10.PNG)
+
+Screenshot 11 of 17 :  Specify dependent segment copybooks and choose fields
+![CDA Imported Artefacts](images/cdc/imstab11.PNG)
+
+Screenshot 12 of 17 :  Review the IMS table mapping, and Finish
+![CDA Imported Artefacts](images/cdc/imstab12.PNG)
+
+Screenshot 13 of 17 :  Highlight the Mapped Object, right mouse click and Generate DDL
+![CDA Imported Artefacts](images/cdc/imsgen01.PNG)
+
+Screenshot 14 of 17 :  Specify Artefacts required
+![CDA Imported Artefacts](images/cdc/imsgen02.PNG)
+
+Screenshot 15 of 17 :  Review DDL, and tick to execute DDL on Classic CDC Server
+![CDA Imported Artefacts](images/cdc/imsgen03.PNG)
+
+Screenshot 16 of 17 :  Specify the target server (SAMPLEDS) and Finish
+![CDA Imported Artefacts](images/cdc/imsgen04.PNG)
+
+Screenshot 17 of 17 :  Review object in Data Source Explorer for accuracy
+![CDA Imported Artefacts](images/cdc/imsgen05.PNG)
 
 
 End of New stuff 
 
-  <!-- Slideshow -->
-
-
-
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab03.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Use the Classic Integration template for this data model</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab04.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Highlight IMS DBDs, right mouse click, import files</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab05.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Import either from 3270 or Local PC, and Review artefact</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab06.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Repeat process to import COBOL Copybooks</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab07.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Highlight the Physical Data Model, Create an IMS Table</span>
-      </div>
-    </div>
-	
-	
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab08.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify the DBD, assign the desired Schema Name</span>
-      </div>
-    </div> 
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab09.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify Segments, SSID, PSB, and choose Table Name and Usage</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab10.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify root segment copybook and choose fields</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab11.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify dependent segment copybooks and choose fields</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imstab12.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Review the IMS table mapping, and Finish</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imsgen01.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Highlight the Mapped Object, right mouse click and Generate DDL</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imsgen02.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify Artefacts required</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imsgen03.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Review DDL, and tick to execute DDL on Classic CDC Server</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imsgen04.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify the target server (SAMPLEDS) and Finish</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/imsgen05.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Review object in Data Source Explorer</span>
-      </div>
-    </div>
-	
-    <!-- Slideshow next/previous buttons -->
-    <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
-      <div class="w3-left" onclick="plusDivs(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
-      <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
-    
-      <div class="w3-center">
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(6)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(7)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(8)"></span>
-		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(9)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(10)"></span>		
- 		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(11)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(12)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(13)"></span>		
- 		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(14)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(15)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(16)"></span>		
- 		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(17)"></span>	
-	  </div>
-    </div>
-  </div>
+ 
   
 <br>
 
