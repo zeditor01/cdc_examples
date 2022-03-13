@@ -900,43 +900,50 @@ The Data Perpective is shown in the screenshot below.
  
 ![CDA Data Perspective](images/cdc/CDA_Data_Perspective.png)
 
-<p>In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
+In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
 (bottom left window in the Data Perspective), right click on "Database Connections" and choose "New". 
-Then fill in the connection details ( 192.168.1.191:9087 IBMUSER/SYS1 ), test the connection and press OK.</p>
-<center><img src="/recipes/images/neale/cdc/CDA_Connect.png" alt="CDA Connection" style="border:1px solid black; width:500px"></center> 
+Then fill in the connection details ( 192.168.1.191:9087 IBMUSER/SYS1 ), test the connection and press OK.
 
-<p>You must also repeat this process to define a connection on the "Console Explorer" window. Defining a connection in one window does 
-not copy that connection to the other window.</p>
-<p>If the connection fails, the most likely cause is a firewall. Once you have eliminated firewalls, 
-check in the Classic CDC started task output for correction errors.</p> 
-<p>Once connected, you can expand the "SAMPLEDS" datasource and explore the schemas, and the table objects within the schemas. 
+![CDA Connection](images/cdc/CDA_Connect.png)
+
+You must also repeat this process to define a connection on the "Console Explorer" window. Defining a connection in one window does 
+not copy that connection to the other window. 
+
+If the connection fails, the most likely cause is a firewall. Once you have eliminated firewalls, 
+check in the Classic CDC started task output for correction errors.  
+
+Once connected, you can expand the "SAMPLEDS" datasource and explore the schemas, and the table objects within the schemas. 
 Initially, the Catalog Tables will be visible under schemas "SYSIBM" and "SYSCAC". When you have developed some IMS Tables" 
-they will be visible under the schema that they were created in.</p>
-<center><img src="/recipes/images/neale/cdc/CDA_Data_Source.png" alt="CDA Data Source Explorer" style="border:1px solid black; width:300px"></center>  
+they will be visible under the schema that they were created in. 
 
-<p>Click on the Console explorer tab now, and expand the Services and Configuration Tabs. 
-If you select a configuration (such as the DRA Service configuration) and edit the properties, you can make parameter changes here (such as DRATABLESUFFIX=01).</p>
-<center><img src="/recipes/images/neale/cdc/CDA_Console_Parms.png" alt="CDA Imported Artefacts" style="border:1px solid black; width:800px"></center>  
+![CDA Data Source Explorer](images/cdc/CDA_Data_Source.png)
 
+Click on the Console explorer tab now, and expand the Services and Configuration Tabs. 
+If you select a configuration (such as the DRA Service configuration) and edit the properties, you can make parameter changes here (such as DRATABLESUFFIX=01). 
+
+![CDA Imported Artefacts](images/cdc/CDA_Console_Parms.png)
 
 <h4>7.2.2 Create a data development project, and Import DBDs and Copybooks for the mapping work</h4>
-<p>Having configured CDA to operate with the Classic CDC server, the next task is to define an IMS Table. 
+
+Having configured CDA to operate with the Classic CDC server, the next task is to define an IMS Table. 
 This is a multi-step graphical dialog, that enables you to use DBDs and Copybooks to create a relational 
-projection of data slices from the IMS hierarchical database.</p>
-<p>Go to the "Data Project Explorer" (top left window) and create a new project, such as "Zeditor"</p>
+projection of data slices from the IMS hierarchical database. 
 
-<p>The steps you need to follow are described in the list below, and illustrated in the slideshow below that.</p>
-<ol>
-<li>Create a Data Development Project.
-<li>Create a physical data model (Classic Integration) within that project.
-<li>Import the IMS DBDs and Copybooks that describe the IMS database.
-<li>Create an IMS Table mapping based on the imported DBDs and Copybooks.
-<li>Generate DDL to create that IMS Table definition.
-<li>Execute the DDL against the target Classic CDC server.
-<li>Verify the generated object
-</ol>
 
-<p>Click the arrows to progress through series of screenshots for performing these tasks.</p>
+Go to the "Data Project Explorer" (top left window) and create a new project, such as "Zeditor". The steps you need to follow are described in the list below, and illustrated in the slideshow below that. 
+
+
+1. Create a Data Development Project.
+2. Create a physical data model (Classic Integration) within that project.
+3. Import the IMS DBDs and Copybooks that describe the IMS database.
+4. Create an IMS Table mapping based on the imported DBDs and Copybooks.
+5. Generate DDL to create that IMS Table definition.
+6. Execute the DDL against the target Classic CDC server.
+7. Verify the generated object
+
+
+Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
+
 
 
   <!-- Slideshow -->
