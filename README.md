@@ -26,12 +26,12 @@ It contains
 Database replication is widely used by organisations to maintain copies of operational data on systems other than the primary source database. 
 
 Twenty years ago the most common use case for database replication was to maintain a replica database supporting data analytics in a dedicated reporting environment. 
-The justications for the effort and cost of replicating the data would include (a) protecting the operational service levels of the critical transaction systems and 
+The justications for the effort and cost of replicating the data would typically include (a) protecting the operational service levels of the critical transaction systems and 
 (b) making use of hardware which was optimised for analytics.
 
 Nowadays the primary use case is to support digital integration hubs that serve data requests via Cloud APIs. As Enterprises seize upon the benefits of cloud computing, they 
 are compiling sets of APIs that are required support their Cloud applications. These business-focussed APIs do not care about the boundaries that exist between siloed 
-operational systemsby the business. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems, and they need maintain the 
+operational systems. Digital Integration Hubs are designed to curate API-Ready data from a range of heterogeneous source systems, and they need maintain the 
 currency of the curated data by consuming streams of change data from the source systems.
 
 The focus of the worked examples in this publication are for mainframe databases such Db2 z/OS, IMS and VSAM. IBM InfoSphere CDC can capture changes from these source systems 
