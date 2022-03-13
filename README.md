@@ -25,7 +25,7 @@ It contains
 
 Database replication is widely used by organisations to maintain copies of operational data on systems other than the primary source database. 
 
-Twenty years ago the most common use case was to maintain a reporting environment supporting data analytics in a dedicated reporting environment. 
+Twenty years ago the most common use case for database replication was to maintain a replica database supporting data analytics in a dedicated reporting environment. 
 The justications for the effort and cost of replicating the data would include (a) protecting the operational service levels of the critical transaction systems and 
 (b) making use of hardware which was optimised for analytics.
 
