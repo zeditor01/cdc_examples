@@ -535,111 +535,126 @@ If you configured the CECCUSPC parameters to include an MQ target, then you are 
 <br><hr>
 
 <h2 id="6.0">6. Configure the VSAM Environment</h2>
-<p>This is the section where Classic CDC differs from deploying CDC for a relational data source. 
-CDC needs the following 3 things that are more complex to provide from IMS than Db2.</p>
-<ul>
-<li>Provide read Access to VSAM datasets (for development work, and cdc initialization of target)
-<li>Configure CICS-TS or CICS-VR to write replication logs to a z/OS logstream
-<li>Alter the VSAM datasets to identify the z/OS logstream to use as a replication log.
-</ul>
+
+This is the section where Classic CDC differs from deploying CDC for a relational data source. 
+CDC needs the following 3 things that are more complex to provide from IMS than Db2. 
+
+* Provide read Access to VSAM datasets (for development work, and cdc initialization of target)
+* Configure CICS-TS or CICS-VR to write replication logs to a z/OS logstream
+* Alter the VSAM datasets to identify the z/OS logstream to use as a replication log.
+ 
 
 <h3 id="6.1">6.1 VSAM Access Service</h3>
-<p>This is done automatically by the customisation process. The steps in section 4 will create the VSAM Access Service definition and provide it with a default set of configuration paramaters.</p>
+
+This is done automatically by the customisation process. The steps in section 4 will create the VSAM Access Service definition and provide it with a default set of configuration paramaters. 
 
 
 <h3 id="6.2">6.2 CICS-TS or CICS-VR to write the replication logstream</h3> 
-<p>This is outwith the direct Classic CDC for VSAM setup tasks. It is simply a pre-requisite that must be in place before Classic CDC for VSAM can do it's job.</p>
-<p>Classic CDC for VSAM works by using a z/OS logstream as a replication log.</p>
-<ul>
-<li>If the VSAM dataset is augmented correctly (step 6.3) and under CICS-TS control, then CICS-TS will write replication log records to the z/OS logstream when VSAM writes are performed.
-<li>If the VSAM dataset is augmented correctly (step 6.3) and outside control, then CICS-VR will write replication log records to the z/OS logstream when VSAM writes are performed.
-</ul>
-<p>In this worked example, the VSAM changes were executed using a CICS sample transaction that places orders for pens. We were operating this VSAM dataset under CICS-TS control, which provided the log writing function.</p>
+
+This is outwith the direct Classic CDC for VSAM setup tasks. It is simply a pre-requisite that must be in place before Classic CDC for VSAM can do it's job. 
+
+Classic CDC for VSAM works by using a z/OS logstream as a replication log. 
+
+* If the VSAM dataset is augmented correctly (step 6.3) and under CICS-TS control, then CICS-TS will write replication log records to the z/OS logstream when VSAM writes are performed.
+* If the VSAM dataset is augmented correctly (step 6.3) and outside control, then CICS-VR will write replication log records to the z/OS logstream when VSAM writes are performed.
+ 
+
+In this worked example, the VSAM changes were executed using a CICS sample transaction that places orders for pens. 
+We were operating this VSAM dataset under CICS-TS control, which provided the log writing function. 
 
 
 <h3 id="6.3">6.3 Augment VSAM to write replication log records</h3> 
-<p>A third difference between Classic CDC for VSAM and CDC for a relational source is the very existence of a transaction log.</p>
-<p>The first step is to define a z/OS logstream to be the log, shown below.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<pre>
-<code>//************************************************</code>
-<code>//* ALLOCATE THE LOG STREAM FOR A VSAM DATASET    </code>
-<code>//************************************************</code>
-<code>//ALLOCDG    EXEC  PGM=IXCMIAPU                   </code>
-<code>//SYSPRINT DD SYSOUT=*                            </code>
-<code>//SYSOUT   DD SYSOUT=*                            </code>
-<code>//SYSIN    DD *                                   </code>
-<code>   DATA TYPE(LOGR) REPORT(NO)                     </code>
-<code>   DEFINE LOGSTREAM NAME(STREAM1.VSMLOG1)         </code>
-<code>          DASDONLY(YES)                           </code>
-<code>          LS_SIZE(1024)                           </code>
-<code>          STG_SIZE(512)                           </code>
-<code>          RETPD(7) AUTODELETE(YES)                </code>
-<code>/*                                                </code>
-</pre>
-</div>
+A third difference between Classic CDC for VSAM and CDC for a relational source is the very existence of a transaction log. 
 
-<p>The second step is to ALTER the VSAM dataset to associate the logstream, shown below.</p>
+The first step is to define a z/OS logstream to be the log, shown below. 
+
+```
+//************************************************
+//* ALLOCATE THE LOG STREAM FOR A VSAM DATASET    
+//************************************************
+//ALLOCDG    EXEC  PGM=IXCMIAPU                   
+//SYSPRINT DD SYSOUT=*                            
+//SYSOUT   DD SYSOUT=*                            
+//SYSIN    DD *                                   
+   DATA TYPE(LOGR) REPORT(NO)                     
+   DEFINE LOGSTREAM NAME(STREAM1.VSMLOG1)         
+          DASDONLY(YES)                           
+          LS_SIZE(1024)                           
+          STG_SIZE(512)                           
+          RETPD(7) AUTODELETE(YES)                
+/*                                                
+```
+
+The second step is to ALTER the VSAM dataset to associate the logstream, shown below. 
 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<pre>
-<code>//STEP1 EXEC PGM=IDCAMS                           </code>
-<code>//SYSPRINT DD SYSOUT=*                            </code>
-<code>//SYSIN DD *                                      </code>
-<code>  ALTER -                                         </code>
-<code>  IBMUSER.EXMPLAPP.EXMPCAT -                      </code>
-<code>  LOGSTREAMID(STREAM1.VSMLOG1) -                  </code>
-<code>  LOGREPLICATE                                    </code>
-<code>/*                                                </code>
-</pre>
-</div>
+```
+//STEP1 EXEC PGM=IDCAMS                           
+//SYSPRINT DD SYSOUT=*                            
+//SYSIN DD *                                      
+  ALTER -                                         
+  IBMUSER.EXMPLAPP.EXMPCAT -                      
+  LOGSTREAMID(STREAM1.VSMLOG1) -                  
+  LOGREPLICATE                                    
+/*                                                
+```
 
-<p>That's it for the Classic CDC Server !!!</p>
+That's it for the Classic CDC Server !!!
 
 <br><hr>
 
 <h2 id="7.0">7. Integrate with the wider CDC Landscape</h2>
-<p>Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
-to define "VSAM Tables", and define Subscriptions from them to target systems. Section 7 covers this matters.</p>
+
+Now that the mainframe CDC Capture Server is ready for business, you will need to start using some non-mainframe tools in order 
+to define "VSAM Tables", and define Subscriptions from them to target systems. Section 7 covers this matters. 
 
 <h3 id="7.1">7.1 Deploy Classic CDC as a Started Task</h3> 
-<p>Assuming you want to run Classic CDC as a started task, rather than a batch job, you should copy 
+
+Assuming you want to run Classic CDC as a started task, rather than a batch job, you should copy 
 the contents of the JCL to run Classic CDC as a batch job <code>CDCV.I2.USERSAMP(CECCDSRC)</code> 
-to your PROCLIB, and follow your site standards for establishing a new started task.</p> 
+to your PROCLIB, and follow your site standards for establishing a new started task.
+
 
 <h3 id="7.2">7.2 Deploy and use the Classic Data Architect IDE</h3>
-<p>The next step is to create some "VSAM Tables" to be used as CDC replication source objects.</p>
-<p>The Classic CDC Metadata catalog contains the mapping information from VSAM structures to  
+
+The next step is to create some "VSAM Tables" to be used as CDC replication source objects.
+
+
+The Classic CDC Metadata catalog contains the mapping information from VSAM structures to  
 a relational projection, as this is required to participate in CDC data replication. The mapping process is enabled 
-by using an Eclipse-based tool called the Classic Data Architect to define the data mapping.</p>
-<p>The current release of the Classic Data Architect tool should be downloaded from IBM fix Central. 
-Installation to Windows is a standard setup.exe style of installer.</p>
-<p>Once CDA is installed, the tasks you will need to perform with it are as follows:</p>
-<ol>
-<li>Configure the connection to the Classic CDC started task
-<li>Create a data development project, and Import Copybooks for the mapping work
-<li>Develop a relational model "VSAM Table" based on the imported copybooks 
-<li>Deploy the "VSAM Table" to the Classic CDC for VSAM Started Task
-<li>Test the validity of the VSAM Table Mapping using SQL through the CDA
-<li>Make the VSAM Table available for use as a source for CDC subscriptions 
-</ol> 
+by using an Eclipse-based tool called the Classic Data Architect to define the data mapping.
+
+
+The current release of the Classic Data Architect tool should be downloaded from IBM fix Central. 
+Installation to Windows is a standard setup.exe style of installer.
+
+
+Once CDA is installed, the tasks you will need to perform with it are as follows:
+
+1. Configure the connection to the Classic CDC started task
+2. Create a data development project, and Import Copybooks for the mapping work
+3. Develop a relational model "VSAM Table" based on the imported copybooks 
+4. Deploy the "VSAM Table" to the Classic CDC for VSAM Started Task
+5. Test the validity of the VSAM Table Mapping using SQL through the CDA
+6. Make the VSAM Table available for use as a source for CDC subscriptions 
+
 
 <h4>7.2.1 Configure the connection to the Classic CDC started task</h4>
 
-<p>Start up the CDA and choose a workspace on your PC filesystem.</p>
-<p>Verify that you are using the "Data Perspective" from the Action Bar : Window - Open Perspective - Data.</p>
-<p>The Data Perpective is shown in the screenshot below.</p>  
-<ul>
-<li>Top-Left Window : The project explorer
-<li>Top-Middle Window : Working subject pane (contents depend on what objects are selected)
-<li>Bottom-Left Window : Data Source Explorer (data soucre data access) and Console Explorer (data source configurations).
-</ul>
-<center><img src="/recipes/images/neale/cdc/CDA_Data_Perspective.png" alt="CDA Data Perspective" style="border:1px solid black; width:800px"></center> 
+Start up the CDA and choose a workspace on your PC filesystem.
 
+Verify that you are using the "Data Perspective" from the Action Bar : Window - Open Perspective - Data.
+
+The Data Perpective is shown in the screenshot below.
+
+
+* Top-Left Window : The project explorer
+* Top-Middle Window : Working subject pane (contents depend on what objects are selected)
+* Bottom-Left Window : Data Source Explorer (data soucre data access) and Console Explorer (data source configurations).
+ 
+![CDA_Data_Perspective](images/cdc/CDA_Data_Perspective.png)
+ 
 <p>In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
 (bottom left window in the Data Perspective), right click on "Database Connections" and choose "New". 
 Then fill in the connection details ( 192.168.1.191:9088 IBMUSER/SYS1 ), test the connection and press OK.</p>
