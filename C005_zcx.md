@@ -47,7 +47,7 @@ This chapter is a worked example of setting up CDC for Kafka inside a zCX contai
  
  
 <h2 id="abstract"> Abstract</h2>
-This document is a basic worked example of setting up CDC for Kafka inside a zCX container. 
+This document is a basic worked example of setting up CDC for Kafka inside a zCX container. Please bear in mind the following:
 
 * IBM CDC software is shipped with installer programs to perform installations on Linux, Unix and Windows platforms.
 * IBM CDC software is supported whether installed to a native Operating System, a Virtual Machine, or a Software Container.
