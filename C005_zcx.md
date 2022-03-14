@@ -21,7 +21,8 @@ This chapter is a worked example of setting up CDC for Kafka inside a zCX contai
   <li><a href="#2.2">2.2 A single operations team to run the entire CDC solution.</a></li> 
   <li><a href="#2.3">2.3 A Better Physical Recovery Solution.</a></li>
   <li><a href="#2.4">2.4 Faster, Lower Risk Software Upgrades.</a></li>
-  <li><a href="#2.5">2.5 Inherit z/OS Qualities of Service.</a></li>
+  <li><a href="#2.5">2.5 Inherit z/OS Qualities of Service.</a></li> 
+  <li><a href="#2.6">2.6 Inherit z/OS Security Strengths.</a></li>
 </ul>
 <li><a href="#3.0">z/OS Container Extensions (zCX).</a> 
 <ul>
@@ -94,46 +95,70 @@ The purpose of this document to examine the merits of the z/CX option, and provi
 
 <h2 id="2.0">2. The Benefits of deploying CDC agents as zCX Containers.</h2>
 
+Software containers can offer many benefits over traditional software installations, potentially including
 
-The benefits listed in this section would apply to most z/OS centric sites, but the extent of the benefit will depend on the operational situation at a given site.
-* Some of the benefits listed in this section would apply to any container environment.
-* Some of the benefits listed in this section are specific to zCX in z/OS.
-* Some of the benefits listed in this section would only apply to sites who have a z/OS centric operational strengths.
+1. less overhead
+2. increase portability
+3. more consistent operation 
+4. simple and efficient devops
 
-2.1 Simpler, Faster Deployment.
-Software containers are designed for point and shoot provisioning. If you can package your software into a container it will easier the deploy that running through a typical install and configure process for installing software into an operating system.
-This is a benefit that you will realise for software containers on any platform. z/OS doesn�t miss out.
+The specific benefits of deploying a CDC agent as a zCX container would include the following 
 
-2.2 A single operations team to run the entire CDC solution.
+
+<h3 id="2.1">2.1 Simpler, Faster Deployment.</h3>
+
+Software containers are designed for point and shoot provisioning. 
+This is a benefit that you will realise for software containers on any platform. z/OS doesn't miss out.
+
+
+<h3 id="2.2">2.2 A single operations team to run the entire CDC solution.</h3>
+
+
 The author of this document has worked with many organisations who implement data replication solutions between mainframe and midrange platforms like Linux. It is the norm that
+
 1. z/OS and midrange systems are managed by different operation teams
 2. z/OS and midrange operations team will use different tools and different procedures.
 3. Even if there is complete goodwill and commitment from both teams to work together there will be difficulties in managing a service that spans two operations teams.
+
 One anonymous example is that it was designated that the mainframe team had operational responsibility for the CDC service, but they were not allowed to have read access to the CDC log directory on the CDC for Linux Apply Server. As a generalisation with CDC, if a simple restart doesn�t fix a problem, then the critical problem determination information will probably reside in the apply log file on the target side. The consequence of this decision is elongated restart times.
 
 Of course, if the Apply agent runs as a container within zCX, then the mainframe operations team will be able to access the Apply log themselves without queueing to speak with a help desk that fronts the Linux operations team.
 
+<h3 id="2.3">2.3 A Better Physical Recovery Solution.</h3>
 
-2.3 A Better Physical Recovery Solution.
-Any given group of CDC subscriptions can only be operated by one capture and one apply agent at once. In fact, CDC has serialization checks to ensure you don�t accidentally breach this data integrity matter. A consequence of this architectural model is that high availability configurations for CDC are based on the cluster failover model.
-There are several OS clustering solutions on the market for Linux. But none of them come close to the speed and sophistication of system automation for restarting address spaces elsewhere in a z/OS parallel sysplex. The zCX address space can be configured with a DVIPA so that it can be automatically restarted on another LPAR in the event of a failure. This puts CDC Apply agents on the same level as z/OS started tasks like Classic CDC for IMS.
+Any given group of CDC subscriptions can only be operated by one capture and one apply agent at once. 
+In fact, CDC has serialization checks to ensure you don't accidentally breach this data integrity matter. 
+A consequence of this architectural model is that high availability configurations for CDC are based on the cluster failover model.
+There are several OS clustering solutions on the market for Linux. 
+But none of them come close to the speed and sophistication of system automation for restarting address spaces elsewhere in a z/OS parallel sysplex. 
+The zCX address space can be configured with a DVIPA so that it can be automatically restarted on another LPAR in the event of a failure. 
+This puts CDC Apply agents on the same level as z/OS started tasks like Classic CDC for IMS.
+
+<h3 id="2.4">2.4 Faster, Lower Risk Software Upgrades.</h3>
+
+If you deploy CDC for Linux on a Linux Server, then a software upgrade will require the service to be stopped, a software upgrade to be applied (a few minutes) and 
+a degree of risk the the upgraded software may have problems and require a fallback procedure.
+
+When CDC is deployed as a software container, it can be deployed and tested inside the same zCX address space as the live service. 
+Once testing is complete, you can stop the old container, attach the shared volume with the CDC instance information to the new container, and start the subscriptions over there. 
+If problems occur, just reverse the process to fallback to the old container.
+
+<h3 id="2.5">2.5 Inherit z/OS Qualities of Service.</h3>
+
+z/OS qualities of service are exceedingly high. (reliability, robustness, performance, automated local failover, GDPS disaster recovery etc...)
+
+Deploying CDC inside z/OS as a docker contain is an easy way to achieve z/OS qualities of service for very little effort. 
+The main effort will be to establish zCX as another well-managed z/OS started task, with all the standard z/OS operational practices.
+
+<h3 id="2.6">2.6 Inherit z/OS Security Strengths.</h3>
 
 
-2.4 Faster, Lower Risk Software Upgrades.
-If you deploy CDC for Linux on a Linux Server, then a software upgrade will require the service to be stopped, a software upgrade to be applied (a few minutes) and a degree of risk the the upgraded software may have problems and require a fallback procedure.
-When CDC is deployed as a software container, it can be deployed and tested inside the same zCX address space as the live service. Once testing is complete, you can stop the old container, attach the shared volume with the CDC instance information to the new container, and start the subscriptions over there. If problems occur, just reverse the process to fallback to the old container.
-
-
-2.5 Inherit z/OS Qualities of Service.
-z/OS qualities of service are exceedingly high. (reliability, robustness, performance, automated local failover, GDPS disaster recovery etc� etc�)
-Deploying CDC inside z/OS as a docker contain is an easy way to achieve z/OS qualities of service for very little effort. The main effort will be to establish zCX as another well-managed z/OS started task, with all the standard z/OS operational practices.
-
-2.5 Inherit z/OS Security Strengths.
 Operating CDC Apply engines inside zCX places them inside the IBM Z protected shell. This includes a range of heightened security provisions including
+
 * Pervasive encryption of all datasets
-* In-memory networks ( hipersockets ) that can�t be snooped on
+* In-memory networks ( hipersockets ) that can't be snooped on
 * EAL5 certified LPAR security
-* Etc�
+
 
 
 
