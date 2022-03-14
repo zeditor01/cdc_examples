@@ -159,12 +159,15 @@ Operating CDC Apply engines inside zCX places them inside the IBM Z protected sh
 * In-memory networks ( hipersockets ) that can't be snooped on
 * EAL5 certified LPAR security
 
+<br><hr>
+
+<h2 id="3.0">3. z/OS Container Extensions (zCX).</h2>
 
 
-
-3. z/OS Container Extensions (zCX).
-z/OS Container Extensions, is essentially a framework for supporting docker within z/OS. If you know docker on Linux, Unix, Windows or Mac, then you know docker on z/OS.
-The primary scope of this document is deploying CDC inside zCX. If you want to read more about zCX then please review some other source of zCX information, including the following Redbooks.
+z/OS Container Extensions, is essentially a framework for supporting docker within z/OS. 
+If you know docker on Linux, Unix, Windows or Mac, then you know docker on z/OS.
+The primary scope of this document is deploying CDC inside zCX. 
+If you want to read more about zCX then please review some other source of zCX information, including the following Redbooks.
 
 Getting started with z/OS Container Extensions and Docker
 https://www.redbooks.ibm.com/abstracts/sg248457.html
@@ -172,23 +175,28 @@ https://www.redbooks.ibm.com/abstracts/sg248457.html
 IBM z/OS Container Extensions (zCX) Use Cases
 https://www.redbooks.ibm.com/abstracts/sg248471.html
 
-3.1 zCX Concepts.
-zCX Support docker containers. Docker containers are more efficient than virtual machines in that rather than having multiple instances of the guest operating system, you only have one OS kernel (linux based) which is referenced by all the running docker containers. It is also operationally simpler in that the OS kernel is largely hidden from the containers, and you only need to deal with the containerised application.
+<h3 id="3.1">3.1 zCX Concepts.</h3>
 
 
+zCX Support docker containers. Docker containers are more efficient than virtual machines in that rather than having multiple instances of the guest operating system, 
+you only have one OS kernel (linux based) which is referenced by all the running docker containers. 
+It is also operationally simpler in that the OS kernel is largely hidden from the containers, and you only need to deal with the containerised application.
+
+When Docker containers are deployed inside a zCX address space, they are tightly integrated with the z/OS software and IBM Z hardware environment. For example 
 
 
-When Docker containers are deployed inside a zCX address space, they are tightly integrated with the z/OS software and IBM Z hardware environment. For example
 * They use a Dynamic Virtual IP Address for communications with other address space and with the outside word. 
 * TCPIP connectivity inside z/OS with other z/OS subsystems can use in-memory links (hipersockets).
 * System Automation for zCX Address Space(s) can automatically restart zCX services on different LPARs, and retain the same TPCIP and Disk connections.
 * z/OS storage subsystems can provide Hyperswap for local failovers and GDPS for geographically remote failovers.
 
 
+<h3 id="3.2">3.2 zCX Setup.</h3>
 
 
-3.2 zCX Setup.
-Chapter 4 of "Getting started with z/OS Container Extensions and Docker" is the best guide to installing and confguring zCX. I am not going to repeat that information here. Please review the redbook to learn how to setup zCX.
+Chapter 4 of "Getting started with z/OS Container Extensions and Docker" is the best guide to installing and confguring zCX. 
+I am not going to repeat that information here. Please review the redbook to learn how to setup zCX.
+
 https://www.redbooks.ibm.com/abstracts/sg248457.html
 Table of contents
 * Chapter 1. Introduction
@@ -204,109 +212,157 @@ Table of contents
 * Chapter 11. Swarm on zCX
 
 Chapter 5 addresses deploying docker containers within zCX.
+
 Chapter 7 addresses the operation of docker containers within zCX.
 
+<br><hr>
+
+<h2 id="4.0">4. Worked Example: CDC for Kafka in zCX.</h2>
 
 
-4. Worked Example: CDC for Kafka in zCX.
 Having explained why you might want to consider deploying CDC agents inside zCX, the remainder of this document is a simple worked example.
 The scenario implemented is to capture from IMS and apply to Kafka. Classic CDC for IMS is the capture agent. CDC for Kafka for linux on z390 is the Apply agent.
 
-Note: we cannot containerise linux for Intel or linux for Power software for zCX. We must use software that is compiled for z390 because that is the runtime hardware platform. This is not a great restriction as many linux software products are compiled for s390 as well as other platforms.
+Note: we cannot containerise linux for Intel or linux for Power software for zCX. 
+We must use software that is compiled for z390 because that is the runtime hardware platform. 
+This is not a great restriction as many linux software products are compiled for s390 as well as other platforms.
 
-4.1 Creating the CDC Docker Container.
-There are a great many docker containers that are pre-built for s390, and ready to deploy in zCX. Pop over to docker hub and browse the containers that you can pull on demand. Filter by s390 platform to see which of them are available for Z.
-https://hub.docker.com/
-CDC software is not actually shipped as a Docker container. That�s not a problem because you can build your own container with a �Dockerfile�. A dockerfile is a set of instructions to build a container from a software image. 
+<h3 id="4.1">4.1 Creating the CDC Docker Container.</h3>
+
+
+There are a great many docker containers that are pre-built for s390, and ready to deploy in zCX. 
+Pop over to docker hub and browse the containers that you can pull on demand. 
+Filter by s390 platform to see which of them are available for Z.
+https://hub.docker.com/ 
+
+CDC software is not actually shipped as a Docker container. 
+That's not a problem because you can build your own container with a "Dockerfile". 
+A dockerfile is a set of instructions to build a container from a software image. 
 You can download a dockerfile for CDC for Kafka at the following IBM github repository.
-https://github.ibm.com/replication/cdc-luw-docker/tree/master/cdckafka
-That dockerfile was actually written for CDC for Kafka on Intel. However, if you change the name of the CDC installer binary to the s390 version, the dockerfile runs perfectly in zCX ! That�s an experience which demonstrates that docker is docker even on Z.
-The dockerfile source code is pasted into the Appendex for review. The only difference to deploy to zCX is to reference setup-iidr-11.4.0.0-5001-linux-s390.bin. But even that doesn�t require a dockerfile change, because the installer image is named as an input parameter to the dockerbuild command.
+https://github.ibm.com/replication/cdc-luw-docker/tree/master/cdckafka 
 
-Step 1 : Assume ZCX environment is Established
+That dockerfile was actually written for CDC for Kafka on Intel. 
+However, if you change the name of the CDC installer binary to the s390 version, the dockerfile runs perfectly in zCX ! 
+That's an experience which demonstrates that docker is docker even on Z.
+The dockerfile source code is pasted into the Appendex for review. 
+The only difference to deploy to zCX is to reference setup-iidr-11.4.0.0-5001-linux-s390.bin. 
+But even that doesn't require a dockerfile change, because the installer image is named as an input parameter to the dockerbuild command.
+
+<b>Step 1 : Assume ZCX environment is Established</b>
+
 * My ZCX is running at IP Address 192.168.1.220
 * My ZCX is listening on port 8022
 * My zCX has connectivity to the internet, needed to pull packages from repositories
 
 
 
-Step 2 : Verify Docker with hello world.
+<b>Step 2 : Verify Docker with hello world.</b>
+
 ssh into the zCX shell and issue docker run hello-world
 
 
+<b>Step 3 : Create a directory to gather everything you need to run the dockerfile</b>  
 
-Step 3 : Create a directory to gather everything you need to run the dockerfile
+```
 mkdir /home/admin/cdckafka
 cd /home/admin/cdckafka
+```
 
 This is where you will gather the artefacts to build the docker container
 
-Step 4 : Gather the following 4 files
+<b>Step 4 : Gather the following 4 files</b> 
+
 * The Dockerfile
 * The response file for a silent install of CDC for Kafka for Linux on Z
 * The kafkaproducer.properties file ( to save editing it after the install )
 * The installer binary.
 
 
-Step 5 : Invoke the Docker build process
+<b>Step 5 : Invoke the Docker build process</b> 
+
 Run the following command from /home/admin/cdckafka
+
+```
 docker build --build-arg CDCINSF=setup-iidr-11.4.0.0-5001-linux-s390.bin -t zcdckafka .
+```
 
-That�s it. The docker build runs in a few minutes on my ZD&T environment. It should run in seconds on a real Z system. I attach screenshots of the docker build output in the appendix.
+That's it. The docker build runs in a few minutes on my ZD&T environment. 
+It should run in seconds on a real Z system. I attach screenshots of the docker build output in the appendix.
 
+<h3 id="4.2">4.2 Operating the CDC Docker Container.</h3>
 
-4.2 Operating the CDC Docker Container.  
-Before we start the container, we want to add a docker volume. This is not strictly necessary for CDC for Kafka since the container is persisted. However by placing the instance metadata (bookmark etc� ) on a shared docker volume, you have flexibility for things like fast low-risk software upgrades.
+  
+Before we start the container, we want to add a docker volume. This is not strictly necessary for CDC for Kafka since the container is persisted. 
+However by placing the instance metadata (bookmark etc� ) on a shared docker volume, you have flexibility for things like fast low-risk software upgrades.
 Standard docker commands to create a docker volume.
 
 
 Now you can start the container, referencing the shared volume and it�s mountpoint within the container. You also need to surface the listener port 11701 outside the zCX DVIPA.
-docker run -idt -v cdcvol:/cdcinstance/ -p 11701:11701 zcdckafka 
 
-Remember the difference between docker run and docker start
+```
+docker run -idt -v cdcvol:/cdcinstance/ -p 11701:11701 zcdckafka 
+```
+
+Remember the difference between docker run and docker start 
+
+
 * Docker run will create an instance and start it.
 * Docker start will restart a previously created container instance, with all the metadata that you want to keep.
 
-After you start the container, run docker ps -a to discover the container ID.
+After you start the container, run ```docker ps -a``` to discover the container ID.
 
 
 Now connect to that container and start a bash shell
-docker exec -it 733de0daa126 /bin/bash
+
+```
+docker exec -it 733de0daa126 /bin/bash 
+```
+
+<h3 id="4.3">4.3 Configuring the CDC instance.</h3>
 
 
-
-
-4.3 Configuring the CDC instance.  
-From here on in, it�s no different from running CDC in Linux. Create an instance as normal.
+  
+From here on in, it's no different from running CDC in Linux. Create an instance as normal.
 From /opt/cdckafka/bin
-issue
-./dmconfigurets
+issue ```./dmconfigurets```
 
 
 
 And then start the instance
-cd /opt/cdckafka/bin
+cd /opt/cdckafka/bin 
+
+```
 ./dmts64 -I zcxcdckafka &
-
-
-
-
+```
 
 Now you can point all your normal CDC Administration Tools ( Management Console, Access Server, CHCCLP for linux, CHCCLP for z/OS ) at the CDC instance on 192.168.1.220:11701
 
+<b>Reminder:</b> This worked example is primarily focussed on deploying a CDC agent in zCX. Please review [7. Setting up CDC for Kafka.](C007_kafka.md) if you need more detailed 
+discussion on the CDC for Kafka agent and it's connection to Kafka.
 
 Creating and Operating CDC subscriptions via CDC for Kafka in zCX is no different from any other supported CDC platform.
 
-We provide support (i.e. accept/work support tickets) for our CDC software, whether it is running on bare metal, VMs, or in a container.
+IBM provides support (i.e. accept/work support tickets) for our CDC software, whether it is running on bare metal, VMs, or in a container.
 
-We �provide our customers with a sample set of instructions on how to create docker images for our CDC software. The customer is free to use those sample instructions, or create their own docker images as they choose. Our support will be limited to our CDC software that runs in the container or on the VM
+IBM provides our customers with a sample set of instructions on how to create docker images for our CDC software. 
+The customer is free to use those sample instructions, or create their own docker images as they choose. 
+Our support will be limited to our CDC software that runs in the container or on the VM
 
-4.4 Integration with z/OS Operations.  
-The steps we went through to get into the docker container within zCX first time around were not as simple as you would want for an agile Devops environment. No problem : we can feed commands into the docker container from outside.
+<h3 id="4.4">4.4 Integration with z/OS Operations.</h3>
+
+  
+The steps we went through to get into the docker container within zCX first time around were not as simple as you would want for an agile Devops environment. 
+No problem : we can feed commands into the docker container from outside.
+
 For example, from the zCX shell you can invoke the command to start the CDC instance as follows, without needing to open a bash shell inside the CDC container.
+
+```
 docker exec -it <containerId> /opt/cdckafka/bin/dbts64 -I cdc5569
+```
 
 And if you want to wrap it in standard JCL, just place your docker commands in a file and invoke them from BPXBATCH
+
+```
 //DEFACL   EXEC PGM=IKJEFT01                        
 //SYSPRINT DD SYSOUT=*                              
 //SYSUDUMP DD SYSOUT=*                              
@@ -316,219 +372,120 @@ And if you want to wrap it in standard JCL, just place your docker commands in a
 //SYSTSIN DD *                                      
     BPXBATCH SH +                                   
     ssh admin@<zcxIPaddr> -p 8022 < zcxCmds.sh 
+```
 
+Easy As !
 
-Easy As �
+Running CDC agents inside zCX would be a great option if you seek the qualities of service provided by z/OS, have some zIIP processor capacity, 
+and want to take advantage of z/OS operational practices and platform capabilities.
 
-Running CDC agents inside zCX would be a great option if you seek the qualities of service provided by z/OS, have some zIIP processor capacity, and want to take advantage of z/OS operational practices and platform capabilities.
+<br><hr>
 
+<h2 id="5.0">5. Docker Build.</h2>
 
+Having read how to setup CDC for Kafka in zCX, the remainder of this paper is sourcecode and screenshots of doing it.
 
+<h3 id="5.1">5.1 Dockerfile Listing.</h3>
 
+The code sample below is the actual dockerfile listing used in this example.
 
-
-
-
-
-Appendix : Sources of Information
-
-This document is nothing more than a worked example. You should refer to the official IBM documentation for the CDC products when planning an implementation. The following sources of information are recommended.
-
-InfoSphere Data Replication v11.4
-Knowledge Centre for all IBM Replication Solutions, including Q Replication, SQL Replication and CDC Replication.
-https://www.ibm.com/docs/en/idr/11.4.0
-
-Classic CDC for IMS v11.3
-Knowledge Centre section for Classic CDC for IMS
-https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos
-
-CDC for Kafka v11.4
-Knowledge Centre section for CDC for Kafka
-https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-cdc-engine-kafka
-
-IBM Data Replication wiki
-A wide range of mostly technical articles providing guidance on implementing IBM Replication solutions.
-https://www.ibm.com/support/pages/ibm-data-replication-community-wiki
-
-
-
-
-
-Dockerfile Listing
+```
 
 FROM registry.access.redhat.com/ubi7/ubi:latest
 
-
-
-
-
 ARG CDCINSF
-
-
-
-
 
 # check if CDCINSF build argument is set and exit if not
 
-
 RUN if [ -z $CDCINSF ] ; then printf "\033[32m" ; echo -e "\n\nMandatory argument CDCINSF not set! \n\nARGUMENT: \n CDCINSF - cdc installer name eg. setup-iidr-11.4.0.2-5512-linux-x86.bin \n To be provided from the command line (docker build --build-arg CDCINSF=setup-iidr-11.4.0.2-5512-linux-x86.bin)\n\n"; printf "\033[39m" ; exit 1 ; else : ; fi
-
-
-
-
 
 ARG RFILE=cdckafka.rfile
 
-
 RUN printf "\033[32m" ; echo -e "\n\nARGUMENT:\n RFILE - CDC installer response file name\n\n" ; printf "\033[39m"
-
-
-
-
 
 ARG EXP_PORT=11701
 
-
 RUN printf "\033[32m" ; echo -e "\n\nARGUMENT:\n CDC instance port to be exposed. By default 11701\n\n" ; printf "\033[39m"
-
-
-
-
 
 ARG IMAGE_DISPLAY_NAME="Docker image with CDC Replication Engine"
 
-
 ARG IMAGE_DESCRIPTION="This image runs IBM InfoSphere Data Replication for Kafka software"
-
-
-
-
 
 # required by RedHat certification / UBI label overrides
 
-
 # see https://github.com/projectatomic/ContainerApplicationGenericLabels/blob/master/vendor/redhat/labels.md
-
 
 LABEL name="cdcforkafka" \
 
-
 summary="${IMAGE_DISPLAY_NAME}" \
-
 
 description="${IMAGE_DESCRIPTION}" \
 
-
 io.k8s.display-name="${IMAGE_DISPLAY_NAME}" \
-
 
 io.k8s.description="${IMAGE_DESCRIPTION}"
 
-
-
-
-
 # location of installation and instance directories 
-
 
 ENV CDC_HOME=/opt/cdckafka
 
-
 ENV CDC_INSTANCE_PATH=/cdcinstance
-
-
-
-
 
 # upgrade image and install required packages 
 
-
 RUN yum -y upgrade
-
 
 RUN yum -y install unzip wget
 
-
-
-
-
 # Copying installer and response file
-
 
 COPY $CDCINSF $RFILE /tmp/
 
-
-
-
-
 USER root
-
 
 RUN mkdir -p $CDC_HOME $CDC_INSTANCE_PATH && \
 
-
 chmod +x /tmp/$CDCINSF 
-
-
-
-
 
 RUN groupadd -g 1100 cdc \
 
-
 && useradd -u 1100 -g 1100 cdc
-
-
-
-
 
 RUN printf "\033[32m" ; echo -e "\n\nInstalling CDC using silentmode and response file\nInstance directory $CDC_INSTANCE_PATH should be stored on the persistent volume\n\n" ; printf "\033[39m"
 
-
-
-
-
 WORKDIR /tmp
-
 
 ADD kafkaproducer.properties /tmp
 
-
-
-
-
 RUN sed -i -e "s|###CDC_INSTANCE_PATH###|$CDC_INSTANCE_PATH|g" $RFILE && \
-
 
 sed -i -e "s|###CDC_HOME###|$CDC_HOME|g" $RFILE && \
 
-
 ./$CDCINSF -i silent -f $RFILE && \
-
 
 cp /tmp/kafkaproducer.properties $CDC_HOME/conf && \
 
-
 rm -rf $CDCINSF /tmp/$RFILE && \
-
 
 chown -R cdc:cdc $CDC_HOME $CDC_INSTANCE_PATH
 
-
-
-
-
 USER cdc
 
-
 CMD tail -f /dev/null
-
-
-
 
 EXPOSE $EXP_PORT
 
 
+```
+
+<h3 id="5.2">5.2 Docker build Output.</h3>
 
 
-Docker build Output
+The three screenshots below are the output from running the dockerfile above.
+
+![dockerfile build 01](images/cdc/dfbuild01.png)
+
+![dockerfile build 02](images/cdc/dfbuild02.png)
+
+![dockerfile build 03](images/cdc/dfbuild03.png)
+
