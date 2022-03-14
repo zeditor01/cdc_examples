@@ -166,21 +166,37 @@ sudo yum install unzip libnsl
 ```
 
 <h3 id="3.2">3.2 Install the CDC Apply Agent for Kafka</h3>
-<ul>
-<li>logon as cdcinst1
-<li>switch to the directory where the installer binary was downloaded to
-<li>unset DISPLAY ( to force a terminal dialog, rather than a GUI )
-<li>./setup-iidr-11.4.0.4-5618-linux-x86.bin
-</ul>
 
-<p>Respond to the installer dialog as follows to specify "Install New", followed by "Datastore Type:Kafka" followed by the license type of your entitlement.</p>
-<center><img src="/recipes/images/neale/cdc/cdckafka01.png" style="border:1px solid black; width:500px"></center> 
+logon as cdcinst1 and switch to the directory where the installer binary was downloaded to.
 
-<p>Next, accept the installation path, Choose instance directory, and Review the install request.</p>
-<center><img src="/recipes/images/neale/cdc/cdckafka02.png" style="border:1px solid black; width:500px"></center> 
+unset the DISPLAY variable to force a terminal dialog, rather than a GUI
 
-<p>Then let the installer run, and defer the instance creation till later.</p>
-<center><img src="/recipes/images/neale/cdc/cdckafka03.png" style="border:1px solid black; width:500px"></center> 
+```
+unset DISPLAY
+```
+
+Invoke the installer with the following command
+
+```
+/setup-iidr-11.4.0.4-5618-linux-x86.bin
+```
+
+Respond to the installer dialog as follows to specify "Install New", followed by "Datastore Type:Kafka" followed by the license type of your entitlement. 
+
+![cdckafka01](images/cdc/cdckafka01.png)
+
+
+Next, accept the installation path, Choose instance directory, and Review the install request.
+
+![cdckafka02](images/cdc/cdckafka02.png)
+
+
+Then let the installer run, and defer the instance creation till later. 
+
+![cdckafka03](images/cdc/cdckafka03.png)
+
+
+
 
 <h3 id="3.3">3.3 Create the CDC for Kafka Instance</h3>
 
