@@ -200,22 +200,29 @@ Then let the installer run, and defer the instance creation till later.
 
 <h3 id="3.3">3.3 Create the CDC for Kafka Instance</h3>
 
-<p>The dmconfigurets command in the installation/bin directory will start a dialog to allow you to create a CDC instance. Run the command below as cdcinst1.</p>
-<ul>
-</ul>/opt/ibm/InfoSphereDataReplication/ReplicationEngineforKafka/bin/dmconfigurets
-</ul>
+The dmconfigurets command in the installation/bin directory will start a dialog to allow you to create a CDC instance. Run the command below as cdcinst1. 
+ 
+```
+/opt/ibm/InfoSphereDataReplication/ReplicationEngineforKafka/bin/dmconfigurets
+```
 
 
-<p>Now, create an instance called ubuntu32kafka, listening on port 11701, allocated 8MB of memory.</p>
-<center><img src="/recipes/images/neale/cdc/cdckafka04.png" style="border:1px solid black; width:500px"></center> 
+Now, create an instance called ubuntu32kafka, listening on port 11701, allocated 8MB of memory.  
 
-<p>Next step is to define an encryption profile. This dialog is iterative, allowing you to define multiple encryption profiless, and then choose the one to use. 
+![cdckafka04](images/cdc/cdckafka04.png)
+
+
+
+Next step is to define an encryption profile. This dialog is iterative, allowing you to define multiple encryption profiless, and then choose the one to use. 
 You can also return to this dialog later and change the encryption profile of the instance. The configuration of TLS and encryption profiles is handled as a separate 
-topic in <a href="/recipes/docs/NA_CDC/cdcu4.html"> Security for CDC (LDAP and TLS)</a>. For now we will create an encryption profile that disables encryption.</p>
-<p>ADD dialog here</p>
-<center><img src="/recipes/images/neale/cdc/cdckafka05.png" style="border:1px solid black; width:500px"></center> 
+topic in [13. Security for CDC (LDAP and TLS).](C013_security.md). For now we will create an encryption profile that disables encryption. 
 
-<p>Having defined encruption profile "noencrypt", we can select it and complete the instance creation.</p>
+ADD dialog here 
+
+![cdckafka05](images/cdc/cdckafka05.png)
+
+
+Having defined encruption profile "noencrypt", we can select it and complete the instance creation.</p>
 <p>The CDC for Kafka instance needs to have a userid and password created to authenticate connections from the Access Server. In this basic 
 "up and running" example, we will accept the default userid (tsuser) and assign a password. In most real world scenarios you would configure the Access Server 
 to use an LDAP directory for authentication services. LDAP configuration is covered in <a href="/recipes/docs/NA_CDC/cdcu4.html"> Security for CDC (LDAP and TLS).</a></p>
