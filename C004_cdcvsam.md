@@ -324,135 +324,164 @@ and
 
 
 <h3 id="4.5">4.5 Define and Mount the Classic Catalog zFS</h3> 
-<p>The Metadata Catalog is conceptually similar to the Db2 catalog ( SYSTABLES, SYSCOLUMNS etc… ). 
-Not only does it store metadata about IMS Tables, but it also contains the details of the IMS to relational model mapping.</p> 
-<p>The Metadata catalog is deployed as a zFS which needs to be mounted at the path specified for “CATPATH” in CECCUSPC.</p>
-<p>The zFS is allocated with generated job CECCRZCT. 
-The VSAM cluster is defined in the first job step as <code>CDCV.I2.ZFS</code>, and the zFS is formatted in the second job step. 
-Review the submit <code>CDCV.I2.USERSAMP(CECCRZCT)</code> to define the Metadata Catalog.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code> DEFINE CLUSTER ( -    </code>
-<code>   NAME(CDCV.I2.ZFS) - </code>
-<code>   LINEAR -            </code>
-<code>   MEGABYTES(150 128) -</code>
-<code>   VOLUMES(*) -        </code>
-<code>   SHAREOPTIONS(3 3)  -</code>
-<code>   CISZ(4096))         </code>
-</pre>
-<p>and</p>
-<pre>   
-<code>//FORMAT EXEC PGM=IOEAGFMT,REGION=0M,       </code>
-<code>//    COND=(0,LT),                          </code>
-<code>//    PARM='-aggregate CDCV.I2.ZFS  -compat'</code>
-</pre> 
-</div>
+The Metadata Catalog is conceptually similar to the Db2 catalog ( SYSTABLES, SYSCOLUMNS etc… ). 
+Not only does it store metadata about IMS Tables, but it also contains the details of the IMS to relational model mapping.
+
+
+The Metadata catalog is deployed as a zFS which needs to be mounted at the path specified for “CATPATH” in CECCUSPC.
+
+
+The zFS is allocated with generated job CECCRZCT. 
+The VSAM cluster is defined in the first job step as <code>CDCV.I2.ZFS</code>, and the zFS is formatted in the second job step. 
+Review the submit <code>CDCV.I2.USERSAMP(CECCRZCT)</code> to define the Metadata Catalog.
+
+
+```
+ DEFINE CLUSTER ( -    
+   NAME(CDCV.I2.ZFS) - 
+   LINEAR -            
+   MEGABYTES(150 128) -
+   VOLUMES(*) -        
+   SHAREOPTIONS(3 3)  -
+   CISZ(4096))         
+``` 
+
+and
+
+``` 
+//FORMAT EXEC PGM=IOEAGFMT,REGION=0M,       
+//    COND=(0,LT),                          
+//    PARM='-aggregate CDCV.I2.ZFS  -compat'
+```
 
 
 
 <h3 id="4.6">4.6 Define and Populate the Configuration Datasets</h3> 
-<p>Classic CDC for IMS is governed by a number of parameters that are defined in the configuration datasets. 
+
+Classic CDC for IMS is governed by a number of parameters that are defined in the configuration datasets. 
 Parameters governing threads, memory, tcpip ports and so forth, as documented in the knowledge centre. 
-The creation and population of the configuration datasets is controlled by job CECCDCFG. Review the generated JCL and submit when happy.</p>
+The creation and population of the configuration datasets is controlled by job CECCDCFG. Review the generated JCL and submit when happy.
+
  
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//CFGALLOC     EXEC PGM=IEFBR14                       </code>
-<code>//CACCFGD      DD  DSN=&CPHLQ..CACCFGD,               </code>
-<code>//             UNIT=&DISKU,                           </code>
-<code>//             STORCLAS=&STGCL,                       </code>
-<code>//             MGMTCLAS=&MGTCL,                       </code>
-<code>//             SPACE=(TRK,(20,10)),                   </code>
-<code>//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),</code>
-<code>//             DISP=(NEW,CATLG,DELETE)                </code>
-<code>//CACCFGX  DD  DSN=&CPHLQ..CACCFGX,                   </code>
-<code>//             UNIT=&DISKU,                           </code>
-<code>//             STORCLAS=&STGCL,                       </code>
-<code>//             MGMTCLAS=&MGTCL,                       </code>
-<code>//             SPACE=(TRK,(10,5)),                    </code>
-<code>//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),</code>
-<code>//             DISP=(NEW,CATLG,DELETE)                </code>
-<code>//*                                                   </code>
-</pre>
-</div>
+```
+//CFGALLOC     EXEC PGM=IEFBR14                       
+//CACCFGD      DD  DSN=&CPHLQ..CACCFGD,               
+//             UNIT=&DISKU,                           
+//             STORCLAS=&STGCL,                       
+//             MGMTCLAS=&MGTCL,                       
+//             SPACE=(TRK,(20,10)),                   
+//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),
+//             DISP=(NEW,CATLG,DELETE)                
+//CACCFGX  DD  DSN=&CPHLQ..CACCFGX,                   
+//             UNIT=&DISKU,                           
+//             STORCLAS=&STGCL,                       
+//             MGMTCLAS=&MGTCL,                       
+//             SPACE=(TRK,(10,5)),                    
+//             DCB=(RECFM=FBS,LRECL=64,BLKSIZE=27968),
+//             DISP=(NEW,CATLG,DELETE)                
+//*                                                   
+```
 
-<p>and the final step imports the default parameter values into the configuration datasets</p>
+and the final step imports the default parameter values into the configuration datasets
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//ALLOCATE EXEC ALLOCFG                         </code>
-<code>//CFGINIT.SYSIN DD *                            </code>
-<code>IMPORT,CONFIG,FILENAME=DDN:IMPORTCF(CECCDXFG)   </code>
-<code>REPORT                                          </code>
-<code>QUIT                                            </code>
-<code>/*                                              </code>
-</pre>
-</div>
+```
+//ALLOCATE EXEC ALLOCFG                         
+//CFGINIT.SYSIN DD *                            
+IMPORT,CONFIG,FILENAME=DDN:IMPORTCF(CECCDXFG)   
+REPORT                                          
+QUIT                                            
+/*                                              
+```
 
 <h3 id="4.7">4.7 Create the Metadata Catalog</h3> 
-<p>The Metadata Catalog is a zFS that holds catalog tables ( systables, syscolumns etc... ). 
-The CACCATUT utility is used to create the metadata catalog tables in the Metadata Catalog. 
-This is performed using job CECCDCAT. Review the generated JCL and submit when happy.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>//INIT     EXEC PGM=CACCATUT,PARM='INIT',REGION=&RGN        </code>
-<code>//STEPLIB  DD  DISP=SHR,DSN=&CAC..SCACLOAD                  </code>
-<code>//SYSOUT   DD  SYSOUT=&SOUT                                 </code>
-<code>//SYSPRINT DD  SYSOUT=&SOUT                                 </code>
-<code>//MSGCAT   DD  DISP=SHR,DSN=&CAC..SCACMSGS                  </code>
-<code>//CACCAT   DD  PATHDISP=(KEEP,KEEP),                        </code>
-<code>//             PATH='/opt/IBM/isclassic113/catalogv/caccat' </code>
-<code>//CACINDX  DD  PATHDISP=(KEEP,KEEP),                        </code>
-<code>//             PATH='/opt/IBM/isclassic113/catalogv/cacindx'</code>
-</pre>
-</div>
+The Metadata Catalog is a zFS that holds catalog tables ( systables, syscolumns etc... ). 
+The CACCATUT utility is used to create the metadata catalog tables in the Metadata Catalog. 
+This is performed using job CECCDCAT. Review the generated JCL and submit when happy. 
+
+```
+//INIT     EXEC PGM=CACCATUT,PARM='INIT',REGION=&RGN        
+//STEPLIB  DD  DISP=SHR,DSN=&CAC..SCACLOAD                  
+//SYSOUT   DD  SYSOUT=&SOUT                                 
+//SYSPRINT DD  SYSOUT=&SOUT                                 
+//MSGCAT   DD  DISP=SHR,DSN=&CAC..SCACMSGS                  
+//CACCAT   DD  PATHDISP=(KEEP,KEEP),                        
+//             PATH='/opt/IBM/isclassic113/catalogv/caccat' 
+//CACINDX  DD  PATHDISP=(KEEP,KEEP),                        
+//             PATH='/opt/IBM/isclassic113/catalogv/cacindx'
+```
 
 <h3 id="4.8">4.8 Create the Replication Mapping Datasets</h3> 
-<p>The Replication Mapping datasets are used to hold the metadata to support subscriptions from IMS to targets like Kafka. 
-These mapping datasets will be empty until you start defining subscriptions using Management Console or CHCCLP scripts. 
-This is performed using job CECCDSUB. Review the generated JCL and submit when happy.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code> DEFINE CLUSTER                  - </code>
-<code>    (NAME(&CPHLQ..SUB)        -    </code>
-<code>     RECSZ(1024 2048)            - </code>
-<code>     KEY(80 12)                  - </code>
-<code>     CYL(2 1)                    - </code>
-<code>     SPEED REUSE)                - </code>
-<code>  DATA                           - </code>
-<code>    (NAME(&CPHLQ..SUB.DATA)   -    </code>
-<code>     CISZ(8192)                  - </code>
-<code>     FSPC(20 5))                 - </code>
-<code>  INDEX                          - </code>
-<code>    (NAME(&CPHLQ..SUB.INDEX)  -    </code>
-<code>     CISZ(6144))                   </code>
-<code> /**/                              </code>
-<code> DEFINE CLUSTER                  - </code>
-<code>    (NAME(&CPHLQ..RM)        -     </code>
-<code>     RECSZ(512 2432)             - </code>
-<code>     KEY(20 12)                  - </code>
-<code>     CYL(15 5)                   - </code>
-<code>     SPEED REUSE)                - </code>
-<code>   DATA                          - </code>
-<code>     (NAME(&CPHLQ..RM.DATA)   -    </code>
-<code>      CISZ(8192)                 - </code>
-<code>      FSPC(20 5))                - </code>
-<code>   INDEX                         - </code>
-<code>     (NAME(&CPHLQ..RM.INDEX)  -    </code>
-<code>      CISZ(2048))                  </code>
-<code>/*                                 </code>
-</pre>
-</div>
+The Replication Mapping datasets are used to hold the metadata to support subscriptions from IMS to targets like Kafka. 
+These mapping datasets will be empty until you start defining subscriptions using Management Console or CHCCLP scripts. 
+This is performed using job CECCDSUB. Review the generated JCL and submit when happy. 
+
+```
+ DEFINE CLUSTER                  - 
+    (NAME(&CPHLQ..SUB)        -    
+     RECSZ(1024 2048)            - 
+     KEY(80 12)                  - 
+     CYL(2 1)                    - 
+     SPEED REUSE)                - 
+  DATA                           - 
+    (NAME(&CPHLQ..SUB.DATA)   -    
+     CISZ(8192)                  - 
+     FSPC(20 5))                 - 
+  INDEX                          - 
+    (NAME(&CPHLQ..SUB.INDEX)  -    
+     CISZ(6144))                   
+ /**/                              
+ DEFINE CLUSTER                  - 
+    (NAME(&CPHLQ..RM)        -     
+     RECSZ(512 2432)             - 
+     KEY(20 12)                  - 
+     CYL(15 5)                   - 
+     SPEED REUSE)                - 
+   DATA                          - 
+     (NAME(&CPHLQ..RM.DATA)   -    
+      CISZ(8192)                 - 
+      FSPC(20 5))                - 
+   INDEX                         - 
+     (NAME(&CPHLQ..RM.INDEX)  -    
+      CISZ(2048))                  
+/*                                 
+```
 
 
 <h3 id="4.8">4.9 Setup Encrypted Passwords</h3> 
-<p>Assuming that you enabled security in the CACCUSPC parameters file earlier: <code>CDCPSAFX="CACSX04"</code> 
+
+Assuming that you enabled security in the CACCUSPC parameters file earlier: <code>CDCPSAFX="CACSX04"</code> 
 you will need to setup encrypted passwords for connections to the Classic CDC instance. (Enabling security requires providing a password for all user access. 
-The utilities used in the validation job require encrypted passwords to access the Classic data server.)</p>
-<p>The following steps are required to generate an encrypted password for the userid that will run jobs to access Classic CDC, and save it in a referencable PDS member.</p>
+The utilities used in the validation job require encrypted passwords to access the Classic data server.) 
+
+The following steps are required to generate an encrypted password for the userid that will run jobs to access Classic CDC, and save it in a referencable PDS member.
+
+
+Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.
+
+![Encryp01](images/cdc/vencrypt01.PNG)
+
+Submit <code>CDCV.I2.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code>CDCV.I2.USERCONF(CACPWDIN)</code> with the encrypted value.
+
+![Encryp02](images/cdc/vencrypt02.PNG)
+
+Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.
+
+![Encryp03](images/cdc/vencrypt03.PNG)
+
+Edit <code>CDCV.I2.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.
+
+![Encryp04](images/cdc/vencrypt04.PNG)
+
+Edit <code>CDCV.I2.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.
+
+![Encryp05](images/cdc/vencrypt05.PNG)
+
+
+
+QQQQ
 
 <p>Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.</p>
 <center><img src="/recipes/images/neale/cdc/vencrypt01.PNG" style="width:800px"></center>
