@@ -54,58 +54,62 @@ This chapter is a worked example of setting up Classic CDC for VSAM.
 
 
 <h2 id="abstract"> Abstract</h2>
-<p>This document is a basic worked example of setting up Classic CDC for VSAM as a CDC Source Server.</p> 
-<ul>
-<li>It deals with the practical considerations for implementing VSAM as a CDC data source. 
-<li>It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and CICS-VSAM practical experience).
-<li>It does not attempt to cover all the product's features.
-<li>It is categorically <b>not</b> a replacement for the  
-<a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos">IBM Classic CDC knowledge centre</a>, which is the comprehensive official product documentation.
-</ul> 
 
-<p>It is part of a series of documents providing practical worked examples and 
+This document is a basic worked example of setting up Classic CDC for VSAM as a CDC Source Server. 
+
+* It deals with the practical considerations for implementing VSAM as a CDC data source. 
+* It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and CICS-VSAM practical experience).
+* It does not attempt to cover all the product's features.
+* It is categorically <b>not</b> a replacement for the  
+<a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos">IBM Classic CDC knowledge centre</a>, which is the comprehensive official product documentation.
+ 
+
+It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the links at the very top of this page</p> 
+The complete set of articles can be accessed using the links at the very top of this page 
 
 <br><hr>
 
 <h2 id="1.0">1. Introduction to Classic CDC for VSAM</h2>  
 
-<p>Classic CDC for VSAM is a CDC Capture Source only. It does not have CDC Apply functionality.</p>
+Classic CDC for VSAM is a CDC Capture Source only. It does not have CDC Apply functionality. 
 
-<p style="margin-left: 50px"><b>Aside:</b> Classic CDC for VSAM is licensed seperately from Classic CDC for IMS. However, these two 
-products share a lot of common components. The sister document <a href="/recipes/docs/NA_CDC/cdcz2.html">Setting up Classic CDC for IMS.</a> follows the same pattern as this worked 
-example for much of the setup work, but has differences with regard to the services to access IMS and capture changes from IMS.</p>
+<b>Aside:</b> Classic CDC for VSAM is licensed seperately from Classic CDC for IMS. However, these two 
+products share a lot of common components. The sister document [3. Setting up Classic CDC for IMS.](C003_cdcims.md) follows the same pattern as this worked 
+example for much of the setup work, but has differences with regard to the services to access IMS and capture changes from IMS. 
 
-<p>CDC Replication is a set of products that implement a common data replication architecture spanning 
+CDC Replication is a set of products that implement a common data replication architecture spanning 
 a large number of diverse data sources and targets. The CDC common architecture is based upon replication of 
 data that conforms to the relational model. Any CDC capture or apply agent that supports a non-relational data structure 
 must perform whatever conversion work that is necessary to implement a mapping between that data structure and the 
-relational model of data.</p> 
+relational model of data. 
 
 <h3 id="1.1">1.1 Requirements to Replicate VSAM Data</h3> 
 
-<p>The core functionaility of any CDC Capture agent is to read the source database logs asynchronously, 
+The core functionaility of any CDC Capture agent is to read the source database logs asynchronously, 
 stage captured data (preferably in memory) until the Unit of Work is commited or rolled back, 
-and then publish the committed changes over TCPIP sockets to a CDC Apply agent.</p> 
-<p>In addition to the usual requirements, Classic CDC for VSAM needs to handle the fact that VSAM data structures are stored in copybooks, and VSAM does not write a "database log".</p>
+and then publish the committed changes over TCPIP sockets to a CDC Apply agent. 
 
-<p style="margin-left: 50px"><b>Regarding copybook data structures:</b> The Classic CDC for VSAM product provides 
+In addition to the usual requirements, Classic CDC for VSAM needs to handle the fact that VSAM data structures are stored in copybooks, and VSAM does not write a "database log". 
+
+<b>Regarding copybook data structures:</b> The Classic CDC for VSAM product provides 
 a tool (Classic Data Architect) to map the copybook data structures
 into relational projections of that data, for the purposes of acting as a CDC Replication capture agent. 
 The mappings of data structures are stored in a zFS dataset called the "Classic Catalog". This contains relational catalog tables 
 like Db2 ( sysibm.systables , sysibm.syscolumns etc... ) that contain the mapping between the fields in the relevant copybooks for the 
-VSAM data, and their relational projection. The mapping information allows SQL access to the VSAM datasets to retrieve the base data</p>
-<p style="margin-left: 50px"><b>Regarding VSAM logs:</b>Classic CDC for VSAM works by taking advantage of z/OS logstreams. VSAM datasets are augmented to specify an assosiated z/OS logstream. 
+VSAM data, and their relational projection. The mapping information allows SQL access to the VSAM datasets to retrieve the base data.
+
+<b>Regarding VSAM logs:</b>Classic CDC for VSAM works by taking advantage of z/OS logstreams. VSAM datasets are augmented to specify an assosiated z/OS logstream. 
 If the VSAM dataset is under control of CICS, then CICS Transaction Server is responsible for writing replication log records to the logstream. 
-If the VSAM dataset is independent of CICS and written to in batch, then a separately licensed prodyuct ( CICS VSAM Recovery ) can be used to write replication log records to the logstream.</p>
+If the VSAM dataset is independent of CICS and written to in batch, then a separately licensed prodyuct ( CICS VSAM Recovery ) can be used to write replication log records to the logstream. 
 
 
 <h3 id="1.2">1.2 The Classic CDC Started Task</h3>
-<p>The diagram below is a representation of the components within a Classic CDC for IMS started task, and how they 
-relate to external artefacts.</p>
 
-<center><img src="/recipes/images/neale/cdc/cdcv_services.PNG" alt="Classic CDC Services" style="border:1px solid black; width:800px"></center> 
+The diagram below is a representation of the components within a Classic CDC for VSAM started task, and how they 
+relate to external artefacts. 
+
+![Classic CDC Started Task](images/cdc/ccdv_services.PNG)
 
 <p>The services that are outlined in red are the ones that can be protected by the SAF Exit. 
 The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
