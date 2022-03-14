@@ -675,28 +675,30 @@ they will be visible under the schema that they were created in.
 
 
 Click on the Console explorer tab now, and expand the Services and Configuration Tabs. 
-If you select a configuration (such as the VSAM Access Service configuration) and edit the properties, you can make parameter changes here. 
+If you select a configuration (such as the VSAM Log Reader Service configuration) and edit the properties, you can make parameter changes here. 
 
 ![CDA Services CFG](images/cdc/cda_consolev_parms.PNG)
 
 
 
 <h4>7.2.2 Create a data development project, and Import DBDs and Copybooks for the mapping work</h4>
-<p>Having configured CDA to operate with the Classic CDC server, the next task is to define an IMS Table. 
-This is a multi-step graphical dialog, that enables you to use DBDs and Copybooks to create a relational 
-projection of data slices from the IMS hierarchical database.</p>
-<p>Go to the "Data Project Explorer" (top left window) and create a new project, such as "Zeditor"</p>
 
-<p>The steps you need to follow are described in the list below, and illustrated in the slideshow below that.</p>
-<ol>
-<li>Create a Data Development Project.
-<li>Create a physical data model (Classic Integration) within that project.
-<li>Import the VSAM Copybooks that describe the VSAM dataset.
-<li>Create a VSAM Table mapping based on the imported Copybooks.
-<li>Generate DDL to create that VSAM Table definition.
-<li>Execute the DDL against the target Classic CDC server.
-<li>Verify the generated object
-</ol>
+Having configured CDA to operate with the Classic CDC server, the next task is to define an IMS Table. 
+This is a multi-step graphical dialog, that enables you to use DBDs and Copybooks to create a relational 
+projection of data slices from the IMS hierarchical database. 
+
+Go to the "Data Project Explorer" (top left window) and create a new project, such as "Zeditor"
+
+The steps you need to follow are described in the list below, and illustrated in the slideshow below that. 
+
+1. Create a Data Development Project.
+2. Create a physical data model (Classic Integration) within that project.
+3. Import the VSAM Copybooks that describe the VSAM dataset.
+4. Create a VSAM Table mapping based on the imported Copybooks.
+5. Generate DDL to create that VSAM Table definition.
+6. Execute the DDL against the target Classic CDC server.
+7. Verify the generated object
+
 
 <p>Click the arrows to progress through series of screenshots for performing these tasks.</p>
 
