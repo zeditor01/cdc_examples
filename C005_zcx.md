@@ -120,7 +120,12 @@ The author of this document has worked with many organisations who implement dat
 2. z/OS and midrange operations team will use different tools and different procedures.
 3. Even if there is complete goodwill and commitment from both teams to work together there will be difficulties in managing a service that spans two operations teams.
 
-One anonymous example is that it was designated that the mainframe team had operational responsibility for the CDC service, but they were not allowed to have read access to the CDC log directory on the CDC for Linux Apply Server. As a generalisation with CDC, if a simple restart doesn�t fix a problem, then the critical problem determination information will probably reside in the apply log file on the target side. The consequence of this decision is elongated restart times.
+One anonymous example is that it was designated that the mainframe team had operational responsibility for the CDC service, 
+but they were not allowed to have read access to the CDC log directory on the CDC for Linux Apply Server. 
+As a generalisation with CDC, if a simple restart doesn't fix a problem, then the critical problem determination information will probably reside in the apply log file on the target side. 
+The consequence of this decision is elongated restart times.
+
+![zcx01](images/cdc/zcx01.png)
 
 Of course, if the Apply agent runs as a container within zCX, then the mainframe operations team will be able to access the Apply log themselves without queueing to speak with a help desk that fronts the Linux operations team.
 
@@ -134,6 +139,8 @@ But none of them come close to the speed and sophistication of system automation
 The zCX address space can be configured with a DVIPA so that it can be automatically restarted on another LPAR in the event of a failure. 
 This puts CDC Apply agents on the same level as z/OS started tasks like Classic CDC for IMS.
 
+![zcx02](images/cdc/zcx02.png)
+
 <h3 id="2.4">2.4 Faster, Lower Risk Software Upgrades.</h3>
 
 If you deploy CDC for Linux on a Linux Server, then a software upgrade will require the service to be stopped, a software upgrade to be applied (a few minutes) and 
@@ -142,6 +149,8 @@ a degree of risk the the upgraded software may have problems and require a fallb
 When CDC is deployed as a software container, it can be deployed and tested inside the same zCX address space as the live service. 
 Once testing is complete, you can stop the old container, attach the shared volume with the CDC instance information to the new container, and start the subscriptions over there. 
 If problems occur, just reverse the process to fallback to the old container.
+
+![zcx03](images/cdc/zcx03.png)
 
 <h3 id="2.5">2.5 Inherit z/OS Qualities of Service.</h3>
 
@@ -182,6 +191,8 @@ zCX Support docker containers. Docker containers are more efficient than virtual
 you only have one OS kernel (linux based) which is referenced by all the running docker containers. 
 It is also operationally simpler in that the OS kernel is largely hidden from the containers, and you only need to deal with the containerised application.
 
+![zcx04](images/cdc/zcx04.png)
+
 When Docker containers are deployed inside a zCX address space, they are tightly integrated with the z/OS software and IBM Z hardware environment. For example 
 
 
@@ -189,6 +200,8 @@ When Docker containers are deployed inside a zCX address space, they are tightly
 * TCPIP connectivity inside z/OS with other z/OS subsystems can use in-memory links (hipersockets).
 * System Automation for zCX Address Space(s) can automatically restart zCX services on different LPARs, and retain the same TPCIP and Disk connections.
 * z/OS storage subsystems can provide Hyperswap for local failovers and GDPS for geographically remote failovers.
+
+![zcx05](images/cdc/zcx05.png)
 
 
 <h3 id="3.2">3.2 zCX Setup.</h3>
@@ -222,6 +235,8 @@ Chapter 7 addresses the operation of docker containers within zCX.
 
 Having explained why you might want to consider deploying CDC agents inside zCX, the remainder of this document is a simple worked example.
 The scenario implemented is to capture from IMS and apply to Kafka. Classic CDC for IMS is the capture agent. CDC for Kafka for linux on z390 is the Apply agent.
+
+![CDC Model 3](images/cdc/cdc_model3.png)
 
 Note: we cannot containerise linux for Intel or linux for Power software for zCX. 
 We must use software that is compiled for z390 because that is the runtime hardware platform. 
@@ -260,6 +275,7 @@ But even that doesn't require a dockerfile change, because the installer image i
 
 ssh into the zCX shell and issue docker run hello-world
 
+![zcx10](images/cdc/zcx10.png)
 
 <b>Step 3 : Create a directory to gather everything you need to run the dockerfile</b>  
 
@@ -276,6 +292,8 @@ This is where you will gather the artefacts to build the docker container
 * The response file for a silent install of CDC for Kafka for Linux on Z
 * The kafkaproducer.properties file ( to save editing it after the install )
 * The installer binary.
+
+![zcx11](images/cdc/zcx11.png)
 
 
 <b>Step 5 : Invoke the Docker build process</b> 
