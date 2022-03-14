@@ -756,39 +756,32 @@ Screenshot 15 of 15 :  Review DDL, and tick to execute DDL on Classic CDC Server
   
 <br>
 
-<h4>7.2.3 Test the validity of the IMS Table Mapping using SQL through the CDA</h4>
-<p>Once you have deployed the IMS Table to the Classic CDC Server, you should validate that the table mapping is correct. 
-The simplest way to do this is to run an SQL query against the mapped IMS Table. 
-Right Click on the Table, and either "return all rows" or choose "sample contents" to eyeball the data for validity</p>
-<center><img src="/recipes/images/neale/cdc/vsamt_verify.PNG" alt="Classic CDC Services" style="border:1px solid black; width:800px"></center> 
+<h4>7.2.3 Test the validity of the VSAM Table Mapping using SQL through the CDA</h4>
 
-<p>You can dig deeper into data validation with more probing SQL through the Classic Data Architect. 
-Just click the SQL icon in the Data Source Exporer window (bottom-right) and SQL away.</p>
+Once you have deployed the VSAM Table to the Classic CDC Server, you should validate that the table mapping is correct. 
+The simplest way to do this is to run an SQL query against the mapped VSAM Table. 
+Right Click on the Table, and either "return all rows" or choose "sample contents" to eyeball the data for validity
 
-<p>Be mindful of the fact that many test VSAM systems have "dirty data". 
+![CDA Verify VSAMT](images/cdc/vsamt_verify.PNG)
+
+You can dig deeper into data validation with more probing SQL through the Classic Data Architect. 
+Just click the SQL icon in the Data Source Exporer window (bottom-right) and SQL away. 
+
+Be mindful of the fact that many test VSAM systems have "dirty data". 
 If this is true for your environment, you can overcome dirty data with some forgiving Classic CDC parameters. 
-However, at some point before deploying to production, you must take responsibility for validating the data and the accuracy of the mapping.</p>
+However, at some point before deploying to production, you must take responsibility for validating the data and the accuracy of the mapping. 
 
-<p>The "forgiving" Classic CDC parameters that are available to you are as follows</p>
+The "forgiving" Classic CDC parameters that are available to you are as follows 
 
- <table>
-  <tr>
-    <td width=300>Parameter</td>
-    <td width=500>Purpose</td>
-  </tr> 
-  <tr>
-    <td>DATACONVERRACT</td>
-    <td>1 will convert invalid numeric data to -9s for query actions</td>
-  </tr> 
-  <tr>
-    <td>DATAVALIDATEACT</td>
-    <td>1 will convert invalid numeric data to -9s for change data capture actions</td>
-  </tr>   
-  <tr>
-    <td>CSDATAVALIDATEAC</td>
-    <td>1 will convert invalid numeric data to -9s for change data capture actions</td>
-  </tr> 
-</table> 
+
+| Parameter | Purpose |
+| --- | --- |
+| DATACONVERRACT | 1 will convert invalid numeric data to -9s for query actions | 
+| DATAVALIDATEACT | 1 will convert invalid numeric data to -9s for change data capture actions | 
+| CSDATAVALIDATEAC | 1 will convert invalid numeric data to -9s for change data capture actions | 
+
+
+
 
 
 <p>Deploying the VSAM Table <b>(with Change Capture Table Usage)</b> makes it visible to the CDC Management Console and Access Server 
