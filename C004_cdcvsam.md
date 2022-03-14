@@ -699,6 +699,65 @@ The steps you need to follow are described in the list below, and illustrated in
 6. Execute the DDL against the target Classic CDC server.
 7. Verify the generated object
 
+QQQ
+
+Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
+
+Screenshot 1 of 17 : Create a new Data Design Project (Zeditor)
+![CDA Imported Artefacts](images/cdc/imstab01.PNG)
+
+Screenshot 2 of 17 :  Inside the project, create a new Physical Data Model
+![CDA Imported Artefacts](images/cdc/imstab02.PNG)
+
+Screenshot 3 of 17 :  Use the Classic Integration template for this data model
+![CDA Imported Artefacts](images/cdc/imstab03.PNG)
+
+Screenshot 4 of 17 :  Highlight IMS DBDs, right mouse click, import files
+![CDA Imported Artefacts](images/cdc/imstab04.PNG)
+
+Screenshot 5 of 17 :  Import either from 3270 or Local PC, and Review artefact
+![CDA Imported Artefacts](images/cdc/imstab05.PNG)
+
+Screenshot 6 of 17 :  Repeat process to import COBOL Copybooks
+![CDA Imported Artefacts](images/cdc/imstab06.PNG)
+
+Screenshot 7 of 17 :  Highlight the Physical Data Model, Create an IMS Table
+![CDA Imported Artefacts](images/cdc/imstab07.PNG)
+
+
+Screenshot 8 of 17 :  Specify the DBD, assign the desired Schema Name
+![CDA Imported Artefacts](images/cdc/imstab08.PNG)
+
+Screenshot 9 of 17 :  Specify Segments, SSID, PSB, and choose Table Name and Usage
+![CDA Imported Artefacts](images/cdc/imstab09.PNG)
+
+Screenshot 10 of 17 :  Specify root segment copybook and choose fields
+![CDA Imported Artefacts](images/cdc/imstab10.PNG)
+
+Screenshot 11 of 17 :  Specify dependent segment copybooks and choose fields
+![CDA Imported Artefacts](images/cdc/imstab11.PNG)
+
+Screenshot 12 of 17 :  Review the IMS table mapping, and Finish
+![CDA Imported Artefacts](images/cdc/imstab12.PNG)
+
+Screenshot 13 of 17 :  Highlight the Mapped Object, right mouse click and Generate DDL
+![CDA Imported Artefacts](images/cdc/imsgen01.PNG)
+
+Screenshot 14 of 17 :  Specify Artefacts required
+![CDA Imported Artefacts](images/cdc/imsgen02.PNG)
+
+Screenshot 15 of 17 :  Review DDL, and tick to execute DDL on Classic CDC Server
+![CDA Imported Artefacts](images/cdc/imsgen03.PNG)
+
+Screenshot 16 of 17 :  Specify the target server (SAMPLEDS) and Finish
+![CDA Imported Artefacts](images/cdc/imsgen04.PNG)
+
+Screenshot 17 of 17 :  Review object in Data Source Explorer for accuracy
+![CDA Imported Artefacts](images/cdc/imsgen05.PNG)
+
+
+QQQ
+
 
 <p>Click the arrows to progress through series of screenshots for performing these tasks.</p>
 
