@@ -15,7 +15,7 @@ It contains
 | [1. Environment for CDC Worked Examples.](C001_environment.md) | [10. Creating and Operating CDC Subscriptions.](C010_administration.md) |
 | [2. Setting up CDC for Db2 on z/OS.](C002_cdcdb2zos.md) | [11. Devops Options for CDC.](C011_devops.md) | 
 | [3. Setting up Classic CDC for IMS.](C003_cdcims.md) | [12. CHCCLP Scripting.](C012_chcclp.md) |
-| [4. Setting up Classic CDC for VSAM.](C004_vsam.md) | [13. Security for CDC (LDAP and TLS).](C013_security.md) |
+| [4. Setting up Classic CDC for VSAM.](C004_cdcvsam.md) | [13. Security for CDC (LDAP and TLS).](C013_security.md) |
 | [5. Setting up CDC for Kafka in zCX.](C005_zcx.md) | [14. Container Deployment.](C014_containers.md) |
 | [6. Setting up CDC for Db2 on Linux.](C006_db2linux.md) | [15. Monitoring and Managing outwith the Windows MC.](C015_dashboard.md) |
 | [7. Setting up CDC for Kafka.](C007_kafka.md) | [16. CDC Use-Case Suitability.](C016_dashboard.md)  |
