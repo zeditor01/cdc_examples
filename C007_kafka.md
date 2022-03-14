@@ -217,31 +217,36 @@ Next step is to define an encryption profile. This dialog is iterative, allowing
 You can also return to this dialog later and change the encryption profile of the instance. The configuration of TLS and encryption profiles is handled as a separate 
 topic in [13. Security for CDC (LDAP and TLS).](C013_security.md). For now we will create an encryption profile that disables encryption. 
 
-ADD dialog here 
+Select 1 to manage encryption profiles, and then select 1 again to drive the "ADD encryption profile" dialog here 
 
 ![cdckafka05](images/cdc/cdckafka05.png)
 
 
-Having defined encruption profile "noencrypt", we can select it and complete the instance creation.</p>
-<p>The CDC for Kafka instance needs to have a userid and password created to authenticate connections from the Access Server. In this basic 
+Having defined encruption profile "noencrypt", we can select it and complete the instance creation. 
+
+The CDC for Kafka instance needs to have a userid and password created to authenticate connections from the Access Server. In this basic 
 "up and running" example, we will accept the default userid (tsuser) and assign a password. In most real world scenarios you would configure the Access Server 
-to use an LDAP directory for authentication services. LDAP configuration is covered in <a href="/recipes/docs/NA_CDC/cdcu4.html"> Security for CDC (LDAP and TLS).</a></p>
-<center><img src="/recipes/images/neale/cdc/cdckafka06.png" style="border:1px solid black; width:500px"></center> 
+to use an LDAP directory for authentication services. LDAP configuration is covered in [13. Security for CDC (LDAP and TLS).](C013_security.md) 
 
-<p>Once the installation is created, you can start it immediately from the dialog. The command to start it at any other time is</p>
-<ul>
-<li>/opt/ibm/InfoSphereDataReplication/ReplicationEngineforKafka/bin/dmts64 -I ubuntu32kafka
-</ul>
+![cdckafka06](images/cdc/cdckafka06.png)
 
-<center><img src="/recipes/images/neale/cdc/cdckafka07.png" style="border:1px solid black; width:500px"></center> 
+Once the installation is created, you can start it immediately from the dialog. The command to start it at any other time is
+
+```
+/opt/ibm/InfoSphereDataReplication/ReplicationEngineforKafka/bin/dmts64 -I ubuntu32kafka
+```
+
+![cdckafka07](images/cdc/cdckafka07.png)
 
 
 <h2 id="4.0">4. Configure the Linux Environment</h2>  
-<p>A couple of pieces of Linux adminsitration must be done.</p>
+
+A couple of pieces of Linux adminsitration must be done. 
 
 <h3 id="4.1">4.1 TCPIP Ports</h3> 
-<p>We configured this instance to listen on port 11701. You must ensure that the Linux Firewall allows incoming traffic on this port, as well as any 
-other network firewalls between other CDC components and this instance.</p>
+
+We configured this instance to listen on port 11701. You must ensure that the Linux Firewall allows incoming traffic on this port, as well as any 
+other network firewalls between other CDC components and this instance. 
 
 
 <h3 id="4.2">4.2 Kafka Connection Properties</h3>
