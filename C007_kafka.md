@@ -3,7 +3,6 @@
 # Setting Up CDC for Kafka - Worked Example
 This chapter is a worked example of setting up CDC for Kafka on Linux. 
 
-![Roadwork](images/work_in_progress.jpg)
 
 ## Table of Contents
 
