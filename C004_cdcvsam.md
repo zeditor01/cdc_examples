@@ -481,70 +481,56 @@ Edit <code>CDCV.I2.USERSAMP(CACQRSYS)</code> and replace the second line of the 
 
 
 
-QQQQ
-
-<p>Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.</p>
-<center><img src="/recipes/images/neale/cdc/vencrypt01.PNG" style="width:800px"></center>
-
-<p>Submit <code>CDCV.I2.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code>CDCV.I2.USERCONF(CACPWDIN)</code> with the encrypted value.</p>
-<center><img src="/recipes/images/neale/cdc/vencrypt02.PNG" style="width:800px"></center>
-
-<p>Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.</p>
-<center><img src="/recipes/images/neale/cdc/vencrypt03.PNG" style="width:800px"></center>
-
-<p>Edit <code>CDCV.I2.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.</p>
-<center><img src="/recipes/images/neale/cdc/vencrypt04.PNG" style="width:800px"></center>
-
-<p>Edit <code>CDCV.I2.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.</p>
-<center><img src="/recipes/images/neale/cdc/vencrypt05.PNG" style="width:800px"></center>
 
 
-
-<p><code>CDCV.I2.USERCONF(CACMUCON)</code> and <code>CDCV.I2.USERSAMP(CACQRSYS)</code> will be 
-referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above</p)
+<code>CDCV.I2.USERCONF(CACMUCON)</code> and <code>CDCV.I2.USERSAMP(CACQRSYS)</code> will be 
+referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above.
 
 
 <br><hr>
 
 <h2 id="5.0">5. Configure the z/OS Environment</h2>
-<p>Every z/OS environment will have different constraints and considerations for deployment. 
+
+Every z/OS environment will have different constraints and considerations for deployment. 
 This worked example was implement on a Z Development and Test v13 environment, using the z/OS v2.4 stack provided by ADCD v13. 
-The z/OS customizations that I needed to do were as follows</p>
+The z/OS customizations that I needed to do were as follows.
 
 <h3 id="5.1">5.1 APF Authorised Load Libraries</h3>
-<p>The Classic CDC Load Libraries need to be APF Authorized. 
-With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD)</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre>
-<code>/**********************************************/                      </code>
-<code>/*  CDCV 11.4                                 */                      </code>
-<code>/**********************************************/                      </code>
-<code>APF ADD                                                               </code>
-<code>    DSNAME(CDCV.SCACLOAD)                               VOLUME(USER0B)</code>
-</pre>
-</div>	
+The Classic CDC Load Libraries need to be APF Authorized. 
+With the ADCD distribution I simply added these libraries to ADCD.Z24C.PARMLIB(PROGAD)  
+
+
+```
+/**********************************************/                      
+/*  CDCV 11.4                                 */                      
+/**********************************************/                      
+APF ADD                                                               
+    DSNAME(CDCV.SCACLOAD)                               VOLUME(USER0B)
+```	
 	
 <h3 id="5.2">5.2 TCPIP Ports</h3> 
-<p>Classic CDC for VSAM is configured to listen on one port. I used the custom port of 9088 because 9087 was already taken by my Classic CDC for IMS server. 
-The ADCD z/OS v2.4 distribution does not lock high ports, so I didn’t have any network administration to perform to open port 9087.</p> 
+
+Classic CDC for VSAM is configured to listen on one port. I used the custom port of 9088 because 9087 was already taken by my Classic CDC for IMS server. 
+The ADCD z/OS v2.4 distribution does not lock high ports, so I didn’t have any network administration to perform to open port 9088. 
 
 <h3 id="5.3">5.3 RACF Started Task ID</h3> 
-<p>For the ZD&T environment I didn’t bother the define a started task ID to RACF. 
-I just added the PROC to ADCD.Z24B.PROCLIB and ran it as START1.</p>
+
+For the ZD&T environment I didn’t bother the define a started task ID to RACF. 
+I just added the PROC to ADCD.Z24B.PROCLIB and ran it as START1. 
 
 <h3 id="5.4">5.4 Test Start the Classic CDC Server</h3> 
-<p>This is a good point to start the server and resolve any problems with the Classic CDC Server.  
+
+This is a good point to start the server and resolve any problems with the Classic CDC Server.  
 You can test the Classic CDC as a Job using the JCL in member CECCDSRC, and then deploy it as a started task later on.
 Upon first start, you should expect to see the Classic CDC Server come up.
-</p>
 
-<Ccenter><img src="/recipes/images/neale/cdc/cdcv_startup.PNG" alt="Classic CDC Startup Messages" style="border:1px solid black; width:800px"></center> 
-
+![CDCV Startup Messages](images/cdc/cdcv_startup.PNG)
 
 
-<p>If you configured the CECCUSPC parameters to include an MQ target, then you are likely to experience MQ connection errors until you resolve
-RACF permissions.</p>
+
+
+If you configured the CECCUSPC parameters to include an MQ target, then you are likely to experience MQ connection errors until you resolve RACF permissions.  
 
 <br><hr>
 
