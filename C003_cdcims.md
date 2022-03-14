@@ -116,6 +116,15 @@ relate to external artefacts.
 The services that are outlined in red are the ones that can be protected by the SAF Exit. 
 The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
 The following is a brief summary of what some of the key services do. 
+
+
+
+| Service | Function |
+| --- | --- |
+| Connection Handler | Listens on a TCPIP port for requests from other CDC components (Classic Data Architect, Management Console & Access Server, CDC Apply agents). |
+| Admin Service | Dispatches tasks to appropriate services within the Started Task. |
+
+
  <table>
   <tr>
     <th width=300>Service</th>
