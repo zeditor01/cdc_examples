@@ -133,18 +133,17 @@ center <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-configuration-p
 <br><hr>
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>
-<p>There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for VSAM. 
-It is helpful to establish a structured overview of the main installation and configuration activities before 
-diving into the technical details of very nut and bolt. 
-This paper identifies five separate stages of implementation</p>
 
-	<ul> 
-	<li>SMPE Installation of Code Libraries
-	<li>Creating the Customised Classic CDC Instance
-	<li>Configure the z/OS Environment
-	<li>Configure the CICS-VSAM Environment
-	<li>Integrate with the wider CDC Landscape
-	</ul>
+There are a lot of moving parts, and a lot of inter-related dependencies in setting up Classic CDC for VSAM. 
+It is helpful to establish a structured overview of the main installation and configuration activities before 
+diving into the technical details of very nut and bolt. This paper identifies five separate stages of implementation.
+
+1. SMPE Installation of Code Libraries
+2. Creating the Customised Classic CDC Instance
+3. Configure the z/OS Environment
+4. Configure the CICS-VSAM Environment
+5. Integrate with the wider CDC Landscape
+
 
 <br><hr>
 
