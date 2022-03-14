@@ -304,16 +304,19 @@ Run the following command from /home/admin/cdckafka
 docker build --build-arg CDCINSF=setup-iidr-11.4.0.0-5001-linux-s390.bin -t zcdckafka .
 ```
 
-That's it. The docker build runs in a few minutes on my ZD&T environment. 
+That's it !
+
+The docker build runs in a few minutes on my ZD&T environment. 
 It should run in seconds on a real Z system. I attach screenshots of the docker build output in the appendix.
 
 <h3 id="4.2">4.2 Operating the CDC Docker Container.</h3>
 
   
 Before we start the container, we want to add a docker volume. This is not strictly necessary for CDC for Kafka since the container is persisted. 
-However by placing the instance metadata (bookmark etc� ) on a shared docker volume, you have flexibility for things like fast low-risk software upgrades.
+However by placing the instance metadata (bookmark etc ) on a shared docker volume, you have flexibility for things like fast low-risk software upgrades.
 Standard docker commands to create a docker volume.
 
+![zcx12](images/cdc/zcx12.png)
 
 Now you can start the container, referencing the shared volume and it�s mountpoint within the container. You also need to surface the listener port 11701 outside the zCX DVIPA.
 
@@ -329,12 +332,16 @@ Remember the difference between docker run and docker start
 
 After you start the container, run ```docker ps -a``` to discover the container ID.
 
+![zcx13](images/cdc/zcx13.png)
 
 Now connect to that container and start a bash shell
 
 ```
 docker exec -it 733de0daa126 /bin/bash 
 ```
+
+![zcx14](images/cdc/zcx14.png)
+
 
 <h3 id="4.3">4.3 Configuring the CDC instance.</h3>
 
@@ -344,6 +351,7 @@ From here on in, it's no different from running CDC in Linux. Create an instance
 From /opt/cdckafka/bin
 issue ```./dmconfigurets```
 
+![zcx20](images/cdc/zcx20.png)
 
 
 And then start the instance
@@ -352,6 +360,8 @@ cd /opt/cdckafka/bin
 ```
 ./dmts64 -I zcxcdckafka &
 ```
+
+![zcx21](images/cdc/zcx21.png)
 
 Now you can point all your normal CDC Administration Tools ( Management Console, Access Server, CHCCLP for linux, CHCCLP for z/OS ) at the CDC instance on 192.168.1.220:11701
 
