@@ -3,7 +3,7 @@
 # Setting Up Classic CDC for IMS - Worked Example
 This chapter is a worked example of setting up CDC for Kafka inside a zCX container.
 
-* The focus of this article is the zCX deployment. 
+* The primary focus of this article is the zCX deployment of a CDC agent. (the example just happens to be CDC for Kafka, but it could be any CDC agent). 
 * Please review [7. Setting up CDC for Kafka.](C007_kafka.md) for an article that is more focussed on CDC for Kafka
 
 ## Contents
