@@ -177,37 +177,44 @@ Then let the installer run, and defer the instance creation till later.
 
 <h3 id="3.3">3.3 Create the CDC for Db2 Linux Instance</h3>
 
-<p><b>Procedural Warning:</b> Before you create a cdc instance for Db2 you must ensure that the Db2 database is correctly configured to support archival logging. 
+<b>Procedural Warning:</b> Before you create a cdc instance for Db2 you must ensure that the Db2 database is correctly configured to support archival logging. 
 The consequence of failing to do this is that the cdc instance will only be able to act as a CDC Apply server. 
-Please refer to <a href="#5.0">5. Configure the Db2 Linux Environment</a> if your Db2 database is not suitably configured.</p>
+Please refer to <a href="#5.0">5. Configure the Db2 Linux Environment</a> if your Db2 database is not suitably configured. 
 
-<p>The dmconfigurets command in the installation/bin directory will start a dialog to allow you to create a CDC instance. Run the command below as cdcinst1.</p>
-<ul>
-</ul>/opt/ibm/InfoSphereDataReplication/ReplicationEngineforKafka/bin/dmconfigurets
-</ul>
+The dmconfigurets command in the installation/bin directory will start a dialog to allow you to create a CDC instance. Run the command below as cdcinst1. 
+
+```
+/opt/ibm/InfoSphereDataReplication/ReplicationEngineforKafka/bin/dmconfigurets
+```
 
 
-<p>Now, create an instance called centos199db2, listening on port 10901, allocated 8MB of memory.</p>
-<center><img src="/recipes/images/neale/cdc/cdcdb2luw04.png" style="border:1px solid black; width:500px"></center> 
+Now, create an instance called centos199db2, listening on port 10901, allocated 8MB of memory. 
+![cdcdb2luw04](images/cdc/cdcdb2luw04.png)
 
-<p>Next step is to define an encryption profile. This dialog is iterative, allowing you to define multiple encryption profiless, and then choose the one to use. 
+Next step is to define an encryption profile. This dialog is iterative, allowing you to define multiple encryption profiless, and then choose the one to use. 
 You can also return to this dialog later and change the encryption profile of the instance. The configuration of TLS and encryption profiles is handled as a separate 
-topic in <a href="/recipes/docs/NA_CDC/cdcu4.html"> Security for CDC (LDAP and TLS)</a>. For now we will create an encryption profile that disables encryption.</p>
-<p>ADD dialog here</p>
-<center><img src="/recipes/images/neale/cdc/cdckafka05.png" style="border:1px solid black; width:500px"></center> 
+topic in [13. Security for CDC (LDAP and TLS).](C013_security.md). For now we will create an encryption profile that disables encryption. 
 
-<p>Having defined encruption profile "noencrypt", we can select it and complete the instance creation.</p>
-<p>The CDC for Db2 instance will use the Db2 data source logon to authenticate connections from the Access Server. 
- In most real world scenarios you would configure the Access Server 
-to use an LDAP directory for authentication services. LDAP configuration is covered in <a href="/recipes/docs/NA_CDC/cdcu4.html"> Security for CDC (LDAP and TLS).</a></p>
-<center><img src="/recipes/images/neale/cdc/cdcdb2luw06.png" style="border:1px solid black; width:500px"></center> 
+Select 1 to manage encryption profiles, and then select 1 again to drive the "ADD encryption profile" dialog here 
 
-<p>Once the installation is created, you can start it immediately from the dialog. The command to start it at any other time is</p>
-<ul>
-<li>/opt/ibm/InfoSphereDataReplication/ReplicationEngineforIBMDB2/bin/dmts64 -I centos199db2
-</ul>
+![cdcdb2luw05](images/cdc/cdcdb2luw05.png)
 
-<center><img src="/recipes/images/neale/cdc/cdcdb2luw07.png" style="border:1px solid black; width:500px"></center> 
+
+Having defined encruption profile "noencrypt", we can select it and complete the instance creation. 
+
+The CDC for Db2 instance will use the Db2 data source logon to authenticate connections from the Access Server. 
+In most real world scenarios you would configure the Access Server 
+to use an LDAP directory for authentication services. LDAP configuration is covered in [13. Security for CDC (LDAP and TLS).](C013_security.md)
+
+![cdcdb2luw06](images/cdc/cdcdb2luw06.png)
+
+Once the installation is created, you can start it immediately from the dialog. The command to start it at any other time is
+
+```
+/opt/ibm/InfoSphereDataReplication/ReplicationEngineforIBMDB2/bin/dmts64 -I centos199db2
+```
+
+![cdcdb2luw07](images/cdc/cdcdb2luw07.png)
 
 
 <h2 id="4.0">4. Configure the Linux Environment</h2>  
