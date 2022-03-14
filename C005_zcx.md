@@ -4,50 +4,47 @@
 This chapter is a worked example of setting up CDC for Kafka inside a zCX container.
 
 * The primary focus of this article is the zCX deployment of a CDC agent. (the example is CDC for Kafka, but it could be any CDC agent). 
-* Please review [7. Setting up CDC for Kafka.](C007_kafka.md) for an article that is more focussed on CDC for Kafka
+* Please review [7. Setting up CDC for Kafka.](C007_kafka.md) for an article that is more focussed Kafka as a CDC agent.
 
 ## Contents
 
+<ul class="toc_list">
+<li><a href="#abstract">Abstract</a>   
+<li><a href="#1.0">1 Why Deploy CDC as a z/OS Container ?</a>
+<ul>
+  <li><a href="#1.1">1.1 Traditional benefits of containers</a></li>
+  <li><a href="#1.2">1.2 Choice of Operational Platform for CDC</a></li>
+</ul>
+<li><a href="#2.0">2. Benefits of deploying CDC agents as zCX Containers.</a> 
+<ul>
+  <li><a href="#2.1">2.1 Simpler, Faster Deployment.</a></li>
+  <li><a href="#2.2">2.2 A single operations team to run the entire CDC solution.</a></li> 
+  <li><a href="#2.3">2.3 A Better Physical Recovery Solution.</a></li>
+  <li><a href="#2.4">2.4 Faster, Lower Risk Software Upgrades.</a></li>
+  <li><a href="#2.5">2.5 Inherit z/OS Qualities of Service.</a></li>
+</ul>
+<li><a href="#3.0">z/OS Container Extensions (zCX).</a> 
+<ul>
+  <li><a href="#3.1">3.1 zCX Concepts.</a></li>
+  <li><a href="#3.2">3.2 zCX Setup.</a></li>
+</ul>
+<li><a href="#4.0">4. Worked Example: CDC for Kafka in zCX.</a>
+<ul>
+  <li><a href="#4.1">4.1 Creating the CDC Docker Container.</a></li>
+  <li><a href="#4.2">4.2 Operating the CDC Docker Container.</a></li>
+  <li><a href="#4.3">4.3 Configuring the CDC instance.</a></li>
+  <li><a href="#4.4">4.4 Integration with z/OS Operations.</a></li>  
+</ul> 
+<li><a href="#5.0">5. Docker Build</a>
+<ul>
+  <li><a href="#5.1">5.1 Dockerfile Listing</a></li>
+  <li><a href="#5.2">5.2 Docker build Output</a></li>
+</ul>
+</ul>
 
- 
 
-The primary 
-As Enterprises expand their usage of cloud services for new applications, so does the need to gain access to current corporate data. 
-* How useful is a mobile banking app that can�t see today�s transactions?
-* What�s the point of an insurance portal that doesn�t reflect the current status of a claim ? 
-One pattern for achieving Z data access is to publish a stream of Z data changes to Apache Kafka, which serves as an artery of current data to feed cloud applications.
-This series of documents has been prepared to provide worked examples of how you might implement such a pattern between IMS databases on mainframe and Apache Kafka. A major focus of these documents is the practicality and security of the ultimate operational deployment.
-This is the fourth document in the series. Docker containers are usually associated with moving workloads to public or private cloud infrastructure. However, z/OS Container Extensions provides a z/OS environment for deploying docker containers. CDC for Kafka can be deployed as a container within zCX. The primary benefits would be realize the Qualities of Service that come with a z/OS started task, and to manage all the CDC operational processes by the z/OS Operations Team. This is a worked example of how to deploy CDC for Kafka as a docker container in zCX.
-Neale Armstrong (neale.armstrong@au1.ibm.com)
+<hr>
 
-
-
-
-Contents
-1. Why Deploy CDC as a z/OS Container ?	3
-2. The Benefits of deploying CDC agents as zCX Containers.	4
-2.1 Simpler, Faster Deployment.	4
-2.2 A single operations team to run the entire CDC solution.	4
-2.3 A Better Physical Recovery Solution.	5
-2.4 Faster, Lower Risk Software Upgrades.	5
-2.5 Inherit z/OS Qualities of Service.	6
-2.5 Inherit z/OS Security Strengths.	6
-3. z/OS Container Extensions (zCX).	7
-3.1 zCX Concepts.	7
-3.2 zCX Setup.	9
-4. Worked Example: CDC for Kafka in zCX.	10
-4.1 Creating the CDC Docker Container.	10
-Step 1 : Assume ZCX environment is Established	10
-Step 2 : Verify Docker with hello world.	11
-Step 3 : Create a directory to gather everything you need to run the dockerfile	11
-Step 4 : Gather the following 4 files	11
-Step 5 : Invoke the Docker build process	11
-4.2 Operating the CDC Docker Container.	12
-4.3 Configuring the CDC instance.	13
-4.4 Integration with z/OS Operations.	15
-Appendix : Sources of Information	16
-Dockerfile Listing	17
-Docker build Output	19
 
 
 
