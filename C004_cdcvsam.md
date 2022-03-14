@@ -655,23 +655,30 @@ The Data Perpective is shown in the screenshot below.
  
 ![CDA_Data_Perspective](images/cdc/CDA_Data_Perspective.png)
  
-<p>In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
+In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
 (bottom left window in the Data Perspective), right click on "Database Connections" and choose "New". 
-Then fill in the connection details ( 192.168.1.191:9088 IBMUSER/SYS1 ), test the connection and press OK.</p>
-<center><img src="/recipes/images/neale/cdc/cda_connectv.PNG" alt="CDA Connection" style="border:1px solid black; width:500px"></center> 
+Then fill in the connection details ( 192.168.1.191:9088 IBMUSER/SYS1 ), test the connection and press OK.
 
-<p>You must also repeat this process to define a connection on the "Console Explorer" window. Defining a connection in one window does 
-not copy that connection to the other window.</p>
-<p>If the connection fails, the most likely cause is a firewall. Once you have eliminated firewalls, 
-check in the Classic CDC started task output for correction errors.</p> 
-<p>Once connected, you can expand the "SAMPLEDS" datasource and explore the schemas, and the table objects within the schemas. 
+![CDA Connection](images/cdc/cda_connectv.PNG)
+
+You must also repeat this process to define a connection on the "Console Explorer" window. Defining a connection in one window does 
+not copy that connection to the other window. 
+
+If the connection fails, the most likely cause is a firewall. Once you have eliminated firewalls, 
+check in the Classic CDC started task output for correction errors. 
+
+Once connected, you can expand the "SAMPLEDS" datasource and explore the schemas, and the table objects within the schemas. 
 Initially, the Catalog Tables will be visible under schemas "SYSIBM" and "SYSCAC". When you have developed some IMS Tables" 
-they will be visible under the schema that they were created in.</p>
-<center><img src="/recipes/images/neale/cdc/cda_dsev.PNG" alt="CDA Data Source Explorer" style="border:1px solid black; width:300px"></center>  
+they will be visible under the schema that they were created in. 
 
-<p>Click on the Console explorer tab now, and expand the Services and Configuration Tabs. 
-If you select a configuration (such as the DRA Service configuration) and edit the properties, you can make parameter changes here.</p>
-<center><img src="/recipes/images/neale/cdc/cda_consolev_parms.PNG" alt="CDA Imported Artefacts" style="border:1px solid black; width:800px"></center>  
+![CDA Data Source Explorer](images/cdc/cda_dsev.PNG)
+
+
+Click on the Console explorer tab now, and expand the Services and Configuration Tabs. 
+If you select a configuration (such as the VSAM Access Service configuration) and edit the properties, you can make parameter changes here. 
+
+![CDA Services CFG](images/cdc/cda_consolev_parms.PNG)
+
 
 
 <h4>7.2.2 Create a data development project, and Import DBDs and Copybooks for the mapping work</h4>
