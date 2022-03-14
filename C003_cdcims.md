@@ -117,56 +117,18 @@ The services that are outlined in red are the ones that can be protected by the 
 The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
 The following is a brief summary of what some of the key services do. 
 
-
-
 | Service | Function |
 | --- | --- |
 | Connection Handler | Listens on a TCPIP port for requests from other CDC components (Classic Data Architect, Management Console & Access Server, CDC Apply agents). |
 | Admin Service | Dispatches tasks to appropriate services within the Started Task. |
+| Query Processor | Converts SQL requests into DL/I language to access IMS data structures. |
+| DRA | Service to connect to IMS via the IMS Database Remote Access interface. |
+| IMSLRS | IMS Log Reader Service. |
+| Capture | Extracts log changes needed for subscriptions, and publishes them over TCPIP to CDC Apply Agents. |
+| Operator | Command Processor. (Start, Stop, Park etc... ). |
+| Logger | Writes Started Task logs to z/OS logstreams. |
+| Monitor | Tracks health and performance data. |
 
-
- <table>
-  <tr>
-    <th width=300>Service</th>
-    <th width=500>Function</th>
-  </tr>
-  <tr><td>Connection Handler</td>
-    <td>Listens on a TCPIP port for requests from other CDC components (Classic Data Architect, 
-	Management Console & Access Server, CDC Apply agents).</td>
-  </tr> 
-  <tr>
-   <td>Admin Service</td>
-   <td>Dispatches tasks to appropriate services within the Started Task.</td>
-  </tr> 
-   <tr>
-   <td>Query Processor</td>
-   <td>Converts SQL requests into DL/I language to access IMS data structures.</td>
-  </tr> 
-  <tr>
-   <td>DRA</td>
-   <td>Sevice to connect to IMS via the IMS Database Remote Access interface.</td>
-  </tr> 
-  <tr>
-   <td>IMSLRS</td>
-   <td>IMS Log Reader Service.</td>
-  </tr> 
-  <tr>
-   <td>Capture</td>
-   <td>Extracts log changes needed for subscriptions, and publishes them over TCPIP to CDC Apply Agents.</td>
-  </tr> 
-  <tr>
-   <td>Operator</td>
-   <td>Command Processor. (Start, Stop, Park etc... )</td>
-  </tr> 
-  <tr>
-   <td>Logger</td>
-   <td>Writes Started Task logs to z/OS logstreams.</td>
-  </tr> 
-  <tr>
-   <td>Monitor</td>
-   <td>Tracks health and performance data.</td>
-  </tr> 
-</table> 
 
 
 All the services, and their governing parameters are documented in the knowledge 
