@@ -699,187 +699,60 @@ The steps you need to follow are described in the list below, and illustrated in
 6. Execute the DDL against the target Classic CDC server.
 7. Verify the generated object
 
-QQQ
-
-Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
-
-Screenshot 1 of 17 : Create a new Data Design Project (Zeditor)
-![CDA Imported Artefacts](images/cdc/imstab01.PNG)
-
-Screenshot 2 of 17 :  Inside the project, create a new Physical Data Model
-![CDA Imported Artefacts](images/cdc/imstab02.PNG)
-
-Screenshot 3 of 17 :  Use the Classic Integration template for this data model
-![CDA Imported Artefacts](images/cdc/imstab03.PNG)
-
-Screenshot 4 of 17 :  Highlight IMS DBDs, right mouse click, import files
-![CDA Imported Artefacts](images/cdc/imstab04.PNG)
-
-Screenshot 5 of 17 :  Import either from 3270 or Local PC, and Review artefact
-![CDA Imported Artefacts](images/cdc/imstab05.PNG)
-
-Screenshot 6 of 17 :  Repeat process to import COBOL Copybooks
-![CDA Imported Artefacts](images/cdc/imstab06.PNG)
-
-Screenshot 7 of 17 :  Highlight the Physical Data Model, Create an IMS Table
-![CDA Imported Artefacts](images/cdc/imstab07.PNG)
 
 
-Screenshot 8 of 17 :  Specify the DBD, assign the desired Schema Name
-![CDA Imported Artefacts](images/cdc/imstab08.PNG)
+Scroll through the screenshots below to following the GUI dialog to Define and Verify a VSAM Table.
 
-Screenshot 9 of 17 :  Specify Segments, SSID, PSB, and choose Table Name and Usage
-![CDA Imported Artefacts](images/cdc/imstab09.PNG)
+Screenshot 1 of 15 : Create a new Data Design Project 
+![CDA Imported Artefacts](images/cdc/vsamt01.PNG)
 
-Screenshot 10 of 17 :  Specify root segment copybook and choose fields
-![CDA Imported Artefacts](images/cdc/imstab10.PNG)
+Screenshot 2 of 15 :  Call it CDCVSAM
+![CDA Imported Artefacts](images/cdc/vsamt02.PNG)
 
-Screenshot 11 of 17 :  Specify dependent segment copybooks and choose fields
-![CDA Imported Artefacts](images/cdc/imstab11.PNG)
+Screenshot 3 of 15 :  Inside the project, create a new physical data model
+![CDA Imported Artefacts](images/cdc/vsamt03.PNG)
 
-Screenshot 12 of 17 :  Review the IMS table mapping, and Finish
-![CDA Imported Artefacts](images/cdc/imstab12.PNG)
-
-Screenshot 13 of 17 :  Highlight the Mapped Object, right mouse click and Generate DDL
-![CDA Imported Artefacts](images/cdc/imsgen01.PNG)
-
-Screenshot 14 of 17 :  Specify Artefacts required
-![CDA Imported Artefacts](images/cdc/imsgen02.PNG)
-
-Screenshot 15 of 17 :  Review DDL, and tick to execute DDL on Classic CDC Server
-![CDA Imported Artefacts](images/cdc/imsgen03.PNG)
-
-Screenshot 16 of 17 :  Specify the target server (SAMPLEDS) and Finish
-![CDA Imported Artefacts](images/cdc/imsgen04.PNG)
-
-Screenshot 17 of 17 :  Review object in Data Source Explorer for accuracy
-![CDA Imported Artefacts](images/cdc/imsgen05.PNG)
+Screenshot 4 of 15 :  Use the Classic Integration template for this data model
+![CDA Imported Artefacts](images/cdc/vsamt04.PNG)
 
 
-QQQ
+Screenshot 5 of 15 :  Import copybooks
+![CDA Imported Artefacts](images/cdc/vsamt05.PNG)
+
+Screenshot 6 of 15 :  Import from either 3270 or local PC files
+![CDA Imported Artefacts](images/cdc/vsamt06.PNG)
+
+Screenshot 7 of 15 :  View the object and Finish
+![CDA Imported Artefacts](images/cdc/vsamt07.PNG)
 
 
-<p>Click the arrows to progress through series of screenshots for performing these tasks.</p>
+Screenshot 8 of 15 :  Add a Classic Object: A VSAM Table
+![CDA Imported Artefacts](images/cdc/vsamt08a.PNG)
+
+Screenshot 9 of 15 :  Specify copybook, table schema and table usage
+![CDA Imported Artefacts](images/cdc/vsamt10.PNG)
+
+Screenshot 10 of 15 :  Identify the VSAM dataset, and name the table to be created
+![CDA Imported Artefacts](images/cdc/vsamt11.PNG)
+
+Screenshot 11 of 15 :  Choose the fields to map from the copybook
+![CDA Imported Artefacts](images/cdc/vsamt12.PNG)
+
+Screenshot 12 of 15 :  Review the field and datatype mappings
+![CDA Imported Artefacts](images/cdc/vsamt13.PNG)
+
+Screenshot 13 of 15 :  Highlight the modelled table, right mouse click, generate DDL
+![CDA Imported Artefacts](images/cdc/vsamt14.PNG)
+
+Screenshot 14 of 15 :  Choose the DDL artefacts to generate
+![CDA Imported Artefacts](images/cdc/vsamt15.PNG)
+
+Screenshot 15 of 15 :  Review DDL, and tick to execute DDL on Classic CDC Server
+![CDA Imported Artefacts](images/cdc/vsamt16.PNG)
 
 
-  <!-- Slideshow -->
-  <div class="w3-container"> 
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt01.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Create a new Data Design Project </span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt02.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Call it CDCVSAM</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt03.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Inside the project, create a new physical data model</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt04.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Use the Classic Integration template for this data model</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt05.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Import copybooks</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt06.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Import from either 3270 or local PC files</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt07.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">View the object and Finish</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt08a.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Add a Classic Object: A VSAM Table</span>
-      </div>
-    </div> 
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt10.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Specify copybook, table schema and table usage</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt11.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Identify the VSAM dataset, and name the table to be created</span>
-      </div>
-    </div>
-     <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt12.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Choose the fields to map from the copybook</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt13.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Review the field and datatype mappings</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt14.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Highlight the modelled table, right mouse click, generate DDL</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt15.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Choose the DDL artefacts to generate</span>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-      <img src="/recipes/images/neale/cdc/vsamt16.PNG" style="width:100%">
-      <div class="w3-display-bottomright w3-container w3-padding-32">
-        <span class="w3-yellow w3-padding-large w3-animate-bottom">Review DDL, and tick to execute DDL on Classic CDC Server</span>
-      </div>
-    </div>
 
-	
-    <!-- Slideshow next/previous buttons -->
-    <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
-      <div class="w3-left" onclick="plusDivs(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
-      <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
-    
-      <div class="w3-center">
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(6)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(7)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(8)"></span>
-		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(9)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(10)"></span>		
- 		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(11)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(12)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(13)"></span>		
- 		<span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(14)"></span>
-        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(15)"></span>
-	  </div>
-    </div>
-  </div>
+
   
 <br>
 
