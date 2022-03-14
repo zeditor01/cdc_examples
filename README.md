@@ -18,7 +18,7 @@ It contains
 | [4. Setting up Classic CDC for VSAM.](C004_cdcvsam.md) | [13. Security for CDC (LDAP and TLS).](C013_security.md) |
 | [5. Setting up CDC for Kafka in zCX.](C005_zcx.md) | [14. Container Deployment.](C014_containers.md) |
 | [6. Setting up CDC for Db2 on Linux.](C006_db2linux.md) | [15. Monitoring and Managing outwith the Windows MC.](C015_dashboard.md) |
-| [7. Setting up CDC for Kafka.](C007_kafka.md) | [16. CDC Use-Case Suitability.](C016_dashboard.md)  |
+| [7. Setting up CDC for Kafka.](C007_kafka.md) | [16. CDC Use-Case Suitability.](C016_use_cases.md)  |
 | [8. Setting up remote CDC Capture for Db2 z/OS.](C008_rdb2zos.md) |     |
 | [9. Setting up remote CDC Capture for VSAM.](C009_rvsam.md) |     |    
 
