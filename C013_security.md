@@ -1,48 +1,134 @@
-# Title
+# Securing CDC with TLS and LDAP
+This chapter covers authentication and encryption solutions for CDC
 
 Ooops. This article hasn't been written yet.
 
 ![Roadwork](images/work_in_progress.jpg)
 
-## Table of Contents
+
+## Contents
+
+<ul class="toc_list">
+<li><a href="#abstract">Abstract</a>   
+<li><a href="#1.0">1 Authentication and Encryption Options for CDC Components</a>
+<ul>
+  <li><a href="#1.1">1.1 CDC Component Reference Scenarios</a></li>
+  <li><a href="#1.2">1.2 Authentication options for CDC Users</a></li> 
+  <li><a href="#1.3">1.3 Encryption options between CDC Components</a></li>
+</ul>
+<li><a href="#2.0">2. Authentication Options for CDC Users</a>
+<ul>
+  <li><a href="#2.1">2.1 Authentication at the CDC Access Server</a></li>
+  <li><a href="#2.2">2.2 Authentication and Authorization at the CDC Access Server</a></li>
+  <li><a href="#2.3">2.3 Authentication and Authorization at the CDC Agents</a></li>
+</ul> 
+<li><a href="#3.0">3. Encryption between Management Console and Access Server</a>
+<li><a href="#4.0">4. Encryption between Access Server and CDC Agents</a>
+<ul>
+  <li><a href="#4.1">4.1 Mutually Authenticated TLS Encryption</a></li>
+  <li><a href="#4.2">4.2 Simplistic mTLS with Self-Signed Certificates</a></li>
+  <li><a href="#4.3">4.3 mTLS with Certificate Authorities</a></li>
+  <li><a href="#4.4">4.4 Application Controlled TLS (LUW)</a></li>  
+  <li><a href="#4.5">4.5 Application Transparent TLS (z/OS)</a></li>
+</ul> 
+<li><a href="#5.0">5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent</a>
+<ul>
+  <li><a href="#5.1">5.1 Environment for Scenario without Encryption</a></li>
+  <li><a href="#5.2">5.2 mTLS configuration of Access Server</a></li>
+  <li><a href="#5.3">5.3 mTLS configuration of CDC Apply on Linux</a></li>
+  <li><a href="#5.4">5.4 AT-TLS configuration of CDC Capture on z/OS</a></li>  
+  <li><a href="#5.5">5.5 Certificate Exchanges between platforms</a></li>
+  <li><a href="#5.6">5.6 Operating CDC with mTLS encryption</a></li>
+  <li><a href="#5.7">5.7 Monitoring and Tracing of encrypted network flows</a></li>  
+</ul>
+<li><a href="#6.0">6. Operational Considerations arising from using Encryption</a>
+<ul>
+  <li><a href="#6.1">6.1 Always Encrypted CDC Agents</a></li>
+  <li><a href="#6.2">6.2 ???</a></li>
+  <li><a href="#6.3">6.3 ???</a></li> 
+</ul>
+</ul>
 
 
-Contents
-1. Network Security Requirements.	4
-1.1 Understand that z/OS differs from other platforms in how it supports TLS.	4
-1.2 Worked Example	4
-2. Transport Layer Security by CDC Connection Type	5
-2.1 TLS Between CDC Capture Agents and CDC Apply Agents	5
-2.2 TLS Between CDC Access Server and CDC Datastores	6
-2.3 TLS Between Management Console and Access Server	6
-2.4 TLS Between Classic Data Architect and Classic CDC for IMS	6
-2.5 Authentication Options for CDC Access Server	6
-3. mTLS between CDC Capture on Linux and CDC Apply on Linux.	7
-3.1 Overview of mutual TLS configuration	7
-3.2 Using keytool to generate keypairs and create trust stores at each CDC Node	8
-3.3 Exporting and Importing CA Certificates for mutual trust and authentication	8
-3.4 Configuring Encryption Profiles for CDC Capture and CDC Apply	9
-3.5 Configuring tls.propertes at the Access Server and Management Console	10
-3.6 Editing Encryption Profiles for CDC Capture and CDC Apply instances.	11
-3.7 Validation of TLS Encryption	13
-4. AT-TLS between Classic CDC for IMS and CDC Apply on Linux.	14
-4.1 Overview of AT-TLS encryption on z/OS	14
-4.2 Configuring keypairs and keyrings in PAGENT	14
-4.3 Exporting and Importing CA Certificates for mutual trust and authentication	15
-4.4 Configuring TTLS Policies in PAGENT	17
-4.5 Configuring compatible encryption profiles in CDC Apply	18
-4.6 CHCCLP for z/OS using AT-TLS	19
-4.7 Operate Subscriptions	19
-4.7 Validation of TLS Encryption	20
-Appendix : Sources of Information	21
+<br><hr>
 
+<h2 id="abstract"> Abstract</h2>
+In recent years cyber security has become a non-negotiable requirement of any system that communicates over a network, regardless of whether it is a public or a private network.
+This document provides worked examples of
 
-
-
+* Implementing LDAP authentication for CDC users. 
+* Implementing transport layer security (mutually authenticated encryption) between CDC capture and apply agents on any platform. 
+* Implementing transport layer security (server authenticated encryption) between Management Console and Access Server.
+* It does not attempt to cover all the product's secuirty features.
+* Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
  
 
+It is part of a series of documents providing practical worked examples and 
+guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
+The complete set of articles can be accessed using the README link at the very top of this page. 
+
+<br><hr>
+
+<h2 id="1.0">1 Authentication and Encryption Options for CDC Components</h2>  
+ 
+<h3 id="1.1">1.1 CDC Component Reference Scenarios</h3>  
+<h3 id="1.2">1.2 Authentication options for CDC Users</h3>
+<h3 id="1.3">1.3 Encryption options between CDC Components</h3>
+ 
+
+<br><hr>
+
+<h2 id="2.0">2. Authentication Options for CDC Users</h2>  
+ 
+<h3 id="2.1">2.1 Authentication at the CDC Access Server</h3>  
+<h3 id="2.2">2.2 Authentication and Authorization at the CDC Access Server</h3>
+<h3 id="2.3">2.3 Authentication and Authorization at the CDC Agents</h3>
+
+
+
+<br><hr>
+
+<h2 id="3.0">3. Encryption between Management Console and Access Server</h2>  
+ 
+
+<br><hr>
+
+<h2 id="4.0">4. Encryption between Access Server and CDC Agents</h2>  
+ 
+<h3 id="4.1">4.1 Mutually Authenticated TLS Encryption</h3>  
+<h3 id="4.2">4.2 Simplistic mTLS with Self-Signed Certificates</h3>
+<h3 id="4.3">4.3 mTLS with Certificate Authorities</h3>
+<h3 id="4.4">4.4 Application Controlled TLS (LUW)</h3>
+<h3 id="4.5">4.5 Application Transparent TLS (z/OS)</h3>
+
+
+<br><hr>
+
+<h2 id="5.0">5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent</h2>  
+ 
+<h3 id="5.1">5.1 Environment for Scenario without Encryption</h3>  
+<h3 id="5.2">5.2 mTLS configuration of Access Server</h3>
+<h3 id="5.3">5.3 mTLS configuration of CDC Apply on Linux</h3>
+<h3 id="5.4">5.4 AT-TLS configuration of CDC Capture on z/OS</h3>
+<h3 id="5.5">5.5 Certificate Exchanges between platforms</h3>
+<h3 id="5.6">5.6 Operating CDC with mTLS encryption</h3>
+<h3 id="5.7">5.7 Monitoring and Tracing of encrypted network flows</h3>
+
+
+
+<br><hr>
+
+<h2 id="6.0">6. Operational Considerations arising from using Encryption</h2>  
+ 
+<h3 id="6.1">6.1 Always Encrypted CDC Agents</h3>  
+<h3 id="6.2">6.2 ???</h3>
+<h3 id="6.3">6.3 ???</h3>
+
+
+
+
 1. Network Security Requirements.
-In recent years cyber security has become a non-negotiable requirement of any system that communicated over a network, regardless of whether it is a public or a private network.
+In recent years cyber security has become a non-negotiable requirement of any system that communicates over a network, regardless of whether it is a public or a private network.
 This series of CDC documents is based around the pattern of streaming core transactional data from Systems of Record to Apache Kafka event streaming systems, many of which will be hosted on public cloud services. Suitable Transport Level Security (TLS) is essential.
 Each of the CDC components supports Transport Level Security (TLS). The purpose of this document is to provide a worked example of how to implement TLS on connections between all the CDC components.
 
