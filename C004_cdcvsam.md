@@ -781,65 +781,67 @@ The "forgiving" Classic CDC parameters that are available to you are as follows
 | CSDATAVALIDATEAC | 1 will convert invalid numeric data to -9s for change data capture actions | 
 
 
-
-
-
-<p>Deploying the VSAM Table <b>(with Change Capture Table Usage)</b> makes it visible to the CDC Management Console and Access Server 
-when they connect to the Classic CDC Server</p>
+Deploying the VSAM Table <b>(with Change Capture Table Usage)</b> makes it visible to the CDC Management Console and Access Server 
+when they connect to the Classic CDC Server 
 
 <h3 id="7.3">7.3 Connect from Management Console to Classic CDC Started Task</h3>
-<p>This document is primarily concerned with everything that needs to be done to establish Classic CDC for VSAM as a CDC source.</p>
-<p>Using the the CDC administration tools is now a standard CDC task which is covered in 
-the <a href="/recipes/docs/NA_CDC/cdcu2.html">Devops Options for CDC.</a> paper.</p>
+
+This document is primarily concerned with everything that needs to be done to establish Classic CDC for VSAM as a CDC source. 
+
+Using the the CDC administration tools is now a standard CDC task which is covered in 
+the [10. Creating and Operating CDC Subscriptions.](C010_administration.md) paper.
 
 
 <h3 id="7.4">7.4 Use CHCCLP Scripting for z/OS</h3>
-<p>CDC Replication is traditionally a Windows-centric environment for operations and control, but it also has advanced scripting capabilities for automation.</p>
-<p>The CDC Management Console is a comprehensive GUI that addresses all parts of the devops 
-lifecycle ( access control, definition, operations, monitoring ).</p>
-<p>The CHCCLP Scripting tools offer automated devops controls using scripts. These can be executed from the Windows-based 
+
+CDC Replication is traditionally a Windows-centric environment for operations and control, but it also has advanced scripting capabilities for automation. 
+
+The CDC Management Console is a comprehensive GUI that addresses all parts of the devops 
+lifecycle ( access control, definition, operations, monitoring ). 
+
+The CHCCLP Scripting tools offer automated devops controls using scripts. These can be executed from the Windows-based 
 Management Console, or from the Access Server on Windows or Linux. 
 The CHCCLP scripting option will be attractive to all shops that wish to implement strong devops governance and control to their 
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
-inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler).<p>
-<p>All of these devops options are covered in the the <a href="/recipes/docs/NA_CDC/cdcu2.html">Devops Options for CDC.</a> paper 
-and <a href="/recipes/docs/NA_CDC/cdcu3.html">CHCCLP Scripting.</a> paper in this series of articles.</p>
+inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
+
+All of these devops options are covered in the the [11. Devops Options for CDC.](C011_devops.md paper 
+and [12. CHCCLP Scripting.](C012_chcclp.md) paper in this series of articles. 
 
 <h3 id="7.5">7.5 Conforming to site standards for cross-platform devops and security.</h3> 
-<p>So far, this document has been primarily concerned with the mechanics of making CDC operate from VSAM to any number of heterogeneous targets. 
-It may be hard to believe, but that was the easy part!</p>
-<p>The author has worked with several mainframe customers deploying CDC for VSAM to feed a stream of changes to midrange and Cloud targets. 
-The challenges to overcome will include...</p>
-<ul>
-<li>different development and operational teams supporting the capture and apply services
-<li>co-ordinating devops tasks between cross-platform teams
-<li>change control procedures
-<li>implementing TLS encryption between the application-transparent z/OS platform and application-controlled LUW platforms
-</ul>
-<p>A good approach is to start by considering the non-functional requriements for the business service that CDC will support. If the business 
+
+So far, this document has been primarily concerned with the mechanics of making CDC operate from VSAM to any number of heterogeneous targets. 
+It may be hard to believe, but that was the easy part! 
+
+The author has worked with several mainframe customers deploying CDC for IMS to feed a stream of changes to midrange and Cloud targets. 
+The challenges to overcome will include... 
+
+* different development and operational teams supporting the capture and apply services
+* co-ordinating devops tasks between cross-platform teams
+* change control procedures
+* implementing TLS encryption between the application-transparent z/OS platform and application-controlled LUW platforms
+
+
+A good approach is to start by considering the non-functional requriements for the business service that CDC will support. If the business 
 requires a high level of service ( low latency, stringent monitoring and alerting, minimal downtime, fast recovery from outages etc... ) then
-an operational support model can be developed to meet those requirements.</p>
-
-<p>Once the required service levels are defined, that is a useful reference point for assessing whether the opertional 
-management controls and interfaces between different operations teams can satisfy those service levels</p>
-<p>In some cases, the co-operation between different operational teams can be adjusted to satisfy the required service levels</p>
-<p>In other cases, it may be helpful to use technology options to shift the CDC operations entirely to mainframe, or entirely to non-mainframe. 
-This case be done by selecting different CDC agents in many cases, as follows</p>
-<ul>
-<li>If a Windows/Linux operations hub is desired, then there are remote capture agent options for VSAM and DB2 z/OS.
-<li>If a z/OS operations hub is desired, then the Linux-based CDC agents can be deployed as software containers inside z/OS Container Extensions
-</ul>
-<p>Please be aware of the flexible CDC deployment options that exist, and take an early view on what choices may provide the best 
-devops lifecycle proposition for your organisation.</p>
-
-<p>This series of articles includes a heavy focus of worked deployment examples, but the articles in the "Using CDC" column do aim 
-to address the practical devops challenges with recommendations on how to address common challenges.</p>
+an operational support model can be developed to meet those requirements. 
 
 
-<br><hr>
+Once the required service levels are defined, that is a useful reference point for assessing whether the opertional 
+management controls and interfaces between different operations teams can satisfy those service levels 
 
-<h2 id="App">Appendix</h2>
-<p>placeholder</p>
+* In some cases, the co-operation between different operational teams can be adjusted to satisfy the required service levels 
+* In other cases, it may be helpful to use technology options to shift the CDC operations entirely to mainframe, or entirely to non-mainframe. 
+This case be done by selecting different CDC agents in many cases, as follows 
+
+1. If a Windows/Linux operations hub is desired, then there are remote capture agent options for VSAM and DB2 z/OS.
+2. If a z/OS operations hub is desired, then the Linux-based CDC agents can be deployed as software containers inside z/OS Container Extensions
+
+Please be aware of the flexible CDC deployment options that exist, and take an early view on what choices may provide the best 
+devops lifecycle proposition for your organisation. 
+
+This series of articles includes a heavy focus of worked deployment examples, but the articles in the "Using CDC" column do aim 
+to address the practical devops challenges with recommendations on how to address common challenges.
 
 
 
