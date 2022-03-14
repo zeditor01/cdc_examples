@@ -62,7 +62,7 @@ This document is a basic worked example of setting up CDC for Kafka as a CDC Tar
 
 It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the links at the very top of this page.
+The complete set of articles can be accessed using the README link at the very top of this page. 
 
 <br><hr>
 
@@ -139,14 +139,13 @@ sudo groupadd -g 970 cdcadm1
 sudo useradd -u 1070 -g cdcadm1 -m -d /home/cdcinst1 cdcinst1
 passwd cdcinst1 
 ```
- 
 
 Next, create the directories that the installer will install the program to. 
 
 ```
 /opt/ibm/InfoSphereDataReplication will hold all the cdc agents
 /opt/IBM/InfoSphereDataReplication will hold the access server
-``` 
+```
 
 Make cdcinst1 the owner of those directories, with the following commands
 
