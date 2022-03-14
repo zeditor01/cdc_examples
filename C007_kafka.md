@@ -44,119 +44,126 @@ This chapter is a worked example of setting up CDC for Kafka on Linux.
   <li><a href="#6.3">6.3 Use CHCCLP Scripting</a></li>  
   <li><a href="#6.4">6.4 Conforming to site standards for cross-platform devops and security</a></li>
 </ul> 
-<li><a href="#App">Appendix</a>
 </ul>
-</div>
 
-<hr>
+
+<br><hr>
 
 
 <h2 id="abstract"> Abstract</h2>
-<p>This document is a basic worked example of setting up CDC for Kafka as a CDC Target Engine.</p> 
-<ul>
-<li>It deals with the practical considerations for implementing CDC for Kafka. 
-<li>It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of Linux experience).
-<li>It does not attempt to cover all the product's features.
-<li>It is categorically <b>not</b> a replacement for the  
-<a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-cdc-engine-kafka">IBM CDC for Kafka knowledge centre</a>, which is the comprehensive official product documentation.
-</ul> 
 
-<p>It is part of a series of documents providing practical worked examples and 
+This document is a basic worked example of setting up CDC for Kafka as a CDC Target Engine. 
+
+
+* It deals with the practical considerations for implementing CDC for Kafka. 
+* It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of Linux experience).
+* It does not attempt to cover all the product's features.
+* It is categorically <b>not</b> a replacement for the  <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-cdc-engine-kafka">IBM CDC for Kafka knowledge centre</a>, which is the comprehensive official product documentation.
+
+
+It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the links at the very top of this page</p> 
+The complete set of articles can be accessed using the links at the very top of this page.
 
 <br><hr>
 
 <h2 id="1.0">1. Introduction to CDC for Kafka</h2>  
 
-<p>CDC for Kafka is a CDC Apply Agent only. It does not have CDC Capture functionality.</p>
+CDC for Kafka is a CDC Apply Agent only. It does not have CDC Capture functionality. 
 
-<p>CDC Replication is a set of products that implement a common data replication architecture spanning 
+CDC Replication is a set of products that implement a common data replication architecture spanning 
 a large number of diverse data sources and targets. The CDC common architecture is based upon replication of 
 data that conforms to the relational model. Any CDC capture or apply agent that supports a non-relational data structure 
 must perform whatever conversion work that is necessary to implement a mapping between that data structure and the 
-relational model of data.</p> 
+relational model of data. 
 
 <h3 id="1.1">1.1 Requirements to Replicate to Apache Kafka</h3> 
 
-<p>Apache Kafka, and it's varioud commercial distributions, is widely used for event streaming services both on-premise and in-cloud. 
-This document assumes that the reader is familiar with the basics of Kafka, which is widely documented online.</p>
+Apache Kafka, and it's various commercial distributions, is widely used for event streaming services both on-premise and in-cloud. 
+This document assumes that the reader is familiar with the basics of Kafka, which is widely documented online. 
 
-<p>CDC architecture (which is founded on the relational model of data) provides a range of integration options to write data to Kafka topics and integrate with 
-constructs in the Kafka world like Schema Registries that enable Kafka applications to consume the events that CDC writes to Kafka.</p>
+CDC architecture (which is founded on the relational model of data) provides a range of integration options to write data to Kafka topics and integrate with 
+constructs in the Kafka world like Schema Registries that enable Kafka applications to consume the events that CDC writes to Kafka. 
 
-<p>CDC for Kafka supports all the major Kafka distributions, including Confluent, Hortonworks, Cloudera, Amazon MSK, BigInsights, Event Streams. CDC for Kafka is 
-supported for Ubuntu, Redhat, Suse and CentOS.</p>
+CDC for Kafka supports all the major Kafka distributions, including Confluent, Hortonworks, Cloudera, Amazon MSK, BigInsights, Event Streams. CDC for Kafka is 
+supported for Ubuntu, Redhat, Suse and CentOS. 
 
-<p>For latest details on supported versions of Linux and Kafka please check with the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-cdc-engine-kafka">IBM CDC for Kafka knowledge centre.</a>
+For latest details on supported versions of Linux and Kafka please check with the <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-cdc-engine-kafka">IBM CDC for Kafka knowledge centre.</a>
 
 <h3 id="1.1">1.2 Kafka Concepts</h3> 
 
-<p>The author comes from a Db2 relational database platform. If you are a specialist in Relational Database and CDC replication, you will need to become familiar with a very different set of
+The author comes from a Db2 relational database platform. If you are a specialist in Relational Database and CDC replication, you will need to become familiar with a very different set of
 concepts from relational databases. Initially you will probably thing of Kafka as something similar to Websphere MQ, which provides messaging and integration solutions for many 
 Enterprises today. But Kafka is different in that...</p>
-<ul>
-<li>It is designed to be run on scalable, industry-standard cluster fabrics.
-<li>It is legendary for providing lightning fast performance.
-<li>It conforms the an "eventually consistent" model for data integrity (wheras databases follow a transactionally consistent model).
-<li>Every message will be processed <b>at least once</b>, which means consuming applications have to be responsible for de-duping.
-<li>Message structures are defined outside the messages in a schema registry.
-<li>Many Kafka clusters are kerberized, which is another area of endeavour that Database and MQ experts may not be totally familiar with.
-</ul>
 
-<p>This article does not attempt to provide a tutorial on Kafka. However, if the reader is unfamiliar with Kafka, some research is strongly recommended. 
-Section 6 of this paper addresses how CDC for Kafka handles some of these Kafka concepts and constructs.</p>
+* It is designed to be run on scalable, industry-standard cluster fabrics.
+* It is legendary for providing lightning fast performance.
+* It conforms the an "eventually consistent" model for data integrity (wheras databases follow a transactionally consistent model).
+* Every message will be processed <b>at least once</b>, which means consuming applications have to be responsible for de-duping.
+* Message structures are defined outside the messages in a schema registry.
+* Many Kafka clusters are kerberized, which is another area of endeavour that Database and MQ experts may not be totally familiar with.
+
+
+This article does not attempt to provide a tutorial on Kafka. However, if the reader is unfamiliar with Kafka, some research is strongly recommended. 
+Section 6 of this paper addresses how CDC for Kafka handles some of these Kafka concepts and constructs. 
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>  
 
-<p>Deploying CDC for Kafka software is a simple process, comprising the following steps.</p>
-<ol>
-<li>Prepare the Linux paths and permissions
-<li>Run the software installer binary
-<li>Create an instance of CDC for Kafka with it's own operational paramaters
-<li>Configure TCPIP Network and Secuirty
-</ol>
+Deploying CDC for Kafka software is a simple process, comprising the following steps. 
+
+
+1. Prepare the Linux paths and permissions
+2. Run the software installer binary
+3. Create an instance of CDC for Kafka with it's own operational paramaters
+4. Configure TCPIP Network and Secuirty
+
 
 <h2 id="3.0">3. Installing CDC Kafka</h2>  
-<p>Download the CDC for Linux x64 package from Passport Advantage or Fix Central. 
-The filename of the version that was used in this example is <b>setup-iidr-11.4.0.4-5618-linux-x86.bin</b></p>
-<p>The version is 11.4.0.4 and the specific build is 5618. New builds are published periodically without necessarily incrementing the version number.</p>
-<p>Note that this installer binary contains all the CDC agents for Linux on Intel. The installer dialog will prompt you to specify which agent you wish to install.</p>
+
+Download the CDC for Linux x64 package from Passport Advantage or Fix Central. 
+The filename of the version that was used in this example is <b>setup-iidr-11.4.0.4-5618-linux-x86.bin</b> 
+
+The version is 11.4.0.4 and the specific build is 5618. New builds are published periodically without necessarily incrementing the version number. 
+
+Note that this installer binary contains all the CDC agents for Linux on Intel. The installer dialog will prompt you to specify which agent you wish to install. 
 
 <h3 id="3.1">3.1 Linux paths and permissions</h3> 
 
-<p>I have chosen to use cdcinst1 as the linux userid that owns all cdc programs for my demo environment.
-I created a group ( cdcadm1 ) for the user ( cdcinst1 )</p>
-<ul>
-<li>sudo groupadd -g 970 cdcadm1
-<li>sudo useradd -u 1070 -g cdcadm1 -m -d /home/cdcinst1 cdcinst1
-<li>passwd cdcinst1 (and follow the prompts to set the password for cdcinst1)</p>
-</ul>
+I have chosen to use cdcinst1 as the linux userid that owns all cdc programs for my demo environment.
+I created a group ( cdcadm1 ) for the user ( cdcinst1 ) and requested to reset the password for cdcinst1 with the following commands.
+
+```
+sudo groupadd -g 970 cdcadm1
+sudo useradd -u 1070 -g cdcadm1 -m -d /home/cdcinst1 cdcinst1
+passwd cdcinst1 
+```
  
-<p>Next, create the directories that the installer will install the program to.</p>
-<ul>
-<li>/opt/ibm/InfoSphereDataReplication will hold all the cdc agents
-<li>/opt/IBM/InfoSphereDataReplication will hold the access server
-</ul>
 
-<p>Make cdcinst1 the owner of those directories</p>
-<ul>
-<li>chown cdcinst1:cdcadm1 /opt/ibm/InfoSphereDataReplication
-<li>chown cdcinst1:cdcadm1 /opt/IBM/InfoSphereDataReplication
-</ul>
+Next, create the directories that the installer will install the program to. 
 
-<p>Also, add cdcinst1 to Sudoers</p>
-<ul>
-<li>usermod -aG wheel username
-</li>
-</ul>
+```
+/opt/ibm/InfoSphereDataReplication will hold all the cdc agents
+/opt/IBM/InfoSphereDataReplication will hold the access server
+``` 
 
-<p>If the JRE is not installed, do so now</p>
-Preparation : JRE Libraries 
+Make cdcinst1 the owner of those directories, with the following commands
 
-<ul>
-<li>sudo yum install unzip libnsl
-</ul>
+```
+chown cdcinst1:cdcadm1 /opt/ibm/InfoSphereDataReplication
+chown cdcinst1:cdcadm1 /opt/IBM/InfoSphereDataReplication
+```
+
+Also, add cdcinst1 to Sudoers for convenience
+
+```
+usermod -aG wheel username
+```
+
+If the JRE is not installed, do so now with the following command
+
+```
+sudo yum install unzip libnsl
+```
 
 <h3 id="3.2">3.2 Install the CDC Apply Agent for Kafka</h3>
 <ul>
