@@ -129,10 +129,8 @@ The following is a brief summary of what some of the key services do.
 | Logger | Writes Started Task logs to z/OS logstreams. |
 | Monitor | Tracks health and performance data. |
 
-
-
 All the services, and their governing parameters are documented in the knowledge 
-centre <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-configuration-parameters-classic-data-servers-services">Classic Services</a>.
+center <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-configuration-parameters-classic-data-servers-services">Classic Services</a>.
 
 <br><hr>
 
