@@ -1,6 +1,6 @@
 [Back to README.md and Table of Contents.](README.md)
 
-# Setting Up Classic CDC for IMS - Worked Example
+# Setting Up CDC for Kafka in z/OS Container Extensions (zCX) - Worked Example
 This chapter is a worked example of setting up CDC for Kafka inside a zCX container.
 
 * The primary focus of this article is the zCX deployment of a CDC agent. (the example is CDC for Kafka, but it could be any CDC agent). 
@@ -43,15 +43,26 @@ This chapter is a worked example of setting up CDC for Kafka inside a zCX contai
 </ul>
 
 
-<hr>
-
-
-
-
-
+<br><hr>
  
+ 
+<h2 id="abstract"> Abstract</h2>
+This document is a basic worked example of setting up CDC for Kafka inside a zCX container. 
 
-1. Why Deploy CDC as a z/OS Container ?
+* IBM CDC software is shipped with installer programs to perform installations on Linux, Unix and Windows platforms.
+* IBM CDC software is supported whether installed to a native Operating System, a Virtual Machine, or a Software Container.
+* IBM does not provide container images with CDC software: it is a user responsibility to build the software container from the installer programs. 
+
+The approach adopted in this paper is a worked example. Other methods may vary from the details presented here.
+
+It is part of a series of documents providing practical worked examples and 
+guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
+The complete set of articles can be accessed using the README link at the very top of this page. 
+
+<br><hr>
+
+<h2 id="1.0">1. Why Deploy CDC as a z/OS Container ?</h2>
+
 CDC Data Replication is based on a Capture Agent running on (or close to) a Source Datastore, and an Apply Agent running on (or close to) a Target Datastore. One of the most common scenarios is a capture agent for a z/OS datastore like IMS and an Apply agent on a midrange or cloud target.
 
 Recently, IBM has released a couple of remote CDC agents for z/OS data sources. This allows the capture agent to run on linux, and make calls to a lightweight log reader service that still runs on the mainframe. The remote capture agent for Db2 z/OS actually calls a stored procedure that calls the Db2 log API and returns the filtered log records to the Capture program to process them, as illustrated below:
