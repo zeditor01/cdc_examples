@@ -110,55 +110,25 @@ relate to external artefacts.
 
 ![Classic CDC Started Task](images/cdc/cdcv_services.PNG)
 
-<p>The services that are outlined in red are the ones that can be protected by the SAF Exit. 
-The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
-The following is a brief summary of what some of the key services do.</p>
- <table>
-  <tr>
-    <th width=300>Service</th>
-    <th width=500>Function</th>
-  </tr>
-  <tr><td>Connection Handler</td>
-    <td>Listens on a TCPIP port for requests from other CDC components (Classic Data Architect, 
-	Management Console & Access Server, CDC Apply agents).</td>
-  </tr> 
-  <tr>
-   <td>Admin Service</td>
-   <td>Dispatches tasks to appropriate services within the Started Task.</td>
-  </tr> 
-   <tr>
-   <td>Query Processor</td>
-   <td>Converts SQL requests into DL/I language to access IMS data structures.</td>
-  </tr> 
-  <tr>
-   <td>VSAM Access</td>
-   <td>Sevice to connect to and read from VSAM.</td>
-  </tr> 
-  <tr>
-   <td>VSAM LRS</td>
-   <td>VSAM z/OS Logstream Reader Service.</td>
-  </tr> 
-  <tr>
-   <td>Capture</td>
-   <td>Extracts log changes needed for subscriptions, and publishes them over TCPIP to CDC Apply Agents.</td>
-  </tr> 
-  <tr>
-   <td>Operator</td>
-   <td>Command Processor. (Start, Stop, Park etc... )</td>
-  </tr> 
-  <tr>
-   <td>Logger</td>
-   <td>Writes Started Task logs to z/OS logstreams.</td>
-  </tr> 
-  <tr>
-   <td>Monitor</td>
-   <td>Tracks health and performance data.</td>
-  </tr> 
-</table> 
+The services that are outlined in red are the ones that can be protected by the SAF Exit. 
+The primary services involved in the cdc capture server are  the VSAM Log Reader Service (VSAM LRS) and the Capture process (Capture). 
+The following is a brief summary of what some of the key services do.
 
 
-<p>All the services, and their governing parameters are documented in the knowledge 
-centre <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-configuration-parameters-classic-data-servers-services">Classic Services</a>.
+| Service | Function |
+| --- | --- |
+| Connection Handler | Listens on a TCPIP port for requests from other CDC components (Classic Data Architect, Management Console & Access Server, CDC Apply agents). |
+| Admin Service | Dispatches tasks to appropriate services within the Started Task. |
+| Query Processor | Converts SQL requests into DL/I language to access IMS data structures. |
+| VSAM Access | Sevice to connect to and read from VSAM. |
+| VSAM LRS | VSAM z/OS Logstream Reader Service. |
+| Capture | Extracts log changes needed for subscriptions, and publishes them over TCPIP to CDC Apply Agents. |
+| Operator | Command Processor. (Start, Stop, Park etc... ). |
+| Logger | Writes Started Task logs to z/OS logstreams. |
+| Monitor | Tracks health and performance data. |
+
+All the services, and their governing parameters are documented in the knowledge 
+center <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=zos-configuration-parameters-classic-data-servers-services">Classic Services</a>.
 
 <br><hr>
 
