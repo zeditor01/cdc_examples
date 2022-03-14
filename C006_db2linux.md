@@ -87,6 +87,7 @@ Any supported version of Db2 for Linux is ready to go with CDC. The customisatio
 * Granting the CDC task ID sufficient privileges to access the Db2 Catalog and Log Interface
 * Altering source tables to enforce full row logging so that the log records contain enough information to support replication
 
+<br><hr>
 
 <h2 id="2.0">2. High Level Review of Implementation Steps</h2>  
 
@@ -98,6 +99,7 @@ Deploying CDC for Kafka software is a simple process, comprising the following s
 3. Create an instance of CDC for Db2 Linux with it's own operational paramaters
 4. Configure TCPIP Network and Security
 
+<br><hr>
 
 <h2 id="3.0">3. Installing CDC for Db2 for Linux</h2>  
 
@@ -216,105 +218,130 @@ Once the installation is created, you can start it immediately from the dialog. 
 
 ![cdcdb2luw07](images/cdc/cdcdb2luw07.png)
 
+<br><hr>
 
 <h2 id="4.0">4. Configure the Linux Environment</h2>  
-<p>A couple of pieces of Linux adminsitration must be done.</p>
+A couple of pieces of Linux adminsitration must be done. 
 
 <h3 id="4.1">4.1 TCPIP Ports</h3> 
-<p>We configured this instance to listen on port 10901. You must ensure that the Linux Firewall allows incoming traffic on this port, as well as any 
-other network firewalls between other CDC components and this instance.</p>
+We configured this instance to listen on port 10901. You must ensure that the Linux Firewall allows incoming traffic on this port, as well as any 
+other network firewalls between other CDC components and this instance. 
 
+```
+firewall-cmd --permanent --zone=public --add-port=10901/tcp
+firewall-cmd --reload
+```
 
 <h3 id="4.2">4.2 Db2 connection Properties</h3>
-<p>Connections to Db2 are performed with the userid and password specified during the instance creation, and are established using the 
-TCPIP address and port specified during that dialog.</p>
+Connections to Db2 are performed with the userid and password specified during the instance creation, and are established using the 
+TCPIP address and port specified during that dialog. 
 
-
+<br><hr>
 
 <h2 id="5.0">5. Configure the Db2 Linux Environment</h2> 
 
 <h3 id="5.1">5.1 Configure Db2 for archival logging</h3>
-<p>A default Db2 instance is created with circular logging, which is incapable of supporting replication capture. This is only likely to 
-be an issue in a playpen environment (like mine!). I configured archive logging for my demo database with the following command.</p>
-<p>db2 update db cfg for DB2CENT using logarchmeth1 logretain</p>
-<p>After configuring archival logging, you will also need to take a db2 backup. My actions are captured in the screenshot below.</p>
-<center><img src="/recipes/images/neale/cdc/db2luwprep.png" style="border:1px solid black; width:500px"></center> 
+
+A default Db2 instance is created with circular logging, which is incapable of supporting replication capture. This is only likely to 
+be an issue in a playpen environment (like mine!). I configured archive logging for my demo database with the following command. 
+
+```
+db2 update db cfg for DB2CENT using logarchmeth1 logretain
+``` 
+
+After configuring archival logging, you will also need to take a db2 backup. My actions are captured in the screenshot below. 
+
+![db2luwprep](images/cdc/db2luwprep.png)
 
 
 <h3 id="5.2">5.2 Alter Source Tables for full row logging</h3>
-<p>By default Db2 only logs enough data to perform rollforward and rollback recovery processing. Unchanged column values are not usually logged, but a data replication 
-product needs to see all the before and after column values of the entire row. This is achieved by ALTERing the Db2 table to instruct Db2 to perform full row logging 
-for all logged SQL operations.</p>
-<p>You don't even need to do this in advance, because the CDC administration tools will detect if "Data Capture None" is in force for any source table, and generate an ALTER 
-statement to make the change.</p>
 
-<p><code style="color:#00FF00; background-color:#000000">ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES</code></p> 
+By default Db2 only logs enough data to perform rollforward and rollback recovery processing. Unchanged column values are not usually logged, but a data replication 
+product needs to see all the before and after column values of the entire row. This is achieved by ALTERing the Db2 table to instruct Db2 to perform full row logging 
+for all logged SQL operations. 
+
+You don't even need to do this in advance, because the CDC administration tools will detect if "Data Capture None" is in force for any source table, and generate an ALTER 
+statement to make the change. 
+
+```
+ALTER TABLE TABSCHEMA.TABNAME DATA CAPTURE CHANGES
+```
 
 <h3 id="5.3">5.3 Db2 configuration considerations</h3> 
-<p>There is nothing else that needs to be done for a basic up and running exercise.</p>
-<p>As you progress with CDC for Db2 LUW you may need to perform some Db2 tuning. Examples of the sorts of work you may need to do are:</p>
 
-<ul> 
-<li>Db2 log buffer configuration should be adjusted to ensure that all log reads for Db2 are satisfied from memory
-<li>For Ultra-active Db2 systems you will want to schedule the ALTER TABLE commands for a quiet time
-<li>If you replicate a lot of tables, the increase in logging may prompt you to review your log configuration.
-</ul>
+There is nothing else that needs to be done for a basic up and running exercise. 
 
+As you progress with CDC for Db2 LUW you may need to perform some Db2 tuning. Examples of the sorts of work you may need to do are: 
+
+
+* Db2 log buffer configuration should be adjusted to ensure that all log reads for Db2 are satisfied from memory
+* For Ultra-active Db2 systems you will want to schedule the ALTER TABLE commands for a quiet time
+* If you replicate a lot of tables, the increase in logging may prompt you to review your log configuration.
+
+<br><hr>
 
 <h2 id="6.0">6. Integrate with the wider CDC Landscape</h2>
-<p>Now that the CDC for Db2 instance is created and started, you can start to use the wider CDC landscape to develop and operate subscriptions. 
-Section 6 covers this matters.</p>
+
+Now that the CDC for Db2 instance is created and started, you can start to use the wider CDC landscape to develop and operate subscriptions. 
+Section 6 covers this matters. 
 
 
 <h3 id="6.1">6.1 Automation of the CDC for Db2 Service</h3> 
-<p>CDC for Db2 is no different from any other linux service with regard to automation. Use whatever method is standard at your site (cron, shell scripts, tools) 
-to automate the execution and operation of the CDC instance. The monitoring and managing of subscriptions is handled in several of the papers in the "Using CDC" section.</p>
+
+CDC for Db2 is no different from any other linux service with regard to automation. Use whatever method is standard at your site (cron, shell scripts, tools) 
+to automate the execution and operation of the CDC instance.  
 
 <h3 id="6.2">6.2 Connect from Management Console to CDC for Db2 instance</h3>
-<p>This document is primarily concerned with everything that needs to be done to establish CDC for Db2 as a CDC source and target.</p>
-<p>Using the the CDC administration tools is now a standard CDC task which is covered in 
-the <a href="/recipes/docs/NA_CDC/cdcu2.html">Devops Options for CDC.</a> paper.</p>
+
+This document is primarily concerned with everything that needs to be done to establish CDC for Db2 as a CDC source and target. 
+
+Using the the CDC administration tools is now a standard CDC task which is covered in [11. Devops Options for CDC.](C011_devops.md)
 
 <h3 id="6.3">6.3 Use CHCCLP Scripting</h3>
-<p>CDC Replication is traditionally a Windows-centric environment for operations and control, but it also has advanced scripting capabilities for automation.</p>
-<p>The CDC Management Console is a comprehensive GUI that addresses all parts of the devops 
-lifecycle ( access control, definition, operations, monitoring ).</p>
-<p>The CHCCLP Scripting tools offer automated devops controls using scripts. These can be executed from the Windows-based 
+
+CDC Replication is traditionally a Windows-centric environment for operations and control, but it also has advanced scripting capabilities for automation. 
+
+The CDC Management Console is a comprehensive GUI that addresses all parts of the devops lifecycle ( access control, definition, operations, monitoring ). 
+
+The CHCCLP Scripting tools offer automated devops controls using scripts. These can be executed from the Windows-based 
 Management Console, or from the Access Server on Windows or Linux. 
 The CHCCLP scripting option will be attractive to all shops that wish to implement strong devops governance and control to their 
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
-inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler).<p>
-<p>All of these devops options are covered in the the <a href="/recipes/docs/NA_CDC/cdcu2.html">Devops Options for CDC.</a> paper 
-and <a href="/recipes/docs/NA_CDC/cdcu3.html">CHCCLP Scripting.</a> paper in this series of articles.</p>
+inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
+
+All of these devops options are covered in the  [11. Devops Options for CDC.](C011_devops.md) paper 
+and the [12. CHCCLP Scripting.](C012_chcclp.md) paper.
+
+<h3 id="6.4">6.4 Conforming to site standards for cross-platform devops and security</h3> 
+
+So far, this document has been primarily concerned with the mechanics of making CDC operate with Db2 for Linux
+
+The author has worked with several customers deploying CDC from mainframe sources to midrange and Cloud targets. 
+The challenges to overcome will include... 
 
 
-<h3 id="6.4">6.4 Conforming to site standards for cross-platform devops and security</h3>
-<p>So far, this document has been primarily concerned with the mechanics of making CDC operate from IMS to any number of heterogeneous targets. 
-It may be hard to believe, but that was the easy part!</p>
-<p>The author has worked with several mainframe customers deploying CDC for IMS to feed a stream of changes to midrange and Cloud targets. 
-The challenges to overcome will include...</p>
-<ul>
-<li>different development and operational teams supporting the capture and apply services
-<li>co-ordinating devops tasks between cross-platform teams
-<li>change control procedures
-<li>implementing TLS encryption between the application-transparent z/OS platform and application-controlled LUW platforms
-</ul>
-<p>A good approach is to start by considering the non-functional requriements for the business service that CDC will support. If the business 
+1. different development and operational teams supporting the capture and apply services
+2. co-ordinating devops tasks between cross-platform teams
+3. change control procedures
+4. implementing TLS encryption between the application-transparent z/OS platform and application-controlled LUW platforms
+
+A good approach is to start by considering the non-functional requriements for the business service that CDC will support. If the business 
 requires a high level of service ( low latency, stringent monitoring and alerting, minimal downtime, fast recovery from outages etc... ) then
-an operational support model can be developed to meet those requirements.</p>
+an operational support model can be developed to meet those requirements. 
 
-<p>Once the required service levels are defined, that is a useful reference point for assessing whether the opertional 
-management controls and interfaces between different operations teams can satisfy those service levels</p>
-<p>In some cases, the co-operation between different operational teams can be adjusted to satisfy the required service levels</p>
-<p>In other cases, it may be helpful to use technology options to shift the CDC operations entirely to mainframe, or entirely to non-mainframe. 
-This case be done by selecting different CDC agents in many cases, as follows</p>
-<ul>
-<li>If a Windows/Linux operations hub is desired, then there are remote capture agent options for VSAM and DB2 z/OS.
-<li>If a z/OS operations hub is desired, then the Linux-based CDC agents can be deployed as software containers inside z/OS Container Extensions
-</ul>
-<p>Please be aware of the flexible CDC deployment options that exist, and take an early view on what choices may provide the best 
-devops lifecycle proposition for your organisation.</p>
 
-<p>This series of articles includes a heavy focus of worked deployment examples, but the articles in the "Using CDC" column do aim 
-to address the practical devops challenges with recommendations on how to address common challenges.</p>
+Once the required service levels are defined, that is a useful reference point for assessing whether the opertional 
+management controls and interfaces between different operations teams can satisfy those service levels 
 
+* In some cases, the co-operation between different operational teams can be adjusted to satisfy the required service levels 
+* In other cases, it may be helpful to use technology options to shift the CDC operations entirely to mainframe, or entirely to non-mainframe. 
+This case be done by selecting different CDC agents in many cases, as follows 
+
+1. If a Windows/Linux operations hub is desired, then there are remote capture agent options for VSAM and DB2 z/OS.
+2. If a z/OS operations hub is desired, then the Linux-based CDC agents can be deployed as software containers inside z/OS Container Extensions
+
+Please be aware of the flexible CDC deployment options that exist, and take an early view on what choices may provide the best 
+devops lifecycle proposition for your organisation. 
+
+This series of articles includes a heavy focus of worked deployment examples, but the articles in the "Using CDC" column do aim 
+to address the practical devops challenges with recommendations on how to address common challenges.
