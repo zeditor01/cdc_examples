@@ -64,12 +64,19 @@ The complete set of articles can be accessed using the README link at the very t
 
 <h2 id="1.0">1. Why Deploy CDC as a z/OS Container ?</h2>
 
-CDC Data Replication is based on a Capture Agent running on (or close to) a Source Datastore, and an Apply Agent running on (or close to) a Target Datastore. One of the most common scenarios is a capture agent for a z/OS datastore like IMS and an Apply agent on a midrange or cloud target.
+CDC Data Replication is based on a Capture Agent running on (or close to) a Source Datastore, and an Apply Agent running on (or close to) a Target Datastore. 
+One of the most common scenarios is a capture agent for a z/OS datastore like IMS and an Apply agent on a midrange or cloud target.
+
+![CDC Model 1](images/cdc/cdc_model1.png)
 
 Recently, IBM has released a couple of remote CDC agents for z/OS data sources. This allows the capture agent to run on linux, and make calls to a lightweight log reader service that still runs on the mainframe. The remote capture agent for Db2 z/OS actually calls a stored procedure that calls the Db2 log API and returns the filtered log records to the Capture program to process them, as illustrated below:
 
+![CDC Model 2](images/cdc/cdc_model2.png)
+
 The sales messaging for the remote capture agents tends to focus on the CPU offload from the mainframe. In practice you are likely to save only 50% of the CPU compared to a local agent, because the log reading is the most expensive part, and that isn�t zIIP eligible. The primary benefit of using a remote capture agent is for linux sites to manage all their CDC operations on Linux. In some sites it can be challenging to get the mainframe and linux operations teams to collaborate well, both practically and culturally!
 The advent of containers presents yet more options for operational deploymemt. You might deploy some of these CDC agents in containers in order to move the CDC solution into a cloud-provisioned world either on private or public cloud. But container technology can also move the ball to the other end of the pitch, as shown below.
+
+![CDC Model 3](images/cdc/cdc_model3.png)
 
 Containers provide deployment and operational flexibility. z/OS Container Extensions (zCX) allows docker containers to run inside z/OS, and to execute on zIIP processors (that do not attract software consumption charges). Deploying CDC agents within z/OS offers the option for z/OS centric sites to run CDC linux agents inside z/OS and take advantage of z/OS robustness, z/OS operations, z/OS high availability, and z/OS system automation!
 The purpose of this document to examine the merits of the z/CX option, and provide a worked example of how to do it. 
