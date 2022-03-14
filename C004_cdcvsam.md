@@ -108,7 +108,7 @@ If the VSAM dataset is independent of CICS and written to in batch, then a separ
 The diagram below is a representation of the components within a Classic CDC for VSAM started task, and how they 
 relate to external artefacts. 
 
-![Classic CDC Started Task](images/cdc/ccdc_services.PNG)
+![Classic CDC Started Task](images/cdc/cdcv_services.PNG)
 
 <p>The services that are outlined in red are the ones that can be protected by the SAF Exit. 
 The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
