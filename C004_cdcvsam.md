@@ -60,8 +60,7 @@ This document is a basic worked example of setting up Classic CDC for VSAM as a 
 * It deals with the practical considerations for implementing VSAM as a CDC data source. 
 * It's scope is limited to a "basic up and running guide", and is intended to be easy to follow (assuming a base of z/OS and CICS-VSAM practical experience).
 * It does not attempt to cover all the product's features.
-* It is categorically <b>not</b> a replacement for the  
-<a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos">IBM Classic CDC knowledge centre</a>, which is the comprehensive official product documentation.
+* It is categorically <b>not</b> a replacement for the  <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=replication-infosphere-classic-cdc-zos">IBM Classic CDC knowledge centre</a>, which is the comprehensive official product documentation.
  
 
 It is part of a series of documents providing practical worked examples and 
