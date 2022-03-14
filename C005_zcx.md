@@ -365,10 +365,14 @@ cd /opt/cdckafka/bin
 
 Now you can point all your normal CDC Administration Tools ( Management Console, Access Server, CHCCLP for linux, CHCCLP for z/OS ) at the CDC instance on 192.168.1.220:11701
 
+![zcx22](images/cdc/zcx22.png)
+
 <b>Reminder:</b> This worked example is primarily focussed on deploying a CDC agent in zCX. Please review [7. Setting up CDC for Kafka.](C007_kafka.md) if you need more detailed 
 discussion on the CDC for Kafka agent and it's connection to Kafka.
 
 Creating and Operating CDC subscriptions via CDC for Kafka in zCX is no different from any other supported CDC platform.
+
+![zcx22](images/cdc/zcx22.png)
 
 IBM provides support (i.e. accept/work support tickets) for our CDC software, whether it is running on bare metal, VMs, or in a container.
 
