@@ -148,10 +148,12 @@ diving into the technical details of very nut and bolt. This paper identifies fi
 <br><hr>
 
 <h2 id="3.0">3. SMPE Installation of Code Libraries</h2>
-<p>SMPE installation is a well documented, standardised process that every systems programming shop manages with 
+
+SMPE installation is a well documented, standardised process that every systems programming shop manages with 
 their own standards. It is outside the scope of this paper, aside from noting that it is a pre-requisite to the 
-followng stages.</p>
-<p>Once the SMPE installation is complete, the following target libraries will exist under the chosen high level qualifier. (CDCV in this example).</p>
+followng stages. 
+
+Once the SMPE installation is complete, the following target libraries will exist under the chosen high level qualifier. (CDCV in this example). 
 
  <table>
   <tr><td width=200><b>Library</b></td><td width=500><b>Contents</b></td></tr> 
@@ -168,32 +170,33 @@ followng stages.</p>
 <br><hr>
 	
 <h2 id="4.0">4. Creating the Classic CDC Instance</h2>
-<p>The installed product code can now be used to support one or more instances of Classic CDC for IMS. 
-This worked example will create a single instance, under the instance high level qualifier of CDCV.I2 (in this example).</p>
+
+The installed product code can now be used to support one or more instances of Classic CDC for VSAM. 
+This worked example will create a single instance, under the instance high level qualifier of CDCV.I2 (in this example). 
 
 <h3 id="4.1">4.1 Create the Instance Libraries</h3> 
-<p>Creating the instance libraries is easy. Job CECCUSC1 will allocate the instance library, 
-and populate the instance library with a parameters file and a job to generate fully customised versions of all the JCL and configuration members that you need</p>
-<p>Just edit CDCV.SCACSAMP(CECCUSC1) to specify the high level qualifier for 
-the installation library (CACINHLQ=CDCV) and the instance library (CACUSHLQ=CDCV.I2), and submit the job to create the instance libraries.</p> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>//GENSAMPE EXEC GENSAMP                                          </code>
-<code>//CRTSAMP.SYSTSIN  DD *                                          </code>
-<code> PROFILE NOPREFIX  MSGID                                         </code>
-<code>                                                                 </code>
-<code> ISPSTART CMD(%CACCUSX1                                         +</code>
-<code>      CACDUNIT=SYSALLDA                                         +</code>
-<code>      CACINHLQ=CDCV                                             +</code>
-<code>      CACUSHLQ=CDCV.I2                                          +</code>
-<code>      ISPFHLQ=ISP                                               +</code>
-<code>      ISPFLANG=ENU                                              +</code>
-<code>      SERVERROLE=(CDC_VSAM_SRC)                                 +</code>
-<code> )                                                               </code>
-<code>/*                                                               </code>                                                              
-</pre>
-</div>
+Creating the instance libraries is easy. Job CECCUSC1 will allocate the instance library, 
+and populate the instance library with a parameters file and a job to generate fully customised versions of all the JCL and configuration members that you need 
+
+Just edit CDCV.SCACSAMP(CECCUSC1) to specify the high level qualifier for 
+the installation library (CACINHLQ=CDCV) and the instance library (CACUSHLQ=CDCV.I2), and submit the job to create the instance libraries. 
+
+``` 
+//GENSAMPE EXEC GENSAMP                                          
+//CRTSAMP.SYSTSIN  DD *                                          
+ PROFILE NOPREFIX  MSGID                                         
+                                                                 
+ ISPSTART CMD(%CACCUSX1                                         +
+      CACDUNIT=SYSALLDA                                         +
+      CACINHLQ=CDCV                                             +
+      CACUSHLQ=CDCV.I2                                          +
+      ISPFHLQ=ISP                                               +
+      ISPFLANG=ENU                                              +
+      SERVERROLE=(CDC_VSAM_SRC)                                 +
+ )                                                               
+/*                                                                                                                             
+```
 
 
 <p>The result should be to allocate the following libraries.</p>
@@ -203,119 +206,122 @@ the installation library (CACINHLQ=CDCV) and the instance library (CACUSHLQ=CDCV
   <tr><td>CDCV.I2.USERSAMP</td><td>just a parameters member plus generation job, listed below:</td></tr>  
 </table> 
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>CECCUSC2                                                         </code>
-<code>CECCUSPC                                                         </code>                                                          
-</pre>
-</div>
+```
+CECCUSC2                                                         
+CECCUSPC                                                                                                                   
+```
 
 
 <h3 id="4.2">4.2 Edit the Parameters member</h3> 
-<p>Editing the parameters member <code>CDCV.I2.USERSAMP(CECCUSPC)</code> is a critical step. It will generate 
+
+Editing the parameters member <code>CDCV.I2.USERSAMP(CECCUSPC)</code> is a critical step. It will generate 
 fully customised JCL for pretty much everything you need to do to deploy the Classic CDC instance in your environment. 
-You will need to gather configuration information for z/OS, TCPIP, IMS, MQ and so forth to populate the parameters member.</p>
-<p>Many of the default paramaters will be just fine. You should review the descriptions for each of the parameters that are 
+You will need to gather configuration information for z/OS, TCPIP, IMS, MQ and so forth to populate the parameters member. 
+
+Many of the default paramaters will be just fine. You should review the descriptions for each of the parameters that are 
 provided inside the parameters member to assess whether they need to be changed in your system. 
-In this worked example the parameters (and line numbers for V11.3) that we edited were as follows.</p> 
+In this worked example the parameters (and line numbers for V11.3) that we edited were as follows. 
+
 <ul>
-<li>Line 45, specify the installation HLQ <code style="color:#00FF00; background-color:#000000">CACINHLQ="CDCV"</code> 
-<li>Line 47, specify the instance HLQ <code style="color:#00FF00; background-color:#000000">CACUSHLQ="CDCV.I2"</code> 
-<li>Line 49, specify the default UNIT for DSN creation <code style="color:#00FF00; background-color:#000000">CACDUNIT="SYSALLDA"</code> 
+<li>Line 45, specify the installation HLQ <code>CACINHLQ="CDCV"</code> 
+<li>Line 47, specify the instance HLQ <code>CACUSHLQ="CDCV.I2"</code> 
+<li>Line 49, specify the default UNIT for DSN creation <code>CACDUNIT="SYSALLDA"</code> 
 <li>Lines 60 and 61, provide a job card for all the JCLs that will be generated
-<li>Line 71, provide the HLQ for the various source datasets that will be created for this instance <code style="color:#00FF00; background-color:#000000">CDCPHLQD="CDCV.I2.CDCSRC"</code>
-<li>Line 83, provide the zFS path for the Metadata Catalog that will be created <code style="color:#00FF00; background-color:#000000">CATPATH="/opt/IBM/ccdci1/catalogv"</code> 
-<li>Line 105, provide the TCPIP listener port for the Server <code style="color:#00FF00; background-color:#000000">CDCPPORT="9088"</code>  
-<li>Line 106, provide the Data Source Name for the Server <code style="color:#00FF00; background-color:#000000">CDCDSRCE="SAMPLEVS"</code>  
-<li>Line 111, provide the SYSADM ID for the Server <code style="color:#00FF00; background-color:#000000">CDCADMUS="ADMUSER"</code>  
-<li>Line 156, Accept the default supplied security exit name for the SAF-protected services <code style="color:#00FF00; background-color:#000000">CDCPSAFX="CACSX04"</code> 
-<li>Line 187 and 194, Comment the storage classes for the logstreams (which will result in DASD logstreams, rather than CF logstreams <code style="color:#00FF00; background-color:#000000">**CPLGSC="STG1"</code> and <code style="color:#00FF00; background-color:#000000">**CPEVSC="STG1"</code> 
+<li>Line 71, provide the HLQ for the various source datasets that will be created for this instance <code>CDCPHLQD="CDCV.I2.CDCSRC"</code>
+<li>Line 83, provide the zFS path for the Metadata Catalog that will be created <code>CATPATH="/opt/IBM/ccdci1/catalogv"</code> 
+<li>Line 105, provide the TCPIP listener port for the Server <code>CDCPPORT="9088"</code>  
+<li>Line 106, provide the Data Source Name for the Server <code>CDCDSRCE="SAMPLEVS"</code>  
+<li>Line 111, provide the SYSADM ID for the Server <code>CDCADMUS="ADMUSER"</code>  
+<li>Line 156, Accept the default supplied security exit name for the SAF-protected services <code>CDCPSAFX="CACSX04"</code> 
+<li>Line 187 and 194, Comment the storage classes for the logstreams (which will result in DASD logstreams, rather than CF logstreams <code>**CPLGSC="STG1"</code> and <code>**CPEVSC="STG1"</code> 
 </ul>
 <p>... and optionally, if you also want to use the ability to publish changes to MQ (in addition to CDC Apply agents)</p>
 <ul>
-<li>Line 202, provide the HLQ for the MQ Libraries <code style="color:#00FF00; background-color:#000000">CDCMQHLQ="CSQ911"</code>
-<li>Line 203, provide the name of the Queue Manager to connect to for MQ publishing<code style="color:#00FF00; background-color:#000000">CDCMQMGR="CSQ9"</code>
-<li>Line 208, provide the name of the Bookmark Queue to use for MQ publishing <code style="color:#00FF00; background-color:#000000">CDCBKMKQ="CDCV.BOOKMARK"</code> 
-<li>Line 213, provide the name of the Subscription Queue to use for MQ publishing <code style="color:#00FF00; background-color:#000000">CDCSUBLQ="CDCV.PUBLISH1"</code>
+<li>Line 202, provide the HLQ for the MQ Libraries <code>CDCMQHLQ="CSQ911"</code>
+<li>Line 203, provide the name of the Queue Manager to connect to for MQ publishing<code>CDCMQMGR="CSQ9"</code>
+<li>Line 208, provide the name of the Bookmark Queue to use for MQ publishing <code>CDCBKMKQ="CDCV.BOOKMARK"</code> 
+<li>Line 213, provide the name of the Subscription Queue to use for MQ publishing <code>CDCSUBLQ="CDCV.PUBLISH1"</code>
 </ul>
 
-<p>Browse the entire PARMS file in the github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/CECCUSPC_VSAM.TXT" target="_blank">here.</a></p>
+
+Browse the entire PARMS file in the github repository (opens new tab) <a href="https://github.com/zeditor01/recipes/blob/main/samples/cdc/CECCUSPC_VSAM.TXT" target="_blank">here.</a> 
 
 <h3 id="4.3">4.3 Generate the Customised JCL members</h3> 
-<p>The list of parameters above is enough to completely define the Classic CDC instance. All you need is to run a program 
+
+The list of parameters above is enough to completely define the Classic CDC instance. All you need is to run a program 
 that will merge those paramaters with some skeleton files in order to generate all the customised JCL and configuration members from them. 
-Simply edit and submit <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP(CECCUSC2)</code> to do this.</p>
-<p>You should end up with 4 configuration members in <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERCONF</code> and 50 JCL members in <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP</code>.</p>
+Simply edit and submit <code>CDCV.I2.USERSAMP(CECCUSC2)</code> to do this.
+
+
+You should end up with 4 configuration members in <code>CDCV.I2.USERCONF</code> and 50 JCL members in <code>CDCV.I2.USERSAMP</code>.
+
 
 
 <h3 id="4.4">4.4 Define CDC Logstreams</h3> 
-<p>Classic CDC uses z/OS Logstreams for the diagnostic log and the event log. The logstreams can be either CF logstreams or DASD logstreams. 
-By commenting out the Logstream Storage Class they will ge generated as DASD logstreams in this simple example.</p> 
-<p>Review and submit member <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP(CECCDSLS)</code> to define these as DASD logstreams.</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<code>//*********************************************</code>
-<code>//* ALLOCATE THE LOG STREAM FOR THE EVENT LOG *</code>
-<code>//*********************************************</code>
-<code>//ALLOCEV    EXEC  PGM=IXCMIAPU                </code>
-<code>//SYSPRINT DD SYSOUT=*                         </code>
-<code>//SYSOUT   DD SYSOUT=*                         </code>
-<code>//SYSIN    DD *                                </code>
-<code>   DATA TYPE(LOGR) REPORT(NO)                  </code>
-<code>   DEFINE LOGSTREAM NAME(CDCSRC.I2.EVENTS)     </code>
-<code>          DASDONLY(YES)                        </code>
-<code>          MAXBUFSIZE(4096)                     </code>
-<code>          LS_SIZE(1024)                        </code>
-<code>          STG_SIZE(512)                        </code>
-<code>          RETPD(14) AUTODELETE(YES)            </code>
-<code>/*                                             </code>
-</pre>
-</div>
+Classic CDC uses z/OS Logstreams for the diagnostic log and the event log. The logstreams can be either CF logstreams or DASD logstreams. 
+By commenting out the Logstream Storage Class they will ge generated as DASD logstreams in this simple example.
 
-<p>and</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<pre>
-<code>//************************************************</code>
-<code>//* ALLOCATE THE LOG STREAM FOR THE DIAGNOSTIC LOG</code>
-<code>//************************************************</code>
-<code>//ALLOCDG    EXEC  PGM=IXCMIAPU                   </code>
-<code>//SYSPRINT DD SYSOUT=*                            </code>
-<code>//SYSOUT   DD SYSOUT=*                            </code>
-<code>//SYSIN    DD *                                   </code>
-<code>   DATA TYPE(LOGR) REPORT(NO)                     </code>
-<code>   DEFINE LOGSTREAM NAME(CDCSRC.I2.DIAGLOG)       </code>
-<code>          DASDONLY(YES)                           </code>
-<code>          LS_SIZE(1024)                           </code>
-<code>          STG_SIZE(512)                           </code>
-<code>          RETPD(7) AUTODELETE(YES)                </code>
-<code>/*                                                </code>
-</pre>
-</div>
+Review and submit member <code>CDCV.I2.USERSAMP(CECCDSLS)</code> to define these as DASD logstreams.
 
-<p>and</p>
 
-<div class="w3-container" style="color:#00FF00; background-color:#000000">   
-<pre> 
-<pre>
-<code>//************************************************</code>
-<code>//* ALLOCATE THE LOG STREAM FOR THE IVP LOGSTREAM </code>
-<code>//************************************************</code>
-<code>//ALLOCDG    EXEC  PGM=IXCMIAPU                   </code>
-<code>//SYSPRINT DD SYSOUT=*                            </code>
-<code>//SYSOUT   DD SYSOUT=*                            </code>
-<code>//SYSIN    DD *                                   </code>
-<code>   DATA TYPE(LOGR) REPORT(NO)                     </code>
-<code>   DEFINE LOGSTREAM NAME(CDCSRC.IVP.REPLLOG)      </code>
-<code>          DASDONLY(YES)                           </code>
-<code>          LS_SIZE(1024)                           </code>
-<code>          STG_SIZE(512)                           </code>
-<code>          RETPD(7) AUTODELETE(YES)                </code>
-<code>/*                                                </code>
-</pre>
-</div>
+```
+//*********************************************
+//* ALLOCATE THE LOG STREAM FOR THE EVENT LOG *
+//*********************************************
+//ALLOCEV    EXEC  PGM=IXCMIAPU                
+//SYSPRINT DD SYSOUT=*                         
+//SYSOUT   DD SYSOUT=*                         
+//SYSIN    DD *                                
+   DATA TYPE(LOGR) REPORT(NO)                  
+   DEFINE LOGSTREAM NAME(CDCSRC.I2.EVENTS)     
+          DASDONLY(YES)                        
+          MAXBUFSIZE(4096)                     
+          LS_SIZE(1024)                        
+          STG_SIZE(512)                        
+          RETPD(14) AUTODELETE(YES)            
+/*                                             
+```
+
+and
+
+```
+//************************************************
+//* ALLOCATE THE LOG STREAM FOR THE DIAGNOSTIC LOG
+//************************************************
+//ALLOCDG    EXEC  PGM=IXCMIAPU                   
+//SYSPRINT DD SYSOUT=*                            
+//SYSOUT   DD SYSOUT=*                            
+//SYSIN    DD *                                   
+   DATA TYPE(LOGR) REPORT(NO)                     
+   DEFINE LOGSTREAM NAME(CDCSRC.I2.DIAGLOG)       
+          DASDONLY(YES)                           
+          LS_SIZE(1024)                           
+          STG_SIZE(512)                           
+          RETPD(7) AUTODELETE(YES)                
+/*                                                
+```
+
+and
+
+```
+//************************************************
+//* ALLOCATE THE LOG STREAM FOR THE IVP LOGSTREAM 
+//************************************************
+//ALLOCDG    EXEC  PGM=IXCMIAPU                   
+//SYSPRINT DD SYSOUT=*                            
+//SYSOUT   DD SYSOUT=*                            
+//SYSIN    DD *                                   
+   DATA TYPE(LOGR) REPORT(NO)                     
+   DEFINE LOGSTREAM NAME(CDCSRC.IVP.REPLLOG)      
+          DASDONLY(YES)                           
+          LS_SIZE(1024)                           
+          STG_SIZE(512)                           
+          RETPD(7) AUTODELETE(YES)                
+/*                                                
+``` 
+
 
 <h3 id="4.5">4.5 Define and Mount the Classic Catalog zFS</h3> 
 <p>The Metadata Catalog is conceptually similar to the Db2 catalog ( SYSTABLES, SYSCOLUMNS etc… ). 
@@ -443,29 +449,29 @@ This is performed using job CECCDSUB. Review the generated JCL and submit when h
 
 
 <h3 id="4.8">4.9 Setup Encrypted Passwords</h3> 
-<p>Assuming that you enabled security in the CACCUSPC parameters file earlier: <code style="color:#00FF00; background-color:#000000">CDCPSAFX="CACSX04"</code> 
+<p>Assuming that you enabled security in the CACCUSPC parameters file earlier: <code>CDCPSAFX="CACSX04"</code> 
 you will need to setup encrypted passwords for connections to the Classic CDC instance. (Enabling security requires providing a password for all user access. 
 The utilities used in the validation job require encrypted passwords to access the Classic data server.)</p>
 <p>The following steps are required to generate an encrypted password for the userid that will run jobs to access Classic CDC, and save it in a referencable PDS member.</p>
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.</p>
+<p>Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.</p>
 <center><img src="/recipes/images/neale/cdc/vencrypt01.PNG" style="width:800px"></center>
 
-<p>Submit <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERCONF(CACPWDIN)</code> with the encrypted value.</p>
+<p>Submit <code>CDCV.I2.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code>CDCV.I2.USERCONF(CACPWDIN)</code> with the encrypted value.</p>
 <center><img src="/recipes/images/neale/cdc/vencrypt02.PNG" style="width:800px"></center>
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.</p>
+<p>Edit <code>CDCV.I2.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.</p>
 <center><img src="/recipes/images/neale/cdc/vencrypt03.PNG" style="width:800px"></center>
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.</p>
+<p>Edit <code>CDCV.I2.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.</p>
 <center><img src="/recipes/images/neale/cdc/vencrypt04.PNG" style="width:800px"></center>
 
-<p>Edit <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.</p>
+<p>Edit <code>CDCV.I2.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.</p>
 <center><img src="/recipes/images/neale/cdc/vencrypt05.PNG" style="width:800px"></center>
 
 
 
-<p><code style="color:#00FF00; background-color:#000000">CDCV.I2.USERCONF(CACMUCON)</code> and <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP(CACQRSYS)</code> will be 
+<p><code>CDCV.I2.USERCONF(CACMUCON)</code> and <code>CDCV.I2.USERSAMP(CACQRSYS)</code> will be 
 referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above</p)
 
 
@@ -587,7 +593,7 @@ to define "VSAM Tables", and define Subscriptions from them to target systems. S
 
 <h3 id="7.1">7.1 Deploy Classic CDC as a Started Task</h3> 
 <p>Assuming you want to run Classic CDC as a started task, rather than a batch job, you should copy 
-the contents of the JCL to run Classic CDC as a batch job <code style="color:#00FF00; background-color:#000000">CDCV.I2.USERSAMP(CECCDSRC)</code> 
+the contents of the JCL to run Classic CDC as a batch job <code>CDCV.I2.USERSAMP(CECCDSRC)</code> 
 to your PROCLIB, and follow your site standards for establishing a new started task.</p> 
 
 <h3 id="7.2">7.2 Deploy and use the Classic Data Architect IDE</h3>
