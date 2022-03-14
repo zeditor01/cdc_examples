@@ -90,8 +90,11 @@ Containers provide deployment and operational flexibility. z/OS Container Extens
 Deploying CDC agents within z/OS offers the option for z/OS centric sites to run CDC linux agents inside z/OS and take advantage of z/OS robustness, z/OS operations, z/OS high availability, and z/OS system automation!
 The purpose of this document to examine the merits of the z/CX option, and provide a worked example of how to do it. 
 
+<br><hr>
 
-2. The Benefits of deploying CDC agents as zCX Containers. 
+<h2 id="2.0">2. The Benefits of deploying CDC agents as zCX Containers.</h2>
+
+
 The benefits listed in this section would apply to most z/OS centric sites, but the extent of the benefit will depend on the operational situation at a given site.
 * Some of the benefits listed in this section would apply to any container environment.
 * Some of the benefits listed in this section are specific to zCX in z/OS.
