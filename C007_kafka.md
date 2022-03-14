@@ -334,8 +334,13 @@ SQL statements to query the target tables. With Kafka you can read the messages 
 However, for testing purposes initial verification of messages would be via a console consumer. 
 
 Most distributions of Kafka will include a console consumer to read messages that are not encoded with an avro schema, and an avro console consumer for messages that 
-are encoded with an avro schema. The screenshot below is an example of using a console consumer to read messages that were published by CDC for Kafka. 
+are encoded with an avro schema. An example of a command to invoke a kafka console consumer is as follows 
 
+```
+./kafka-avro-console-consumer --bootstrap-server localhost:9092 --property print.key=true --from-beginning --topic=NA.dsqlstbb.q.org 
+```
+
+The screenshot below is an example of using a console consumer to read messages that were published by CDC for Kafka. 
 
 ![cdckafka09](images/cdc/cdckafka09.png)
 
