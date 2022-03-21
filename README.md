@@ -39,3 +39,4 @@ and publish them to targets such as Kafka, Db2 and Oracle.
 
 Code samples for the demo application used in this Redpaper can be downloaded at [code sample](https://github.com/zeditor01/cdc_examples/tree/main/code%20sample).
 
+
