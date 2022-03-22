@@ -70,8 +70,15 @@ The complete set of articles can be accessed using the README link at the very t
 <br><hr>
 
 <h2 id="1.0">1 Authentication and Encryption Options for CDC Components</h2>  
- 
+
+Lets start with a broad view of connectivity between CDC components, and consider what security provisions are approapriate.
+
 <h3 id="1.1">1.1 CDC Component Reference Scenarios</h3>  
+
+The diagram below is a generic representation of the five CDC components that you probably want to consider.
+
+
+
 <h3 id="1.2">1.2 Authentication options for CDC Users</h3>
 <h3 id="1.3">1.3 Encryption options between CDC Components</h3>
  
