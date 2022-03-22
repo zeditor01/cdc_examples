@@ -79,6 +79,7 @@ Lets start with a broad view of connectivity between CDC components, and conside
 
 The diagram below is a generic representation of the five CDC components that you probably want to consider.
 
+![CDC Components](images/CDC_architecture.jpg)
 
 
 <h3 id="1.2">1.2 Authentication options for CDC Users</h3>
