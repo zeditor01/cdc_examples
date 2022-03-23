@@ -128,11 +128,16 @@ standards, as depicted in the diagram below.
 
 ![CDC Components](images/cdc/cdcsec04.png)
 
+All communications between CDC agents and CDC Access Server use mutual-authenticated TLS encryption. This is based on 
+certificates being used as the basis for negotiating encryption on CDC connections.
 
+The CDC knowledge center describes an approach using self-signed certificates between the various end points. However, it would 
+be more common for an enterprise to use a certificate authority to sign certificates to be stored at each end point. The worked 
+examples in this paper are based on certificate authority.
 
-<h3 id="1.2">1.2 Authentication options for CDC Users</h3> 
+z/OS - ATTLS
 
-Moving on to Authentication options, there are several options, as depicted in the diagram below.
+MC - SvrAuth
 
 
 <br><hr>
