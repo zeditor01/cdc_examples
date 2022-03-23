@@ -77,9 +77,15 @@ Lets start with a broad view of connectivity between CDC components, and conside
 
 <h3 id="1.1">1.1 CDC Component Reference Scenarios</h3>  
 
-The diagram below is a generic representation of the five CDC components that you probably want to consider.
+The diagram below is a generic representation of the four CDC components that you probably want to consider.
 
-![CDC Components](images/cdc/CDC_architecture.jpg)
+![CDC Components](images/cdc/cdcsec01.png)
+
+The communcations processes that occur are
+
+1. Development: Management Console connects to Access Server. TCPIP connection. Access Server authenticates user against either a local encrypted file, or an LDAP Server.
+2. Development: Management Console invokes processing at the access server that connect to CDC Capture and Apply Agents. A second tier of authentication is performed at the CDC Capture or Apply agent.
+3. Runtime: CDC Capture agent connects to CDC Apply agent over TCPIP to send change data packets.
 
 
 <h3 id="1.2">1.2 Authentication options for CDC Users</h3>
