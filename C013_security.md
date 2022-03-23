@@ -90,19 +90,50 @@ The basic communcations processes that occur between these components are
 
 <h3 id="1.2">1.2 Authentication options for CDC Users</h3> 
 
-Moving on to Authentication options, The diagram below is a generic representation of the four CDC components that you probably want to consider.
+Moving on to Authentication options, there are several options, as depicted in the diagram below.
 
 ![CDC Components](images/cdc/cdcsec02.png)
 
-The communcations processes that occur between these components are
+Users of the Windows Management Console must be authenticated by the Access Server. There are two options for this
+1. Access Server stores userid/password credentials in an encrypted local file.
+2. Access Server performs an authentication check using LDAP protocols.
 
-1. Management Console connects to Access Server, for Access Server Authentication (and optionally authorisation).
-2. Access Server connects to CDC Capture and Apply Agents to define/operate subscriptions. (secondary authentication tier)
-3. CDC Capture agent connects to CDC Apply agent over TCPIP to send change data packets. (optional TLS authentication)
+If you use the LDAP option, then you have two further options.
+1. Authentication only, where an authenticated user can then perform any CDC Access Server tasks.
+2. Authentication and Authorisation, where specific privileges against specific CDC datastores are controlled.
+
+Whichever LDAP option you choose, the CDC agent itself is subject to whatever authentication and authorisation controls are
+implement at the various data sources. Whether z/OS or Linux, this would normally be a mixture of OS Authentication 
+and associated DBMS authorisation.
+
+
+It is possible to use an "embedded" Access Server, that is installed as part of the Management console, as depicted below.
+
+![CDC Components](images/cdc/cdcsec03.png)
+
+This still conforms to exactly the same authentication options as a separate access server. The embedded access server option 
+may be attractive depending on the way that CDC will be operated and managed in a production environment. 
+
+* A site that wants to automate CDC operations with CHCCLP scripting would prefer a separate access server as part of the production infrastructure
+* A site that uses z/OS system automation extensively may prefer to run CHCCLP scripts under JCL, and avoid the need to provision, secure and operate a separate server in the production environment.
+
+There is no single right answer here. CDC is designed to operate in wildly heterogeneous environments. It tries not to be prescriptive on 
+how operations and system automation is achieved because every site will be different. Hence - the provision of different options.
 
 
 <h3 id="1.3">1.3 Encryption options between CDC Components</h3>
  
+Encryption of sensitive business data over a network should always be encrypted. CDC supports industry-standard Transport Layer Security 
+standards, as depicted in the diagram below.
+
+![CDC Components](images/cdc/cdcsec04.png)
+
+
+
+<h3 id="1.2">1.2 Authentication options for CDC Users</h3> 
+
+Moving on to Authentication options, there are several options, as depicted in the diagram below.
+
 
 <br><hr>
 
