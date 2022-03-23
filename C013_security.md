@@ -81,11 +81,11 @@ The diagram below is a generic representation of the four CDC components that yo
 
 ![CDC Components](images/cdc/cdcsec01.png)
 
-The communcations processes that occur are
+The communcations processes that occur between these components are
 
-1. Development: Management Console connects to Access Server. TCPIP connection. Access Server authenticates user against either a local encrypted file, or an LDAP Server.
-2. Development: Management Console invokes processing at the access server that connect to CDC Capture and Apply Agents. A second tier of authentication is performed at the CDC Capture or Apply agent.
-3. Runtime: CDC Capture agent connects to CDC Apply agent over TCPIP to send change data packets.
+1. Management Console connects to Access Server, for Access Server Authentication (and optionally authorisation).
+2. Access Server connects to CDC Capture and Apply Agents to define/operate subscriptions. (secondary authentication tier)
+3. CDC Capture agent connects to CDC Apply agent over TCPIP to send change data packets. (optional TLS authentication)
 
 
 <h3 id="1.2">1.2 Authentication options for CDC Users</h3>
