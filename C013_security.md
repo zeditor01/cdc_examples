@@ -171,7 +171,7 @@ The steps are
 
 1. Install Windows Management Console without the embedded access server.
 2. Install the Access Server without the LDAP Option.
-3. Start the access server and create the CDC SYSADMIN userid. 
+3. Start the access server and create the CDC SYSADMIN userid. (dmcreateuser command)
 4. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
 The result of these steps will be that Access Server uses an encrypted local file to hold userids and passwords.
@@ -401,7 +401,7 @@ $
 
 Now you can connect to CDC datastores. Go to the Access Manager tab, click on "new connection" and fill in the details.
 
-![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as33.png)
+![cdc_mc_connect_as34](images/cdc/cdc_mc_connect_as34.png)
 
 <h3 id="2.2">2.2 Authentication-Only with LDAP</h3>
 
@@ -413,12 +413,98 @@ An example of using LDAP on z/OS with an LDBM backend is described in Appendix A
 
 1. Install the Access Server with the LDAP Authentication-Only Option.
 2. Configure the connectivity from Access Server to the LDAP Server (ldap.properties file)
-3. On the access server, create the root userid for the CDC Access Server. (CHCCLP command)
-3. Start the Access Server
+3. Start the Access Server and create the root userid for the CDC Access Server. (CHCCLP command)
 4. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
 The result of these steps will be that Access Server uses the LDAP server for authentication, but not CDC authorisation control.
 
+<b>Step 1:</b> Install the Access Server with the LDAP Authentication-Only Option.
+
+Same dialog as before, except choose Option 2 (LDAP Authentication Only)
+
+
+```
+===============================================================================
+Enable LDAP Configuration
+-------------------------
+
+Enable and select an LDAP configuration.
+  ->1- None (Standard Mode)
+    2- LDAP Authentication Only
+    3- LDAP Authentication & Authorization
+    4- LDAP CHCCLP Embedded
+
+CHOOSE LDAP CONFIGURATION BY NUMBER, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
+   : 2
+```
+
+<b>Step 2:</b> Configure the connectivity from Access Server to the LDAP Server (ldap.properties file) 
+
+Edit the ldap.properties file with the correct connectivity values
+
+![ldap_properties](images/cdc/ldap_properties.png)
+
+<b>Step 3:</b> Start the Access Server
+
+```
+$ pwd
+/opt/IBM/InfoSphereDataReplication/AccessServer/bin
+$
+$ ls
+asnclp                      dmchangeuserpassword  dmdeleteuser          dmlistuserdatastores  dmterminateuser
+chcclp                      dmcreatedatastore     dmdisableuser         dmlistusers           dmunlockuser
+dmaccessserver              dmcreateuser          dmenableuser          dmresetuser
+dmaddconnection             dmdeleteconnection    dmlistdatastores      dmshowversion
+dmchangeconnectionpassword  dmdeletedatastore     dmlistdatastoreusers  dmshutdownserver
+$
+$ ./dmaccessserver &
+$
+```
+
+<b>Step 4:</b> On the access server, create the root userid for the CDC Access Server. (CHCCLP command)
+
+Switch to the bin directory of the Access Server installation, invoke chcclp and enter the command to add the CDC Sysadmin user.
+
+```
+$ pwd
+/opt/IBM/InfoSphereDataReplication/AccessServer/bin
+$
+$ ls
+asnclp  chcclp  dmaccessserver  dmshowversion  dmshutdownserver
+$ ./dmaccessserver &
+$
+$ ./chcclp
+Command Line Processor for IBM InfoSphere Data Replication 11.4.0 [Build 11072]
+(c) Copyright IBM Corporation 2013, 2016
+
+You can execute IBM InfoSphere Data Replication commands from the command
+prompt. Use double quotes around parameter values that contain special
+characters or syntax keywords, or around empty strings. If the parameter value
+contains double quotes, use single quotes around the value. Commands must be
+terminated with ; and can span multiple lines.
+
+For help on the available commands or for a specific command, type:
+
+  help;
+  help "connect server";
+  help "11.3";
+
+To turn on verbose output, type:
+
+  set verbose;
+
+To exit interactive mode, type exit; or quit;
+
+Repl > add ldap access manager username cdcadmin password l0nep1ne;
+[ERR3006]: simple bind failed: 192.168.1.191:389
+```
+
+<h1>FIX THIS</h1> 
+
+
+<b>Step 4:</b> Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+
+Same as before, except that this time the authentication processing is performed by LDAP calls.
 
 
 
@@ -432,12 +518,37 @@ Having said that, it's an extra option that is available to you, if it is helpfu
 The setup is very similar to the previous step.
 The only setup difference is that the Access Server installation must specify the "Authentication and Authorization with LDAP" option.
 
-the result is that CDC root user will be able to grant and revoke CDC administration priviledges in whatever level of granularity is required.
+```
+===============================================================================
+Enable LDAP Configuration
+-------------------------
+
+Enable and select an LDAP configuration.
+  ->1- None (Standard Mode)
+    2- LDAP Authentication Only
+    3- LDAP Authentication & Authorization
+    4- LDAP CHCCLP Embedded
+
+CHOOSE LDAP CONFIGURATION BY NUMBER, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
+   : 3
+```
+
+The result is that CDC root user will be able to grant and revoke CDC administration priviledges in whatever level of granularity is required.
 
 <br><hr>
 
 <h2 id="3.0">3. Encryption between Management Console and Access Server</h2>  
  
+Lets just deal with the simple TLS connection first, before tackling the more challenging one.
+
+The connections between Management Console and Access Server can be encrypted using Server-Authentication. 
+The management console just needs to trust the certificate of the access server.
+
+Configuring the Access Server and Management Console is easy. 
+You just need to edit a tls.properties file for each of these components. 
+
+<h1>tls.properties</h1>
+
 
 <br><hr>
 
