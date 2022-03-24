@@ -30,6 +30,12 @@ A CDC Apply Target (like CDC for Kafka shown below) can receive replicated data 
 
 The screenshot below is how the various servers are represented in the CDC Management Console.
 
+Note the three tabs, and what they are used for
+
+* Access Manager tab, is where connections to CDC agents are defined, together with the corresponding authenticaton details.
+* Configuration tab, is where CDC subscriptions are defined
+* Monitoring tab, is where CDC subscriptions are operated, with monitoring dashboards
+
 ![CDC Capture Sources](images/cdc/cdc_access_manager_tab.png)
 
 ## About these Worked Examples
