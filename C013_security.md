@@ -21,7 +21,7 @@ Ooops. This article hasn't been written yet.
 <li><a href="#2.0">2. Configuring Authentication</a>
 <ul>
   <li><a href="#2.1">2.1 Authentication without LDAP</a></li>
-  <li><a href="#2.2">2.2 Authentication with LDAP</a></li>
+  <li><a href="#2.2">2.2 Authentication-Only with LDAP</a></li>
   <li><a href="#2.3">2.3 Authentication and Authorization with LDAP</a></li>
 </ul> 
 <li><a href="#3.0">3. Encryption between Management Console and Access Server</a>
@@ -164,7 +164,34 @@ You must decide which option you want to use, and choose the appropriate option 
 
 <h3 id="2.1">2.1 Authentication without LDAP</h3>
 
-<h3 id="2.2">2.2 Authentication with LDAP</h3>
+Authentication without LDAP is easy. It's probably a good option if you are assessing CDC for it's replication capabilities without the effort of configuring a hardened operational production service.
+The steps are
+
+1. Install Windows Management Console without the embedded access server.
+2. Install the Access Server without the LDAP Option.
+3. On the access server, create the root userid for the CDC Access Server. 
+4. Start the Access Server
+5. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+
+The result of these steps will be that Access Server uses an encrypted local file to hold userids and passwords.
+
+
+<h3 id="2.2">2.2 Authentication-Only with LDAP</h3>
+
+Using the same Windows Management Console that was installed in the previous step, we would install a different Access Server with the LDAP Autentication-Only Option.
+
+As a pre-requsuite you need to setup an LDAP Server which has 
+
+
+
+1. Install the Access Server with the LDAP Authentication-Only Option.
+2. Configure the connectivity to the LDAP Server
+3. On the access server, create the root userid for the CDC Access Server. 
+3. Start the Access Server
+4. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+
+The result of these steps will be that Access Server uses an encrypted local file to hold userids and passwords.
+
 
 <h3 id="2.3">2.3 Authentication and Authorization with LDAP</h3>
 
