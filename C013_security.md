@@ -158,7 +158,8 @@ The windows Management Console supports server-authenticated TLS, which is simpl
 
 <h2 id="#2.0">2. Configuring Authentication</h2> 
 
-This sections provides worked example of the three configuration options for authentication.
+This sections provides worked example of the three configuration options for authentication using a separate Access Server.
+Should you wish to deploy an embedded Access Server, the principles in the examples below should be enough to see you right.
 
 <b>Important Note:</b> These three options are mutually exclusive for an installation of the access server. 
 You must decide which option you want to use, and choose the appropriate option at installation time.
@@ -192,6 +193,11 @@ An example of using LDAP on z/OS with an LDBM backend is described in Appendix A
 4. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
 The result of these steps will be that Access Server uses the LDAP server for authentication, but not CDC authorisation control.
+
+Screenshots for the sequence of steps are
+
+![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
+
 
 
 <h3 id="2.3">2.3 Authentication and Authorization with LDAP</h3>
