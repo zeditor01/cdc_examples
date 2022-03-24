@@ -26,6 +26,11 @@ A CDC Apply Target (like CDC for Kafka shown below) can receive replicated data 
 
 ![CDC Capture Sources](images/cdc/cdc_landscapeA.PNG)
 
+## CDC Management Console view of the Servers
+
+The screenshot below is how the various servers are represented in the CDC Management Console.
+
+![CDC Capture Sources](images/cdc/cdc_access_manager_tab.png)
 
 ## About these Worked Examples
 
