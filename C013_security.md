@@ -235,8 +235,9 @@ The result of these steps will be that Access Server uses an encrypted local fil
 <h3 id="6.2">6.2 ???</h3>
 <h3 id="6.3">6.3 ???</h3>
 
+<br><hr>
 
-<h2 id="Appendix">6. Appendix: LDAP on z/OS with an LDBM backend.</h2>  
+<h2 id="Appendix">Appendix: LDAP on z/OS with an LDBM backend.</h2>  
 
 My test environment didn't have an LDAP server, so I had to install one. 
 You could use any LDAP server, including OpenLDAP on any Linux distribution.
