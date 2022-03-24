@@ -178,11 +178,11 @@ The result of these steps will be that Access Server uses an encrypted local fil
 
 Screenshots from the sequence of steps follow
 
-Step 1: Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
+<b>Step 1:</b> Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
 
 ![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
 
-Step 2: Installation dialog to install the Access Server (on Linux) without the LDAP option.
+<b>Step 2:</b> Installation dialog to install the Access Server (on Linux) without the LDAP option.
 
 ```
 $ unset DISPLAY
@@ -375,7 +375,7 @@ so, before connecting to Access Server.
 PRESS <ENTER> TO EXIT THE INSTALLER:
 ```
 
-Step 3: Start the access server and create the CDC SYSADMIN userid.
+<b>Step 3:</b> Start the access server and create the CDC SYSADMIN userid.
 
 ```
 $ pwd
@@ -394,7 +394,7 @@ $ ./dmcreateuser cdcadmin cdcadmin cdcadmin l0nep1ne sysadmin true false false
 $
 ```
 
-Step 4: Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+<b>Step 4:</b> Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
 
 
