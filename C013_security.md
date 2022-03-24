@@ -177,6 +177,34 @@ The steps are
 
 The result of these steps will be that Access Server uses an encrypted local file to hold userids and passwords.
 
+Screenshots from the sequence of steps follow
+
+Step 1: Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
+
+![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
+
+Step 2: Installation dialog to install the Access Server (on Linux) without the LDAP option.
+
+![cdc_mc_install_noldap](images/cdc/cdc_mc_connect_as.png)
+
+
+Step 3: Installation dialog to install the Access Server (on Linux) without the LDAP option.
+
+![cdc_mc_install_noldap](images/cdc/cdc_mc_connect_as.png)
+
+Step 4: Start the Access Server on Linux
+
+```
+cd /opt/ibm/ccc
+./dmaccessstartup
+```
+
+
+Step 5: Management Center logon to Access Server, requires userid, password, IP Address and port of the Access Server.
+
+![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as.png)
+
+
 
 <h3 id="2.2">2.2 Authentication-Only with LDAP</h3>
 
@@ -194,11 +222,6 @@ An example of using LDAP on z/OS with an LDBM backend is described in Appendix A
 
 The result of these steps will be that Access Server uses the LDAP server for authentication, but not CDC authorisation control.
 
-Screenshots from the sequence of steps follow
-
-Leave the "LDAP Embedded Access Server" box unchecked, if you want to connect to a separate Access Server.
-
-![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
 
 
 
