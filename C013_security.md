@@ -18,11 +18,11 @@ Ooops. This article hasn't been written yet.
   <li><a href="#1.2">1.2 Authentication options for CDC Users</a></li> 
   <li><a href="#1.3">1.3 Encryption options between CDC Components</a></li>
 </ul>
-<li><a href="#2.0">2. Authentication Options for CDC Users</a>
+<li><a href="#2.0">2. Configuring Authentication</a>
 <ul>
-  <li><a href="#2.1">2.1 Authentication at the CDC Access Server</a></li>
-  <li><a href="#2.2">2.2 Authentication and Authorization at the CDC Access Server</a></li>
-  <li><a href="#2.3">2.3 Authentication and Authorization at the CDC Agents</a></li>
+  <li><a href="#2.1">2.1 Authentication without LDAP</a></li>
+  <li><a href="#2.2">2.2 Authentication with LDAP</a></li>
+  <li><a href="#2.3">2.3 Authentication and Authorization with LDAP</a></li>
 </ul> 
 <li><a href="#3.0">3. Encryption between Management Console and Access Server</a>
 <li><a href="#4.0">4. Encryption between Access Server and CDC Agents</a>
@@ -155,12 +155,18 @@ The windows Management Console supports server-authenticated TLS, which is simpl
 
 <br><hr>
 
-<h2 id="2.0">2. Authentication Options for CDC Users</h2>  
- 
-<h3 id="2.1">2.1 Authentication at the CDC Access Server</h3>  
-<h3 id="2.2">2.2 Authentication and Authorization at the CDC Access Server</h3>
-<h3 id="2.3">2.3 Authentication and Authorization at the CDC Agents</h3>
+<h2 id="#2.0">2. Configuring Authentication</h2> 
 
+This sections provides worked example of the three configuration options for authentication.
+
+<b>Important Note:</b> These three options are mutually exclusive for an installation of the access server. 
+You must decide which option you want to use, and choose the appropriate option at installation time.
+
+<h3 id="2.1">2.1 Authentication without LDAP</h3>
+
+<h3 id="2.2">2.2 Authentication with LDAP</h3>
+
+<h3 id="2.3">2.3 Authentication and Authorization with LDAP</h3>
 
 
 <br><hr>
