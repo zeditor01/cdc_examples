@@ -128,17 +128,30 @@ standards, as depicted in the diagram below.
 
 ![CDC Components](images/cdc/cdcsec04.png)
 
-All communications between CDC agents and CDC Access Server use mutual-authenticated TLS encryption. This is based on 
+All communications between CDC agents and CDC Access Server use mutual-authenticated TLS encryption (mTLS). This is based on 
 certificates being used as the basis for negotiating encryption on CDC connections.
 
 The CDC knowledge center describes an approach using self-signed certificates between the various end points. However, it would 
 be more common for an enterprise to use a certificate authority to sign certificates to be stored at each end point. The worked 
 examples in this paper are based on certificate authority.
 
-z/OS - ATTLS
+<h4 id="1.3.1">1.3.1 Application-Controlled and Application-Transparent TLS</h4>
 
-MC - SvrAuth
+The implementation of TLS encryption is quite different between z/OS and other platforms.
 
+* Linux, Unix and Windows platforms leave the application to manage the encryption process.
+* z/OS as a platform supports "Application-Transparent TLS" (AT-TLS)
+
+Consequently, CDC components conform to the standards of their respective operating systems.
+
+* CDC components on LUW platforms implement Application-Controlled TLS, and use an encryption profile to manage the mTLS processing.
+* CDC components on the z/OS platforms are completely ignorant of AT-TLS processing. As z/OS service ( Policy Agent ) is configured to intercept selected communications (eg: on specified TCPIP ports) and enforce TLS encryption.
+
+Both approaches implement exactly the same standards-based TLS, but the configuration is different.
+
+<h4 id="1.3.2">1.3.2 Management Console TLS encryption</h4>
+
+The windows Management Console supports server-authenticated TLS, which is simpler, and sufficient for a simple Graphical client to the Access Server
 
 <br><hr>
 
