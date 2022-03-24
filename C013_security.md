@@ -399,7 +399,9 @@ $
 
 ![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as32.png)
 
+Now you can connect to CDC datastores. Go to the Access Manager tab, click on "new connection" and fill in the details.
 
+![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as33.png)
 
 <h3 id="2.2">2.2 Authentication-Only with LDAP</h3>
 
