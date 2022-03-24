@@ -186,16 +186,25 @@ An example of using LDAP on z/OS with an LDBM backend is described in Appendix A
 
 
 1. Install the Access Server with the LDAP Authentication-Only Option.
-2. Configure the connectivity to the LDAP Server
-3. On the access server, create the root userid for the CDC Access Server. 
+2. Configure the connectivity from Access Server to the LDAP Server (ldap.properties file)
+3. On the access server, create the root userid for the CDC Access Server. (CHCCLP command)
 3. Start the Access Server
 4. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
-The result of these steps will be that Access Server uses an encrypted local file to hold userids and passwords.
+The result of these steps will be that Access Server uses the LDAP server for authentication, but not CDC authorisation control.
 
 
 <h3 id="2.3">2.3 Authentication and Authorization with LDAP</h3>
 
+This option seems like a dated throwback to the era of datamarts, as it envisages a hierarchy of CDC administrators performing ad-hoc subscriptions to a network of database servers.
+In my experience with Banks and government entities anything that moves sensitive data around the network is tested heavily and then locked down very hard.
+It conjures up a very 1970s office setting in my mind that just doesn't exist in today's cyber security world.
+Having said that, it's an extra option that is available to you, if it is helpful.
+
+The setup is very similar to the previous step.
+The only setup difference is that the Access Server installation must specify the "Authentication and Authorization with LDAP" option.
+
+the result is that CDC root user will be able to grant and revoke CDC administration priviledges in whatever level of granularity is required.
 
 <br><hr>
 
