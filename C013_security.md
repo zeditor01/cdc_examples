@@ -194,7 +194,9 @@ An example of using LDAP on z/OS with an LDBM backend is described in Appendix A
 
 The result of these steps will be that Access Server uses the LDAP server for authentication, but not CDC authorisation control.
 
-Screenshots for the sequence of steps are
+Screenshots from the sequence of steps follow
+
+Leave the "LDAP Embedded Access Server" box unchecked, if you want to connect to a separate Access Server.
 
 ![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
 
