@@ -397,10 +397,7 @@ $
 
 <b>Step 4:</b> Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
-
-
-
-![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as.png)
+![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as32.png)
 
 
 
