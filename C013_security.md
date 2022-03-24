@@ -185,7 +185,197 @@ Step 1: Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want
 
 Step 2: Installation dialog to install the Access Server (on Linux) without the LDAP option.
 
-![cdc_mc_install_noldap](images/cdc/cdc_mc_connect_as.png)
+```
+$ unset DISPLAY
+$ ls
+iidraccess-11.4.0.4-11072-linux-x86-setup.bin  setup-iidr-11.4.0.4-5618-linux-x86.bin
+$ ./iidraccess-11.4.0.4-11072-linux-x86-setup.bin
+Preparing to install
+Extracting the JRE from the installer archive...
+Unpacking the JRE...
+Extracting the installation resources from the installer archive...
+Configuring the installer for this system's environment...
+
+Launching installer...
+
+===============================================================================
+Choose Locale...
+----------------
+
+    1- Deutsch
+  ->2- English
+    3- Español
+    4- Italiano
+    5- Português  (Brasil)
+
+CHOOSE LOCALE BY NUMBER: 2
+===============================================================================
+IBM InfoSphere Data Replication Access Server    (created with InstallAnywhere)
+-------------------------------------------------------------------------------
+
+Preparing CONSOLE Mode Installation...
+
+
+
+
+===============================================================================
+Introduction
+------------
+
+InstallAnywhere will guide you through the installation of IBM InfoSphere Data
+Replication Access Server.
+
+It is strongly recommended that you quit all programs before continuing with
+this installation.
+
+Respond to each prompt to proceed to the next step in the installation.  If
+you want to change something on a previous step, type 'back'.
+
+You may cancel this installation at any time by typing 'quit'.
+
+PRESS <ENTER> TO CONTINUE:
+
+
+
+===============================================================================
+Choose Install Folder
+---------------------
+
+Where would you like to install?
+
+  Default Install Folder: /opt/IBM/InfoSphereDataReplication/AccessServer
+
+ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
+      :
+
+
+
+===============================================================================
+
+
+
+
+    LICENSE INFORMATION
+
+    The Programs listed below are licensed under the following License
+    Information terms and conditions in addition to the Program license
+    terms previously agreed to by Client and IBM. If Client does not have
+    previously agreed to license terms in effect for the Program, the
+    International Program License Agreement (Z125-3301-14) applies.
+
+    Program Name (Program Number):
+    IBM InfoSphere Data Replication Management Console / Access Server v11.
+    4.0.4 (Tool)
+	
+    The following standard terms apply to Licensee's use of the Program.
+
+    Limited use right
+
+    With the exception of Bundled Programs, all IBM software provided to
+    Licensee with the Program can only be used to support Licensee's use
+    of the Principal Program under this License Information document,
+
+Press Enter to continue viewing the license agreement, or enter "1" to
+   accept the agreement, "2" to decline it, "3" to print it, or "99" to go back
+   to the previous screen.: 1
+
+
+
+
+===============================================================================
+Enable LDAP Configuration
+-------------------------
+
+Enable and select an LDAP configuration.
+  ->1- None (Standard Mode)
+    2- LDAP Authentication Only
+    3- LDAP Authentication & Authorization
+    4- LDAP CHCCLP Embedded
+
+CHOOSE LDAP CONFIGURATION BY NUMBER, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
+   : 1
+
+
+
+===============================================================================
+
+
+Enter the TCP/IP port for Access Server.
+Port Number: (Default: 10101):
+
+
+
+===============================================================================
+Configure User Data Folder
+--------------------------
+
+Access Server requires a folder to store logs, configuration information and
+user data. Specify a folder where this information should be stored.
+
+
+Where would you like your user data folder?
+
+Default User Data Folder: /opt/IBM/InfoSphereDataReplication/AccessServer
+
+
+   ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
+
+
+
+===============================================================================
+Pre-Installation Summary
+------------------------
+
+Please Review the Following Before Continuing:
+
+Product Name:
+    IBM InfoSphere Data Replication Access Server
+
+Install Folder:
+    /opt/IBM/InfoSphereDataReplication/AccessServer
+
+Link Folder:
+    /home/cdcinst1
+
+User Data Folder:
+    /opt/IBM/InfoSphereDataReplication/AccessServer
+
+Disk Space Information (for Installation Target):
+    Required:  359,173,263 Bytes
+    Available: 932,703,215,616 Bytes
+
+PRESS <ENTER> TO CONTINUE:
+
+
+
+===============================================================================
+Installing...
+-------------
+
+ [==================|==================|==================|==================]
+ [------------------|------------------|------------------|------------------]
+
+
+
+===============================================================================
+Installation Complete
+---------------------
+
+Congratulations. IBM InfoSphere Data Replication Access Server has been
+successfully installed to:
+
+/opt/IBM/InfoSphereDataReplication/AccessServer
+
+Before you connect to this Access Server installation, you must start Access
+Server and create the administration user account. See the installation guide
+for more information. You should also install the equivalent version of IBM
+InfoSphere Data Replication Management Console, if you haven't already done
+so, before connecting to Access Server.
+
+
+PRESS <ENTER> TO EXIT THE INSTALLER:
+```
+
 
 
 Step 3: Installation dialog to install the Access Server (on Linux) without the LDAP option.
