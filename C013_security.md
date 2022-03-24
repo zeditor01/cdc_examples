@@ -49,6 +49,7 @@ Ooops. This article hasn't been written yet.
   <li><a href="#6.2">6.2 ???</a></li>
   <li><a href="#6.3">6.3 ???</a></li> 
 </ul>
+<li><a hrex="Appendix">Appendix: LDAP on z/OS with an LDBM backend</li>
 </ul>
 
 
@@ -180,8 +181,8 @@ The result of these steps will be that Access Server uses an encrypted local fil
 
 Using the same Windows Management Console that was installed in the previous step, we would install a different Access Server with the LDAP Autentication-Only Option.
 
-As a pre-requsuite you need to setup an LDAP Server which has 
-
+As a <b>pre-requsuite</b> you need to setup an LDAP Server which has cdcBaseDN=o=cdc,dc=ibm setup. 
+An example of using LDAP on z/OS with an LDBM backend is described in Appendix A.
 
 
 1. Install the Access Server with the LDAP Authentication-Only Option.
@@ -234,6 +235,139 @@ The result of these steps will be that Access Server uses an encrypted local fil
 <h3 id="6.2">6.2 ???</h3>
 <h3 id="6.3">6.3 ???</h3>
 
+
+<h2 id="Appendix">6. Appendix: LDAP on z/OS with an LDBM backend.</h2>  
+
+My test environment didn't have an LDAP server, so I had to install one. 
+You could use any LDAP server, including OpenLDAP on any Linux distribution.
+I decided to implement LDAP on z/OS, and include the notes in this document.
+
+z/OS includes the "IBM Tivoli Directory Server for z/OS". 
+The provides an LDAP Server with a choice of multiple database back ends ( file, Db2 database etc... )
+For this example I chose the LDBC backend (a USS file) which is the simplest option.
+LDBM setup documentation is  <a href="https://www.ibm.com/docs/en/zos/2.4.0?topic=hashing-setting-up-ldbm">here.</a>
+
+Open a terminal in a USS directory
+
+```
+cd /u/ibmuser
+```
+
+Copy the IBM-supplied template for the configuration file to your directory
+
+```
+cp /usr/lpp/ldap/etc/ds.profile .
+```
+
+Edit /u/ibmuser/ds.profile
+
+```
+ADMINDN = "cn=root" 
+ADMINPW = root 
+LDBM_SUFFIX = "o=cdc,dc=ibm"
+LDBM_DATABASEDIRECTORY = /var/ldap/ldbm
+PROG_SUFFIX=AD 
+JOBCARDLINE1S = //GLDAPF JOB 1, 
+OUTPUT_DATASET = IBMUSER.LDAP
+```
+
+
+Export some parameters in the USS shell.
+
+```
+export STEPLIB=SYS1.SIEALNKE:$STEPLIB
+export PATH=/usr/lpp/ldap/sbin:$PATH
+export NLSPATH=/usr/lpp/ldap/lib/nls/msg/%L/%N:$NLSPATH
+export LANG=En_US.IBM-1047
+```
+
+Invoke the ds.config configuration utility.
+
+```
+	IBMUSER:/u/ibmuser: >dsconfig -i ds.profile
+	220321 17:28:59.444396 GLD2002I Directory Server configuration utility has started.
+	220321 17:28:59.474210 GLD2004D
+	           The output data set IBMUSER.LDAP has been previously used.
+	           Existing members may be overwritten and data lost.
+	           Do you wish to continue? (yes/no)
+	yes
+	220321 17:29:02.022564 GLD2003I Directory Server configuration utility has ended.
+```
+
+Review the generated members of the output PDS (IBMUSER.LDAP)
+
+```
+	DSLIST            IBMUSER.LDAP 
+	           Name     Prompt     
+	_________ APF      *Browsed    
+	_________ DSCONFIG *Browsed    
+	_________ DSENVVAR *Browsed    
+	_________ GLDSRV   *Browsed    
+	_________ PRGMCTRL *Browsed    
+	_________ PROGAD   *Browsed    
+	_________ RACF     *Browsed    
+	          **End**
+```
+
+Review all the generated members and assess whether you need to act of them ( Environment Variables, PARMLIB members, RACF resources etc... ).
+In my system ( ADCD V13 stack ) the only action I needed to take was to create the userid/group in RACF.
+
+The copy GLDSRV to PROCLIB and add it in the VTAM startup list if you want to auto-start it.
+The salient lines from my GLDSRV member are
+
+
+
+```
+//GLDSRV  PROC REGSIZE=0M,                                              
+//*-------------------------------------------------------------------- 
+//* CUSTOMIZABLE SYMBOLIC PARAMETERS                                    
+//*-------------------------------------------------------------------- 
+// PARMS='',                                                            
+// OUTCLASS='A'                                                         
+//*-------------------------------------------------------------------- 
+//GO       EXEC PGM=GLDSRV31,REGION=&REGSIZE,TIME=1440,                 
+//         PARM=('/&PARMS >DD:DSOUT 2>&1')                              
+//*-------------------------------------------------------------------- 
+//* CONFIG can be used to specify the LDAP server config file.          
+//*-------------------------------------------------------------------- 
+//CONFIG    DD DSN=IBMUSER.LDAP(DSCONFIG),DISP=SHR                      
+//*-------------------------------------------------------------------- 
+//* ENVVAR can be used to specify any environment variables             
+//* If this DD is used, the name of the data set must be customized     
+//* for the installation.                                               
+//*-------------------------------------------------------------------- 
+//ENVVAR   DD DSN=IBMUSER.LDAP(DSENVVAR),DISP=SHR                       
+//DSOUT    DD SYSOUT=&OUTCLASS                                          
+//SYSOUT   DD SYSOUT=&OUTCLASS                                          
+//CEEOPTS  DD *                                                         
+TERMTHDACT(UADUMP,)                                                     
+//SYSMDUMP DD SYSOUT=&OUTCLASS                                          
+//CEEDUMP  DD SYSOUT=&OUTCLASS                                          
+```
+
+and check the started task in SDSF.
+
+```
+ SDSF OUTPUT DISPLAY GLDSRV   STC04588  DSID     2 LINE 0       COLUMNS 21- 100 
+ COMMAND INPUT ===>                                            SCROLL ===> CSR  
+********************************* TOP OF DATA **********************************
+    J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E  S 0 W 1       
+                                                                                
+--- THURSDAY,  24 MAR 2022 ----                                                 
+IEF695I START GLDSRV   WITH JOBNAME GLDSRV   IS ASSIGNED TO USER GLDSRV  , GROUP
+$HASP373 GLDSRV   STARTED                                                       
+IEF403I GLDSRV - STARTED - TIME=08.24.06                                        
+BPXM023I (GLDSRV) GLD1004I LDAP server is ready for requests.                   
+GLD1005I LDAP server start command processed.                                   
+BPXM023I (GLDSRV) GLD1059I Listening for requests on 192.168.1.191 port 389.    
+BPXM023I (GLDSRV) GLD1059I Listening for requests on 10.1.1.191 port 389.       
+BPXM023I (GLDSRV) GLD1059I Listening for requests on 127.0.0.1 port 389.        
+BPXM023I (GLDSRV) GLD6051I No database changes to commit for LDBM backend named 
+```
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
@@ -493,6 +627,8 @@ TLS Encryption for CDC flows should be considered essential for all CDC Replicat
 
 
 
+
+<li><a hrex="Appendix">Appendix: LDAP on z/OS with an LDBM backend</li>
 
 
 
