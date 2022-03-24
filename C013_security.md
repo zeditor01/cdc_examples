@@ -375,7 +375,8 @@ so, before connecting to Access Server.
 PRESS <ENTER> TO EXIT THE INSTALLER:
 ```
 
-<b>Step 3:</b> Start the access server and create the CDC SYSADMIN userid.
+<b>Step 3:</b> Start the access server and create the CDC SYSADMIN userid. logon as the cdc install userid, switch to the access server /bin directory, start the 
+access server with the ```dmaccessserver``` command, and then create the access server sysadmin id with the ```dmcreateuser``` command.
 
 ```
 $ pwd
