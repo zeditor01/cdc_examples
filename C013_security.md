@@ -171,9 +171,8 @@ The steps are
 
 1. Install Windows Management Console without the embedded access server.
 2. Install the Access Server without the LDAP Option.
-3. On the access server, create the root userid for the CDC Access Server. 
-4. Start the Access Server
-5. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+3. Start the access server and create the CDC SYSADMIN userid. 
+4. Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
 The result of these steps will be that Access Server uses an encrypted local file to hold userids and passwords.
 
@@ -376,21 +375,29 @@ so, before connecting to Access Server.
 PRESS <ENTER> TO EXIT THE INSTALLER:
 ```
 
-
-
-Step 3: Installation dialog to install the Access Server (on Linux) without the LDAP option.
-
-![cdc_mc_install_noldap](images/cdc/cdc_mc_connect_as.png)
-
-Step 4: Start the Access Server on Linux
+Step 3: Start the access server and create the CDC SYSADMIN userid.
 
 ```
-cd /opt/ibm/ccc
-./dmaccessstartup
+$ pwd
+/opt/IBM/InfoSphereDataReplication/AccessServer/bin
+$
+$ ls
+asnclp                      dmchangeuserpassword  dmdeleteuser          dmlistuserdatastores  dmterminateuser
+chcclp                      dmcreatedatastore     dmdisableuser         dmlistusers           dmunlockuser
+dmaccessserver              dmcreateuser          dmenableuser          dmresetuser
+dmaddconnection             dmdeleteconnection    dmlistdatastores      dmshowversion
+dmchangeconnectionpassword  dmdeletedatastore     dmlistdatastoreusers  dmshutdownserver
+$
+$ ./dmaccessserver &
+$
+$ ./dmcreateuser cdcadmin cdcadmin cdcadmin l0nep1ne sysadmin true false false
+$
 ```
 
+Step 4: Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
-Step 5: Management Center logon to Access Server, requires userid, password, IP Address and port of the Access Server.
+
+
 
 ![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as.png)
 
