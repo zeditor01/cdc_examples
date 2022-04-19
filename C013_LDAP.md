@@ -217,7 +217,7 @@ The installation binary for linux x86 is iidraccess-11.4.0.4-11072-linux-x86-set
 The code block below is the entire Installation dialog to install the Access Server (on Linux) without the LDAP option.
 I prefer to force installers on Linux to execute in command mode rather than invoke a GUI, hence the "unset DISPLAY" command.
 
-Note the question "Enable LDAP Configuration" and the response "2- LDAP Authentication Only"
+Note the question "Enable LDAP Configuration" and the response "1- None (Standard Mode)"
 
 ```
 $ unset DISPLAY
@@ -410,8 +410,13 @@ so, before connecting to Access Server.
 PRESS <ENTER> TO EXIT THE INSTALLER:
 ```
 
-<b>Step 3:</b> Start the access server and create the CDC SYSADMIN userid. logon as the cdc install userid, switch to the access server /bin directory, start the 
-access server with the ```dmaccessserver``` command, and then create the access server sysadmin id with the ```dmcreateuser``` command.
+<b>Step 3:</b> Start the access server and create the CDC SYSADMIN userid. (dmcreateuser command)
+
+
+1. logon as the cdc install userid
+2. switch to the access server /bin directory
+3. start the access server with the ```dmaccessserver``` command
+4. create the access server sysadmin id with the ```dmcreateuser``` command.
 
 ```
 $ pwd
@@ -426,7 +431,7 @@ dmchangeconnectionpassword  dmdeletedatastore     dmlistdatastoreusers  dmshutdo
 $
 $ ./dmaccessserver &
 $
-$ ./dmcreateuser cdcadmin cdcadmin cdcadmin l0nep1ne sysadmin true false false
+$ ./dmcreateuser cdcadmin cdcadmin cdcadmin favepwd sysadmin true false false
 $
 ```
 
@@ -434,11 +439,31 @@ $
 
 ![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as32.png)
 
-Now you can connect to CDC datastores. Go to the Access Manager tab, click on "new connection" and fill in the details.
+Now (as cdcadmin) you can connect to CDC datastores. Go to the Access Manager tab, click on "new connection" and fill in the details.
 
 ![cdc_mc_connect_as34](images/cdc/cdc_mc_connect_as34.png)
 
-<h3 id="2.2">2.2 Authentication-Only with LDAP</h3>
+Alternatively, you can click on the Access Manager tab, and create a hierarchy of cdc administration users, and grant the desired authorities to each of them. 
+For example, you might want to control which cdc users are authorised to work with which CDC sources and targets. 
+
+
+<h3 id="2.2">2.2 Setting up Management Console with embedded Access Server to perform Authentication without LDAP</h3>
+
+If you wish to use Management Console with an embedded Access Server, you need to perform a separate installtion.
+
+* a Management Console installation either connects to separate Access Server, or uses an embedded Access Server.
+* After installation, the type of Access Server being used cannot be changed.
+
+Run the installer binary (eg: iidrmc-11.4.0.4-11072-setup.exe
+
+Check the "LDAP Embedded Access Server" box  if you want to use and Embedded Access Server.
+
+![cdc_mc_install_noldap](images/cdc/cdc_mc_install_withldap.png)
+
+
+
+
+DDDDD
 
 Using the same Windows Management Console that was installed in the previous step, we would install a different Access Server with the LDAP Autentication-Only Option.
 
