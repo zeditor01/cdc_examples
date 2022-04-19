@@ -1,7 +1,7 @@
 [Back to README.md and Table of Contents.](README.md)
 
 # Securing CDC with TLS and LDAP
-This chapter covers authentication and encryption solutions for CDC
+This chapter covers authentication and authorisation solutions for CDC
 
 Ooops. This article hasn't been written yet.
 
@@ -15,8 +15,8 @@ Ooops. This article hasn't been written yet.
 <li><a href="#1.0">1 Authentication and Authentication for CDC using LDAP</a>
 <ul>
   <li><a href="#1.1">1.1 CDC Component Reference Scenarios</a></li>
-  <li><a href="#1.2">1.2 Authentication options for CDC Users</a></li> 
-  <li><a href="#1.3">1.3 Authorisation options for CDC Users</a></li>
+  <li><a href="#1.2">1.2 Authentication and Authorisation options for CDC Users</a></li> 
+  <li><a href="#1.3">1.3 TLS Encryption</a></li>
 </ul>
 <li><a href="#2.0">2. Configuring Authentication</a>
 <ul>
@@ -124,7 +124,9 @@ There is no single right answer here. CDC is designed to operate in wildly heter
 how operations and system automation is achieved because every site will be different. Hence - the provision of different options.
 
 
-<h3 id="1.3">1.3 Encryption options between CDC Components</h3>
+<h3 id="1.3">1.3 TLS Encryption</h3>
+
+TLS Encryption is covered in TLS Encryption is covered later, but deserves a quick preview in this paper. 
  
 Encryption of sensitive business data over a network should always be encrypted. CDC supports industry-standard Transport Layer Security 
 standards, as depicted in the diagram below.
@@ -138,23 +140,12 @@ The CDC knowledge center describes an approach using self-signed certificates be
 be more common for an enterprise to use a certificate authority to sign certificates to be stored at each end point. The worked 
 examples in this paper are based on certificate authority.
 
-<h4 id="1.3.1">1.3.1 Application-Controlled and Application-Transparent TLS</h4>
+Communication between Management Console and Access Server is encrypted using server-authenticated TLS.
 
-The implementation of TLS encryption is quite different between z/OS and other platforms.
+TLS Encryption is covered in TLS Encryption is covered in [14. CDC Security - TLS Encryption.](C014_TLS.md) . 
 
-* Linux, Unix and Windows platforms leave the application to manage the encryption process.
-* z/OS as a platform supports "Application-Transparent TLS" (AT-TLS)
 
-Consequently, CDC components conform to the standards of their respective operating systems.
 
-* CDC components on LUW platforms implement Application-Controlled TLS, and use an encryption profile to manage the mTLS processing.
-* CDC components on the z/OS platforms are completely ignorant of AT-TLS processing. As z/OS service ( Policy Agent ) is configured to intercept selected communications (eg: on specified TCPIP ports) and enforce TLS encryption.
-
-Both approaches implement exactly the same standards-based TLS, but the configuration is different.
-
-<h4 id="1.3.2">1.3.2 Management Console TLS encryption</h4>
-
-The windows Management Console supports server-authenticated TLS, which is simpler, and sufficient for a simple Graphical client to the Access Server
 
 <br><hr>
 
