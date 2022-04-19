@@ -41,17 +41,11 @@ This chapter covers authentication and authorisation solutions for CDC
   <li><a href="#5.3">5.3 Creating the first Access Server user (using the LDAP Server)</a></li> 
   <li><a href="#5.4">5.4 Subsequent Workflows with this setup.</a></li>  
 </ul> 
-
-
-
-
-<li><a href="#6.0">6. Operational Considerations arising from using Encryption</a>
+<li><a href="#6.0">6. Operational Considerations for Management Console, Access Server and LDAP Server</a>
 <ul>
-  <li><a href="#6.1">6.1 Always Encrypted CDC Agents</a></li>
-  <li><a href="#6.2">6.2 ???</a></li>
-  <li><a href="#6.3">6.3 ???</a></li> 
+  <li><a href="#6.1">6.1 Understand Site Standards</a></li>
+  <li><a href="#6.2">6.2 Don't overcomplicate a Proof of Concept</a></li>
 </ul>
-<li><a href="Appendix">Appendix: LDAP on z/OS with an LDBM backend</a></li>
 </ul>
 
 
@@ -879,6 +873,11 @@ and grant the desired authorities to each of them. For example, you might want t
 
 
 
+<li><a href="#6.0">6. Operational Considerations for Management Console, Access Server and LDAP Server</a>
+<ul>
+  <li><a href="#6.1">6.1 Understand Site Standards</a></li>
+  <li><a href="#6.2">6.2 Don't overcomplicate a Proof of Concept</a></li>
+
 
 
 
@@ -886,15 +885,26 @@ and grant the desired authorities to each of them. For example, you might want t
 
 <br><hr>
 
-<h2 id="6.0">6. Operational Considerations arising from using Encryption</h2>  
+<h2 id="6.0">6. Operational Considerations for Management Console, Access Server and LDAP Server</h2>  
+
+So many choices, so little time!
+
+Being a heterogenous, cross-platform, data replication solution, CDC is bound to cause you to interact with multiple groups in your organisation. You might 
+find yourself talking to IMS systems programmers, IMS DBAs, Network Administrators, z/OS Security admins, Midrange Security admins, 
+Cloud provisioning teams, Kafka admins, Open Source developers and so forth. When you are scoping your CDC project, it's a good idea to consider what teams 
+you might need to work with within your organisation and figure out how to work with them efficiently.
  
-<h3 id="6.1">6.1 Always Encrypted CDC Agents</h3>  
-<h3 id="6.2">6.2 ???</h3>
-<h3 id="6.3">6.3 ???</h3>
+ 
+<h3 id="6.1">6.1 Understand Site Standards</h3>  
+
+Site standards will likely dictate if you have to use LDAP and TLS. Find out what site standards apply, and get with the programme.
+
+<h3 id="6.2">6.2 Don't overcomplicate a Proof of Concept</h3>
+
+You might be evaluating the function and performance of CDC. If so, you might not need to include LDAP and TLS in the scope of your POC.
 
 <br><hr>
 
-<h2 id="Appendix">Appendix: LDAP on z/OS with an LDBM backend.</h2>  
 
 
 
