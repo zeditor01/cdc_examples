@@ -12,7 +12,8 @@ This chapter covers authentication and authorisation solutions for CDC
 <ul>
   <li><a href="#1.1">1.1 CDC Component Reference Scenarios</a></li>
   <li><a href="#1.2">1.2 Authentication and Authorisation options for CDC Users</a></li> 
-  <li><a href="#1.3">1.3 TLS Encryption</a></li>
+  <li><a href="#1.3">1.3 Embedded Access Server</a></li> 
+  <li><a href="#1.4">1.4 TLS Encryption</a></li>
 </ul>
 <li><a href="#2.0">2. Configuring Authentication and Authorisation without an LDAP Server</a>
 <ul>
@@ -41,25 +42,8 @@ This chapter covers authentication and authorisation solutions for CDC
   <li><a href="#5.4">5.4 Subsequent Workflows with this setup.</a></li>  
 </ul> 
 
-<li><a href="#3.0">3. Encryption between Management Console and Access Server</a>
-<li><a href="#4.0">4. Encryption between Access Server and CDC Agents</a>
-<ul>
-  <li><a href="#4.1">4.1 Mutually Authenticated TLS Encryption</a></li>
-  <li><a href="#4.2">4.2 Simplistic mTLS with Self-Signed Certificates</a></li>
-  <li><a href="#4.3">4.3 mTLS with Certificate Authorities</a></li>
-  <li><a href="#4.4">4.4 Application Controlled TLS (LUW)</a></li>  
-  <li><a href="#4.5">4.5 Application Transparent TLS (z/OS)</a></li>
-</ul> 
-<li><a href="#5.0">5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent</a>
-<ul>
-  <li><a href="#5.1">5.1 Environment for Scenario without Encryption</a></li>
-  <li><a href="#5.2">5.2 mTLS configuration of Access Server</a></li>
-  <li><a href="#5.3">5.3 mTLS configuration of CDC Apply on Linux</a></li>
-  <li><a href="#5.4">5.4 AT-TLS configuration of CDC Capture on z/OS</a></li>  
-  <li><a href="#5.5">5.5 Certificate Exchanges between platforms</a></li>
-  <li><a href="#5.6">5.6 Operating CDC with mTLS encryption</a></li>
-  <li><a href="#5.7">5.7 Monitoring and Tracing of encrypted network flows</a></li>  
-</ul>
+
+
 <li><a href="#6.0">6. Operational Considerations arising from using Encryption</a>
 <ul>
   <li><a href="#6.1">6.1 Always Encrypted CDC Agents</a></li>
@@ -73,7 +57,7 @@ This chapter covers authentication and authorisation solutions for CDC
 <br><hr>
 
 <h2 id="abstract"> Abstract</h2>
-In recent years cyber security has become a fundamental requirement of any system that communicates over a network, regardless of whether it is a public or a private network.
+Cyber security (authentication, authorisation, encryption etc... ) is a fundamental requirement of any system that communicates over a network, regardless of whether it is a public or a private network.
 This document provides worked examples of
 
 * Implementing authentication and authorisation for CDC Administration Users with Access Server alone. 
@@ -85,7 +69,7 @@ Comprehensive details of all CDC security features is covered in the <a href="ht
   
 TLS Encryption is mentioned briefly in this paper, and covered in detail in [14. CDC Security - TLS Encryption.](C014_TLS.md) 
  
-It is part of a series of documents providing practical worked examples and 
+This paper is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
 The complete set of articles can be accessed using the README link at the very top of this page. 
 
@@ -120,14 +104,16 @@ Users of the Windows Management Console must be authenticated by the Access Serv
 
 If you use the LDAP option, then you have two further options.
 1. Authentication only, where an authenticated user can then perform any CDC Access Server tasks.
-2. Authentication and Authorisation, where specific privileges against specific CDC datastores are controlled.
+2. Authentication and Authorisation, where specific privileges against specific CDC datastores are controlled at the Access Server.
 
 Whichever LDAP option you choose, the CDC agent itself is subject to whatever authentication and authorisation controls are
 implement at the various data sources. Whether z/OS or Linux, this would normally be a mixture of OS Authentication 
 and associated DBMS authorisation.
 
 
-It is possible to use an "embedded" Access Server, that is installed as part of the Management console, as depicted below.
+<h3 id="1.3">1.3 Embedded Access Server</h3>
+
+It is also possible to use an "embedded" Access Server, that is installed as part of the Management console, as depicted below.
 
 ![CDC Components](images/cdc/cdcsec03.png)
 
@@ -140,10 +126,14 @@ may be attractive depending on the way that CDC will be operated and managed in 
 There is no single right answer here. CDC is designed to operate in wildly heterogeneous environments. It tries not to be prescriptive on 
 how operations and system automation is achieved because every site will be different. Hence - the provision of different options.
 
+<b>Important Note:</b> The decision of whether to use LDAP, and whether to use an embedded Access Server or a separate Access Server need to be made 
+at installation time, because you need to choose what functions to install during the installation dialog.
 
-<h3 id="1.3">1.3 TLS Encryption</h3>
 
-TLS Encryption is covered in TLS Encryption is covered later, but deserves a quick preview in this paper. 
+
+<h3 id="1.4">1.4 TLS Encryption</h3>
+
+TLS Encryption is covered in depth in the next paper, but deserves a quick preview in this paper. 
  
 Encryption of sensitive business data over a network should always be encrypted. CDC supports industry-standard Transport Layer Security 
 standards, as depicted in the diagram below.
@@ -159,17 +149,18 @@ examples in this paper are based on certificate authority.
 
 Communication between Management Console and Access Server is encrypted using server-authenticated TLS.
 
-TLS Encryption is covered in TLS Encryption is covered in [14. CDC Security - TLS Encryption.](C014_TLS.md) . 
+TLS Encryption is covered with worked examples in [14. CDC Security - TLS Encryption.](C014_TLS.md) . 
 
 
 
 
 <br><hr>
 
-<h2 id="#2.0">2. Configuring Authentication and Authorisation</h2> 
+<h2 id="#2.0">2. Configuring Authentication and Authorisation without an LDAP Server</h2> 
 
-This sections provides worked example of the three configuration options for authentication using a separate Access Server.
-Should you wish to deploy an embedded Access Server, the principles in the examples below should be enough to see you right.
+This section covers the simplest model for Authentication and Authorisation for CDC Administration Users: Just use the Management Console and 
+the Access Server components without an LDAP Server, and use the native authentication and authorisation functions provided by CDC.
+
 
 <b>Important Note:</b> These three options are mutually exclusive for an installation of the access server. 
 You must decide which option you want to use, and choose the appropriate option at installation time.
