@@ -18,12 +18,33 @@ Ooops. This article hasn't been written yet.
   <li><a href="#1.2">1.2 Authentication and Authorisation options for CDC Users</a></li> 
   <li><a href="#1.3">1.3 TLS Encryption</a></li>
 </ul>
-<li><a href="#2.0">2. Configuring Authentication</a>
+<li><a href="#2.0">2. Configuring Authentication and Authorisation without an LDAP Server</a>
 <ul>
   <li><a href="#2.1">2.1 Authentication without LDAP</a></li>
   <li><a href="#2.2">2.2 Authentication-Only with LDAP</a></li>
   <li><a href="#2.3">2.3 Authentication and Authorization with LDAP</a></li>
 </ul> 
+<li><a href="#3.0">3. Setting up an LDAP Server for CDC</a>
+<ul>
+  <li><a href="#3.1">3.1 Installing Open LDAP on a Raspberry Pi</a></li>
+  <li><a href="#3.2">3.2 Adding CDC-related directory entries</a></li>
+  <li><a href="#3.3">3.3 Verifying remote access to the LDAP Server</a></li>
+</ul> 
+<li><a href="#4.0">4. Setting up a separate Access Server to use the LDAP Server</a>
+<ul>
+  <li><a href="#4.1">4.1 Installing Access Server to use an LDAP Server</a></li>
+  <li><a href="#4.2">4.2 Editing ldap.properties to use the LDAP Server</a></li>
+  <li><a href="#4.3">4.3 Creating the first Access Server user (using the LDAP Server)</a></li> 
+  <li><a href="#4.4">4.4 Subsequent Workflows with this setup.</a></li>  
+</ul> 
+<li><a href="#5.0">4. Setting up an Embedded Access Server to use the LDAP Server</a>
+<ul>
+  <li><a href="#5.1">5.1 Installing Management Console with Embedded Access Server to use an LDAP Server</a></li>
+  <li><a href="#5.2">5.2 Editing ldap.properties to use the LDAP Server</a></li>
+  <li><a href="#5.3">5.3 Creating the first Access Server user (using the LDAP Server)</a></li> 
+  <li><a href="#5.4">5.4 Subsequent Workflows with this setup.</a></li>  
+</ul> 
+
 <li><a href="#3.0">3. Encryption between Management Console and Access Server</a>
 <li><a href="#4.0">4. Encryption between Access Server and CDC Agents</a>
 <ul>
@@ -49,7 +70,7 @@ Ooops. This article hasn't been written yet.
   <li><a href="#6.2">6.2 ???</a></li>
   <li><a href="#6.3">6.3 ???</a></li> 
 </ul>
-<li><a hrex="Appendix">Appendix: LDAP on z/OS with an LDBM backend</li>
+<li><a href="Appendix">Appendix: LDAP on z/OS with an LDBM backend</li>
 </ul>
 
 
@@ -149,7 +170,7 @@ TLS Encryption is covered in TLS Encryption is covered in [14. CDC Security - TL
 
 <br><hr>
 
-<h2 id="#2.0">2. Configuring Authentication</h2> 
+<h2 id="#2.0">2. Configuring Authentication and Authorisation</h2> 
 
 This sections provides worked example of the three configuration options for authentication using a separate Access Server.
 Should you wish to deploy an embedded Access Server, the principles in the examples below should be enough to see you right.
