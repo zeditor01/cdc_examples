@@ -460,6 +460,161 @@ Check the "LDAP Embedded Access Server" box  if you want to use and Embedded Acc
 
 ![cdc_mc_install_noldap](images/cdc/cdc_mc_install_withldap.png)
 
+Complete the installation, start the Management Console.
+The TCPIP address and port of the Access Server will be greyed out. They are hardcoded to perform TCPIP loopback to the embedded Access Server.
+
+You will still need to issue the dmcreateuser command to create the CDC SYSADMIN userid.
+After that, the user interface is identical to the previous scenario.
+
+
+ 
+  
+<h2 id="#3.0">3. Setting up an LDAP Server for CDC</h2>   
+
+Many enterprises will want to use standard authentication mechanisms for all IT activities that require a logon identity to be authenticated, controlled and auditable.
+Lightweight Directory Access Protocol is used extensively to access many directory and authentication services like Microsoft Active Directory, IBM Tivoli Directory Server, 
+Open LDAP and others. CDC provides integration with LDAP so that you can use any commercial or open source directory that is LDAP-compliant.
+  
+CDC requires that you conform to a distinguished name of "o=cdc,dc=ibm" 
+  
+  
+<h3 id="3.1">3.1 Installing Open LDAP on a Raspberry Pi</h3>
+
+In my test environment, I chose to deploy an Open LDAP Server on a Raspberry Pi. My Raspberry Pi is an always-on server performing many network services for my home network, 
+which made it the perfect choice for me. The setup of Open LDAP on Pi is virtually identical to open LDAP on any other Linux distribution.
+
+First up, install open LDAP and supporting utilities with the following command.
+
+```
+sudo apt-get install slapd ldap-utils
+```
+
+Next, invoke the dialog to configure the Open LDAP Server, with the following command.
+
+```
+sudo dpkg-reconfigure slapd 
+```
+
+My responses to the configuration dialog were as follows
+
+* omit LDAP server config = No
+* specify dns domain name = ibm
+* specify organisational name = cdc
+* specify admin password = secret
+* for the directory backend datastore : use MDB
+* when asked to purge database on slapdremoval : no
+* move old DB after reconfiguration :  yes
+
+The OpenLDAP server can be operated with standard commands such as
+
+* sudo systemctl start slapd
+* sudo systemctl enable slapd
+* sudo systemctl stop slapd
+
+
+Finally  perform an LDAP search to verify the cdc entries don’t exist.
+
+```
+pi@raspberrypi:~ $ ldapsearch -x -LLL -b "o=cdc,dc=ibm"
+No such object (32)
+Matched DN: dc=ibm
+```
+
+<h3 id="3.2">3.2 Adding CDC-related directory entries</h3>
+  
+Edit an ldif file to define the distinguised names required by CDC.
+
+```
+pi@raspberrypi:~ $ cat cdcbase.ldif
+dn: o=cdc,dc=ibm
+objectclass: top
+objectclass: organization
+o: cdc
+
+dn: cn=cdcadmin,o=cdc,dc=ibm
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: cdcadmin
+sn: Administrator
+userPassword: secret
+```
+
+Add the contents of the ldif file to the OpenLDAP server with the following command.
+
+```
+pi@raspberrypi:~ $ ldapadd -x -W -D cn=admin,dc=ibm -f cdcbase.ldif
+Enter LDAP Password:
+adding new entry "o=cdc,dc=ibm"
+
+adding new entry "cn=cdcadmin,o=cdc,dc=ibm"
+```
+  
+Finally, perform a local ldapsearch to verify the names
+
+```
+pi@raspberrypi:~ $ ldapsearch -x -LLL -b "o=cdc,dc=ibm"
+dn: o=cdc,dc=ibm
+objectClass: top
+objectClass: organization
+o: cdc
+
+dn: cn=cdcadmin,o=cdc,dc=ibm
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+cn: cdcadmin
+sn: Administrator
+
+```  
+
+
+<h3 id="3.3">3.3 Verifying remote access to the LDAP Server</h3>
+
+Typically the CDC Access Server (192.168.1.32 in my case) will be remote from the LDAP Server (192.168.1.66 in my case), so 
+it's a good idea to verify LDAP access from the Access Server.  
+
+The ldapsearch call from the Access Server system will need to specify
+* the TCPIP address and port of the LDAP Server ```-h 192.168.1.66 -p 389```
+* the distinguished name for CDC ```-D "cn=cdcadmin,o=cdc,dc=ibm"```
+* the password for the distinguished name ```-w secret```
+
+My search from the Access Server system was successful as follows.
+
+```
+$ ldapsearch -h 192.168.1.66 -p 389 -D "cn=cdcadmin,o=cdc,dc=ibm" -w secret -b o=cdc,dc=ibm
+# extended LDIF
+#
+# LDAPv3
+# base <o=cdc,dc=ibm> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# cdc, ibm
+dn: o=cdc,dc=ibm
+objectClass: top
+objectClass: organization
+o: cdc
+
+# cdcadmin, cdc, ibm
+dn: cn=cdcadmin,o=cdc,dc=ibm
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+cn: cdcadmin
+sn: Administrator
+userPassword:: c2VjcmV0
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 3
+# numEntries: 2 
+```
+
+
 
 
 
