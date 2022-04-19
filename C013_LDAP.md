@@ -14,12 +14,12 @@ This chapter covers authentication and authorisation solutions for CDC
   <li><a href="#1.2">1.2 Authentication and Authorisation options for CDC Users</a></li> 
   <li><a href="#1.3">1.3 Embedded Access Server</a></li> 
   <li><a href="#1.4">1.4 TLS Encryption</a></li>
-</ul>
+</ul>  
+
 <li><a href="#2.0">2. Configuring Authentication and Authorisation without an LDAP Server</a>
 <ul>
-  <li><a href="#2.1">2.1 Authentication without LDAP</a></li>
-  <li><a href="#2.2">2.2 Authentication-Only with LDAP</a></li>
-  <li><a href="#2.3">2.3 Authentication and Authorization with LDAP</a></li>
+  <li><a href="#2.1">2.1 Setting up Management Console and separate Access Server to perform Authentication without LDAP</a></li>
+  <li><a href="#2.2">2.2 Setting up Management Console with embedded Access Server to perform Authentication without LDAP</a></li>
 </ul> 
 <li><a href="#3.0">3. Setting up an LDAP Server for CDC</a>
 <ul>
@@ -41,6 +41,7 @@ This chapter covers authentication and authorisation solutions for CDC
   <li><a href="#5.3">5.3 Creating the first Access Server user (using the LDAP Server)</a></li> 
   <li><a href="#5.4">5.4 Subsequent Workflows with this setup.</a></li>  
 </ul> 
+
 
 
 
@@ -126,7 +127,7 @@ may be attractive depending on the way that CDC will be operated and managed in 
 There is no single right answer here. CDC is designed to operate in wildly heterogeneous environments. It tries not to be prescriptive on 
 how operations and system automation is achieved because every site will be different. Hence - the provision of different options.
 
-<b>Important Note:</b> The decision of whether to use LDAP, and whether to use an embedded Access Server or a separate Access Server need to be made 
+<b>IMPORTANT NOTE:</b> The decision of whether to use LDAP, and whether to use an embedded Access Server or a separate Access Server need to be made 
 at installation time, because you need to choose what functions to install during the installation dialog.
 
 
@@ -162,10 +163,7 @@ This section covers the simplest model for Authentication and Authorisation for 
 the Access Server components without an LDAP Server, and use the native authentication and authorisation functions provided by CDC.
 
 
-<b>Important Note:</b> These three options are mutually exclusive for an installation of the access server. 
-You must decide which option you want to use, and choose the appropriate option at installation time.
-
-<h3 id="2.1">2.1 Authentication without LDAP</h3>
+<h3 id="2.1">2.1 Setting up Management Console and separate Access Server to perform Authentication without LDAP</h3>
 
 Authentication without LDAP is easy. It's probably a good option if you are assessing CDC for it's replication capabilities without the effort of configuring a hardened operational production service.
 The steps are
@@ -179,11 +177,45 @@ The result of these steps will be that Access Server uses an encrypted local fil
 
 Screenshots from the sequence of steps follow
 
-<b>Step 1:</b> Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
+<b>Step 1:</b> Install Windows Management Console without the embedded access server.
+
+Run the installer binary (eg: iidrmc-11.4.0.4-11072-setup.exe
+
+Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
 
 ![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
 
-<b>Step 2:</b> Installation dialog to install the Access Server (on Linux) without the LDAP option.
+<b>Step 2:</b> Install the Access Server without the LDAP Option.
+
+Prepare a Linux system for installing access server as follows
+
+* create a group (cdcadm1) and a userid (cdcinst1)  
+* set the password for the userid
+* give the userid the ability to sudo 
+* create the installation directories needed for installation
+* change the ownership of the installation directories 
+
+``` 
+groupadd -g 970 cdcadm1
+
+useradd -u 1070 -g cdcadm1 -m -d /home/cdcinst1 cdcinst1
+
+passwd cdcinst1
+(favepwd)
+
+usermod -aG sudo cdcinst1
+
+mkdir /opt/IBM/InfoSphereDataReplication  
+
+chown cdcinst1 /opt/IBM/InfoSphereDataReplication
+chgrp cdcadm1 /opt/IBM/InfoSphereDataReplication
+```
+
+
+The installation binary for linux x86 is iidraccess-11.4.0.4-11072-linux-x86-setup.bin
+
+The code block below is the entire Installation dialog to install the Access Server (on Linux) without the LDAP option.
+
 
 ```
 $ unset DISPLAY
