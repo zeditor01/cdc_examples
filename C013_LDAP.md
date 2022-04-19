@@ -66,7 +66,7 @@ This chapter covers authentication and authorisation solutions for CDC
   <li><a href="#6.2">6.2 ???</a></li>
   <li><a href="#6.3">6.3 ???</a></li> 
 </ul>
-<li><a href="Appendix">Appendix: LDAP on z/OS with an LDBM backend</li>
+<li><a href="Appendix">Appendix: LDAP on z/OS with an LDBM backend</a></li>
 </ul>
 
 
