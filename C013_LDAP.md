@@ -619,8 +619,42 @@ That concludes the setup of the OpenLDAP Server.
 
 <h2 id="4.0">4.0 Setting up a separate Access Server to use the LDAP Server</h2>
 
+Section 4 covers the scenario where separate Management Console and Access Server are used with an LDAP Server.
+(Section 5 covers the Management Console with embedded Access Server using an LDAP Server).
+
+First Up, install the Management Console without the embedded access server, just like the base example in <a href="#2.0">2. Configuring Authentication and Authorisation without an LDAP Server</a>.
+
+Run the installer binary (eg: iidrmc-11.4.0.4-11072-setup.exe
+
+Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
+
+![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
+
 
 <h3 id="4.1">4.1 Installing Access Server to use an LDAP Server</h3>
+
+Next, install the Access Server, and select option 2 to enable LDAP Authentication Only.
+
+The installation binary for linux x86 is iidraccess-11.4.0.4-11072-linux-x86-setup.bin
+
+For brevity, I will not repeat the output of the entire installtion dialog, but I will include the "Enable LDAP Configuration" step.
+
+Note the question "Enable LDAP Configuration" and the response "2- LDAP Authentication Only"
+
+```
+===============================================================================
+Enable LDAP Configuration
+-------------------------
+
+Enable and select an LDAP configuration.
+  ->1- None (Standard Mode)
+    2- LDAP Authentication Only
+    3- LDAP Authentication & Authorization
+    4- LDAP CHCCLP Embedded
+
+CHOOSE LDAP CONFIGURATION BY NUMBER, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
+   : 2
+```
 
 <h3 id="4.2">4.2 Editing ldap.properties to use the LDAP Server</h3>
 
