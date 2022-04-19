@@ -614,6 +614,23 @@ result: 0 Success
 # numEntries: 2 
 ```
 
+That concludes the setup of the OpenLDAP Server.
+
+
+<h2 id="4.0">4.0 Setting up a separate Access Server to use the LDAP Server</h2>
+
+
+<h3 id="4.1">4.1 Installing Access Server to use an LDAP Server</h3>
+
+<h3 id="4.2">4.2 Editing ldap.properties to use the LDAP Server</h3>
+
+<h3 id="4.3">4.3 Creating the first Access Server user (using the LDAP Server)</h3>
+
+<h3 id="4.4">4.4 Subsequent Workflows with this setup</h3>
+
+
+
+
 
 
 
