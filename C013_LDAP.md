@@ -441,7 +441,7 @@ Alternatively, you can click on the Access Manager tab, and create a hierarchy o
 For example, you might want to control which cdc users are authorised to work with which CDC sources and targets. 
 
 
-<h3 id="2.2">2.2 Setting up Management Console with embedded Access Server to perform Authentication >>> WITHOUT <<< LDAP</h3>
+<h3 id="2.2">2.2 Setting up Management Console with embedded Access Server for Authentication >>> WITHOUT <<< LDAP</h3>
 
 If you wish to use Management Console with an embedded Access Server, you need to perform a separate installtion.
 
