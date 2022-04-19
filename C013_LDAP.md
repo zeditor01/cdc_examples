@@ -448,7 +448,7 @@ If you wish to use Management Console with an embedded Access Server, you need t
 * a Management Console installation either connects to separate Access Server, or uses an embedded Access Server.
 * After installation, the type of Access Server being used cannot be changed.
 
-Run the installer binary (eg: iidrmc-11.4.0.4-11072-setup.exe
+Run the installer binary (eg: iidrmc-11.4.0.4-11072-setup.exe)
 
 Check the "LDAP Embedded Access Server" box  if you want to use and Embedded Access Server.
 
@@ -469,7 +469,7 @@ Many enterprises will want to use standard authentication mechanisms for all IT 
 Lightweight Directory Access Protocol is used extensively to access many directory and authentication services like Microsoft Active Directory, IBM Tivoli Directory Server, 
 Open LDAP and others. CDC provides integration with LDAP so that you can use any commercial or open source directory that is LDAP-compliant.
   
-CDC requires that you conform to a distinguished name of "o=cdc,dc=ibm" 
+CDC requires that you conform to a distinguished name base of "o=cdc,dc=ibm" 
   
   
 <h3 id="3.1">3.1 Installing Open LDAP on a Raspberry Pi</h3>
@@ -506,7 +506,7 @@ The OpenLDAP server can be operated with standard commands such as
 * sudo systemctl stop slapd
 
 
-Finally  perform an LDAP search to verify the cdc entries don’t exist.
+Finally  perform an LDAP search to verify the cdc entries don’t yet exist.
 
 ```
 pi@raspberrypi:~ $ ldapsearch -x -LLL -b "o=cdc,dc=ibm"
@@ -517,6 +517,11 @@ Matched DN: dc=ibm
 <h3 id="3.2">3.2 Adding CDC-related directory entries</h3>
   
 Edit an ldif file to define the distinguised names required by CDC.
+
+We need two distinguished names.
+
+* the base DN is "o=cdc,dc=ibm"
+* the DN of users will add the common name, for exampe "cn=cdcadmin,o=cdc,dc=ibm"
 
 ```
 pi@raspberrypi:~ $ cat cdcbase.ldif
@@ -869,14 +874,6 @@ As before, you can either start doing CDC administration work under cdcadmin...
 
 ... or Alternatively, you can click on the Access Manager tab, and create a hierarchy of cdc administration users, 
 and grant the desired authorities to each of them. For example, you might want to control which cdc users are authorised to work with which CDC sources and targets.
-
-
-
-
-<li><a href="#6.0">6. Operational Considerations for Management Console, Access Server and LDAP Server</a>
-<ul>
-  <li><a href="#6.1">6.1 Understand Site Standards</a></li>
-  <li><a href="#6.2">6.2 Don't overcomplicate a Proof of Concept</a></li>
 
 
 
