@@ -81,13 +81,9 @@ This document provides worked examples of
 * Using CDC Management Console with an embedded Access Server.
 
 It does not attempt to cover all of CDC's security features.
-Comprehensive details of all CDC security features is covered in  <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
- 
- 
-It does not attempt to cover all the product's security features. 
-Comprehensive details of the product's features are covered in <a> href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
- 
-TLS Encryption is covered in [14. CDC Security - TLS Encryption.](C014_TLS.md) 
+Comprehensive details of all CDC security features is covered in the <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
+  
+TLS Encryption is mentioned briefly in this paper, and covered in detail in [14. CDC Security - TLS Encryption.](C014_TLS.md) 
  
 It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
