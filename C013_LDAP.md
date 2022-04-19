@@ -81,10 +81,7 @@ This document provides worked examples of
 * Using CDC Management Console with an embedded Access Server.
 
 It does not attempt to cover all of CDC's security features.
-Comprehensive details of all CDC security features is covered in 
-
-
-details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM Classic CDC knowledge centre.</a>
+Comprehensive details of all CDC security features is covered in  <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
  
  
 It does not attempt to cover all the product's security features. 
