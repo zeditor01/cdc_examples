@@ -151,7 +151,7 @@ TLS Encryption is covered with worked examples in [14. CDC Security - TLS Encryp
 
 <br><hr>
 
-<h2 id="#2.0">2. Configuring Authentication and Authorisation WITHOUTT an LDAP Server</h2> 
+<h2 id="#2.0">2. Configuring Authentication and Authorisation >>> WITHOUT <<< an LDAP Server</h2> 
 
 This section covers the simplest model for Authentication and Authorisation for CDC Administration Users: Just use the Management Console and 
 the Access Server components without an LDAP Server, and use the native authentication and authorisation functions provided by CDC.
