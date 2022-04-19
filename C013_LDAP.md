@@ -620,7 +620,7 @@ That concludes the setup of the OpenLDAP Server.
 <h2 id="4.0">4.0 Setting up a separate Access Server to use the LDAP Server</h2>
 
 Section 4 covers the scenario where separate Management Console and Access Server are used with an LDAP Server.
-(Section 5 covers the Management Console with embedded Access Server using an LDAP Server).
+(Section 5, later on, covers the Management Console with embedded Access Server using an LDAP Server).
 
 First Up, install the Management Console without the embedded access server, just like the base example in <a href="#2.0">2. Configuring Authentication and Authorisation without an LDAP Server</a>.
 
@@ -658,9 +658,114 @@ CHOOSE LDAP CONFIGURATION BY NUMBER, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
 
 <h3 id="4.2">4.2 Editing ldap.properties to use the LDAP Server</h3>
 
+You must edit the ldap.properties file to tell Access Server how to connect to the LDAP Server. ```/opt/IBM/InfoSphereDataReplication/AccessServer/ldap.properties```
+
+1. Provide the TCPIP address of the LDAP Server : ldapHost=192.168.1.66
+2. Provide the TCPIP port that the LDAP Server is listening on : ldapPort=389
+3. Specify whether to access the LDAP server with SSL : false
+4. Specify the LDAP Authentication user search base (authUserBaseDN, and authUserIDAttribute)
+5. Specify the cdcBaseDN (o=cdc,dc=ibm)
+
+Not being experienced in LDAP, the bit I found confusing was the Authentication user search base. 
+
+* authUserIDAttribute=cn means that CDC will be specifying string that represents a common name in LDAP
+* authUserBaseDN=o=cdc,dc=ibm specifies how CDC should expand the provided common name to define the distinguished name to use
+
+So, If I enter a common name of cdcadmin into CDC, it will expand that into a distinguished name of "cn=cdcadmin,o=cdc,dc=ibm" when it connects to LDAP, which is the 
+same as we used to successfully test ldap search from this server. ```ldapsearch -h 192.168.1.66 -p 389 -D "cn=cdcadmin,o=cdc,dc=ibm" -w secret -b o=cdc,dc=ibm```
+
+
+The contents of my ldap.properties file is here: 
+
+```
+$ pwd
+/opt/IBM/InfoSphereDataReplication/AccessServer
+$ cat ldap.properties
+#
+# Sample configuration properties file for LDAP authentication support.
+#
+ldapHost=192.168.1.66
+ldapPort=389
+# Specify whether LDAP server is accessed through SSL port. (ldaps://)
+SSL=false
+# When LDAP server is accessed through normal(unprotected) port,
+# specify if access via the use of the Start TLS Extension.
+useTLS=false
+# Supported authentication: SIMPLE, DIGEST-MD5, CRAM-MD5
+ldapAuthMeth=SIMPLE
+# REALM is only required for DIGEST-MD5
+#ldapRealm=IBM.COM
+#
+# Authentication user search base
+authUserBaseDN=o=cdc,dc=ibm
+authUserIDAttribute=cn
+#
+# CDC base DN
+cdcBaseDN=o=cdc,dc=ibm
+
+#CDC user OU. Optional, default as following, only override when needed
+#userSearchBase=ou=as
+#userNameAttribute=cn
+#userRoleAttribute=sn
+#datastoreAccessAttribute=description
+
+#CDC datastore OU. Optional, default as following, only override when needed
+#datastoreSearchBase=ou=datastore
+#datastoreNameAttribute=cn
+#datastoreDefinitionAttribute=description
+
+```
+
+The CDC Access Server must be recycled for changes to take effect.
+
+
 <h3 id="4.3">4.3 Creating the first Access Server user (using the LDAP Server)</h3>
 
+Now that CDC is configured to use the LDAP Server, the first task is to create the first Access Server user <b>within</b> the LDAP Server.
+
+This is done using a CHCCLP command as follows.
+
+Logged on as cdcinst1, navigate to /opt/IBM/InfoSphereDataReplication/AccessServer/bin
+
+Invoke CHCCLP, and issue the add ldap access manager command.
+
+```
+$ ls
+asnclp  chcclp  dmaccessserver  dmshowversion  dmshutdownserver
+$ ./chcclp
+Command Line Processor for IBM InfoSphere Data Replication 11.4.0 [Build 11072]
+(c) Copyright IBM Corporation 2013, 2016
+
+You can execute IBM InfoSphere Data Replication commands from the command
+prompt. Use double quotes around parameter values that contain special
+characters or syntax keywords, or around empty strings. If the parameter value
+contains double quotes, use single quotes around the value. Commands must be
+terminated with ; and can span multiple lines.
+
+For help on the available commands or for a specific command, type:
+
+  help;
+  help "connect server";
+  help "11.3";
+
+To turn on verbose output, type:
+
+  set verbose;
+
+To exit interactive mode, type exit; or quit;
+
+Repl > add ldap access manager username cdcadmin password secret ;
+Repl >
+
+```
+
+
 <h3 id="4.4">4.4 Subsequent Workflows with this setup</h3>
+
+As before, you can either start doing CDC administration work under cdcadmin... 
+
+... or Alternatively, you can click on the Access Manager tab, and create a hierarchy of cdc administration users, 
+and grant the desired authorities to each of them. For example, you might want to control which cdc users are authorised to work with which CDC sources and targets.
 
 
 
