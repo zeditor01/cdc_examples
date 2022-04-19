@@ -15,11 +15,11 @@ It contains
 | [1. Environment for CDC Worked Examples.](C001_environment.md) | [10. Creating and Operating CDC Subscriptions.](C010_administration.md) |
 | [2. Setting up CDC for Db2 on z/OS.](C002_cdcdb2zos.md) | [11. Devops Options for CDC.](C011_devops.md) | 
 | [3. Setting up Classic CDC for IMS.](C003_cdcims.md) | [12. CHCCLP Scripting.](C012_chcclp.md) |
-| [4. Setting up Classic CDC for VSAM.](C004_cdcvsam.md) | [13. Security for CDC (LDAP and TLS).](C013_security.md) |
-| [5. Setting up CDC for Kafka in zCX.](C005_zcx.md) | [14. Container Deployment.](C014_containers.md) |
-| [6. Setting up CDC for Db2 on Linux.](C006_db2linux.md) | [15. Monitoring and Managing outwith the Windows MC.](C015_dashboard.md) |
-| [7. Setting up CDC for Kafka.](C007_kafka.md) | [16. CDC Use-Case Suitability.](C016_use_cases.md)  |
-| [8. Setting up remote CDC Capture for Db2 z/OS.](C008_rdb2zos.md) |     |
+| [4. Setting up Classic CDC for VSAM.](C004_cdcvsam.md) | [13. CDC Security - LDAP Authentication and Authorisation.](C013_LDAP.md) |
+| [5. Setting up CDC for Kafka in zCX.](C005_zcx.md) | [14. CDC Security - TLS Encryption.](C014_TLS.md) |
+| [6. Setting up CDC for Db2 on Linux.](C006_db2linux.md) | [15. Container Deployment.](C015_containers.md) |
+| [7. Setting up CDC for Kafka.](C007_kafka.md) | [16. Monitoring and Managing outwith the Windows MC.](C016_dashboard.md)  |
+| [8. Setting up remote CDC Capture for Db2 z/OS.](C008_rdb2zos.md) | [17. CDC Use-Case Suitability.](C017_use_cases.md)  |
 | [9. Setting up remote CDC Capture for VSAM.](C009_rvsam.md) |     |    
 
 
