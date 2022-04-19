@@ -215,7 +215,9 @@ chgrp cdcadm1 /opt/IBM/InfoSphereDataReplication
 The installation binary for linux x86 is iidraccess-11.4.0.4-11072-linux-x86-setup.bin
 
 The code block below is the entire Installation dialog to install the Access Server (on Linux) without the LDAP option.
+I prefer to force installers on Linux to execute in command mode rather than invoke a GUI, hence the "unset DISPLAY" command.
 
+Note the question "Enable LDAP Configuration" and the response "2- LDAP Authentication Only"
 
 ```
 $ unset DISPLAY
