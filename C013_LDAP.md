@@ -1,11 +1,7 @@
 [Back to README.md and Table of Contents.](README.md)
 
-# Securing CDC with TLS and LDAP
+# Securing CDC with LDAP
 This chapter covers authentication and authorisation solutions for CDC
-
-Ooops. This article hasn't been written yet.
-
-![Roadwork](images/work_in_progress.jpg)
 
 
 ## Contents
