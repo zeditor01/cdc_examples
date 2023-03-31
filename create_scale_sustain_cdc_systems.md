@@ -16,7 +16,7 @@ IBM Z Data and AI Technical Specialist, IBM Australia.
 
 Last Update: April 2023.
 
-## Contents
+## Links to Documents in this repository
 1. Establishing sustainable devops management of the designed CDC solution (this document)
 2. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
 3. Securing all points of the CDC solution. (Authentication, Authorisation, Encryption)
@@ -27,7 +27,18 @@ Last Update: April 2023.
 8. Shift-Right deployment options (remote capture agents) to facilitate an LUW operational control plane
 9. Shift-Left deployment options (zCX containers) to facilitate a z/OS operational control plane.
 
-## The true nature of a heterogenous data replication project
+## Contents of this document
+
+1. The true nature of a heterogenous data replication project
+2. Risk Mitigation
+3. CDC Implementation (Theory) 
+4. CDC Implementation (Practice)
+5. Common Constraints that will make things difficult
+6. First Implementation in Test
+7. Ongoing Devops after Successful Production Deployment
+8. Shift Left or Shift Right for Devops Sustainability
+
+## 1. The true nature of a heterogenous data replication project
 Establishing CDC replication solutions in a "simple unconstrained environment" is fairly straightforward. 
 * Install and configure the CDC components (capture agent, apply agent, admin tools)
 * Define data replication subscriptions
@@ -82,19 +93,19 @@ the following high-level strategies (some obvious, other less so) may form part 
 * Present the solution to the teams, and secure agreement to them supporting their responsibilities (or identify and resolve differing viewpoints)
 * Refine the design if appropriate, and proceed with the managed project 
 
-## CDC Implementation (Theory)
+## 2. CDC Implementation (Theory)
 
 Complex but manageale.
 Picture and explanation of Simplest Likely scenarios ( TLS , MC GUI )
 
-## CDC Implementation (Practice)
+## 3. CDC Implementation (Practice)
 
 Realistic real-world scenarios
 Picture to include all technical complexities
 Picture to overlay different teams
 
 
-## Common Constraints that will make things difficult
+## 4. Common Constraints that will make things difficult
 
 IMS ( logging, exits, augmentation of databases, DRA, copybook changes )
 Db2 z/OS ( logging, DDL changes, break-in )
@@ -108,20 +119,20 @@ Devt, Test and Prod environments, and testing and promotion
 Use of Windows client in a production environment 
 Automation
 
-## First Implementation in Test
+## 5. First Implementation in Test
 
 mechanical & organisation
 nuances of TLS establishment between z/OS and LUW
 Early debugging experiences and exposure to operational difficulties
 
-## Ongoing Devops after Successful Production Deployment
+## 6. Ongoing Devops after Successful Production Deployment
 
 Operational Visibility and drill-down
 Software maintenance co-ordination
 coping with Source DDL changes, and incorporating them into CDC subscriptions
 
 
-## Shift Left or Shift Right for Devops Sustainability
+## 7. Shift Left or Shift Right for Devops Sustainability
 
 remote capture agents - promoted for the wrog reasons
 true value of shift-right deployments
