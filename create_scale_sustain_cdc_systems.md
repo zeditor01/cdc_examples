@@ -6,6 +6,11 @@ include narrow height image to reflect common use cases
 This github repository is dedicated to addressing the practical aspects of implementing CDC data replication solutions, primarily 
 through the use of documenting worked examples of how to build CDC solutions that are easy to operate, manage and maintain.
 
+This document is a reflection of the author's experiences in deploying CDC solutions at large enterprise clients, and contains 
+many practical observations and opinions that are open to debate. 
+It is intended to be read in conjuction with the official product documentation, 
+which is IBM-provided reference point for CDC.
+
 ## Contents
 1. Establishing sustainable devops management of the designed CDC solution (this document)
 2. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
