@@ -4,7 +4,7 @@
 This github repository is dedicated to addressing the practical aspects of implementing CDC data replication solutions, primarily 
 through the use of documenting worked examples of how to build CDC solutions that are easy to operate, manage and maintain.
 
-## The True nature of a heterogenous data replication project
+## The true nature of a heterogenous data replication project
 Establishing CDC replication solutions in a "simple unconstrained environment" is fairly straightforward. 
 * Install and configure the CDC components (capture agent, apply agent, admin tools)
 * Define data replication subscriptions
@@ -33,6 +33,29 @@ The list below are just of the complexities that a typical CDC deployment will f
 * A regular flow of database structure changes on the data sources, that must be included within the subscriptions and reflected in the data targets.
 
 Some of these real-world complexities affect the initial setup project, and cease to be an ongoing concern.
-Others affect the ongoing operations of a data replication environment.
+Others affect the ongoing operations of a data replication environment. 
+
+## Risk Mitigation
+It is very easy to get engrossed in all the technical challenges. Heterogenous data replication is a geek's paradise of technical challenges, and 
+you can go down some very deep rabbit holes if you address all the challenges head on without an overarching strategy.
+
+Put your project manager hat on, and review the (probably incomplete) list of technical challenges in the previous section. 
+Ask yourself how many different people from different teams need to be involved to make this heterogeneous data replication project work. 
+As a side exercise, you might also consider how many different outsourced companies these people work for.
+The answers to these questions are the best indication of how difficult this project might be.
+
+It is not the CDC product that makes the creation and sustainability of a heterogeneous data replication hard to manage. 
+It is the co-ordination of the multiple teams that are necessarily involved that makes it hard!
+
+Once you have clocked the true nature of the project that you are about to embark upon, you can start to evaluate risk mitigation strategies.
+The following strategies (some obvious, other less so) may form part of your risk mitigation aproach
+
+* Start with a vision of the desired end-point and an honest assessment of the ongoing devops
+
+
+1. Clear vision of the outcome (business requirements, technical design)
+2. Good project management (sponsor, funding, documented technical design, technical approval of design etc...)
+3. multi-disciplinary team for the setup phase
+4. 
 
 
