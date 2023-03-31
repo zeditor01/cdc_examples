@@ -11,7 +11,10 @@ many practical observations and opinions that are open to debate.
 It is intended to be read in conjuction with the official product documentation, 
 which is IBM-provided reference point for CDC.
 
-neale.armstrong@au1.ibm.com 
+neale.armstrong@au1.ibm.com
+IBM Z Data and AI Technical Specialist, IBM Australia.
+
+Last Update: April 2023.
 
 ## Contents
 1. Establishing sustainable devops management of the designed CDC solution (this document)
