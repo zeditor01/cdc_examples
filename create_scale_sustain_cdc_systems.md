@@ -47,15 +47,17 @@ The answers to these questions are the best indication of how difficult this pro
 It is not the CDC product that makes the creation and sustainability of a heterogeneous data replication hard to manage. 
 It is the co-ordination of the multiple teams that are necessarily involved that makes it hard!
 
-Once you have clocked the true nature of the project that you are about to embark upon, you can start to evaluate risk mitigation strategies.
-The following strategies (some obvious, other less so) may form part of your risk mitigation aproach
+Once you have clocked the true nature of the project that you are about to embark upon, you can start to evaluate risk mitigation strategies. 
+Aside from Project Management best practices (sponsor, funding, project manager, technical owner, project planning etc...) 
+the following high-level strategies (some obvious, other less so) may form part of your risk mitigation aproach
 
-* Start with a vision of the desired end-point and an honest assessment of the ongoing devops
+* Have a clear vision of the desired end-point (functional and non-functional requirements, service levels for ongoing devops control) and an honest assessment of the ongoing devops requirements
+* Produce a detailed design of the CDC solution, with a focus on the cross-team integration points, and the operational teams that will be responsible for meeting the required service levels.
+* Assess the practical ability of the operational teams to work together to meet the required service levels.
+* Consider Shift-Left or Shift-Right deployment approaches to reduce the number of different teams with devops involvement
+* Identify all the teams that need to contribute to the solution, and specify the initial and ongoing responsibilities of those teams
+* Present the solution to the teams, and secure agreement to them supporting their responsibilities (or identify and resolve differing viewpoints)
+* Refine the design if appropriate, and proceed with the managed project 
 
-
-1. Clear vision of the outcome (business requirements, technical design)
-2. Good project management (sponsor, funding, documented technical design, technical approval of design etc...)
-3. multi-disciplinary team for the setup phase
-4. 
 
 
