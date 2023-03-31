@@ -11,6 +11,8 @@ many practical observations and opinions that are open to debate.
 It is intended to be read in conjuction with the official product documentation, 
 which is IBM-provided reference point for CDC.
 
+neale.armstrong@au1.ibm.com 
+
 ## Contents
 1. Establishing sustainable devops management of the designed CDC solution (this document)
 2. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
@@ -19,8 +21,8 @@ which is IBM-provided reference point for CDC.
 5. Basic Operations Management 
 6. Performance Management
 7. Devops approaches and Change Management
-8. Shift-Left deployment options (zCX containers) to facilitate a z/OS operational control plane.
-9. Shift-Right deployment options (remote capture agents) to facilitate an LUW operational control plane
+8. Shift-Right deployment options (remote capture agents) to facilitate an LUW operational control plane
+9. Shift-Left deployment options (zCX containers) to facilitate a z/OS operational control plane.
 
 ## The true nature of a heterogenous data replication project
 Establishing CDC replication solutions in a "simple unconstrained environment" is fairly straightforward. 
