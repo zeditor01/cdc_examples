@@ -4,6 +4,17 @@
 This github repository is dedicated to addressing the practical aspects of implementing CDC data replication solutions, primarily 
 through the use of documenting worked examples of how to build CDC solutions that are easy to operate, manage and maintain.
 
+## Contents
+1. Establishing sustainable devops management of the designed CDC solution (this document)
+2. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
+3. Securing all points of the CDC solution. (Authentication, Authorisation, Encryption)
+4. Monitoring and Alerting for CDC subscriptions
+5. Basic Operations Management 
+6. Performance Management
+7. Devops approaches and Change Management
+8. Shift-Left deployment options (zCX containers) to facilitate a z/OS operational control plane.
+9. Shift-Right deployment options (remote capture agents) to facilitate an LUW operational control plane
+
 ## The true nature of a heterogenous data replication project
 Establishing CDC replication solutions in a "simple unconstrained environment" is fairly straightforward. 
 * Install and configure the CDC components (capture agent, apply agent, admin tools)
@@ -59,5 +70,49 @@ the following high-level strategies (some obvious, other less so) may form part 
 * Present the solution to the teams, and secure agreement to them supporting their responsibilities (or identify and resolve differing viewpoints)
 * Refine the design if appropriate, and proceed with the managed project 
 
+## CDC Implementation (Theory)
+
+Complex but manageale.
+Picture and explanation of Simplest Likely scenarios ( TLS , MC GUI )
+
+## CDC Implementation (Practice)
+
+Realistic real-world scenarios
+Picture to include all technical complexities
+Picture to overlay different teams
+
+
+## Common Constraints that will make things difficult
+
+IMS ( logging, exits, augmentation of databases, DRA, copybook changes )
+Db2 z/OS ( logging, DDL changes, break-in )
+Kafka (kerberized, schema regsitries, KCOPs, authorities, scaling)
+Control of target schemas
+Liaison with network teams
+Liaison with security teams
+Liaison with zOS, LUW and Cloud teams
+Division of Operational Responsibility
+Devt, Test and Prod environments, and testing and promotion
+Use of Windows client in a production environment 
+Automation
+
+## First Implementation in Test
+
+mechanical & organisation
+nuances of TLS establishment between z/OS and LUW
+Early debugging experiences and exposure to operational difficulties
+
+## Ongoing Devops after Successful Production Deployment
+
+Operational Visibility and drill-down
+Software maintenance co-ordination
+coping with Source DDL changes, and incorporating them into CDC subscriptions
+
+
+## Shift Left or Shift Right for Devops Sustainability
+
+remote capture agents - promoted for the wrog reasons
+true value of shift-right deployments
+containers to facilitate shift levt deployments 
 
 
