@@ -4,7 +4,7 @@ The diagram below is representative of a typical deployment of Infosphere CDC in
 with transactional databases on IBM Z. Data from sources such as IMS, Db2 and VSAM may be streamed
 in near realtime to various targets for data science, analytics or integration use cases.
 
-![typicalcdc](/images/typicalcdc.JPG)
+![typical_cdc](/images/typical_cdc.JPG)
 
 ## Abstract
 This github repository is dedicated to addressing the practical aspects of implementing CDC data replication solutions, primarily 
