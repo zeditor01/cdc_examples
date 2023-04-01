@@ -2,7 +2,7 @@
 
 The diagram below is representative of a typical deployment of Infosphere CDC in an enterprise 
 with transactional databases on IBM Z.
-![typicalcdc](images/typicalcdc.JPG)
+![typicalcdc](../images/typicalcdc.JPG)
 
 ## Abstract
 This github repository is dedicated to addressing the practical aspects of implementing CDC data replication solutions, primarily 
