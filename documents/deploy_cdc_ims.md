@@ -435,23 +435,23 @@ The following steps are required to generate an encrypted password for the useri
 
 Edit <code>CCDC.I1.USERCONF(CACPWDIN)</code>. Set the value to the TSO password (SYS1) for the User ID (IBMUSER) that you use to run the customization jobs.
 
-![Encryp01](images/cdc/encrypt01.PNG)
+![Encryp01](../images/cdc/encrypt01.PNG)
 
 Submit <code>CCDC.I1.USERSAMP(CACENCRP)</code> JCL to run the password generator utility, which updates <code>CCDC.I1.USERCONF(CACPWDIN)</code> with the encrypted value.
 
-![Encryp02](images/cdc/encrypt02.PNG)
+![Encryp02](../images/cdc/encrypt02.PNG)
 
 Edit <code>CCDC.I1.USERCONF(CACPWDIN)</code> again and copy the hex string value for the ENCRYPTED= keyword.
 
-![Encryp03](images/cdc/encrypt03.PNG)
+![Encryp03](../images/cdc/encrypt03.PNG)
 
 Edit <code>CCDC.I1.USERCONF(CACMUCON)</code> and replace the X'.ENCRYP PASSWD..' string with the hex string copied in the previous step.
 
-![Encryp04](images/cdc/encrypt04.PNG)
+![Encryp04](../images/cdc/encrypt04.PNG)
 
 Edit <code>CCDC.I1.USERSAMP(CACQRSYS)</code> and replace the second line of the member with the hex string that you copied.
 
-![Encryp05](images/cdc/encrypt05.PNG)
+![Encryp05](../images/cdc/encrypt05.PNG)
 
 
 <code>CCDC.I1.USERCONF(CACMUCON)</code> and <code>CCDC.I1.USERSAMP(CACQRSYS)</code> will be 
@@ -496,13 +496,13 @@ However, this is a good point to start the server and resolve any problems with 
 You can test the Classic CDC as a Job using the JCL in member CECCDSRC, and then deploy it as a started task later on.
 Upon first start, you should expect to see the Classic CDC Server come up, but report failures on connection to IMS DRA
 
-![Classic CDC Startup Messages](images/cdc/cdc01_16.png)
+![Classic CDC Startup Messages](../images/cdc/cdc01_16.png)
 
 
 Further down the job output you may spot more detailed error messages and return codes which will give you more insight into any problems. 
 Specifically the SpcRC codes can be particularly useful. 
 
-![Classic CDC Startup SpcRC codes](images/cdc/cdc01_17.png)
+![Classic CDC Startup SpcRC codes](../images/cdc/cdc01_17.png)
 
 Specifically, if you lookup SPcRC(00570082) in the Classic CDC Messages 
 publication you will see the following explanation: 
@@ -867,13 +867,13 @@ The Data Perpective is shown in the screenshot below.
 <b>Top-Middle Window</b> : Working subject pane (contents depend on what objects are selected)
 <b>Bottom-Left Window</b> : Data Source Explorer (data soucre data access) and Console Explorer (data source configurations).
  
-![CDA Data Perspective](images/cdc/CDA_Data_Perspective.png)
+![CDA Data Perspective](../images/cdc/CDA_Data_Perspective.png)
 
 In order to make a connection to the Classic CDC Server you must open up the "Data Source Explorer" 
 (bottom left window in the Data Perspective), right click on "Database Connections" and choose "New". 
 Then fill in the connection details ( 192.168.1.191:9087 IBMUSER/SYS1 ), test the connection and press OK.
 
-![CDA Connection](images/cdc/CDA_Connect.png)
+![CDA Connection](../images/cdc/CDA_Connect.png)
 
 You must also repeat this process to define a connection on the "Console Explorer" window. Defining a connection in one window does 
 not copy that connection to the other window. 
@@ -885,12 +885,12 @@ Once connected, you can expand the "SAMPLEDS" datasource and explore the schemas
 Initially, the Catalog Tables will be visible under schemas "SYSIBM" and "SYSCAC". When you have developed some IMS Tables" 
 they will be visible under the schema that they were created in. 
 
-![CDA Data Source Explorer](images/cdc/CDA_Data_Source.png)
+![CDA Data Source Explorer](../images/cdc/CDA_Data_Source.png)
 
 Click on the Console explorer tab now, and expand the Services and Configuration Tabs. 
 If you select a configuration (such as the DRA Service configuration) and edit the properties, you can make parameter changes here (such as DRATABLESUFFIX=01). 
 
-![CDA Imported Artefacts](images/cdc/CDA_Console_Parms.png)
+![CDA Imported Artefacts](../images/cdc/CDA_Console_Parms.png)
 
 <h4>7.2.2 Create a data development project, and Import DBDs and Copybooks for the mapping work</h4>
 
@@ -914,56 +914,56 @@ Go to the "Data Project Explorer" (top left window) and create a new project, su
 Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
 
 Screenshot 1 of 17 : Create a new Data Design Project (Zeditor)
-![CDA Imported Artefacts](images/cdc/imstab01.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab01.PNG)
 
 Screenshot 2 of 17 :  Inside the project, create a new Physical Data Model
-![CDA Imported Artefacts](images/cdc/imstab02.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab02.PNG)
 
 Screenshot 3 of 17 :  Use the Classic Integration template for this data model
-![CDA Imported Artefacts](images/cdc/imstab03.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab03.PNG)
 
 Screenshot 4 of 17 :  Highlight IMS DBDs, right mouse click, import files
-![CDA Imported Artefacts](images/cdc/imstab04.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab04.PNG)
 
 Screenshot 5 of 17 :  Import either from 3270 or Local PC, and Review artefact
-![CDA Imported Artefacts](images/cdc/imstab05.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab05.PNG)
 
 Screenshot 6 of 17 :  Repeat process to import COBOL Copybooks
-![CDA Imported Artefacts](images/cdc/imstab06.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab06.PNG)
 
 Screenshot 7 of 17 :  Highlight the Physical Data Model, Create an IMS Table
-![CDA Imported Artefacts](images/cdc/imstab07.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab07.PNG)
 
 
 Screenshot 8 of 17 :  Specify the DBD, assign the desired Schema Name
-![CDA Imported Artefacts](images/cdc/imstab08.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab08.PNG)
 
 Screenshot 9 of 17 :  Specify Segments, SSID, PSB, and choose Table Name and Usage
-![CDA Imported Artefacts](images/cdc/imstab09.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab09.PNG)
 
 Screenshot 10 of 17 :  Specify root segment copybook and choose fields
-![CDA Imported Artefacts](images/cdc/imstab10.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab10.PNG)
 
 Screenshot 11 of 17 :  Specify dependent segment copybooks and choose fields
-![CDA Imported Artefacts](images/cdc/imstab11.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab11.PNG)
 
 Screenshot 12 of 17 :  Review the IMS table mapping, and Finish
-![CDA Imported Artefacts](images/cdc/imstab12.PNG)
+![CDA Imported Artefacts](../images/cdc/imstab12.PNG)
 
 Screenshot 13 of 17 :  Highlight the Mapped Object, right mouse click and Generate DDL
-![CDA Imported Artefacts](images/cdc/imsgen01.PNG)
+![CDA Imported Artefacts](../images/cdc/imsgen01.PNG)
 
 Screenshot 14 of 17 :  Specify Artefacts required
-![CDA Imported Artefacts](images/cdc/imsgen02.PNG)
+![CDA Imported Artefacts](../images/cdc/imsgen02.PNG)
 
 Screenshot 15 of 17 :  Review DDL, and tick to execute DDL on Classic CDC Server
-![CDA Imported Artefacts](images/cdc/imsgen03.PNG)
+![CDA Imported Artefacts](../images/cdc/imsgen03.PNG)
 
 Screenshot 16 of 17 :  Specify the target server (SAMPLEDS) and Finish
-![CDA Imported Artefacts](images/cdc/imsgen04.PNG)
+![CDA Imported Artefacts](../images/cdc/imsgen04.PNG)
 
 Screenshot 17 of 17 :  Review object in Data Source Explorer for accuracy
-![CDA Imported Artefacts](images/cdc/imsgen05.PNG)
+![CDA Imported Artefacts](../images/cdc/imsgen05.PNG)
 
  
   
@@ -976,7 +976,7 @@ The simplest way to do this is to run an SQL query against the mapped IMS Table.
 Right Click on the Table, and either "return all rows" or choose "sample contents" to eyeball the data for validity 
 
 
-![CDA Verify Data](images/cdc/cdc01_31.png)
+![CDA Verify Data](../images/cdc/cdc01_31.png)
 
 You can dig deeper into data validation with more probing SQL through the Classic Data Architect. 
 Just click the SQL icon in the Data Source Exporer window (bottom-right) and SQL away. 
