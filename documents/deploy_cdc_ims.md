@@ -111,7 +111,7 @@ information for the purposes of data repliaction.
 The diagram below is a representation of the components within a Classic CDC for IMS started task, and how they 
 relate to external artefacts.
 
-![Classic CDC Started Task](images/cdc/ccdc_services.PNG)
+![Classic CDC Started Task](../images/cdc/ccdc_services.PNG)
 
 The services that are outlined in red are the ones that can be protected by the SAF Exit. 
 The primary services involved in the cdc capture server are  the IMS Log Reader Service (IMSLRS) and the Capture process (Capture). 
