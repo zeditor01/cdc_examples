@@ -1,7 +1,9 @@
 # Create, Scale and Sustain CDC data replication systems
 
 The diagram below is representative of a typical deployment of Infosphere CDC in an enterprise 
-with transactional databases on IBM Z.
+with transactional databases on IBM Z. Data from sources such as IMS, Db2 and VSAM may be streamed
+in near realtime to various targets for data science, analytics or integration use cases.
+
 ![typicalcdc](/images/typicalcdc.JPG)
 
 ## Abstract
