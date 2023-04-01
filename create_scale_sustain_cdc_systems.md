@@ -14,7 +14,7 @@ This document is a reflection of the author's experiences in deploying CDC solut
 many practical observations and opinions that are matters of opinion. 
 It is intended to be read in conjuction with 
 the [official product documentation](https://www.ibm.com/docs/en/idr/11.4.0?topic=change-data-capture-cdc-replication), 
-which is IBM-provided reference point for CDC.
+which is the definitive IBM-provided reference point for CDC.
 
 * Author: neale.armstrong@au1.ibm.com
 * IBM Z Data and AI Technical Specialist, IBM Australia.
