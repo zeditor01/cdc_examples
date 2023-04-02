@@ -140,12 +140,12 @@ I don't know if the boating claim is true, but I can assert that ***"the two mos
 
 Regarding the first implementation in test, my advice is to establish a test environment with as few of the constraints in effect as possible, so that you can gain confidence in the configuration and mechanical operation of the CDC solution before you introduce the necessary layers of complexity that will be required for a secured production environment.
 
-Ane example of a staged approach to CDC implementation is illustrated in the diagram below
+An example of a staged approach to CDC implementation is illustrated in the diagram below. Implementing CDC between the z/OS agents as a first phase can defer managing the complexity of the downstream environment until after the core z/OS CDC services are bedded down and understood.
 
 ![staged_dc](/images/staged_cdc.JPG)
 
 Other examples of a staged approach might include
-* getting CDC working in the clear before configuring the environment to support encryption
+* getting CDC working in the clear before configuring the environment to support network encryption
 * getting CDC working with raw Operating System authentication before configuring LDAP for authetication and authorisation
 
 ## 6. Ongoing Devops after Successful Production Deployment
