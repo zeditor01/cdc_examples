@@ -101,15 +101,18 @@ the following high-level strategies (some obvious, other less so) may form part 
 
 ## 2. CDC Implementation (Theory)
 
-Complex but manageale.
-Picture and explanation of Simplest Likely scenarios ( TLS , MC GUI )
+CDC solutions, in theory, have a complex set of moving parts to co-ordinate, but are easy to manage with the centralised control plane. 
+A simple architectecture diagram might look like this.
+
+![cdc_in_theory](/images/cdc_in_theory.JPG)
 
 ## 3. CDC Implementation (Practice)
 
-Realistic real-world scenarios
-Picture to include all technical complexities
-Picture to overlay different teams
+CDC in practice is rather more complicated to manage. The causes of the complexity lie the heterogeneous nature of the typical CDC solution.
+And whilst all the technical integration points use standards-based patterns, it is the number of different teams that need to be co-ordinated
+that will be the most demanding aspect of project management for a heterogeneous data replication project.
 
+![cdc_in_practice](/images/cdc_in_practice.JPG)
 
 ## 4. Common Constraints that will make things difficult
 
