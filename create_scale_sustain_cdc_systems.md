@@ -25,14 +25,15 @@ The content of this repository has been structured into separate documents as fo
 
 1. [Establishing sustainable devops management of the designed CDC solution](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md) (this document).
 2. Deploying CDC agents for [IMS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md) or [DB2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2zos.md) or [VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md) or [Kafka](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_kafka.md) or [Db2 for Linux](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2linux.md) or [remote VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) pr [remote Db2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md)
-3. [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md)
-4. [Securing all points of the CDC solution - Authentication, Authorisation, Encryption](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md)
-5. [Monitoring and Alerting for CDC subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/monitoring_alerting.md)
-6. [Basic Operations Management](https://github.com/zeditor01/cdc_examples/blob/main/documents/operations.md) 
-7. [Performance Management](https://github.com/zeditor01/cdc_examples/blob/main/documents/performance.md)
-8. [Devops approaches and Change Management](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
-9. [Shift-Right deployment options](https://github.com/zeditor01/cdc_examples/blob/main/documents/shift_right_cdc_operations.md) to facilitate an LUW operational control plane
-10. [Shift-Left deployment options](https://github.com/zeditor01/cdc_examples/blob/main/documents/shift_left_cdc_operations.md) to facilitate a z/OS operational control plane.
+3. Deploying [Management Console and Access Server](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_admintools.md) and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md)
+4. [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md)
+5. [Securing all points of the CDC solution - Authentication, Authorisation, Encryption](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md)
+6. [Monitoring and Alerting for CDC subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/monitoring_alerting.md)
+7. [Basic Operations Management](https://github.com/zeditor01/cdc_examples/blob/main/documents/operations.md) 
+8. [Performance Management](https://github.com/zeditor01/cdc_examples/blob/main/documents/performance.md)
+9. [Devops approaches and Change Management](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+10. [Shift-Right deployment options](https://github.com/zeditor01/cdc_examples/blob/main/documents/shift_right_cdc_operations.md) to facilitate an LUW operational control plane
+11. [Shift-Left deployment options](https://github.com/zeditor01/cdc_examples/blob/main/documents/shift_left_cdc_operations.md) to facilitate a z/OS operational control plane.
 
 ## Contents of *this* document
 
