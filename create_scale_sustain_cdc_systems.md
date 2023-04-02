@@ -21,7 +21,7 @@ which is the definitive IBM-provided reference point for CDC.
 * Last Updated: April 2023.
 
 ## Links to Documents in this repository
-1. Establishing sustainable devops management of the designed CDC solution [this document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md)
+1. [Establishing sustainable devops management of the designed CDC solution](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md) (this document).
 3. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
 4. Securing all points of the CDC solution. (Authentication, Authorisation, Encryption)
 5. Monitoring and Alerting for CDC subscriptions
