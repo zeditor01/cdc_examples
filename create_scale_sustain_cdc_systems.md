@@ -67,7 +67,7 @@ The list below are just of the complexities that a typical CDC deployment will f
 * Requirement for network encryption for CDC data flows.
 * Conformance to cross-platform authentication and authorisation standards (LDAP etc...)
 * Understanding the differences between application-transparent TLS (z/OS) and application-controlled TLS (most other systems)
-* different specialist groups for typical data sources ( IMS, Db2 z/OS, VSAM ) and typical data targets ( Kafka, SQL Server, Oracle )
+* different specialist groups to manage typical data sources ( IMS, Db2 z/OS, VSAM ) and typical data targets ( Kafka, SQL Server, Oracle )
 * For Kafka targets (very common nowadays) rigid standards for configuring access to the Kafka Cluster which often make life difficult for CDC.
 * Separate operations team for z/OS systems and LUW systems and Cloud systems.
 * Multiple groups within an enterprise that have interest in and influence on a heterogenous data replication solution ( Network, Security, Architecture etc...)
