@@ -21,15 +21,15 @@ which is the definitive IBM-provided reference point for CDC.
 * Last Updated: April 2023.
 
 ## Links to Documents in this repository
-1. Establishing sustainable devops management of the designed CDC solution (this document)
-2. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
-3. Securing all points of the CDC solution. (Authentication, Authorisation, Encryption)
-4. Monitoring and Alerting for CDC subscriptions
-5. Basic Operations Management 
-6. Performance Management
-7. Devops approaches and Change Management
-8. Shift-Right deployment options (remote capture agents) to facilitate an LUW operational control plane
-9. Shift-Left deployment options (zCX containers) to facilitate a z/OS operational control plane.
+1. Establishing sustainable devops management of the designed CDC solution [this document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md)
+3. Deploying selected CDC agents ( IMS, DB2 z/OS, VSAM, Kafka, Db2 LUW, remote VSAM, remote Db2 z/OS )
+4. Securing all points of the CDC solution. (Authentication, Authorisation, Encryption)
+5. Monitoring and Alerting for CDC subscriptions
+6. Basic Operations Management 
+7. Performance Management
+8. Devops approaches and Change Management
+9. Shift-Right deployment options (remote capture agents) to facilitate an LUW operational control plane
+10. Shift-Left deployment options (zCX containers) to facilitate a z/OS operational control plane.
 
 ## Contents of this document
 
