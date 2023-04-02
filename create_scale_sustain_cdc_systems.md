@@ -134,15 +134,19 @@ Each of these considerations is addressed directly in the deployment documents l
 
 ## 5. First Implementation in Test
 
-It is sometimes said that ***"the two happiest or best days of a boater’s life are the day they buy a boat and the day they sell it"***.
+It is sometimes said that ***"the two happiest days of a boater’s life are the day they buy a boat and the day they sell it"***.
 
-I don't know if the boating claim is true, but I can assert 
-that ***"the two most challenging phases of a CDC project are lining up all the ducks to replicate the very first row, and managing structure changes after the project has gone live"***.
+I don't know if the boating claim is true, but I can assert that ***"the two most challenging phases of a CDC project are lining up all the ducks to replicate the very first row, and managing structure changes after the project has gone live"***.
 
+Regarding the first implementation in test, my advice is to establish a test environment with as few of the constraints in effect as possible, so that you can gain confidence in the configuration and mechanical operation of the CDC solution before you introduce the necessary layers of complexity that will be required for a secured production environment.
 
-mechanical & organisation
-nuances of TLS establishment between z/OS and LUW
-Early debugging experiences and exposure to operational difficulties
+Ane example of a staged approach to CDC implementation is illustrated in the diagram below
+
+![staged_dc](/images/staged_cdc.JPG)
+
+Other examples of a staged approach might include
+* getting CDC working in the clear before configuring the environment to support encryption
+* getting CDC working with raw Operating System authentication before configuring LDAP for authetication and authorisation
 
 ## 6. Ongoing Devops after Successful Production Deployment
 
