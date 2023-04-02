@@ -83,28 +83,32 @@ The Access Manager Tab allows datastores to be defined to the Access Server repo
 * CDC Access Server userid ( Admin, Bruce, cdcadmin ) 
 * Authentication credentials that the Access Server userid uses to access the CDC datastores
 
+![mc01](images/mc01.png)
+
 ***Connect to CDC Data Sources :***
 
 The Configuration Tab allows connections to datastores.
+![mc02](images/mc02.png)
 
 ***Define Subscriptions :***
 
 The Configuration Tab allows CDC subscriptions to be defined between CDC source datastores and CDC target datastores.
+![mc03](images/mc03.png)
 
 ***Operate Subscriptions :***
 
 The Configuration or the Monitoring Tabs allow CDC Subscriptions to be started for mirroring, started for refresh or stopped.
-
+![mc04](images/mc04.png)
 
 ***Monitor Subscriptions :***
 
 The Monitoring Tab allows subscriptions to be to be monitored in many different ways : numerical counters, graphical charts
-
+![mc05](images/mc05.png)
 
 ***Define Alert Thresholds and Raise Alerts when they are breached :***
 
 The Configuration Tab allows alert threshold and alert actions to be defined. Out of the box notifications are available for email or a java class that you write yourself.
-
+![mc06](images/mc06.png)
 
 
 ### 2.3 Building CHCCLP scripts to perform the same tasks.
@@ -115,12 +119,17 @@ CHCCLP scripts are constructed with grouped sets of commands as follows:
 
 It is not helpful that the CHCCLP command language is not documented anywhere to read. If you want to find out the syntax for CHCCLP commands you need to connect to an interactive CHCCLP session and request the syntax of the desired commands with the interactive help function. The screenshot below shows the start of a very long list of CHCCLP commands that you can use.
 
-And an example of getting syntax help for a common command (connect server) is shown below
+![script01](images/script01.png)
 
+And an example of getting syntax help for a common command (connect server) is shown below
+![script02](images/script02.png)
 
 The Management Console is very helpful in giving you a head start in building CHCCLP Scripts. By selecting a CDC subscription in your test environment, you can request a CHCCLP script for the same object to be generated.
+![script03](images/script03.png)
 
 This will yield a CHCCLP script that could have be used to define the subscription. Better still, it surfaces the parameters which would change in test and prod environments as runtime variables.
+
+![script04](images/script04.png)
 
 The most complex CDC scripts that you will need to build are those to define new subscriptions. They could be quite verbose, particularly if your subscription contains many tables with many columns. But these scripts are generated for you.
 The remaining scripts needed for the standard range of Devops processes are simply by comparison. You can strip out the context commands (connect to datastore, set context etc) from the CHCCLP script that you just generated, and add the additional simple commands needed to perform a Devops task.
