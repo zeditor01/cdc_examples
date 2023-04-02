@@ -176,12 +176,24 @@ One way of reducing the friction that can arise from multiple different operatio
 
 ### 7.1 Shift-Right Deployment
 
+IBM has produced remote agents for CDC capture from Db2 z/OS and VSAM. This allows the capture and apply agents to both be deployed on linux for intel, and even on the same Linux server. 
 
-remote capture agents - promoted for the wrong reasons
-true value of shift-right deployments
-containers to facilitate shift levt deployments 
+![cdc_shiftright](/images/cdc_shiftright.JPG)
 
+There is a relatively small benefit in reducing the z/OS cpu consumption for the capture agent, compared with running the capture agent on z/OS. 
+The cpu saving is small because the logs are still read on z/OS (using a stored procedure) and 
+the log read (which is the most expensive part of the capture process) is not zIIP elgible. 
+But there is a potentially huge operational benefit if you want to build your CDC operational support team and processes on linux on intel.
 
+If you want to establish CDC operational support in a single team, and the skills of that team are based on linux, then you should consider using the CDC remote capture agents for Db2 z/OS and VSAM.
+
+### 7.2 Shift-Left Deployment
+
+IBM supports CDC software whether deployed natievly on an OS, in a virtual machine, or in a software container. In all cases, you are responsible for the correct deployment in the chosen environment, and after that point IBM Support will provide support for your chosen deployment environment.
+
+![cdc_shiftleft](/images/cdc_shiftleft.JPG)
+
+z/OS V2.4 or later supports software containers via a licensed feature called zCX (z/OS container extensions). Put simply, zCX allows docker containers (compiled for the s390 chip architecture) to be deployed inside z/OS.
 
 ## 8 Summary and Recommendations
 
@@ -190,7 +202,7 @@ This, in turn, is the the biggest change for managing a successful CDC deploymen
 
 Every scenario and enterprise is unique, and the appropriate project management techniques will need to be customised to the specific scanerio.
 
-The best advice I can offer is
+The best advice I can offer (which needs to be translated into the context of a specific CDC project) is
 
 * ***Eyes Open*** and be mindful of the extent to which the project spans heterogeneous platforms and teams.
 * ***Requirements Clarity*** over the business need to incorporate source data structure changes into the downstream replication solution.
@@ -198,4 +210,6 @@ The best advice I can offer is
 * ***Candour*** in bi-directional dialog with project teams over their expectations for co-operating with other teams
 * ***Simplification*** of ongoing operational support team processes 
 
-
+The documents in this github repository are worked examples of how to implement CDC components in heterogeneous environments 
+and configure them to work together. The magic sauce in a successful CDC project is finding a way to streamline the operational 
+support processes for efficient devops after the initial deployment.
