@@ -142,7 +142,7 @@ It is sometimes said that ***"the two happiest days of a boater’s life are the
 
 I don't know if the boating claim is true, but I can assert that ***"the two most challenging phases of a CDC project are lining up all the ducks to replicate the very first row, and managing structure changes after the project has gone live"***.
 
-Regarding the first implementation in test, my advice is to establish a test environment with as few of the constraints in effect as possible, so that you can gain confidence in the configuration and mechanical operation of the CDC solution before you introduce the necessary layers of complexity that will be required for a secured production environment.
+Regarding the first implementation in test, my advice is to establish a test environment with as few of the constraints in effect as possible, so that you can gain confidence in the configuration and experience in the mechanical operation of the CDC solution before you introduce the necessary layers of complexity that will be required for a secured production environment.
 
 An example of a staged approach to CDC implementation is illustrated in the diagram below. Implementing CDC between the z/OS agents as a first phase can defer managing the complexity of the downstream environment until after the core z/OS CDC services are bedded down and understood.
 
