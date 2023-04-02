@@ -110,7 +110,8 @@ A simple architectecture diagram might look like this.
 
 CDC in practice is rather more complicated to manage. The causes of the complexity lie the heterogeneous nature of the typical CDC solution.
 And whilst all the technical integration points use standards-based patterns, it is the number of different teams that need to be co-ordinated
-that will be the most demanding aspect of project management for a heterogeneous data replication project.
+that will be the most demanding aspect of project management for a heterogeneous data replication project. 
+Review the representations of the different teams (the green boxes) and map this example to your own organisational structures.
 
 ![cdc_in_practice](/images/cdc_in_practice.JPG)
 
