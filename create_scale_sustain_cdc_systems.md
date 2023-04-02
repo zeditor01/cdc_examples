@@ -193,7 +193,10 @@ IBM supports CDC software whether deployed natievly on an OS, in a virtual machi
 
 ![cdc_shiftleft](/images/cdc_shiftleft.JPG)
 
-z/OS V2.4 or later supports software containers via a licensed feature called zCX (z/OS container extensions). Put simply, zCX allows docker containers (compiled for the s390 chip architecture) to be deployed inside z/OS.
+z/OS V2.4 or later supports software containers via a licensed feature called zCX (z/OS container extensions). Put simply, zCX allows docker containers (compiled for the s390 chip architecture) to be deployed inside z/OS. Once deployed as a docker container within zCX it is indistinguishable from a CDC agent deployed on Linux or within a VM images.
+
+If you want to establish CDC operational support in a single team, and the skills of that team are based on z/OS, then you should consider deploying your CDC Apply agents as a software container within zCX.
+
 
 ## 8 Summary and Recommendations
 
