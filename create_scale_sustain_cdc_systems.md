@@ -68,8 +68,9 @@ The list below are just of the complexities that a typical CDC deployment will f
 * different specialist groups for typical data sources ( IMS, Db2 z/OS, VSAM ) and typical data targets ( Kafka, SQL Server, Oracle )
 * For Kafka targets (very common nowadays) rigid standards for configuring access to the Kafka Cluster which often make life difficult for CDC.
 * Separate operations team for z/OS systems and LUW systems and Cloud systems.
-* Multiple groups within an enterprise that have interests and constraints relative to a heterogenous data replication solution ( Network, Security, Architecture etc...)
-* A regular flow of database structure changes on the data sources, that must be included within the subscriptions and reflected in the data targets.
+* Multiple groups within an enterprise that have interest in and influence on a heterogenous data replication solution ( Network, Security, Architecture etc...)
+* Devops practices to support a regular flow of database structure changes on the data sources, that must be included within the subscriptions and reflected in the data targets.
+* etc... etc...
 
 Some of these real-world complexities affect the initial setup project, and cease to be an ongoing concern.
 Others affect the ongoing operations of a data replication environment. 
