@@ -214,5 +214,10 @@ The best advice I can offer (which needs to be translated into the context of a 
 * ***Simplification*** of ongoing operational support team processes 
 
 The documents in this github repository are worked examples of how to implement CDC components in heterogeneous environments 
-and configure them to work together. The magic sauce in a successful CDC project is finding a way to streamline the operational 
+and configure them to work together. The magic sauce for a successful CDC project is finding a way to streamline the operational 
 support processes for efficient devops after the initial deployment.
+
+Neale Armstrong, IBM Australia, April 2023.
+neale.armstrong@au1.ibm.com  
+
+
