@@ -148,7 +148,7 @@ An example of a staged approach to CDC implementation is illustrated in the diag
 
 ![staged_dc](/images/staged_cdc.JPG)
 
-Other examples of a staged approach might include
+Other examples of a staged approach will depend on the deployment environment, but might include
 * getting CDC working in the clear before configuring the environment to support network encryption
 * getting CDC working with raw Operating System authentication before configuring LDAP for authetication and authorisation
 
