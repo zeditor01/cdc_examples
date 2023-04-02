@@ -34,7 +34,7 @@ The content of this repository has been structured into separate documents as fo
 9. [Shift-Right deployment options](https://github.com/zeditor01/cdc_examples/blob/main/documents/shift_right_cdc_operations.md) to facilitate an LUW operational control plane
 10. [Shift-Left deployment options](https://github.com/zeditor01/cdc_examples/blob/main/documents/shift_left_cdc_operations.md) to facilitate a z/OS operational control plane.
 
-## Contents of this document
+## Contents of *this* document
 
 1. The true nature of a heterogenous data replication project
 2. Project Risk Mitigation
