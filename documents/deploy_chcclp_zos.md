@@ -83,32 +83,37 @@ The Access Manager Tab allows datastores to be defined to the Access Server repo
 * CDC Access Server userid ( Admin, Bruce, cdcadmin ) 
 * Authentication credentials that the Access Server userid uses to access the CDC datastores
 
-![mc01](images/mc01.png)
+![mc01](/images/mc01.png)
 
 ***Connect to CDC Data Sources :***
 
 The Configuration Tab allows connections to datastores.
-![mc02](images/mc02.png)
+
+![mc02](/images/mc02.png)
 
 ***Define Subscriptions :***
 
 The Configuration Tab allows CDC subscriptions to be defined between CDC source datastores and CDC target datastores.
-![mc03](images/mc03.png)
+
+![mc03](/images/mc03.png)
 
 ***Operate Subscriptions :***
 
 The Configuration or the Monitoring Tabs allow CDC Subscriptions to be started for mirroring, started for refresh or stopped.
-![mc04](images/mc04.png)
+
+![mc04](/images/mc04.png)
 
 ***Monitor Subscriptions :***
 
 The Monitoring Tab allows subscriptions to be to be monitored in many different ways : numerical counters, graphical charts
-![mc05](images/mc05.png)
+
+![mc05](/images/mc05.png)
 
 ***Define Alert Thresholds and Raise Alerts when they are breached :***
 
 The Configuration Tab allows alert threshold and alert actions to be defined. Out of the box notifications are available for email or a java class that you write yourself.
-![mc06](images/mc06.png)
+
+![mc06](/images/mc06.png)
 
 
 ### 2.3 Building CHCCLP scripts to perform the same tasks.
@@ -119,17 +124,19 @@ CHCCLP scripts are constructed with grouped sets of commands as follows:
 
 It is not helpful that the CHCCLP command language is not documented anywhere to read. If you want to find out the syntax for CHCCLP commands you need to connect to an interactive CHCCLP session and request the syntax of the desired commands with the interactive help function. The screenshot below shows the start of a very long list of CHCCLP commands that you can use.
 
-![script01](images/script01.png)
+![script01](/images/script01.png)
 
 And an example of getting syntax help for a common command (connect server) is shown below
-![script02](images/script02.png)
+
+![script02](/images/script02.png)
 
 The Management Console is very helpful in giving you a head start in building CHCCLP Scripts. By selecting a CDC subscription in your test environment, you can request a CHCCLP script for the same object to be generated.
-![script03](images/script03.png)
+
+![script03](/images/script03.png)
 
 This will yield a CHCCLP script that could have be used to define the subscription. Better still, it surfaces the parameters which would change in test and prod environments as runtime variables.
 
-![script04](images/script04.png)
+![script04](/images/script04.png)
 
 The most complex CDC scripts that you will need to build are those to define new subscriptions. They could be quite verbose, particularly if your subscription contains many tables with many columns. But these scripts are generated for you.
 The remaining scripts needed for the standard range of Devops processes are simply by comparison. You can strip out the context commands (connect to datastore, set context etc) from the CHCCLP script that you just generated, and add the additional simple commands needed to perform a Devops task.
@@ -160,9 +167,11 @@ Many Banks will tend to have much stronger operations and automation credentials
 ## 3. CHCCLP for z/OS
 If you have license entitlement to IBM Data Replication, then you can download CHCCLP for z/OS from IBM fix central.
 
+
 ### 3.1 CHCCLP for z/OS Download and Setup 
 Go to IBM fix central and search for Classic CHCCLP.
 
+![shopz01](/images/shopz01.png)
 
 Follow these instructions to install CHCCLP for z/OS 
 https://www.ibm.com/docs/en/idrfvfz/11.3.0?topic=vsam-setting-up-chcclp-command-line-utility
@@ -214,6 +223,7 @@ CHCCLP can also be invoked from JCL members, by using the java batch scheduler c
 https://www.ibm.com/docs/en/idrfvfz/11.3.0?topic=utility-sample-jcl-run-chcclp#iiyv2vchcclpsample
 This is an example of a JCL job to run a CHCCLP monitoring query.
 
+![jcl01](/images/jcl01.png)
 
 To explain the JCL job :
 * The STDENV DD card defines the USS environment 
@@ -227,19 +237,22 @@ The CONN member
 * connects directly to Classic CDC for IMS, and specifies the context as CDC Source.
 * Connects directly to CDC for Kafka, and specifies the context as CDC Target.
 
+![jcl02](/images/jcl02.png)
 
 The MONSUB member
 * Identifies the subscription that it is to operate on
 * Requests a number of performance metrics ( records processed etc )
 * Requests the current latency of the subscription
 
+![jcl03](/images/jcl03.png)
 
 The DISC member just disconnects from each of the datastores and exits CHCCLP.
 
+![jcl04](/images/jcl04.png)
 
 The Output of this CHCCLP job looks like this
 
-
+![jcl05](/images/jcl05.png)
 
 
 
@@ -249,6 +262,8 @@ Once you get over the syntax of CHCCLP, actually it can be incredibly simple to 
 ### 4.1 Defining Subscriptions
 The CHCCLP Syntax for mapping a source table for a subscription is potentially verbose. For example, take a look at CHCCLP script that was generated from Management Console for a subscription from IMS to Kafka.
 
+![syntax01](/images/syntax01.png)
+
 It is not necessary to code "filter cource colum" for every single source column in the IMS tables because
 1. If you define your IMS table correctly in Classic Data Architect, you will only surface the fields that you want to replicate.
 2. The default values for replicate "yes" and critical "yes" are fine for most use cases, so the filter source column statement are all redundant anyway
@@ -256,18 +271,29 @@ It is not necessary to code "filter cource colum" for every single source column
 
 In most cases the CHCCLP commands needed to define a subscription would be as simple as the following examples.
 
+![sub01](/images/sub01.png)
+
 Followed by setting the kafka target properties for the subscription
+
+
+![sub02](/images/sub02.png)
 
 And optionally ( if you want to use a KCOP )
 
+
+![sub03](/images/sub03.png)
 
 Note : KCOPs ( Kafka Custom Operators ) and java programs that provide formatting and topic-routing capabilities when writing to Kafka targets. As such, they tend to include class names that are longer than 80 characters, so you probably want to define your PDS for CHCCLP scripts to have a large record length.
 
 ### 4.2 Operating Replication
 CHCCLP scripts to operate replication would be topped and tailed by the standard CONN and DISC scripts, and include commands like this
 
+
+![op01](/images/op01.png)
+
 And
 
+![op02](/images/op02.png)
 
 ### 4.3 Monitoring Replication
 When you think about it, monitoring replication should be a fairly straightforward probe because if the latency is below your threshold of , say 1 minute , then by implication everything involved in the replication process must be working ok !
