@@ -53,6 +53,8 @@ Establishing CDC replication solutions in a "simple unconstrained environment" i
 
 Simple huh ?
 
+***No!***
+
 Enterprise customers do ***not*** have "simple unconstrained environments". 
 The production environments where CDC must be deployed are highly evolved to provide well-secured, high-performance, 
 continuously-available services for highly visible transactional systems that cannot tolerate service outages.
