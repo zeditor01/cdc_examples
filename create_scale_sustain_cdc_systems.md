@@ -106,7 +106,7 @@ A simple architectecture diagram might look like this.
 
 ![cdc_in_theory](/images/cdc_in_theory.JPG)
 
-## 3. CDC Implementation (Practice)
+## 3. CDC Implementation (Real World)
 
 CDC in practice is rather more complicated to manage. The causes of the complexity lie the heterogeneous nature of the typical CDC solution.
 And whilst all the technical integration points use standards-based patterns, it is the number of different teams that need to be co-ordinated
@@ -130,15 +130,15 @@ The list below is a compilation of some the the challenges that occur most frequ
 * Change management procedures that span the breadth of the heterogeneous data replication solution
 * Operations control
 
-The final point (operations control) is worth special attention. 
-How many operational teams will be involved in the day to day operational management activities? Four ?
-
-![cdc_crux](/images/cdc_crux.JPG)
-
-
-
+Each of these considerations is addressed directly in the deployment documents linked at the top of this document.
 
 ## 5. First Implementation in Test
+
+It is sometimes said that ***"the two happiest or best days of a boater’s life are the day they buy a boat and the day they sell it"***.
+
+I don't know if the boating claim is true, but I can assert 
+that ***"the two most challenging phases of a CDC project are lining up all the ducks to replicate the very first row, and managing structure changes after the project has gone live"***.
+
 
 mechanical & organisation
 nuances of TLS establishment between z/OS and LUW
@@ -146,6 +146,11 @@ Early debugging experiences and exposure to operational difficulties
 
 ## 6. Ongoing Devops after Successful Production Deployment
 
+Cast your mind back to the diagram representing a real-world perspective of CDC implementation.
+Project Management warning flags should be waving vigorously with the number of separate teams that need to be involved in a project of this type.
+But, if you zoom into the teams that are involved in ongoing devops, any organisational inefficiencies will incur an ***ongoing*** cost.
+
+![cdc_crux](/images/cdc_crux.JPG)
 Operational Visibility and drill-down
 Software maintenance co-ordination
 coping with Source DDL changes, and incorporating them into CDC subscriptions
@@ -155,8 +160,14 @@ coping with Source DDL changes, and incorporating them into CDC subscriptions
 
 ## 7. Shift Left or Shift Right for Devops Sustainability
 
-remote capture agents - promoted for the wrog reasons
+
+
+remote capture agents - promoted for the wrong reasons
 true value of shift-right deployments
 containers to facilitate shift levt deployments 
+
+
+
+## 8 Summary
 
 
