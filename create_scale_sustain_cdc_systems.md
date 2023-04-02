@@ -37,7 +37,7 @@ The content of this repository has been structured into separate documents as fo
 ## Contents of this document
 
 1. The true nature of a heterogenous data replication project
-2. Risk Mitigation
+2. Project Risk Mitigation
 3. CDC Implementation (Theory) 
 4. CDC Implementation (Practice)
 5. Common Constraints that will make things difficult
@@ -79,7 +79,7 @@ The list below are just of the complexities that a typical CDC deployment will f
 Some of these real-world complexities affect the initial setup project, and cease to be an ongoing concern.
 Others affect the ongoing operations of a data replication environment. 
 
-## Risk Mitigation
+## Project Risk Mitigation
 It is very easy to get engrossed in all the technical challenges. Heterogenous data replication is a geek's paradise of technical challenges, and 
 you can go down some very deep rabbit holes if you address all the challenges head on without an overarching strategy.
 
