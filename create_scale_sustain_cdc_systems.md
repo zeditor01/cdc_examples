@@ -56,7 +56,7 @@ The production environments where CDC must be deployed are highly evolved to pro
 continuously-available services for highly visible transactional systems that cannot tolerate service outages.
 It is the critical nature of these production systems that is often the driving force for establishing data replicas on 
 other systems for purposes such as analytics, data science, digital integration and so on. But the very practices that 
-are established to protect these business-critical systems are the same practices that make the deployment of 
+are established to protect the demanding service levels of these business-critical systems are the same practices that make the deployment of 
 heterogeneous CDC replication solutions challenging.
 
 The list below are just of the complexities that a typical CDC deployment will face is a real-world environment.
