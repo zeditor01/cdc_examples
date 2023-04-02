@@ -167,9 +167,11 @@ Many Banks will tend to have much stronger operations and automation credentials
 ## 3. CHCCLP for z/OS
 If you have license entitlement to IBM Data Replication, then you can download CHCCLP for z/OS from IBM fix central.
 
+
 ### 3.1 CHCCLP for z/OS Download and Setup 
 Go to IBM fix central and search for Classic CHCCLP.
 
+![shopz01](/images/shopz01.png)
 
 Follow these instructions to install CHCCLP for z/OS 
 https://www.ibm.com/docs/en/idrfvfz/11.3.0?topic=vsam-setting-up-chcclp-command-line-utility
@@ -221,6 +223,7 @@ CHCCLP can also be invoked from JCL members, by using the java batch scheduler c
 https://www.ibm.com/docs/en/idrfvfz/11.3.0?topic=utility-sample-jcl-run-chcclp#iiyv2vchcclpsample
 This is an example of a JCL job to run a CHCCLP monitoring query.
 
+![jcl01](/images/jcl01.png)
 
 To explain the JCL job :
 * The STDENV DD card defines the USS environment 
@@ -234,19 +237,22 @@ The CONN member
 * connects directly to Classic CDC for IMS, and specifies the context as CDC Source.
 * Connects directly to CDC for Kafka, and specifies the context as CDC Target.
 
+![jcl02](/images/jcl02.png)
 
 The MONSUB member
 * Identifies the subscription that it is to operate on
 * Requests a number of performance metrics ( records processed etc )
 * Requests the current latency of the subscription
 
+![jcl03](/images/jcl03.png)
 
 The DISC member just disconnects from each of the datastores and exits CHCCLP.
 
+![jcl04](/images/jcl04.png)
 
 The Output of this CHCCLP job looks like this
 
-
+![jcl05](/images/jcl05.png)
 
 
 
@@ -256,6 +262,8 @@ Once you get over the syntax of CHCCLP, actually it can be incredibly simple to 
 ### 4.1 Defining Subscriptions
 The CHCCLP Syntax for mapping a source table for a subscription is potentially verbose. For example, take a look at CHCCLP script that was generated from Management Console for a subscription from IMS to Kafka.
 
+![syntax01](/images/syntax01.png)
+
 It is not necessary to code "filter cource colum" for every single source column in the IMS tables because
 1. If you define your IMS table correctly in Classic Data Architect, you will only surface the fields that you want to replicate.
 2. The default values for replicate "yes" and critical "yes" are fine for most use cases, so the filter source column statement are all redundant anyway
@@ -263,18 +271,29 @@ It is not necessary to code "filter cource colum" for every single source column
 
 In most cases the CHCCLP commands needed to define a subscription would be as simple as the following examples.
 
+![sub01](/images/sub01.png)
+
 Followed by setting the kafka target properties for the subscription
+
+
+![sub02](/images/sub02.png)
 
 And optionally ( if you want to use a KCOP )
 
+
+![sub03](/images/sub03.png)
 
 Note : KCOPs ( Kafka Custom Operators ) and java programs that provide formatting and topic-routing capabilities when writing to Kafka targets. As such, they tend to include class names that are longer than 80 characters, so you probably want to define your PDS for CHCCLP scripts to have a large record length.
 
 ### 4.2 Operating Replication
 CHCCLP scripts to operate replication would be topped and tailed by the standard CONN and DISC scripts, and include commands like this
 
+
+![op01](/images/op01.png)
+
 And
 
+![op02](/images/op02.png)
 
 ### 4.3 Monitoring Replication
 When you think about it, monitoring replication should be a fairly straightforward probe because if the latency is below your threshold of , say 1 minute , then by implication everything involved in the replication process must be working ok !
