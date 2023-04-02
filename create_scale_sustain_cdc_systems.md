@@ -11,7 +11,7 @@ This github repository is dedicated to addressing the practical aspects of imple
 through the use of documenting worked examples of how to build CDC solutions that are easy to operate, manage and maintain.
 
 This document is a reflection of the author's experiences in deploying CDC solutions at large enterprise clients, and contains 
-many practical observations and opinions that are matters of opinion. 
+many practical observations and recommendations that are matters of opinion. 
 It is intended to be read in conjuction with 
 the [official product documentation](https://www.ibm.com/docs/en/idr/11.4.0?topic=change-data-capture-cdc-replication), 
 which is the definitive IBM-provided reference point for CDC.
@@ -21,8 +21,10 @@ which is the definitive IBM-provided reference point for CDC.
 * Last Updated: April 2023.
 
 ## Links to Documents in this repository
+The content of this repository has been structured into separate documents as follows
+
 1. [Establishing sustainable devops management of the designed CDC solution](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md) (this document).
-2. Deploying selected CDC agents [IMS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md), [DB2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2zos.md), [VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md), [Kafka](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_kafka.md), [Db2 for Linux](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2linux.md), [remote VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md), [remote Db2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md)
+2. Deploying CDC agents for [IMS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md) or [DB2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2zos.md) or [VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md) or [Kafka](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_kafka.md) or [Db2 for Linux](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2linux.md) or [remote VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) pr [remote Db2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md)
 3. [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md)
 4. [Securing all points of the CDC solution - Authentication, Authorisation, Encryption](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md)
 5. [Monitoring and Alerting for CDC subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/monitoring_alerting.md)
@@ -35,7 +37,7 @@ which is the definitive IBM-provided reference point for CDC.
 ## Contents of this document
 
 1. The true nature of a heterogenous data replication project
-2. Risk Mitigation
+2. Project Risk Mitigation
 3. CDC Implementation (Theory) 
 4. CDC Implementation (Practice)
 5. Common Constraints that will make things difficult
@@ -51,6 +53,8 @@ Establishing CDC replication solutions in a "simple unconstrained environment" i
 
 Simple huh ?
 
+***No!***
+
 Enterprise customers do ***not*** have "simple unconstrained environments". 
 The production environments where CDC must be deployed are highly evolved to provide well-secured, high-performance, 
 continuously-available services for highly visible transactional systems that cannot tolerate service outages.
@@ -65,7 +69,7 @@ The list below are just of the complexities that a typical CDC deployment will f
 * Requirement for network encryption for CDC data flows.
 * Conformance to cross-platform authentication and authorisation standards (LDAP etc...)
 * Understanding the differences between application-transparent TLS (z/OS) and application-controlled TLS (most other systems)
-* different specialist groups for typical data sources ( IMS, Db2 z/OS, VSAM ) and typical data targets ( Kafka, SQL Server, Oracle )
+* different specialist groups to manage typical data sources ( IMS, Db2 z/OS, VSAM ) and typical data targets ( Kafka, SQL Server, Oracle )
 * For Kafka targets (very common nowadays) rigid standards for configuring access to the Kafka Cluster which often make life difficult for CDC.
 * Separate operations team for z/OS systems and LUW systems and Cloud systems.
 * Multiple groups within an enterprise that have interest in and influence on a heterogenous data replication solution ( Network, Security, Architecture etc...)
@@ -75,7 +79,7 @@ The list below are just of the complexities that a typical CDC deployment will f
 Some of these real-world complexities affect the initial setup project, and cease to be an ongoing concern.
 Others affect the ongoing operations of a data replication environment. 
 
-## Risk Mitigation
+## 2. Project Risk Mitigation
 It is very easy to get engrossed in all the technical challenges. Heterogenous data replication is a geek's paradise of technical challenges, and 
 you can go down some very deep rabbit holes if you address all the challenges head on without an overarching strategy.
 
@@ -85,10 +89,10 @@ As a side exercise, you might also consider how many different outsourced compan
 The answers to these questions are the best indication of how difficult this project might be.
 
 ***It is not the CDC product that makes the creation and sustainability of a heterogeneous data replication hard to manage. 
-It is the co-ordination of the multiple teams that are necessarily involved that makes it hard!***
+It is the co-ordination of the multiple teams and technologies that are necessarily involved that makes it hard!***
 
 Once you have clocked the true nature of the project that you are about to embark upon, you can start to evaluate risk mitigation strategies. 
-Aside from Project Management best practices (sponsor, funding, project manager, technical owner, project planning etc...) 
+Aside from normal Project Management best practices (sponsor, funding, project manager, technical owner, project planning etc...) 
 the following high-level strategies (some obvious, other less so) may form part of your risk mitigation aproach
 
 * Have a clear vision of the desired end-point (functional and non-functional requirements, service levels for ongoing devops control) and an honest assessment of the ongoing devops requirements
@@ -134,40 +138,81 @@ Each of these considerations is addressed directly in the deployment documents l
 
 ## 5. First Implementation in Test
 
-It is sometimes said that ***"the two happiest or best days of a boater’s life are the day they buy a boat and the day they sell it"***.
+It is sometimes said that ***"the two happiest days of a boater’s life are the day they buy a boat and the day they sell it"***.
 
-I don't know if the boating claim is true, but I can assert 
-that ***"the two most challenging phases of a CDC project are lining up all the ducks to replicate the very first row, and managing structure changes after the project has gone live"***.
+I don't know if the boating claim is true, but I can assert that ***"the two most challenging phases of a CDC project are lining up all the ducks to replicate the very first row, and managing structure changes after the project has gone live"***.
 
+Regarding the first implementation in test, my advice is to establish a test environment with as few of the constraints in effect as possible, so that you can gain confidence in the configuration and experience in the mechanical operation of the CDC solution before you introduce the necessary layers of complexity that will be required for a secured production environment.
 
-mechanical & organisation
-nuances of TLS establishment between z/OS and LUW
-Early debugging experiences and exposure to operational difficulties
+An example of a staged approach to CDC implementation is illustrated in the diagram below. Implementing CDC between the z/OS agents as a first phase can defer managing the complexity of the downstream environment until after the core z/OS CDC services are bedded down and understood.
+
+![staged_dc](/images/staged_cdc.JPG)
+
+Other examples of a staged approach will depend on the deployment environment, but might include
+* getting CDC working in the clear before configuring the environment to support network encryption
+* getting CDC working with raw Operating System authentication before configuring LDAP for authetication and authorisation
 
 ## 6. Ongoing Devops after Successful Production Deployment
 
 Cast your mind back to the diagram representing a real-world perspective of CDC implementation.
 Project Management warning flags should be waving vigorously with the number of separate teams that need to be involved in a project of this type.
-But, if you zoom into the teams that are involved in ongoing devops, any organisational inefficiencies will incur an ***ongoing*** cost.
+Now, zoom into the teams that are involved in ongoing devops to promote database structure changes though that database and network layers.
 
 ![cdc_crux](/images/cdc_crux.JPG)
-Operational Visibility and drill-down
-Software maintenance co-ordination
-coping with Source DDL changes, and incorporating them into CDC subscriptions
 
+Any organisational inefficiencies in ongoing devops will incur an ***ongoing*** cost for the life of the replication solution. 
 
+If you have two separate operational teams for the z/OS Capture and the LUW Apply agents, then you will likely have two separate database administration teams, and you are also likely to have two separate change control teams/processes to navigate.
 
+This may not be a big issue if you don't need to reflect changes in the source database structures in the target database structures. Generally speaking most databases changes on the source will be "Add Table" or "Add Column" type of changes. CDC Replication will continue unaffected as changes like these are made to the source database.
+
+However, if you need to reflect changes that occur in the source database, you will need to co-ordinate them with changes to the target database, and changes to thhe CDC replication mapping metadata, and promotion from test to production. IIDR (IBM Infopsphere Data Replication) does support the concept of inline "DDL Replication" without operational interruption when replicating between some homogeneous databases. DB2 z/OS, Oracle and Db2 LUW can all be supported for some capability of inline "DDL Replication". But heterogeneous data replication scenarios do not support "DDL Replication", and devops procedures must be established and tested to handle changes in database structures that must be reflected in the targets. 
+
+Whatever your operationa management team(s) structure is, you must ensure that it's processes are streamlined to handle database structure changes efficiently. 
 
 ## 7. Shift Left or Shift Right for Devops Sustainability
 
+One way of reducing the friction that can arise from multiple different operational teams, is to bring them together into a single team. A decision like this can be made easier by adopting a Shift-Right or a Shift-Left deployment architecture.
+
+### 7.1 Shift-Right Deployment
+
+IBM has produced remote agents for CDC capture from Db2 z/OS and VSAM. This allows the capture and apply agents to both be deployed on linux for intel, and even on the same Linux server. 
+
+![cdc_shiftright](/images/cdc_shiftright.JPG)
+
+There is a relatively small benefit in reducing the z/OS cpu consumption for the capture agent, compared with running the capture agent on z/OS. 
+The cpu saving is small because the logs are still read on z/OS (using a stored procedure) and 
+the log read (which is the most expensive part of the capture process) is not zIIP elgible. 
+But there is a potentially huge operational benefit if you want to build your CDC operational support team and processes on linux on intel.
+
+If you want to establish CDC operational support in a single team, and the skills of that team are based on linux, then you should consider using the CDC remote capture agents for Db2 z/OS and VSAM.
+
+### 7.2 Shift-Left Deployment
+
+IBM supports CDC software whether deployed natievly on an OS, in a virtual machine, or in a software container. In all cases, you are responsible for the correct deployment in the chosen environment, and after that point IBM Support will provide support for your chosen deployment environment.
+
+![cdc_shiftleft](/images/cdc_shiftleft.JPG)
+
+z/OS V2.4 or later supports software containers via a licensed feature called zCX (z/OS container extensions). Put simply, zCX allows docker containers (compiled for the s390 chip architecture) to be deployed inside z/OS. Once deployed as a docker container within zCX it is indistinguishable from a CDC agent deployed on Linux or within a VM images.
+
+If you want to establish CDC operational support in a single team, and the skills of that team are based on z/OS, then you should consider deploying your CDC Apply agents as a software container within zCX.
 
 
-remote capture agents - promoted for the wrong reasons
-true value of shift-right deployments
-containers to facilitate shift levt deployments 
+## 8 Summary and Recommendations
 
+The very nature of heterogeneous data replication solutions means that their operation will span multiple technical and operations support teams.
+This, in turn, is the the biggest change for managing a successful CDC deployment project.
 
+Every scenario and enterprise is unique, and the appropriate project management techniques will need to be customised to the specific scanerio.
 
-## 8 Summary
+The best advice I can offer (which needs to be translated into the context of a specific CDC project) is
 
+* ***Eyes Open*** and be mindful of the extent to which the project spans heterogeneous platforms and teams.
+* ***Requirements Clarity*** over the business need to incorporate source data structure changes into the downstream replication solution.
+* ***Written Definition*** for service levels required by the business for data latency and operational support to resolve problems.
+* ***Candour*** in bi-directional dialog with project teams over their expectations for co-operating with other teams
+* ***Simplification*** of ongoing operational support team processes 
 
+The documents in this github repository are worked examples of how to implement CDC components in heterogeneous environments 
+and configure them to work together. The magic sauce in a successful CDC project is finding a way to streamline the operational 
+support processes for efficient devops after the initial deployment.
