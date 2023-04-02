@@ -156,18 +156,25 @@ Other examples of a staged approach will depend on the deployment environment, b
 
 Cast your mind back to the diagram representing a real-world perspective of CDC implementation.
 Project Management warning flags should be waving vigorously with the number of separate teams that need to be involved in a project of this type.
-But, if you zoom into the teams that are involved in ongoing devops, any organisational inefficiencies will incur an ***ongoing*** cost.
+Now, zoom into the teams that are involved in ongoing devops to promote database structure changes though that database and network layers.
 
 ![cdc_crux](/images/cdc_crux.JPG)
-Operational Visibility and drill-down
-Software maintenance co-ordination
-coping with Source DDL changes, and incorporating them into CDC subscriptions
 
+Any organisational inefficiencies in ongoing devops will incur an ***ongoing*** cost for the life of the replication solution. 
 
+If you have two separate operational teams for the z/OS Capture and the LUW Apply agents, then you will likely have two separate database administration teams, and you are also likely to have two separate change control teams/processes to navigate.
 
+This may not be a big issue if you don't need to reflect changes in the source database structures in the target database structures. Generally speaking most databases changes on the source will be "Add Table" or "Add Column" type of changes. CDC Replication will continue unaffected as changes like these are made to the source database.
+
+However, if you need to reflect changes that occur in the source database, you will need to co-ordinate them with changes to the target database, and changes to thhe CDC replication mapping metadata, and promotion from test to production. IIDR (IBM Infopsphere Data Replication) does support the concept of inline "DDL Replication" without operational interruption when replicating between some homogeneous databases. DB2 z/OS, Oracle and Db2 LUW can all be supported for some capability of inline "DDL Replication". But heterogeneous data replication scenarios do not support "DDL Replication", and devops procedures must be established and tested to handle changes in database structures that must be reflected in the targets. 
+
+Whatever your operationa management team(s) structure is, you must ensure that it's processes are streamlined to handle database structure changes efficiently. 
 
 ## 7. Shift Left or Shift Right for Devops Sustainability
 
+One way of reducing the friction that can arise from multiple different operational teams, is to bring them together into a single team. A decision like this can be made easier by adopting a Shift-Right or a Shift-Left deployment architecture.
+
+### 7.1 Shift-Right Deployment
 
 
 remote capture agents - promoted for the wrong reasons
@@ -176,6 +183,19 @@ containers to facilitate shift levt deployments
 
 
 
-## 8 Summary
+## 8 Summary and Recommendations
+
+The very nature of heterogeneous data replication solutions means that their operation will span multiple technical and operations support teams.
+This, in turn, is the the biggest change for managing a successful CDC deployment project.
+
+Every scenario and enterprise is unique, and the appropriate project management techniques will need to be customised to the specific scanerio.
+
+The best advice I can offer is
+
+***Eyes Open*** and be mindful of the extent to which the project spans heterogeneous platforms and teams.
+***Requirements Clarity*** over the business need to incorporate source data structure changes into the downstream replication solution.
+***Written Definition*** for service levels required by the business for data latency and operational support to resolve problems.
+***Candour*** in bi-directional dialog with project teams over their expectations for co-operating with other teams
+***Simplification*** of ongoing operational support team processes 
 
 
