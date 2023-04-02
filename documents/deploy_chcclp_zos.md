@@ -299,9 +299,15 @@ And
 When you think about it, monitoring replication should be a fairly straightforward probe because if the latency is below your threshold of , say 1 minute , then by implication everything involved in the replication process must be working ok !
 A couple of simple scripts to measure latency and throughput is probably all you need to automate for health verification
 
+![mon01](/images/mon01.png)
+
 and
 
+![mon02](/images/mon02.png)
+
 Resulting in output such as
+
+![mon03](/images/mon03.png)
 
 In most cases you probably want to test for alert thresholds and issue a WTO command if there is a problem, address in section 4.4 below.
 If you want to produce a throughput and latency dashboard, then the easiest way would be to write the output of these monitoring commands to a dashboarding tool like Kibana or Splunk, and construct a browser-accessible dashboard that can be displayed from anywhere.
@@ -315,6 +321,7 @@ The paradigm of the CDC Management Console was to define Alert Thresholds of con
 There are MTO commands to Classic CDC for IMS to get the status of subscriptions, but they don't include the important metrics from the target end.
 So realistically the best option is to execute CHCCLP for z/OS scripts to monitor replication throughput and latency, and parse the outputs (below) of these commands in some automated operations control environment.
 
+![mon04](/images/mon04.png)
 
 There are several ways to approach this, for example
 * Write a REXX shell script to invoke the CHCCLP monitoring script, parse the output and if there is a health problem call a program to perform a write to the master console for system automation to pick up.
