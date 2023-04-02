@@ -92,7 +92,7 @@ Aside from Project Management best practices (sponsor, funding, project manager,
 the following high-level strategies (some obvious, other less so) may form part of your risk mitigation aproach
 
 * Have a clear vision of the desired end-point (functional and non-functional requirements, service levels for ongoing devops control) and an honest assessment of the ongoing devops requirements
-* Produce a detailed design of the CDC solution, with a focus on the cross-team integration points, and the operational teams that will be responsible for meeting the required service levels.
+* Produce a detailed design of the CDC solution, with a focus on the cross-team integration points, and the operational teams that will be responsible for meeting the required service levels on an ongoing basis.
 * Assess the practical ability of the operational teams to work together to meet the required service levels.
 * Consider Shift-Left or Shift-Right deployment approaches to reduce the number of different teams with devops involvement
 * Identify all the teams that need to contribute to the solution, and specify the initial and ongoing responsibilities of those teams
