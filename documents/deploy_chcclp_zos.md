@@ -83,28 +83,32 @@ The Access Manager Tab allows datastores to be defined to the Access Server repo
 * CDC Access Server userid ( Admin, Bruce, cdcadmin ) 
 * Authentication credentials that the Access Server userid uses to access the CDC datastores
 
+![mc01](images/mc01.png)
+
 ***Connect to CDC Data Sources :***
 
 The Configuration Tab allows connections to datastores.
+![mc02](images/mc02.png)
 
 ***Define Subscriptions :***
 
 The Configuration Tab allows CDC subscriptions to be defined between CDC source datastores and CDC target datastores.
+![mc03](images/mc03.png)
 
 ***Operate Subscriptions :***
 
 The Configuration or the Monitoring Tabs allow CDC Subscriptions to be started for mirroring, started for refresh or stopped.
-
+![mc04](images/mc04.png)
 
 ***Monitor Subscriptions :***
 
 The Monitoring Tab allows subscriptions to be to be monitored in many different ways : numerical counters, graphical charts
-
+![mc05](images/mc05.png)
 
 ***Define Alert Thresholds and Raise Alerts when they are breached :***
 
 The Configuration Tab allows alert threshold and alert actions to be defined. Out of the box notifications are available for email or a java class that you write yourself.
-
+![mc06](images/mc06.png)
 
 
 ### 2.3 Building CHCCLP scripts to perform the same tasks.
