@@ -83,7 +83,7 @@ The Access Manager Tab allows datastores to be defined to the Access Server repo
 * CDC Access Server userid ( Admin, Bruce, cdcadmin ) 
 * Authentication credentials that the Access Server userid uses to access the CDC datastores
 
-![mc01](images/mc01.png)
+![mc01](/images/mc01.png)
 
 ***Connect to CDC Data Sources :***
 
