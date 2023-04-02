@@ -79,7 +79,7 @@ The list below are just of the complexities that a typical CDC deployment will f
 Some of these real-world complexities affect the initial setup project, and cease to be an ongoing concern.
 Others affect the ongoing operations of a data replication environment. 
 
-## Project Risk Mitigation
+## 2. Project Risk Mitigation
 It is very easy to get engrossed in all the technical challenges. Heterogenous data replication is a geek's paradise of technical challenges, and 
 you can go down some very deep rabbit holes if you address all the challenges head on without an overarching strategy.
 
