@@ -11,7 +11,7 @@ This github repository is dedicated to addressing the practical aspects of imple
 through the use of documenting worked examples of how to build CDC solutions that are easy to operate, manage and maintain.
 
 This document is a reflection of the author's experiences in deploying CDC solutions at large enterprise clients, and contains 
-many practical observations and opinions that are matters of opinion. 
+many practical observations and recommendations that are matters of opinion. 
 It is intended to be read in conjuction with 
 the [official product documentation](https://www.ibm.com/docs/en/idr/11.4.0?topic=change-data-capture-cdc-replication), 
 which is the definitive IBM-provided reference point for CDC.
