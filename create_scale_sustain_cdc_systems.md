@@ -192,10 +192,10 @@ Every scenario and enterprise is unique, and the appropriate project management 
 
 The best advice I can offer is
 
-***Eyes Open*** and be mindful of the extent to which the project spans heterogeneous platforms and teams.
-***Requirements Clarity*** over the business need to incorporate source data structure changes into the downstream replication solution.
-***Written Definition*** for service levels required by the business for data latency and operational support to resolve problems.
-***Candour*** in bi-directional dialog with project teams over their expectations for co-operating with other teams
-***Simplification*** of ongoing operational support team processes 
+* ***Eyes Open*** and be mindful of the extent to which the project spans heterogeneous platforms and teams.
+* ***Requirements Clarity*** over the business need to incorporate source data structure changes into the downstream replication solution.
+* ***Written Definition*** for service levels required by the business for data latency and operational support to resolve problems.
+* ***Candour*** in bi-directional dialog with project teams over their expectations for co-operating with other teams
+* ***Simplification*** of ongoing operational support team processes 
 
 
