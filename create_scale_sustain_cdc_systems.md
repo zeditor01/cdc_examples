@@ -92,7 +92,7 @@ The answers to these questions are the best indication of how difficult this pro
 It is the co-ordination of the multiple teams and technologies that are necessarily involved that makes it hard!***
 
 Once you have clocked the true nature of the project that you are about to embark upon, you can start to evaluate risk mitigation strategies. 
-Aside from Project Management best practices (sponsor, funding, project manager, technical owner, project planning etc...) 
+Aside from normal Project Management best practices (sponsor, funding, project manager, technical owner, project planning etc...) 
 the following high-level strategies (some obvious, other less so) may form part of your risk mitigation aproach
 
 * Have a clear vision of the desired end-point (functional and non-functional requirements, service levels for ongoing devops control) and an honest assessment of the ongoing devops requirements
