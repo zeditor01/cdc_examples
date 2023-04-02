@@ -84,8 +84,8 @@ Ask yourself how many different people from different teams need to be involved 
 As a side exercise, you might also consider how many different outsourced companies these people work for.
 The answers to these questions are the best indication of how difficult this project might be.
 
-It is not the CDC product that makes the creation and sustainability of a heterogeneous data replication hard to manage. 
-It is the co-ordination of the multiple teams that are necessarily involved that makes it hard!
+***It is not the CDC product that makes the creation and sustainability of a heterogeneous data replication hard to manage. 
+It is the co-ordination of the multiple teams that are necessarily involved that makes it hard!***
 
 Once you have clocked the true nature of the project that you are about to embark upon, you can start to evaluate risk mitigation strategies. 
 Aside from Project Management best practices (sponsor, funding, project manager, technical owner, project planning etc...) 
