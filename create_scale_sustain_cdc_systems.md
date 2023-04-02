@@ -110,23 +110,33 @@ A simple architectecture diagram might look like this.
 
 CDC in practice is rather more complicated to manage. The causes of the complexity lie the heterogeneous nature of the typical CDC solution.
 And whilst all the technical integration points use standards-based patterns, it is the number of different teams that need to be co-ordinated
-that will be the most demanding aspect of project management for a heterogeneous data replication project.
+that will be the most demanding aspect of project management for a heterogeneous data replication project. 
+Review the representations of the different teams (the green boxes) and map this example to your own organisational structures.
 
 ![cdc_in_practice](/images/cdc_in_practice.JPG)
 
 ## 4. Common Constraints that will make things difficult
 
-IMS ( logging, exits, augmentation of databases, DRA, copybook changes )
-Db2 z/OS ( logging, DDL changes, break-in )
-Kafka (kerberized, schema regsitries, KCOPs, authorities, scaling)
-Control of target schemas
-Liaison with network teams
-Liaison with security teams
-Liaison with zOS, LUW and Cloud teams
-Division of Operational Responsibility
-Devt, Test and Prod environments, and testing and promotion
-Use of Windows client in a production environment 
-Automation
+Each deployment will enounter it's own unique set of challenges, based on the organisation, technology and technical standards applicable at that site.
+The list below is a compilation of some the the challenges that occur most frequently across sites.
+
+* for IMS, implications of increased logging and implementation of IMS exits
+* for IMS, augmentation of DBDs to generate log record types needed for replication
+* for VSAM (or IAM), implementation of z/OS logstreams to serve replication
+* for Db2 z/OS, DDL break in difficulties (completely solved by recent Db2 V13 PTF)
+* for Kafka, configuring CDC (a Kafka producer and consumer) to integrate with site-specific Kafka standards
+* Schema management (whether RDBMS or Kafka)
+* Choice of using a Windows client tool for production operations, or automation with scripting tools
+* Change management procedures that span the breadth of the heterogeneous data replication solution
+* Operations control
+
+The final point (operations control) is worth special attention. 
+How many operational teams will be involved in the day to day operational management activities? Four ?
+
+![cdc_crux](/images/cdc_crux.JPG)
+
+
+
 
 ## 5. First Implementation in Test
 
@@ -139,6 +149,8 @@ Early debugging experiences and exposure to operational difficulties
 Operational Visibility and drill-down
 Software maintenance co-ordination
 coping with Source DDL changes, and incorporating them into CDC subscriptions
+
+
 
 
 ## 7. Shift Left or Shift Right for Devops Sustainability
