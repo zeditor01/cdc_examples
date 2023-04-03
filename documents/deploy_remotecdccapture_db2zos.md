@@ -97,15 +97,15 @@ Invoke the installer with the following command
 Respond to the installer dialog as follows to specify "Install New", followed by "Datastore Type:remote Db2 Capture " followed by the license type of your entitlement. 
 
 
-![cdcdb2luw01](/images/cdcdb2luw01.png)
+![cdcdb2luw01](/images/cdc/cdcdb2luw01.png)
 
 Next, accept the installation path, Choose instance directory, and Review the install request. 
 
-![cdcdb2luw02](/images/cdcdb2luw02.png)
+![cdcdb2luw02](/images/cdc/cdcdb2luw02.png)
 
 Then let the installer run, and defer the instance creation till later. 
 
-![cdcdb2luw03](/images/cdcdb2luw03.png)
+![cdcdb2luw03](/images/cdc/cdcdb2luw03.png)
 
 
 
