@@ -9,7 +9,7 @@ provides worked examples of how to satisfy those requirements with a CDC solutio
 2. Configuring Authentication
 3. Encryption between Management Console and Access Server 
 4. Encryption between Access Server and CDC Agents
-5. 5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent
+5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent
 6. Operational Considerations arising from using Encryption
 
 
