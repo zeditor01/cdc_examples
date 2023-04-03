@@ -1,45 +1,117 @@
 # Deploy Remote Capture for Db2 z/OS
 
-1. IBM understanding of Qantas' intended data replication implementation.
+This chapter is a worked example of setting up remote CDC capture for Db2 z/OS.
 
-Qantas require a low latency stream of Db2 z/OS data changes to be captured from their Db2 z/OS systems, and written to a range of topics within a Kafka cluster that is hosted on a cloud service.
+## Contents
 
-Currently IBM is not aware of the intended number of tables, base data volumes, change data volumes etc...
+1. The nature of remote CDC capture for Db2 z/OS, and why you might choose it.
+2. Installation of Remote CDC Capture for Db2 z/OS
+3. Planning to activate Remote CDC Capture for Db2 z/OS
+4. Activation and use of Remote CDC Capture for Db2 z/OS
 
-2. IBM understanding of Qantas' intended Proof of Concept test environment.
 
-For the PoC, IBM understands that Qantas wish to
-	use one of their own on-premise Db2 z/OS test systems as the Db2 z/OS source.
-	use a Kafka cluster hosted on a cloud service.
-	deploy the CDC Capture, CDC Apply, and CDC Access Server components on a linux server that has TCPIP connectivity to both source and target.
-	deploy the CDC Management Console to a Windows system
+## 1. The nature of remote CDC capture for Db2 z/OS, and why you might choose it.
 
-The diagram below represents the PoC environment that IBM anticipates Qantas will deploy. There is some flexibility on the deployment of the CDC components should that be required.
+The remote capture agent for Db2 z/OS is available as an option for clients who wish to capture changes from Db2 z/OS, 
+without deploying the CDC started task on z/OS itself. The potential benefits of this options include
+
+1. a reduction in general purpose CPU consumption compared on z/OS, compared to the z/OS started task.
+2. placing operational control responsibilities to a linux operations team, instead of a z/OS operations team.
+
+* The administration tools (Management Console and CHCCLP) work with the remote capture agent in exactly the same way as they work wth a z/OS started task for CDC.
+* Performance benchmarks for local and remote capture agents are comparable.
+* Software licensing metrics are different, so it may be worth getting quotes from IBM for each option.
+
+***The Choice*** of whether to use the z/OS started task capture agent for Db2 z/OS, or the linux remote capture agent will be influenced by all of these factors, 
+but the best technical descision will be determined by co-locating the operations responsibility for as many CDC agents as possible on the same platform (be it linux or z/OS).
+
+The design of the remote capture agent for Db2 z/OS is illustrated in the diagram below
 
 ![rcapdb2](/images/rcapdb2.png)
 
-3. Installation and Configuration overview for the PoC.
-
-Four Separate installation activities are required for the PoC environment.
-
-3.1 Install the CDC agent for remote capture from Db2 z/OS on the Linux server. 
-The installer is a linux executable that uses a command line dialog to obtain the necessary connectivity information about
-a)	CDC agent access to Db2 z/OS
-b)	access to the CDC agent from the Access Server.
-
-3.2 Install the CDC agent for Kafka on the Linux server. 
-The installer is a linux executable that uses a command line dialog to obtain the necessary connectivity information about
-a)	CDC agent access to kafka
-b)	access to the CDC agent from the Access Server.
-
-3.3 Install the CDC Access Console. 
-The installer is a linux executable that uses a command line dialog to obtain the necessary connectivity information from the Management Console to the Access Server.
-
-3.4 Install the CDC Management Console. 
-This is a Windows setup.exe style installer that deploys the Management Console GUI application to a Windows PC.
+* The reading of changes from the Db2 z/OS log is performed by a stored procedure which is deployed to Db2 z/OS.
+* The remainder of the CDC capture tasks are executed on a linux server that calls the stored procedure for db2 log reads only.
+* Remote CDC Capture for Db2 z/OS interacts with the admin tools and CDC Apply agents in exactly the same way as any other CDC capture agent.
 
 
-4. Detailed instructions for setting up the Remote Capture Agent for Db2 z/OS.
+
+## 2. Installation of Remote CDC Capture for Db2 z/OS
+
+Installation of the software and configuration to work with Db2 z/OS are separate activities.
+This section deals with installing the software binaries.
+
+Remote CDC Capture for Db2 z/OS is available for linux on intel or linux on Z. 
+
+You download the software installer to a path on your chosen linux server, and then execute the installer.
+
+I have chosen to use cdcinst1 as the linux userid that owns all cdc programs for my demo environment.
+I created a group ( cdcadm1 ) for the user ( cdcinst1 ) and requested to reset the password for cdcinst1 with the following commands.
+
+```
+sudo groupadd -g 970 cdcadm1
+sudo useradd -u 1070 -g cdcadm1 -m -d /home/cdcinst1 cdcinst1
+passwd cdcinst1 
+```
+
+Next, create the directories that the installer will install the program to. 
+
+```
+/opt/ibm/InfoSphereDataReplication will hold all the cdc agents
+/opt/IBM/InfoSphereDataReplication will hold the access server
+```
+
+Make cdcinst1 the owner of those directories, with the following commands
+
+```
+chown cdcinst1:cdcadm1 /opt/ibm/InfoSphereDataReplication
+chown cdcinst1:cdcadm1 /opt/IBM/InfoSphereDataReplication
+```
+
+Also, add cdcinst1 to Sudoers for convenience
+
+```
+usermod -aG wheel username
+```
+
+
+If the JRE is not installed, do so now with the following command
+
+```
+sudo yum install unzip libnsl
+```
+
+logon as cdcinst1 and switch to the directory where the installer binary was downloaded to.
+
+unset the DISPLAY variable to force a terminal dialog, rather than a GUI
+
+```
+unset DISPLAY
+```
+
+Invoke the installer with the following command
+
+```
+./setup-iidr-11.4.0.4-5618-linux-x86.bin
+```
+
+Respond to the installer dialog as follows to specify "Install New", followed by "Datastore Type:remote Db2 Capture " followed by the license type of your entitlement. 
+
+
+![cdcdb2luw01](/images/cdcdb2luw01.png)
+
+Next, accept the installation path, Choose instance directory, and Review the install request. 
+
+![cdcdb2luw02](/images/cdcdb2luw02.png)
+
+Then let the installer run, and defer the instance creation till later. 
+
+![cdcdb2luw03](/images/cdcdb2luw03.png)
+
+
+
+
+
+## 3. Planning to activate Remote CDC Capture for Db2 z/OS
 
 The CDC Remote Capture for Db2 z/OS runs on Linux, but requires a load module to be deployed to Db2 z/OS as the executable program  of a stored procedure for access to the asynchronous Db2 log reader. The installation of this stored procedure is performed by the Remote Capture agent when you first start it. In order for this to happen, you need to ensure that a number of criteria are satisfied so that the Remote Capture agent can deploy the stored procedure. 
 
@@ -91,37 +163,25 @@ TSO userid priveleges
 	SYSIBM.SYSTABLESPACE
 
 
-4.2 Installation dialog for the Remote CDC Capture Agent for Db2 z/OS
-  The installation dialog (3.1 above) demands the following information to proceed.
-	Assign a name for the Remote CDC Capture server.
-	Assign a TCPIP port for the Remote CDC Capture server to listen on.
-	Define disk storage and memory limits for the Remote CDC Capture agent on Linux
-	Define the authentication credentials that the Remote CDC Capture agent uses to execute on the Linux Server
-	Define DRDA Connectivity information to the DB2 z/OS source system (TCPIP address, port, DRDA Location Name, userid/password for connection to DB2 z/OS)
-	Assign a metadata schema to use for the Remote CDC Capture agent.
-	Define SSH connectivity details to allow the transfer the Load Module for the stored procedure. (Host TCPIP address, Host User, Host Schema, SSH Port number).
-	Define WLM environment name that the Stored Procedure will execute under.
-	Define APF-Authorised Load Library that the Load Module is to be stored in.
+## 4. Activation and use of Remote CDC Capture for Db2 z/OS
 
-4.3 Helpful Screenshots
+Installation dialog for the Remote CDC Capture Agent for Db2 z/OS
+The installation dialog (3.1 above) demands the following information to proceed.
+
+* Assign a name for the Remote CDC Capture server.
+* Assign a TCPIP port for the Remote CDC Capture server to listen on.
+* Define disk storage and memory limits for the Remote CDC Capture agent on Linux
+* Define the authentication credentials that the Remote CDC Capture agent uses to execute on the Linux Server
+* Define DRDA Connectivity information to the DB2 z/OS source system (TCPIP address, port, DRDA Location Name, userid/password for connection to DB2 z/OS)
+* Assign a metadata schema to use for the Remote CDC Capture agent.
+* Define SSH connectivity details to allow the transfer the Load Module for the stored procedure. (Host TCPIP address, Host User, Host Schema, SSH Port number).
+* Define WLM environment name that the Stored Procedure will execute under.
+* Define APF-Authorised Load Library that the Load Module is to be stored in.
+
+
 The installation dialog for the Remote CDC Capture agent on a Windows Platform. 
 
 ![rcapdialog](/images/rcapdialog.png)
 
 
-
-5.	Notes on Developing Subscriptions and operating them
-Once all the CDC components are installed and configured, the process of defining, operating and monitoring subscriptions can commence. 
-
-A subscription can contain mappings for multiple tables to write changes to corresponding Kafka topics. By placing a group of tables in the same subscription, you are ensuring that CDC will apply the changes to that group of tables to Kafka in a transactionally consistent manner.
-
-All of these tasks are typically performed through the Windows-based Management Console, which is designed to provide visually intuitive workflows for productivity.
-
-Additionally, there is a command line option to perform everything that the Management Console is used for. A command line option can be desirable for automation and scripting in a production environment. A common approach is to use the management console in development and test environments to generate scripts that will be used for production deployment.
-
-6.	Notes on Kafka consumers
-The change data capture messages written to Kafka are written in an AVRO-JSON format. You can write Kafka consumers using either REST or Java APIs to access the data in Kafka.
-
-IBM provides a number of source code samples of consumers of Kafka topics. These can be used as a template by Qantas to develop their own consumers. The screenshot below is from the IBM sample for a transactionally-consistent consumer of CDC messages.
-
-
+Now you can do normal CDC admin
