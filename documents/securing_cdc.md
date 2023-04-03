@@ -20,8 +20,9 @@ In recent years cyber security has become a non-negotiable requirement of any sy
 * Implementing LDAP authentication for CDC users. 
 * Implementing transport layer security (mutually authenticated encryption) between CDC capture and apply agents on any platform. 
 * Implementing transport layer security (server authenticated encryption) between Management Console and Access Server.
-* It does not attempt to cover all the product's secuirty features.
-* Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
+
+It does not attempt to cover all the product's secuirty features.
+Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
  
 
 ## 1. Authentication and Encryption Options for CDC Components 
@@ -497,13 +498,27 @@ The management console just needs to trust the certificate of the access server.
 Configuring the Access Server and Management Console is easy. 
 You just need to edit a tls.properties file for each of these components. 
 
-![tlsproperties](/images/cdc/tlsproperties.png)
+![tlsproperties](/images/tlsproperties.png)
 
+In the example above, the access server is installed on Windows, 
+and a JKS trust store has be identified at ```C:\tls\ryzen9.jks```.
+The trustore is password protected.
+When the Management console connects to the Access Server, the certificate inside the truststore will be used to encrypt the network 
+flows between Management Console and Access Server.
 
 
 
 ## 4. Encryption between Access Server and CDC Agents   
  
+***Note:*** This section is focussed on LUW platforms, which use application-controlled TLS. 
+Section 5 will address z/OS agents which use Application-Transparent TLS. 
+ 
+Encryption on the links between the Access Server and all the CDC capture and Apply agents is achieved via mutually authenticated TLS encryption (mTLS).
+mTLS is when two parties authenticate each other at the same time in an authentication protocol 
+using certificates that can be authenticated against a certificate authority, and then used for encryption.
+
+The access server and the CDC agent each define 
+
 <h3 id="4.1">4.1 Mutually Authenticated TLS Encryption</h3>  
 <h3 id="4.2">4.2 Simplistic mTLS with Self-Signed Certificates</h3>
 <h3 id="4.3">4.3 mTLS with Certificate Authorities</h3>
