@@ -448,10 +448,8 @@ To turn on verbose output, type:
 To exit interactive mode, type exit; or quit;
 
 Repl > add ldap access manager username cdcadmin password l0nep1ne;
-[ERR3006]: simple bind failed: 192.168.1.191:389
-```
 
-<h1>FIX THIS</h1> 
+```
 
 
 ***Step 5:*** Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
@@ -499,7 +497,7 @@ The management console just needs to trust the certificate of the access server.
 Configuring the Access Server and Management Console is easy. 
 You just need to edit a tls.properties file for each of these components. 
 
-<h1>tls.properties</h1>
+![tlsproperties](/images/cdc/tlsproperties.png)
 
 
 
