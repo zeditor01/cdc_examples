@@ -17,7 +17,7 @@ remotely from the database that they were operating against. The list of possibl
 1. unwillingness to deploy additional software on a server or cluster that is running a mission critical database
 2. operational independence between the application (CDC) and the database
 3. grouping all CDC operations support under a single platform team ( Windows, Linux, Unix, z/OS ... )
-4. minimising cost (under older license metrics for CDC)
+4. minimising distribution of workload from an expensive operting platform to a cheaper operating platform
 5. etc...
 
 ## Shift-Left Operations
@@ -34,8 +34,23 @@ only available on the same OS as the source database.
 ![shift_r](/images/shift_r.png)
 
 
+## IBM Remote Capture products
+
+In support of Shift-Right deployments, IBM has announced two remote capture products for IBM Z data sources. ( Db2 z/OS and VSAM ).
+
+### Remote Capture for Db2 z/OS
+
+Link [RCAPDB2ZOS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
+
+![rcapdb2](/images/rcapdb2.png)
+
+### Remote Capture for VSAM
+
+Link [RCAPVSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) 
 
 
+
+## Summary and Recommendations
 
 remote capture agents offer the benefit of establishing a single operational control point within the enterprise on Linux or Windows.
 
