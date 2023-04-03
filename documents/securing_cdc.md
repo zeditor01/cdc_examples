@@ -20,8 +20,9 @@ In recent years cyber security has become a non-negotiable requirement of any sy
 * Implementing LDAP authentication for CDC users. 
 * Implementing transport layer security (mutually authenticated encryption) between CDC capture and apply agents on any platform. 
 * Implementing transport layer security (server authenticated encryption) between Management Console and Access Server.
-* It does not attempt to cover all the product's secuirty features.
-* Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
+
+It does not attempt to cover all the product's secuirty features.
+Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
  
 
 ## 1. Authentication and Encryption Options for CDC Components 
