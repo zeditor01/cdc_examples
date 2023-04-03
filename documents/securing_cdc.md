@@ -96,10 +96,9 @@ Whichever LDAP option you choose, the CDC agent itself is subject to whatever au
 implement at the various data sources. Whether z/OS or Linux, this would normally be a mixture of OS Authentication 
 and associated DBMS authorisation.
 
-
 It is possible to use an "embedded" Access Server, that is installed as part of the Management console, as depicted below.
 
-![CDC Components](images/cdc/cdcsec03.png)
+![CDC Components](/images/cdc/cdcsec03.png)
 
 This still conforms to exactly the same authentication options as a separate access server. The embedded access server option 
 may be attractive depending on the way that CDC will be operated and managed in a production environment. 
@@ -111,12 +110,12 @@ There is no single right answer here. CDC is designed to operate in wildly heter
 how operations and system automation is achieved because every site will be different. Hence - the provision of different options.
 
 
-<h3 id="1.3">1.3 Encryption options between CDC Components</h3>
+### 1.3 Encryption options between CDC Components 
  
 Encryption of sensitive business data over a network should always be encrypted. CDC supports industry-standard Transport Layer Security 
 standards, as depicted in the diagram below.
 
-![CDC Components](images/cdc/cdcsec04.png)
+![CDC Components](/images/cdc/cdcsec04.png)
 
 All communications between CDC agents and CDC Access Server use mutual-authenticated TLS encryption (mTLS). This is based on 
 certificates being used as the basis for negotiating encryption on CDC connections.
@@ -125,7 +124,7 @@ The CDC knowledge center describes an approach using self-signed certificates be
 be more common for an enterprise to use a certificate authority to sign certificates to be stored at each end point. The worked 
 examples in this paper are based on certificate authority.
 
-<h4 id="1.3.1">1.3.1 Application-Controlled and Application-Transparent TLS</h4>
+#### 1.3.1 Application-Controlled and Application-Transparent TLS 
 
 The implementation of TLS encryption is quite different between z/OS and other platforms.
 
@@ -139,21 +138,21 @@ Consequently, CDC components conform to the standards of their respective operat
 
 Both approaches implement exactly the same standards-based TLS, but the configuration is different.
 
-<h4 id="1.3.2">1.3.2 Management Console TLS encryption</h4>
+#### 1.3.2 Management Console TLS encryption 
 
 The windows Management Console supports server-authenticated TLS, which is simpler, and sufficient for a simple Graphical client to the Access Server
 
-<br><hr>
+ 
 
-<h2 id="#2.0">2. Configuring Authentication</h2> 
+## 2. Configuring Authentication 
 
 This sections provides worked example of the three configuration options for authentication using a separate Access Server.
 Should you wish to deploy an embedded Access Server, the principles in the examples below should be enough to see you right.
 
-<b>Important Note:</b> These three options are mutually exclusive for an installation of the access server. 
+***Important Note:*** These three options are mutually exclusive for an installation of the access server. 
 You must decide which option you want to use, and choose the appropriate option at installation time.
 
-<h3 id="2.1">2.1 Authentication without LDAP</h3>
+### 2.1 Authentication without LDAP 
 
 Authentication without LDAP is easy. It's probably a good option if you are assessing CDC for it's replication capabilities without the effort of configuring a hardened operational production service.
 The steps are
@@ -167,11 +166,11 @@ The result of these steps will be that Access Server uses an encrypted local fil
 
 Screenshots from the sequence of steps follow
 
-<b>Step 1:</b> Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
+***Step 1:*** Leave the "LDAP Embedded Access Server" box <u>unchecked</u> if you want to connect to a separate Access Server.
 
-![cdc_mc_install_noldap](images/cdc/cdc_mc_install_noldap.png)
+![cdc_mc_install_noldap](/images/cdc/cdc_mc_install_noldap.png)
 
-<b>Step 2:</b> Installation dialog to install the Access Server (on Linux) without the LDAP option.
+***Step 2:*** Installation dialog to install the Access Server (on Linux) without the LDAP option.
 
 ```
 $ unset DISPLAY
@@ -364,7 +363,7 @@ so, before connecting to Access Server.
 PRESS <ENTER> TO EXIT THE INSTALLER:
 ```
 
-<b>Step 3:</b> Start the access server and create the CDC SYSADMIN userid. logon as the cdc install userid, switch to the access server /bin directory, start the 
+***Step 3:*** Start the access server and create the CDC SYSADMIN userid. logon as the cdc install userid, switch to the access server /bin directory, start the 
 access server with the ```dmaccessserver``` command, and then create the access server sysadmin id with the ```dmcreateuser``` command.
 
 ```
@@ -384,19 +383,20 @@ $ ./dmcreateuser cdcadmin cdcadmin cdcadmin l0nep1ne sysadmin true false false
 $
 ```
 
-<b>Step 4:</b> Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+***Step 4:*** Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
-![cdc_mc_connect_as](images/cdc/cdc_mc_connect_as32.png)
+![cdc_mc_connect_as](/images/cdc/cdc_mc_connect_as32.png)
 
 Now you can connect to CDC datastores. Go to the Access Manager tab, click on "new connection" and fill in the details.
 
-![cdc_mc_connect_as34](images/cdc/cdc_mc_connect_as34.png)
+![cdc_mc_connect_as34](/images/cdc/cdc_mc_connect_as34.png)
 
-<h3 id="2.2">2.2 Authentication-Only with LDAP</h3>
+
+### 2.2 Authentication-Only with LDAP 
 
 Using the same Windows Management Console that was installed in the previous step, we would install a different Access Server with the LDAP Autentication-Only Option.
 
-As a <b>pre-requsuite</b> you need to setup an LDAP Server which has cdcBaseDN=o=cdc,dc=ibm setup. 
+As a ***pre-requsuite*** you need to setup an LDAP Server which has cdcBaseDN=o=cdc,dc=ibm setup. 
 An example of using LDAP on z/OS with an LDBM backend is described in Appendix A.
 
 
@@ -407,7 +407,7 @@ An example of using LDAP on z/OS with an LDBM backend is described in Appendix A
 
 The result of these steps will be that Access Server uses the LDAP server for authentication, but not CDC authorisation control.
 
-<b>Step 1:</b> Install the Access Server with the LDAP Authentication-Only Option.
+***Step 1:*** Install the Access Server with the LDAP Authentication-Only Option.
 
 Same dialog as before, except choose Option 2 (LDAP Authentication Only)
 
@@ -427,13 +427,13 @@ CHOOSE LDAP CONFIGURATION BY NUMBER, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
    : 2
 ```
 
-<b>Step 2:</b> Configure the connectivity from Access Server to the LDAP Server (ldap.properties file) 
+***Step 2:*** Configure the connectivity from Access Server to the LDAP Server (ldap.properties file) 
 
 Edit the ldap.properties file with the correct connectivity values
 
-![ldap_properties](images/cdc/ldap_properties.png)
+![ldap_properties](/images/cdc/ldap_properties.png)
 
-<b>Step 3:</b> Start the Access Server
+***Step 3:*** Start the Access Server
 
 ```
 $ pwd
@@ -450,7 +450,7 @@ $ ./dmaccessserver &
 $
 ```
 
-<b>Step 4:</b> On the access server, create the root userid for the CDC Access Server. (CHCCLP command)
+***Step 4:*** On the access server, create the root userid for the CDC Access Server. (CHCCLP command)
 
 Switch to the bin directory of the Access Server installation, invoke chcclp and enter the command to add the CDC Sysadmin user.
 
@@ -491,7 +491,7 @@ Repl > add ldap access manager username cdcadmin password l0nep1ne;
 <h1>FIX THIS</h1> 
 
 
-<b>Step 4:</b> Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
+***Step 5:*** Start the Management Console, and login to the Access Server (specifying TCPIP address & port)
 
 Same as before, except that this time the authentication processing is performed by LDAP calls.
 
