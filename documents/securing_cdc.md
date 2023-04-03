@@ -5,48 +5,12 @@ provides worked examples of how to satisfy those requirements with a CDC solutio
 
 ## Contents
 
-<ul class="toc_list">
-<li><a href="#abstract">Abstract</a>   
-<li><a href="#1.0">1 Authentication and Encryption Options for CDC Components</a>
-<ul>
-  <li><a href="#1.1">1.1 CDC Component Reference Scenarios</a></li>
-  <li><a href="#1.2">1.2 Authentication options for CDC Users</a></li> 
-  <li><a href="#1.3">1.3 Encryption options between CDC Components</a></li>
-</ul>
-<li><a href="#2.0">2. Configuring Authentication</a>
-<ul>
-  <li><a href="#2.1">2.1 Authentication without LDAP</a></li>
-  <li><a href="#2.2">2.2 Authentication-Only with LDAP</a></li>
-  <li><a href="#2.3">2.3 Authentication and Authorization with LDAP</a></li>
-</ul> 
-<li><a href="#3.0">3. Encryption between Management Console and Access Server</a>
-<li><a href="#4.0">4. Encryption between Access Server and CDC Agents</a>
-<ul>
-  <li><a href="#4.1">4.1 Mutually Authenticated TLS Encryption</a></li>
-  <li><a href="#4.2">4.2 Simplistic mTLS with Self-Signed Certificates</a></li>
-  <li><a href="#4.3">4.3 mTLS with Certificate Authorities</a></li>
-  <li><a href="#4.4">4.4 Application Controlled TLS (LUW)</a></li>  
-  <li><a href="#4.5">4.5 Application Transparent TLS (z/OS)</a></li>
-</ul> 
-<li><a href="#5.0">5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent</a>
-<ul>
-  <li><a href="#5.1">5.1 Environment for Scenario without Encryption</a></li>
-  <li><a href="#5.2">5.2 mTLS configuration of Access Server</a></li>
-  <li><a href="#5.3">5.3 mTLS configuration of CDC Apply on Linux</a></li>
-  <li><a href="#5.4">5.4 AT-TLS configuration of CDC Capture on z/OS</a></li>  
-  <li><a href="#5.5">5.5 Certificate Exchanges between platforms</a></li>
-  <li><a href="#5.6">5.6 Operating CDC with mTLS encryption</a></li>
-  <li><a href="#5.7">5.7 Monitoring and Tracing of encrypted network flows</a></li>  
-</ul>
-<li><a href="#6.0">6. Operational Considerations arising from using Encryption</a>
-<ul>
-  <li><a href="#6.1">6.1 Always Encrypted CDC Agents</a></li>
-  <li><a href="#6.2">6.2 ???</a></li>
-  <li><a href="#6.3">6.3 ???</a></li> 
-</ul>
-<li><a hrex="Appendix">Appendix: LDAP on z/OS with an LDBM backend</li>
-</ul>
-
+1. Authentication and Encryption Options for CDC Components 
+2. Configuring Authentication
+3. Encryption between Management Console and Access Server 
+4. Encryption between Access Server and CDC Agents
+5. 5. Worked Example of mTLS between z/OS Capture agent and LUW Apply Agent
+6. Operational Considerations arising from using Encryption
 
 
 ## Security Context
@@ -59,7 +23,6 @@ In recent years cyber security has become a non-negotiable requirement of any sy
 * It does not attempt to cover all the product's secuirty features.
 * Comprehensive details of the product's features are covered in <a href="https://www.ibm.com/docs/en/idr/11.4.0">IBM CDC knowledge centre.</a>
  
-
 
 ## 1. Authentication and Encryption Options for CDC Components 
 
