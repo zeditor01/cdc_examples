@@ -498,7 +498,7 @@ The management console just needs to trust the certificate of the access server.
 Configuring the Access Server and Management Console is easy. 
 You just need to edit a tls.properties file for each of these components. 
 
-![tlsproperties](/images/cdc/tlsproperties.png)
+![tlsproperties](/images/tlsproperties.png)
 
 
 
