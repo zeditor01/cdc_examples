@@ -3,6 +3,8 @@
 # Setting Up Classic CDC for IMS - Worked Example
 This chapter is a worked example of setting up Classic CDC for IMS. 
 
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. IMS is a hierarchical database, with some pretty unique integration points that Classic CDC for IMS has to address.
+
 ## Contents
 
 <ul class="toc_list">
