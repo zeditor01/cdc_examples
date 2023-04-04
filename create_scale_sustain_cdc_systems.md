@@ -24,7 +24,7 @@ which is the definitive IBM-provided reference point of information for CDC Soft
 The content of this repository has been structured into separate documents as follows
 
 1. [Establishing sustainable devops management of the designed CDC solution](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md) (this document).
-2. Deploying CDC agents for 
+2. Deploying selected CDC agents... 
     * [Classic CDC for IMS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md)
     * [CDC for DB2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2zos.md)
     * [Classic CDC for VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md)
