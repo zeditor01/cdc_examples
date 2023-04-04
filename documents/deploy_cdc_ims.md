@@ -1,4 +1,4 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
 
 # Setting Up Classic CDC for IMS - Worked Example
 This chapter is a worked example of setting up Classic CDC for IMS. 
