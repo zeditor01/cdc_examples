@@ -50,7 +50,7 @@ The content of this repository has been structured into separate documents as fo
 3. CDC Implementation (Theory) 
 4. CDC Implementation (Practice)
 5. Common Constraints that will make things difficult
-6. First Implementation in Test
+6. Staggered Deployment Steps
 7. Ongoing Devops after Successful Production Deployment
 8. Shift Left or Shift Right for Devops Sustainability
 
@@ -145,7 +145,7 @@ The list below is a compilation of some the the challenges that occur most frequ
 
 Each of these considerations is addressed directly in the deployment documents linked at the top of this document.
 
-## 5. First Implementation in Test
+## 5. Staggered Deployment Steps
 
 It is sometimes said that ***"the two happiest days of a boater’s life are the day they buy a boat and the day they sell it"***.
 
