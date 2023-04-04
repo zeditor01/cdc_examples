@@ -25,14 +25,15 @@ The content of this repository has been structured into separate documents as fo
 
 1. [Establishing sustainable devops management of the designed CDC solution](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md) (this document).
 2. Deploying CDC agents for 
-    3. [IMS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md)
-    4. [DB2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2zos.md)
-    5. [VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md)
-    6. [Kafka](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_kafka.md)
-    7. [Db2 for Linux](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2linux.md)
-    8. [remote VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md)
-    9. [remote Db2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md)
-4. Deploying [Management Console and Access Server](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_admintools.md) and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md)
+    [IMS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md)
+    [DB2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2zos.md)
+    [VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md)
+    [Kafka](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_kafka.md)
+    [Db2 for Linux](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_db2linux.md)
+    [remote VSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md)
+    [remote Db2 z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md)
+3. Deploying [Management Console and Access Server](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_admintools.md)
+4. Deploying [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md)
 5. [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md)
 6. [Securing all points of the CDC solution - Authentication, Authorisation, Encryption](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md)
 7. [Monitoring and Alerting for CDC subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/monitoring_alerting.md)
