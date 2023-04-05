@@ -1,5 +1,9 @@
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
+
 # Deploy CHCCLP for z/OS
 
+***Note*** the content of this paper is fairly comprehensive. 
+However, it will be tided up shortly to create a better structure with less repetition.
 
 ## 1. What is CHCCLP for z/OS ?
 
