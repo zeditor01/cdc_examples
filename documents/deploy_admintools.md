@@ -36,7 +36,8 @@ have been previously developed and tested. CHCCLP scripting interfaces are avail
 
 ## Installing Access Server.
 
-Installation of the CDC Access Server is a simple setup.exe style installer for Windows, or a tar-based installer for Linux
+Installation of the CDC Access Server is a simple setup.exe style installer for Windows, or a tar-based installer for Linux. 
+You need to make some fundamental security decisions before you install Access Server, as discussed below.
 
 Aside from confirming Windows basics like installation path, program group and so forth, the major installation decisions you need to make are as follows.
 
@@ -50,15 +51,20 @@ In this example, we choose not to use an LDAP server for anything, which will me
 
 ![instas02](/images/instas02.JPG)
 
-xx
+Access Server listens on a TCPIP port. The default port is 10101, which can be changed at installation time here.
+
+If you deploy the CDC Management Console and Access Server in a production environment, you will likely want all TCPIP connections to be encrypted. Encryption can be specified at a later time, and is reviewed in the [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) document.
 
 ![instas03](/images/instas03.JPG)
 
-xx
+Next up, you need to define the root CDC administration user. If you are not using LDAP, you must enter a userid and a password here. This a userid defined withn the Access Server, and it is totally independent of the authentcation control of the operating system where Access Server is installed.
+
+In a production environment, you would likely be using an LDAP server, and the root CDC administration user would be defined with a CHCCLP command 
+as covered in the [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) document.
 
 ![instas04](/images/instas04.JPG)
 
-Open the Windows Services application, and observe that an auto-start Windows Service has been established, so that the Access Server is always available on demand.
+After running the installer, open the Windows Services application, and observe that an auto-start Windows Service has been established, so that the Access Server is always available on demand.
 
 ![instas05](/images/instas05.JPG)
 
@@ -66,10 +72,33 @@ Open the Windows Services application, and observe that an auto-start Windows Se
 ## Installing Management Console.
 
 Installation of the CDC Management Console is a simple setup.exe style installer for Windows.
+Aside from confirming Windows basics like installation path, program group and so forth, the only decision you need to make is whether 
+you wish to install and embedded access server, or connect to an independent access server.
 
-Aside from confirming Windows basics like installation path, program group and so forth, the major installation decisions you need to make are as follows.
+Run the installer to see the installation dialog
+
+![instmc01](/images/instmc01.JPG)
+
+After responding to all the Path and License questions, you will be asked whether you wish to install and embedded access server, or connect to an independent access server.
+
+In this example, we choose not to install the embedded access server, because we will connect to the access server we just deployed.
+
+***Note*** A Management Console installation with an embedded access server cannot also connect to independent access servers. 
+
+![instmc02](/images/instmc02.JPG)
 
 
+
+![instmc03](/images/instmc03.JPG)
+
+Next up, you need to define the root CDC administration user. If you are not using LDAP, you must enter a userid and a password here. This a userid defined withn the Access Server, and it is totally independent of the authentcation control of the operating system where Access Server is installed.
+
+In a production environment, you would likely be using an LDAP server, and the root CDC administration user would be defined with a CHCCLP command 
+as covered in the [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) document.
+
+![instmc04](/images/instmc04.JPG)
+
+After running the installer, open the Windows Services application, and observe that an auto-start Windows Service has been established, so that the Access Server is always available on demand.
 
 
 
