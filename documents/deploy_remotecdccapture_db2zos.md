@@ -100,15 +100,42 @@ Invoke the installer with the following command
 Respond to the installer dialog as follows to specify "Install New", followed by "Datastore Type:remote Db2 Capture " followed by the license type of your entitlement. 
 
 
-![cdcdb2luw01](/images/cdc/cdcdb2luw01.png)
+![rdb201](/images/cdc/rdb201.JPG)
 
-Next, accept the installation path, Choose instance directory, and Review the install request. 
+cc 
 
-![cdcdb2luw02](/images/cdc/cdcdb2luw02.png)
+![rdb202](/images/cdc/rdb202.JPG)
 
-Then let the installer run, and defer the instance creation till later. 
+xx
 
-![cdcdb2luw03](/images/cdc/cdcdb2luw03.png)
+![rdb203](/images/cdc/rdb203.JPG)
+
+xx
+
+![rdb204](/images/cdc/rdb204.JPG)
+
+
+xx
+
+![rdb205](/images/cdc/rdb205.JPG)
+
+xx
+
+![rdb206](/images/cdc/rdb206.JPG)
+
+
+xx
+
+![rdb207](/images/cdc/rdb207.JPG)
+
+
+xx
+
+![rdb208](/images/cdc/rdb208.JPG)
+
+xx
+
+![rdb209](/images/cdc/rdb209.JPG)
 
 
 ## 3. Planning for Configuration of Remote CDC Capture for Db2 z/OS
