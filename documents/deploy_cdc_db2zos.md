@@ -538,7 +538,7 @@ to your PROCLIB, and follow your site standards for establishing a new started t
 This document is primarily concerned with everything that needs to be done to establish CDC for Db2 z/OS as a started task. 
 
 Using the the CDC administration tools is now a standard CDC task which is covered in 
-[Chapter 2.  Creating and Operating CDC Subscriptions.](C002_administration.md)
+the [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md) paper
 
 
 
@@ -553,8 +553,8 @@ Management Console, or from the Access Server on Windows or Linux.
 The CHCCLP scripting option will be attractive to all shops that wish to implement strong devops governance and control to their 
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
 inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
-All of these devops options are covered in [Chapter 3.  Devops Options for CDC.](C003_devops.md)
-and [Chapter 4.  CHCCLP Scripting.](C004_chcclp.md)
+All of these devops options are covered in the the [CDC Devops](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md) paper in this series of articles. 
 
 <h3 id="7.4">7.4 Conforming to site standards for cross-platform devops and security.</h3> 
 
