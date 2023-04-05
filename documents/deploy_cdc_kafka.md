@@ -1,7 +1,10 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
+
 
 # Setting Up CDC for Kafka - Worked Example
 This chapter is a worked example of setting up CDC for Kafka on Linux. 
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. Kafka is very different from a conventional Relational Database Management System, and the CDC agent provides integration options to map change data streams to kafka topics, handle flexible formatting options, publish schemas into a schema registry, act as both a kafka consumer and kafka producer, conform to kerberos security constructs, exploit kafka partitioning for performance and many more kafka-specific options.
 
 
 ## Table of Contents
@@ -359,9 +362,7 @@ Examples of what the IBM-supplied KCOPs can do include:
 
 Full details are in the knowledgecenter <a href="https://www.ibm.com/docs/en/idr/11.4.0?topic=crek-kafka-custom-operation-processor-kcop-cdc-replication-engine-kafka">here</a>. 
 
-Just a reminder that section 5 of this document is a brief overview of the Kafka integration considerations. Worked examples of thse tasks are included 
-in  [10. Creating and Operating CDC Subscriptions.](C010_administration.md)
-
+Just a reminder that section 5 of this document is a brief overview of the Kafka integration considerations. 
 <br><hr> 
 
 <h2 id="6.0">6. Integrate with the wider CDC Landscape</h2>
@@ -378,7 +379,8 @@ to automate the execution and operation of the CDC instance.
 <h3 id="6.2">6.2 Connect from Management Console to CDC for Kafka instance</h3>
 
 This document is primarily concerned with everything that needs to be done to establish CDC for Kafka as a CDC target. 
-Using the the CDC administration tools is now a standard CDC task which is covered in [11. Devops Options for CDC.](C011_devops.md)
+Using the the CDC administration tools is now a standard CDC task which is covered in 
+the [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md) paper
 
 <h3 id="6.3">6.3 Use CHCCLP Scripting</h3>
 
@@ -392,8 +394,8 @@ The CHCCLP scripting option will be attractive to all shops that wish to impleme
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
 inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
 
-All of these devops options are covered in the  [11. Devops Options for CDC.](C011_devops.md) paper 
-and the [12. CHCCLP Scripting.](C012_chcclp.md) paper.
+All of these devops options are covered in the the [CDC Devops](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md) paper in this series of articles. 
 
 
 <h3 id="6.4">6.4 Conforming to site standards for cross-platform devops and security</h3>

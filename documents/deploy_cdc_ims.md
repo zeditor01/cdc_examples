@@ -1,7 +1,9 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
 
 # Setting Up Classic CDC for IMS - Worked Example
 This chapter is a worked example of setting up Classic CDC for IMS. 
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. IMS is a hierarchical database, with some pretty unique integration points that Classic CDC for IMS has to address.
 
 ## Contents
 
@@ -64,7 +66,7 @@ This document is a basic worked example of setting up Classic CDC for IMS as a C
 
 It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the README link at the very top of this page. 
+The complete set of articles can be accessed using the link at the very top of this page. 
 
 <br><hr>
 
@@ -73,8 +75,9 @@ The complete set of articles can be accessed using the README link at the very t
 Classic CDC for IMS is a CDC Capture Source only. It does not have CDC Apply functionality.
 
 <b>Aside:</b> Classic CDC for IMS is licensed seperately from Classic CDC for VSAM. However, these two 
-products share a lot of common components. The sister document [Chapter 10.  Setting up Classic CDC for VSAM.](C010_vsam.md) follows the same pattern as this worked 
-example for much of the setup work, but has differences with regard to the services to access VSAM and capture changes from VSAM. 
+products share a lot of common components. 
+The sister document [Setting up Classic CDC for VSAM.](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_vsam.md) follows 
+the same pattern as this worked  example for much of the setup work, but has differences with regard to the services to access VSAM and capture changes from VSAM. 
 
 CDC Replication is a set of products that implement a common data replication architecture spanning 
 a large number of diverse data sources and targets. The CDC common architecture is based upon replication of 
@@ -913,56 +916,106 @@ Go to the "Data Project Explorer" (top left window) and create a new project, su
 
 Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
 
-Screenshot 1 of 17 : Create a new Data Design Project (Zeditor)
+***Screenshot 1 of 17***
+
+Create a new Data Design Project (Zeditor)
+
 ![CDA Imported Artefacts](../images/cdc/imstab01.PNG)
 
-Screenshot 2 of 17 :  Inside the project, create a new Physical Data Model
+***Screenshot 2 of 17***
+
+Inside the project, create a new Physical Data Model
+
 ![CDA Imported Artefacts](../images/cdc/imstab02.PNG)
 
-Screenshot 3 of 17 :  Use the Classic Integration template for this data model
+***Screenshot 3 of 17***
+
+Use the Classic Integration template for this data model
+
 ![CDA Imported Artefacts](../images/cdc/imstab03.PNG)
 
-Screenshot 4 of 17 :  Highlight IMS DBDs, right mouse click, import files
+
+***Screenshot 4 of 17***
+
+Highlight IMS DBDs, right mouse click, import files
+
 ![CDA Imported Artefacts](../images/cdc/imstab04.PNG)
 
-Screenshot 5 of 17 :  Import either from 3270 or Local PC, and Review artefact
+***Screenshot 5 of 17***
+
+Import either from 3270 or Local PC, and Review artefact
+
 ![CDA Imported Artefacts](../images/cdc/imstab05.PNG)
 
-Screenshot 6 of 17 :  Repeat process to import COBOL Copybooks
+***Screenshot 6 of 17***
+
+Repeat process to import COBOL Copybooks
+
 ![CDA Imported Artefacts](../images/cdc/imstab06.PNG)
 
-Screenshot 7 of 17 :  Highlight the Physical Data Model, Create an IMS Table
+***Screenshot 7 of 17***
+
+Highlight the Physical Data Model, Create an IMS Table
+
 ![CDA Imported Artefacts](../images/cdc/imstab07.PNG)
 
+***Screenshot 8 of 17***
 
-Screenshot 8 of 17 :  Specify the DBD, assign the desired Schema Name
+Specify the DBD, assign the desired Schema Name
+
 ![CDA Imported Artefacts](../images/cdc/imstab08.PNG)
 
-Screenshot 9 of 17 :  Specify Segments, SSID, PSB, and choose Table Name and Usage
+***Screenshot 9 of 17*** 
+
+Specify Segments, SSID, PSB, and choose Table Name and Usage
+
 ![CDA Imported Artefacts](../images/cdc/imstab09.PNG)
 
-Screenshot 10 of 17 :  Specify root segment copybook and choose fields
+***Screenshot 10 of 17***  
+
+Specify root segment copybook and choose fields
+
 ![CDA Imported Artefacts](../images/cdc/imstab10.PNG)
 
-Screenshot 11 of 17 :  Specify dependent segment copybooks and choose fields
+***Screenshot 11 of 17*** 
+
+Specify dependent segment copybooks and choose fields
+
 ![CDA Imported Artefacts](../images/cdc/imstab11.PNG)
 
-Screenshot 12 of 17 :  Review the IMS table mapping, and Finish
+***Screenshot 12 of 17***
+
+Review the IMS table mapping, and Finish
+
 ![CDA Imported Artefacts](../images/cdc/imstab12.PNG)
 
-Screenshot 13 of 17 :  Highlight the Mapped Object, right mouse click and Generate DDL
+***Screenshot 13 of 17*** 
+
+Highlight the Mapped Object, right mouse click and Generate DDL
+
 ![CDA Imported Artefacts](../images/cdc/imsgen01.PNG)
 
-Screenshot 14 of 17 :  Specify Artefacts required
+***Screenshot 14 of 17*** 
+
+Specify Artefacts required
 ![CDA Imported Artefacts](../images/cdc/imsgen02.PNG)
 
-Screenshot 15 of 17 :  Review DDL, and tick to execute DDL on Classic CDC Server
+***Screenshot 15 of 17***
+
+Review DDL, and tick to execute DDL on Classic CDC Server
+
 ![CDA Imported Artefacts](../images/cdc/imsgen03.PNG)
 
-Screenshot 16 of 17 :  Specify the target server (SAMPLEDS) and Finish
+***Screenshot 16 of 17***  
+
+Specify the target server (SAMPLEDS) and Finish
+
 ![CDA Imported Artefacts](../images/cdc/imsgen04.PNG)
 
-Screenshot 17 of 17 :  Review object in Data Source Explorer for accuracy
+***Screenshot 17 of 17***
+
+Review object in Data Source Explorer for accuracy
+
 ![CDA Imported Artefacts](../images/cdc/imsgen05.PNG)
 
  
@@ -1004,7 +1057,7 @@ when they connect to the Classic CDC Server
 This document is primarily concerned with everything that needs to be done to establish Classic CDC for IMS as a CDC source.
 
 Using the the CDC administration tools is now a standard CDC task which is covered in 
-the [10. Creating and Operating CDC Subscriptions.](C010_administration.md) paper.
+the [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md) paper
 
 
 <h3 id="7.4">7.4 Use CHCCLP Scripting for z/OS</h3>
@@ -1020,8 +1073,8 @@ The CHCCLP scripting option will be attractive to all shops that wish to impleme
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
 inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler).
 
-All of these devops options are covered in the the [11. Devops Options for CDC.](C011_devops.md paper 
-and [12. CHCCLP Scripting.](C012_chcclp.md) paper in this series of articles. 
+All of these devops options are covered in the the [CDC Devops](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md) paper in this series of articles. 
 
 <h3 id="7.5">7.5 Conforming to site standards for cross-platform devops and security.</h3> 
 

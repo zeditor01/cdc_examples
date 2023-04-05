@@ -1,7 +1,11 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
+
 
 # Setting Up CDC for Db2 Linux - Worked Example
 This chapter is a worked example of setting up CDC for Db2 on Linux. 
+
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. Db2 for linux is a standards-compliant relational database, making CDC integration very straigtforward.
 
 ## Table of Contents
 
@@ -195,7 +199,7 @@ Now, create an instance called centos199db2, listening on port 10901, allocated 
 
 Next step is to define an encryption profile. This dialog is iterative, allowing you to define multiple encryption profiless, and then choose the one to use. 
 You can also return to this dialog later and change the encryption profile of the instance. The configuration of TLS and encryption profiles is handled as a separate 
-topic in [13. Security for CDC (LDAP and TLS).](C013_security.md). For now we will create an encryption profile that disables encryption. 
+topic in [Securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md). For now we will create an encryption profile that disables encryption. 
 
 Select 1 to manage encryption profiles, and then select 1 again to drive the "ADD encryption profile" dialog here 
 
@@ -206,7 +210,7 @@ Having defined encruption profile "noencrypt", we can select it and complete the
 
 The CDC for Db2 instance will use the Db2 data source logon to authenticate connections from the Access Server. 
 In most real world scenarios you would configure the Access Server 
-to use an LDAP directory for authentication services. LDAP configuration is covered in [13. Security for CDC (LDAP and TLS).](C013_security.md)
+to use an LDAP directory for authentication services. LDAP configuration is covered in [Securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md)
 
 ![cdcdb2luw06](../images/cdc/cdcdb2luw06.png)
 
@@ -295,7 +299,8 @@ to automate the execution and operation of the CDC instance.
 
 This document is primarily concerned with everything that needs to be done to establish CDC for Db2 as a CDC source and target. 
 
-Using the the CDC administration tools is now a standard CDC task which is covered in [11. Devops Options for CDC.](C011_devops.md)
+Using the the CDC administration tools is now a standard CDC task which is covered in 
+the [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md) paper
 
 <h3 id="6.3">6.3 Use CHCCLP Scripting</h3>
 
@@ -309,8 +314,8 @@ The CHCCLP scripting option will be attractive to all shops that wish to impleme
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
 inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
 
-All of these devops options are covered in the  [11. Devops Options for CDC.](C011_devops.md) paper 
-and the [12. CHCCLP Scripting.](C012_chcclp.md) paper.
+All of these devops options are covered in the the [CDC Devops](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md) paper in this series of articles. 
 
 <h3 id="6.4">6.4 Conforming to site standards for cross-platform devops and security</h3> 
 

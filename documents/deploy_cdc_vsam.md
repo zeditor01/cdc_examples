@@ -1,7 +1,15 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
 
-# Setting Up Classic CDC for IMS - Worked Example
+# Setting Up Classic CDC for VSAM - Worked Example
 This chapter is a worked example of setting up Classic CDC for VSAM. 
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. 
+
+VSAM is a file system without database recovery logs that are the source for change data capture from most data sources. CDC for VSAM uses z/OS logstreams to act as a replication log, and the VSAM datasets must be modified to write replication log records to the associated z/OS logstream for that VSAM dataset.
+
+VSAM may be deployed under either CICS control, or independently. 
+* If VSAM is deployed independently from CICS, then a separate licensed product (CICS VSAM Recovery) is required to write replication log records to the z/OS logstream. CICS VSAM Recovery is outside the scope of this implementation worked example.
+* If VSAM is deployed under CICS, then CICS TS 5.6 or later will write replication log records to the z/OS logstreams. Care must be taken to ensure that Tie-Up records are also written to the z/OS logstream so that the log records written by CICS (referring to DD cards) can be associated with the actual names of the VSAM datasets. Tie Up records can be generated automatically by deploying a CICS-provided transaction.
 
 ## Contents
 
@@ -38,6 +46,7 @@ This chapter is a worked example of setting up Classic CDC for VSAM.
   <li><a href="#6.1">6.1 VSAM Access Service</a></li>
   <li><a href="#6.2">6.2 CICS-TS or CICS-VR to write the replication logstream</a></li>
   <li><a href="#6.3">6.3 Augment VSAM to write replication log records</a></li>
+  <li><a href="#6.4">6.4 Generate Tie-Up records</a></li>
 </ul>
 <li><a href="#7.0">7. Integrate with the wider CDC Landscape</a>
 <ul>
@@ -74,7 +83,9 @@ The complete set of articles can be accessed using the links at the very top of 
 Classic CDC for VSAM is a CDC Capture Source only. It does not have CDC Apply functionality. 
 
 <b>Aside:</b> Classic CDC for VSAM is licensed seperately from Classic CDC for IMS. However, these two 
-products share a lot of common components. The sister document [3. Setting up Classic CDC for IMS.](C003_cdcims.md) follows the same pattern as this worked 
+products share a lot of common components. 
+The sister document [Setting up Classic CDC for IMS.](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md) follows 
+the same pattern as this worked 
 example for much of the setup work, but has differences with regard to the services to access IMS and capture changes from IMS. 
 
 CDC Replication is a set of products that implement a common data replication architecture spanning 
@@ -600,6 +611,17 @@ The second step is to ALTER the VSAM dataset to associate the logstream, shown b
 /*                                                
 ```
 
+
+ <h3 id="1.0">6.4 Generate Tie-Up records</h2> 
+ 
+Tie-Up Record processing is covered very clearly in the Knowldgecentre [here](https://www.ibm.com/docs/en/idr/11.4.0?topic=reading-tieup-record-tur-processing) and will not be duplicated in this document.
+
+The most sustainable way of ensuring that Tie-Up records are written to the z/OS logstream is to deploy the CICS-provided CFCT transaction (APAR PI97207).
+You should order the PTF for this APAR, and ensure that the CFCT transaction is scheduled to run periodically.
+
+Failure to generate Tie-Up records will result in an absence a records being captured and replicated !
+
+
 That's it for the Classic CDC Server !!!
 
 <br><hr>
@@ -703,51 +725,94 @@ The steps you need to follow are described in the list below, and illustrated in
 
 Scroll through the screenshots below to following the GUI dialog to Define and Verify a VSAM Table.
 
-Screenshot 1 of 15 : Create a new Data Design Project 
+***Screenshot 1 of 15*** 
+
+Create a new Data Design Project 
+
 ![CDA Imported Artefacts](../images/cdc/vsamt01.PNG)
 
-Screenshot 2 of 15 :  Call it CDCVSAM
+***Screenshot 2 of 15***  
+
+Call it CDCVSAM
+
 ![CDA Imported Artefacts](../images/cdc/vsamt02.PNG)
 
-Screenshot 3 of 15 :  Inside the project, create a new physical data model
+***Screenshot 3 of 15*** 
+
+Inside the project, create a new physical data model
+
 ![CDA Imported Artefacts](../images/cdc/vsamt03.PNG)
 
-Screenshot 4 of 15 :  Use the Classic Integration template for this data model
+***Screenshot 4 of 15*** 
+
+Use the Classic Integration template for this data model
+
 ![CDA Imported Artefacts](../images/cdc/vsamt04.PNG)
 
+***Screenshot 5 of 15*** 
 
-Screenshot 5 of 15 :  Import copybooks
+Import copybooks
+
 ![CDA Imported Artefacts](../images/cdc/vsamt05.PNG)
 
-Screenshot 6 of 15 :  Import from either 3270 or local PC files
+***Screenshot 6 of 15***   
+
+Import from either 3270 or local PC files
+
 ![CDA Imported Artefacts](../images/cdc/vsamt06.PNG)
 
-Screenshot 7 of 15 :  View the object and Finish
+***Screenshot 7 of 15***  
+
+View the object and Finish
+
 ![CDA Imported Artefacts](../images/cdc/vsamt07.PNG)
 
+***Screenshot 8 of 15***   
 
-Screenshot 8 of 15 :  Add a Classic Object: A VSAM Table
+Add a Classic Object: A VSAM Table
+
 ![CDA Imported Artefacts](../images/cdc/vsamt08a.PNG)
 
-Screenshot 9 of 15 :  Specify copybook, table schema and table usage
+***Screenshot 9 of 15***   
+
+Specify copybook, table schema and table usage
+
 ![CDA Imported Artefacts](../images/cdc/vsamt10.PNG)
 
-Screenshot 10 of 15 :  Identify the VSAM dataset, and name the table to be created
+***Screenshot 10 of 15***  
+
+Identify the VSAM dataset, and name the table to be created
+
 ![CDA Imported Artefacts](../images/cdc/vsamt11.PNG)
 
-Screenshot 11 of 15 :  Choose the fields to map from the copybook
+***Screenshot 11 of 15*** 
+
+Choose the fields to map from the copybook
+
 ![CDA Imported Artefacts](../images/cdc/vsamt12.PNG)
 
-Screenshot 12 of 15 :  Review the field and datatype mappings
+***Screenshot 12 of 15*** 
+
+Review the field and datatype mappings
+
 ![CDA Imported Artefacts](../images/cdc/vsamt13.PNG)
 
-Screenshot 13 of 15 :  Highlight the modelled table, right mouse click, generate DDL
+***Screenshot 13 of 15***   
+
+Highlight the modelled table, right mouse click, generate DDL
+
 ![CDA Imported Artefacts](../images/cdc/vsamt14.PNG)
 
-Screenshot 14 of 15 :  Choose the DDL artefacts to generate
+***Screenshot 14 of 15***  
+
+Choose the DDL artefacts to generate
+
 ![CDA Imported Artefacts](../images/cdc/vsamt15.PNG)
 
-Screenshot 15 of 15 :  Review DDL, and tick to execute DDL on Classic CDC Server
+***Screenshot 15 of 15*** 
+
+Review DDL, and tick to execute DDL on Classic CDC Server
+
 ![CDA Imported Artefacts](../images/cdc/vsamt16.PNG)
 
 
@@ -789,7 +854,7 @@ when they connect to the Classic CDC Server
 This document is primarily concerned with everything that needs to be done to establish Classic CDC for VSAM as a CDC source. 
 
 Using the the CDC administration tools is now a standard CDC task which is covered in 
-the [10. Creating and Operating CDC Subscriptions.](C010_administration.md) paper.
+the [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md) paper
 
 
 <h3 id="7.4">7.4 Use CHCCLP Scripting for z/OS</h3>
@@ -805,8 +870,8 @@ The CHCCLP scripting option will be attractive to all shops that wish to impleme
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
 inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
 
-All of these devops options are covered in the the [11. Devops Options for CDC.](C011_devops.md paper 
-and [12. CHCCLP Scripting.](C012_chcclp.md) paper in this series of articles. 
+All of these devops options are covered in the the [CDC Devops](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md) paper in this series of articles. 
 
 <h3 id="7.5">7.5 Conforming to site standards for cross-platform devops and security.</h3> 
 
