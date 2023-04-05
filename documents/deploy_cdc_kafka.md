@@ -1,7 +1,10 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
+
 
 # Setting Up CDC for Kafka - Worked Example
 This chapter is a worked example of setting up CDC for Kafka on Linux. 
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. Kafka is very different from a conventional Relational Database Management System, and the CDC agent provides integration options to map change data streams to kafka topics, handle flexible formatting options, publish schemas into a schema registry, act as both a kafka consumer and kafka producer, conform to kerberos security constructs, exploit kafka partitioning for performance and many more kafka-specific options.
 
 
 ## Table of Contents
