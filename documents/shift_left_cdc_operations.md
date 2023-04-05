@@ -56,10 +56,16 @@ most target databases are based on a client-server deployment model, and CDC App
 However, when the source platform is z/OS, and the CDC Apply agent is only available for linux or windows, a shift-left configuration 
 doesn't work.
   
-Software Containers provide an easy solution for the common CDC use cases.
+Software Containers provide an easy solution for the common CDC use cases, as follows.
+* The source database is Db2 z/OS (or IMS or VSAM on z/OS)
+* The target "database" is Kafka on intel
+* CDC Apply for Kafka is available for linux on intel, and also for linux on s390
+* The CDC Apply for Kafka on s390 can be packaged as a docker container, which can run inside z/OS
+* z/OS Container Extensions is a feature of z/OS V2.4 or later, providing a docker runtime environment for z/OS, with easy integration as a z/OS started task allowing z/OS platform capabilities to be inherited by the container. (z/OS operations, z/OS scheduling, z/OS system automation etc...)
   
-
 ![shift_l](/images/shift_l.png)
+
+***Note*** z/OS Container extensions does require a software license for "Container Hosting Foundation (5655-HZ1).
 
 <br><hr>
 
