@@ -8,7 +8,7 @@ This chapter is a worked example of setting up remote CDC capture for Db2 z/OS.
 
 1. The nature of remote CDC capture for Db2 z/OS, and why you might choose it.
 2. Installation of Remote CDC Capture for Db2 z/OS
-3. Planning to activate Remote CDC Capture for Db2 z/OS
+3. Configuration of Remote CDC Capture for Db2 z/OS
 4. Activation and use of Remote CDC Capture for Db2 z/OS
 
 
