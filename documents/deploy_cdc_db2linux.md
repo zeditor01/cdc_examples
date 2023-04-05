@@ -210,7 +210,7 @@ Having defined encruption profile "noencrypt", we can select it and complete the
 
 The CDC for Db2 instance will use the Db2 data source logon to authenticate connections from the Access Server. 
 In most real world scenarios you would configure the Access Server 
-to use an LDAP directory for authentication services. LDAP configuration is covered in [13. Security for CDC (LDAP and TLS).](C013_security.md)
+to use an LDAP directory for authentication services. LDAP configuration is covered in [Securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md)
 
 ![cdcdb2luw06](../images/cdc/cdcdb2luw06.png)
 
