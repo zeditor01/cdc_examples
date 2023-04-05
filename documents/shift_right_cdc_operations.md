@@ -80,6 +80,8 @@ The concepts of the remote capture agent for VSAM are conceptually similar to th
 * There is a lightweight agent on z/OS that performs the actual log reading
 * The remainder of the logic for the capture agent is performed on a linux server.
 
+The remote cdc capture agent for VSAM depends on exactly the same logging implementation as the Classic CDC for VSAM started task option. 
+Namely, the VSAM datasets must be augmented, so that they are asscoiated with a z/OS logstream to act as the replication log, and CICS-TS and/or CICS VSAM Recovery must be used to write replication log records.
 
 A worked example of implementing the remote CDC capture agent for VSAM is not yet written, but will be available shortly 
 at this [link](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) 
