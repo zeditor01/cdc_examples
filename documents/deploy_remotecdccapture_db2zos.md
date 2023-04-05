@@ -119,11 +119,20 @@ press enter, and watch the installer complete. Then confim that you wish to laun
 ![rdb205](/images/cdc/rdb205.JPG)
 
 The configuration tool will ask several questions about the instance to be created.
-If the instance was being created ib Linux, the questions would continue in the command line prompt style.
-If the instance was being created in Windows, the dialog would be a GUI as shown below
+* If the instance was being created in Linux, the questions would continue in the command line prompt style.
+* If the instance was being created in Windows, the dialog would be a GUI as shown below
 
 ![rcdcdb2win](/images/rcdcdb2win.png)
 
+The dialog asks for the following configuration parameters, all of which are discussed in the planning section below
+* Name of instance and listening port
+* Space allocations for CDC instance (staging disk and memory)
+* Connection details for Db2 z/OS server ( DRDA location name, hostname, port )
+* Authentication credentials
+* Schema Name for the CDC control objects
+* SSH port
+* APF-authorized library
+* WLM environment name
 
 
 
@@ -182,24 +191,12 @@ first execution of the instance.
 
 ## 4. Activation and use of Remote CDC Capture for Db2 z/OS
 
-The next step is to define a subscription driven from a DB2 z/OS source table, with changes captured by the remote capture agent for Db2 z/OS.
-
-Use the Management Console to
-Installation dialog for the Remote CDC Capture Agent for Db2 z/OS
-The installation dialog (3.1 above) demands the following information to proceed.
-
-* Assign a name for the Remote CDC Capture server.
-* Assign a TCPIP port for the Remote CDC Capture server to listen on.
-* Define disk storage and memory limits for the Remote CDC Capture agent on Linux
-* Define the authentication credentials that the Remote CDC Capture agent uses to execute on the Linux Server
-* Define DRDA Connectivity information to the DB2 z/OS source system (TCPIP address, port, DRDA Location Name, userid/password for connection to DB2 z/OS)
-* Assign a metadata schema to use for the Remote CDC Capture agent.
-* Define SSH connectivity details to allow the transfer the Load Module for the stored procedure. (Host TCPIP address, Host User, Host Schema, SSH Port number).
-* Define WLM environment name that the Stored Procedure will execute under.
-* Define APF-Authorised Load Library that the Load Module is to be stored in.
+The next step is to define a subscription and start it.
+* If the configuration was good, the first subscription should start replicating.
+* If there were any configuration problems, the execution logs should highlight the cause of the problem
 
 
 
 
 
-Now you can do normal CDC admin
+Done !
