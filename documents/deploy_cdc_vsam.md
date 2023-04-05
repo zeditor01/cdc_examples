@@ -76,7 +76,9 @@ The complete set of articles can be accessed using the links at the very top of 
 Classic CDC for VSAM is a CDC Capture Source only. It does not have CDC Apply functionality. 
 
 <b>Aside:</b> Classic CDC for VSAM is licensed seperately from Classic CDC for IMS. However, these two 
-products share a lot of common components. The sister document [3. Setting up Classic CDC for IMS.](C003_cdcims.md) follows the same pattern as this worked 
+products share a lot of common components. 
+The sister document [Setting up Classic CDC for IMS.](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_cdc_ims.md) follows 
+the same pattern as this worked 
 example for much of the setup work, but has differences with regard to the services to access IMS and capture changes from IMS. 
 
 CDC Replication is a set of products that implement a common data replication architecture spanning 
