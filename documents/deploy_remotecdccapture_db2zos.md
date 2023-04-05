@@ -118,6 +118,10 @@ press enter, and watch the installer complete. Then confim that you wish to laun
 
 ![rdb205](/images/cdc/rdb205.JPG)
 
+The configuration tool will ask several questions about the instance to be created
+
+![rcdcdb2win](/images/rcdcdb2win.png)
+
 give the instance a name, and specify a port that it will listen on. specify the disk and memory parameters. then enter "1" to manage encryption profiles.
 
 ![rdb206](/images/cdc/rdb206.JPG)
@@ -140,6 +144,11 @@ A list of schemas will be returned. Choose the schema where you wish to deploy t
 
 
 ## 3. Planning for Configuration of Remote CDC Capture for Db2 z/OS
+
+You can't proceed to use the remote CDC capture agent until you have made provision for deploying the stored procedure 
+that will read the Db2 logs. Db2 z/OS stored procedures run in WLM-managed address spaces. You need to configure the back end 
+environment so that the CDC remote capture agent can deploy the stored procedure and the underlying load module the first time it runs.
+
 
 The CDC Remote Capture for Db2 z/OS runs on Linux, but requires a load module to be deployed to Db2 z/OS as the executable program  of a stored procedure for access to the asynchronous Db2 log reader. The installation of this stored procedure is performed by the Remote Capture agent when you first start it. In order for this to happen, you need to ensure that a number of criteria are satisfied so that the Remote Capture agent can deploy the stored procedure. 
 
@@ -184,9 +193,14 @@ Required TSO userid privileges are
 * SYSIBM.SYSTABLES
 * SYSIBM.SYSTABLESPACE
 
+Once you have resolved all these pre-requisites, you are ready to run the instance for the first time, and the stored procedure should be deployed on the 
+first execution of the instance.
 
 ## 4. Activation and use of Remote CDC Capture for Db2 z/OS
 
+The next step is to define a subscription driven from a DB2 z/OS source table, with changes captured by the remote capture agent for Db2 z/OS.
+
+Use the Management Console to
 Installation dialog for the Remote CDC Capture Agent for Db2 z/OS
 The installation dialog (3.1 above) demands the following information to proceed.
 
@@ -201,9 +215,7 @@ The installation dialog (3.1 above) demands the following information to proceed
 * Define APF-Authorised Load Library that the Load Module is to be stored in.
 
 
-The installation dialog for the Remote CDC Capture agent on a Windows Platform. 
 
-![rcapdialog](/images/rcapdialog.png)
 
 
 Now you can do normal CDC admin
