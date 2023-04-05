@@ -18,8 +18,10 @@ and establishing all the CDC operational responsibilities on the target side (ty
 <li><a href="#4.0">4. Summary and Recommendations</a> 
 </ul>
 
-## 1. Shift-Reight Concepts
+<br><hr>
 
+<h2 id="1.0">1. Shift-Right Concepts</h2>  
+  
 The biggest operational challenge for CDC systems is often the challenges in getting two independent operational 
 teams (e.g. z/OS and LUW or cloud ) to form an effective alliance to manage the business service level.
 
@@ -41,8 +43,11 @@ remotely from the database that they were operating against. The list of possibl
 5. etc...
 
 
+<br><hr>
 
-## 2. Shift-Right Operations
+<h2 id="2.0">2. Shift-Right Operations</h2>  
+  
+
 Separating a CDC Capture agent from a source database can be hard because the CDC capture agent will use log APIs 
 supported by the DBMS vendor to access the database logs for change data capture, and normally those log APIs are
 only available on the same OS as the source database.
@@ -60,11 +65,16 @@ Whatever the precise mechanism, the driving force is normally the desire to have
 so that a single support team can take responsibility for the CDC service levels without depending on favours from an independent operations support 
 team for a different OS platform.
 
-## 3. IBM Remote Capture products
+<br><hr>
 
+<h2 id="3.0">3. IBM Remote Capture products</h2>  
+  
+ 
 In support of Shift-Right deployments, IBM has announced two remote capture products for IBM Z data sources. ( Db2 z/OS and VSAM ).
 
-### 3.1 Remote Capture for Db2 z/OS
+  
+<h3 id="3.1">3.1 Remote Capture for Db2 z/OS</h3>  
+
 
 In the case fo Db2 z/OS, IBM offers a remote capture capability from a linux client. 
 The diagram below illustrates the architecture of this product.
@@ -92,7 +102,9 @@ A worked example of implementing the remote CDC capture agent for Db2 z/OS is av
 at this [link](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
 
 
-### 3.2 Remote Capture for VSAM
+  
+<h3 id="3.2">3.2 Remote Capture for VSAM</h3>  
+
 
 IBM also offers a remote capture capability for VSAM.
 
@@ -107,8 +119,8 @@ A worked example of implementing the remote CDC capture agent for VSAM is not ye
 at this [link](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) 
 
 
+<h2 id="4.0">4. Summary and Recommendations</h2>  
 
-## 4. Summary and Recommendations
 
 Remote capture agents offer the benefit of establishing a single operational control point within the enterprise on Linux or Windows.
 
