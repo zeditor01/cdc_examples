@@ -97,45 +97,46 @@ Invoke the installer with the following command
 ./setup-iidr-11.4.0.4-5618-linux-x86.bin
 ```
 
-Respond to the installer dialog as follows to specify "Install New", followed by "Datastore Type:remote Db2 Capture " followed by the license type of your entitlement. 
+Respond to the installer dialog, choose language and  specify "Install New"
 
 
 ![rdb201](/images/cdc/rdb201.JPG)
 
-cc 
+choose datastore tyoe Db2 for z/OS, and confirm the option for "Remote Source"
 
 ![rdb202](/images/cdc/rdb202.JPG)
 
-xx
+accept (or modify) the installation path, and accept the license terms
 
 ![rdb203](/images/cdc/rdb203.JPG)
 
-xx
+accept (or modify) the instance path, and review the pre-installation summary.
 
 ![rdb204](/images/cdc/rdb204.JPG)
 
-
-xx
+press enter, and watch the installer complete. Then confim that you wish to launch the configuration tool to create an instance.
 
 ![rdb205](/images/cdc/rdb205.JPG)
 
-xx
+give the instance a name, and specify a port that it will listen on. specify the disk and memory parameters. then enter "1" to manage encryption profiles.
 
 ![rdb206](/images/cdc/rdb206.JPG)
 
-
-xx
+For a functional test, just define a profile called "noencrypt" and specify encryption is not to be performed. 
+(Refer to [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) for worked examples 
+of configuring encryption profiles for enforcing encryption.
 
 ![rdb207](/images/cdc/rdb207.JPG)
 
-
-xx
+complete the management of encryption profiles (selection 4)
 
 ![rdb208](/images/cdc/rdb208.JPG)
 
-xx
+Now provide the connection details to access the Db2 z/OS server that this remote capture agent will operate against.
 
 ![rdb209](/images/cdc/rdb209.JPG)
+
+A list of schemas will be returned. Choose the schema where you wish to deploy the CDC control tables, and complete the instance creation dialog.
 
 
 ## 3. Planning for Configuration of Remote CDC Capture for Db2 z/OS
