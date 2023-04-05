@@ -1,5 +1,8 @@
 # Shift-Right CDC Operations
 
+This section addresses the practice of minimising or eliminating CDC operational responsibility from the source platform (typically z/OS) 
+and establishing all the CDC operational responsibilities on the target side (typically Linux, Unix or Windows)
+
 ## Contents
 
 <ul class="toc_list">
