@@ -20,6 +20,10 @@ and establishing all the CDC operational responsibilities on the target side (ty
   <li><a href="#3.6">3.6 Inherit z/OS Security Strengths.</a></li>    
 </ul>  
 <li><a href="#4.0">4. z/OS Container Extensions (zCX).</a> 
+<ul>  
+  <li><a href="#4.1">4.1 zCX Concepts.</a></li>
+  <li><a href="#4.2">4.2 zCX Setup.</a></li> 
+</ul>    
 </ul>
 
 <br><hr>
@@ -141,38 +145,43 @@ https://www.redbooks.ibm.com/abstracts/sg248457.html
 IBM z/OS Container Extensions (zCX) Use Cases
 https://www.redbooks.ibm.com/abstracts/sg248471.html
 
-3.1 zCX Concepts.
+
+<h3 id="4.1">4.1 zCX Concepts.</h3> 
+
 zCX Support docker containers. Docker containers are more efficient than virtual machines in that rather than having multiple instances of the guest operating system, you only have one OS kernel (linux based) which is referenced by all the running docker containers. It is also operationally simpler in that the OS kernel is largely hidden from the containers, and you only need to deal with the containerised application.
 
 
 ![zcxconcepts](/images/zcxconcepts.png)
 
 When Docker containers are deployed inside a zCX address space, they are tightly integrated with the z/OS software and IBM Z hardware environment. For example
-•	They use a Dynamic Virtual IP Address for communications with other address space and with the outside word. 
-•	TCPIP connectivity inside z/OS with other z/OS subsystems can use in-memory links (hipersockets).
-•	System Automation for zCX Address Space(s) can automatically restart zCX services on different LPARs, and retain the same TPCIP and Disk connections.
-•	z/OS storage subsystems can provide Hyperswap for local failovers and GDPS for geographically remote failovers.
+* They use a Dynamic Virtual IP Address for communications with other address space and with the outside word. 
+* TCPIP connectivity inside z/OS with other z/OS subsystems can use in-memory links (hipersockets).
+* System Automation for zCX Address Space(s) can automatically restart zCX services on different LPARs, and retain the same TPCIP and Disk connections.
+* z/OS storage subsystems can provide Hyperswap for local failovers and GDPS for geographically remote failovers.
 
 ![zcxtcpip](/images/zcxtcpip.png)
 
-3.2 zCX Setup.
+
+<h3 id="4.2">4.2 zCX Setup.</h3>
+
 Chapter 4 of "Getting started with z/OS Container Extensions and Docker" is the best guide to installing and confguring zCX. I am not going to repeat that information here. Please review the redbook to learn how to setup zCX.
 https://www.redbooks.ibm.com/abstracts/sg248457.html
-Table of contents
-•	Chapter 1. Introduction
-•	Chapter 2. z/OS Container Extensions planning
-•	Chapter 3. Security - Overview
-•	Chapter 4. Provisioning and managing your first z/OS Container
-•	Chapter 5. Your first running Docker container in zCX
-•	Chapter 6. Private registry implementation
-•	Chapter 7. Operation
-•	Chapter 8. Integrating container applications with other processes on z/OS
-•	Chapter 9. zCX user administration
-•	Chapter 10. Persistent data
-•	Chapter 11. Swarm on zCX
 
-Chapter 5 addresses deploying docker containers within zCX.
-Chapter 7 addresses the operation of docker containers within zCX.
+Table of contents
+* Chapter 1. Introduction
+* Chapter 2. z/OS Container Extensions planning
+* Chapter 3. Security - Overview
+* Chapter 4. Provisioning and managing your first z/OS Container
+* Chapter 5. Your first running Docker container in zCX
+* Chapter 6. Private registry implementation
+* Chapter 7. Operation
+* Chapter 8. Integrating container applications with other processes on z/OS
+* Chapter 9. zCX user administration
+* Chapter 10. Persistent data
+* Chapter 11. Swarm on zCX
+
+* Chapter 5 addresses deploying docker containers within zCX.
+* Chapter 7 addresses the operation of docker containers within zCX.
 
 
 
