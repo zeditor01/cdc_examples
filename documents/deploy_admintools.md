@@ -44,7 +44,9 @@ Run the installer to see the installation dialog
 
 ![instas01](/images/instas01.JPG)
 
-xx
+After responding to all the Path and License questions, you will be asked whether you wish to use an LDAP server for authentication only, or authentication and authorisation. The [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) document covers the LDAP choices in more detail.
+
+In this example, we choose not to use an LDAP server for anything, which will mean that userids and passwords for CDC administration users are stored (in encrypted files) on the Access Server itself. That's probably ok for initial functional testing in a development environment, but a secure productin deployment will warrant a closer look at the security options.
 
 ![instas02](/images/instas02.JPG)
 
