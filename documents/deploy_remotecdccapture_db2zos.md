@@ -8,7 +8,7 @@ This chapter is a worked example of setting up remote CDC capture for Db2 z/OS.
 
 1. The nature of remote CDC capture for Db2 z/OS, and why you might choose it.
 2. Installation of Remote CDC Capture for Db2 z/OS
-3. Configuration of Remote CDC Capture for Db2 z/OS
+3. Planning for Configuration of Remote CDC Capture for Db2 z/OS
 4. Activation and use of Remote CDC Capture for Db2 z/OS
 
 
@@ -111,59 +111,50 @@ Then let the installer run, and defer the instance creation till later.
 ![cdcdb2luw03](/images/cdc/cdcdb2luw03.png)
 
 
-
-
-
-## 3. Planning to activate Remote CDC Capture for Db2 z/OS
+## 3. Planning for Configuration of Remote CDC Capture for Db2 z/OS
 
 The CDC Remote Capture for Db2 z/OS runs on Linux, but requires a load module to be deployed to Db2 z/OS as the executable program  of a stored procedure for access to the asynchronous Db2 log reader. The installation of this stored procedure is performed by the Remote Capture agent when you first start it. In order for this to happen, you need to ensure that a number of criteria are satisfied so that the Remote Capture agent can deploy the stored procedure. 
 
-4.1 z/OS Environment Pre-Requisites for CDC Remote Capture
 The pre-requisite criteria for the Remote Capture server to complete the setup are:
 
+***Db2 for z/OS*** must be at Version 11 or later
 
-Db2
-V11.1 or later
+***Operational DDF Address Space*** Db2 z/OS V11 or V12 must be configured with the DDF address space to support DRDA connectivity (either encrypted or not) from the CDC Remote Capture instance. The vast majority of Db2 z/OS systems in the world are configured to support DRDA connectivity already, so this is probably already in place.
 
-Operational DDF.
-Db2 z/OS V11 or V12 must be configured with the DDF address space to support DRDA connectivity (either encrypted or not) from the CDC Remote Capture instance. The vast majority of Db2 z/OS systems in the world are configured to support DRDA connectivity already, so this is probably already in place.
-
-WLM Environment.
-A WLM environment is required for the stored procedure to execute. It should be dedicated to a single instance of the remote CDC Capture agent. The WLM environment must be VARIED on before the Remote Capture product starts. 
+***WLM Environment*** A WLM environment is required for the stored procedure to execute. It should be dedicated to a single instance of the remote CDC Capture agent. The WLM environment must be VARIED on before the Remote Capture product starts. 
 
 The CDC Remote Capture procedure, should generally be managed to use a service class with the same performance goals that are defined for the Db2 z/OS DBM1 address space in your site.
 
-I Suggest: 
+A simple approach might be
 1.	For the WLM environment definition, use a copy of the IBM-supplied WLM environment DSNWLM_NUMTCB1
 2.	For the workload service class, define the workload for the CDC Capture based on the stored procedure name (CHCRLRSP) used to invoked the log reader.
 
+```
 Appl Environment Name : assign something meaningful (eg WLMCDC1)            
 Description . . . . . : remote CDC log reader procedure
 Subsystem type  . . . : DB2                   
-Procedure name  . . . : name of your JCL Procedure used to 
-                        start the WLM-managed address space              
+Procedure name  . . . : name of your JCL Procedure used to start the WLM-managed address space              
 Start parameters. . . : DB2SSN=&IWMSSNM,APPLENV=’WLMCDC1’
+```
 
-z/OS SSH Server
-An SSH server must be configured in z/OS to allow the Load Module to be transferred to an APF-Authorised Load Library on z/OS.
+***z/OS SSH Server*** An SSH server must be configured in z/OS to allow the Load Module to be transferred to an APF-Authorised Load Library on z/OS.
 
-APF-Authorised Load Library
-An APF-Authorised Load Library is required to store the load module. This library must be in the STEPLIB of the WLM address space JCL.
+***APF-Authorised Load Library*** An APF-Authorised Load Library is required to store the load module. This library must be in the STEPLIB of the WLM address space JCL. The actual load module will up uploaded via SSH to this APF-authorised library by the remote capture program when it first connects to Db2 z/OS. This is an unusual method of installing load modules to z/OS, but it's how the remote capture agent for Db2 z/OS works.
 
-TSO userid
-A TSO userid is required to execute z/OS commands and access Db2 z/OS. It does not need TSO interactive or ISPF access. This userid is the schema for the Remote CDC Capture agent in Db2 z/OS. For operational simplicity it would be easiest if the TSO userid had a non-expiring password.
+***TSO userid*** A TSO userid is required to execute z/OS commands and access Db2 z/OS. It does not need ISPF access. This userid is the schema for the Remote CDC Capture agent in Db2 z/OS. For operational simplicity it would be easiest if the TSO userid had a non-expiring password.
 
-TSO userid priveleges
+Required TSO userid privileges are
 1.	Ability to connect to Db2 z/OS via DRDA
 2.	Execute privilege on the APF-Authorised Load Module
 3.	SELECT privilege is required on the following Db2 for z/OS catalog tables:
-	SYSIBM.SYSCOLUMNS
-	SYSIBM.SYSDATATYPES
-	SYSIBM.SYSDUMMY1
-	SYSIBM.SYSROUTINES
-	SYSIBM.SYSPACKSTMT
-	SYSIBM.SYSTABLES
-	SYSIBM.SYSTABLESPACE
+
+* SYSIBM.SYSCOLUMNS
+* SYSIBM.SYSDATATYPES
+* SYSIBM.SYSDUMMY1
+* SYSIBM.SYSROUTINES
+* SYSIBM.SYSPACKSTMT
+* SYSIBM.SYSTABLES
+* SYSIBM.SYSTABLESPACE
 
 
 ## 4. Activation and use of Remote CDC Capture for Db2 z/OS
