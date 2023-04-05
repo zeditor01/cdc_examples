@@ -1,7 +1,9 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
 
-# Setting Up Classic CDC for IMS - Worked Example
+# Setting Up Classic CDC for VSAM - Worked Example
 This chapter is a worked example of setting up Classic CDC for VSAM. 
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. VSAM is a file system without database recovery logs that are the source for change data capture from most data sources. CDC for VSAM uses z/OS logstreams to act as a replication log, and the VSAM datasets must be modified to write replication log records to the associated z/OS logstream for that VSAM dataset.
 
 ## Contents
 
