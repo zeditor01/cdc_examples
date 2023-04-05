@@ -915,10 +915,14 @@ Go to the "Data Project Explorer" (top left window) and create a new project, su
 
 Scroll through the screenshots below to following the GUI dialog to Define and Verify an IMS Table.
 
-Screenshot 1 of 17 : Create a new Data Design Project (Zeditor)
+***Screenshot 1 of 17***
+Create a new Data Design Project (Zeditor)
+
 ![CDA Imported Artefacts](../images/cdc/imstab01.PNG)
 
-Screenshot 2 of 17 :  Inside the project, create a new Physical Data Model
+***Screenshot 2 of 17***
+Inside the project, create a new Physical Data Model
+
 ![CDA Imported Artefacts](../images/cdc/imstab02.PNG)
 
 Screenshot 3 of 17 :  Use the Classic Integration template for this data model
