@@ -73,7 +73,7 @@ chown cdcinst1:cdcadm1 /opt/IBM/InfoSphereDataReplication
 Also, add cdcinst1 to Sudoers for convenience
 
 ```
-usermod -aG wheel username
+usermod -aG wheel cdcinst1
 ```
 
 
