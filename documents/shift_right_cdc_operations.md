@@ -51,7 +51,8 @@ The diagram below illustrates the architecture of this product.
 
 ![rcapdb2](/images/rcapdb2.png)
 
-
+In this CDC agent, the Db2 z/OS log is read by a Db2 stored procedure.
+The (using the same Db2 log interface as the z/OS started task CDC agent.
 Link [RCAPDB2ZOS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
 
 
