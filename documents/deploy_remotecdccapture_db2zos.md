@@ -118,29 +118,13 @@ press enter, and watch the installer complete. Then confim that you wish to laun
 
 ![rdb205](/images/cdc/rdb205.JPG)
 
-The configuration tool will ask several questions about the instance to be created
+The configuration tool will ask several questions about the instance to be created.
+If the instance was being created ib Linux, the questions would continue in the command line prompt style.
+If the instance was being created in Windows, the dialog would be a GUI as shown below
 
 ![rcdcdb2win](/images/rcdcdb2win.png)
 
-give the instance a name, and specify a port that it will listen on. specify the disk and memory parameters. then enter "1" to manage encryption profiles.
 
-![rdb206](/images/cdc/rdb206.JPG)
-
-For a functional test, just define a profile called "noencrypt" and specify encryption is not to be performed. 
-(Refer to [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) for worked examples 
-of configuring encryption profiles for enforcing encryption.
-
-![rdb207](/images/cdc/rdb207.JPG)
-
-complete the management of encryption profiles (selection 4)
-
-![rdb208](/images/cdc/rdb208.JPG)
-
-Now provide the connection details to access the Db2 z/OS server that this remote capture agent will operate against.
-
-![rdb209](/images/cdc/rdb209.JPG)
-
-A list of schemas will be returned. Choose the schema where you wish to deploy the CDC control tables, and complete the instance creation dialog.
 
 
 ## 3. Planning for Configuration of Remote CDC Capture for Db2 z/OS
