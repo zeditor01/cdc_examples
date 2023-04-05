@@ -11,13 +11,15 @@ and establishing all the CDC operational responsibilities on the target side (ty
 <li><a href="#1.0">1. Shift-Left Concepts</a>   
 <li><a href="#2.0">2. Shift-Left Operations</a>   
 <li><a href="#3.0">3. The Benefits of deploying CDC agents as zCX Containers</a>
-    
 <ul>  
-  <li><a href="#3.1">3.1 Remote Capture for Db2 z/OS</a></li>
-  <li><a href="#3.2">3.2 Remote Capture for VSAM</a></li>
+  <li><a href="#3.1">3.1 Simpler, Faster Deployment.</a></li>
+  <li><a href="#3.2">3.2 A single operations team to run the entire CDC solution.</a></li>
+  <li><a href="#3.3">3.3 A Better Physical Recovery Solution.</a></li>
+  <li><a href="#3.4">3.4 Faster, Lower Risk Software Upgrades.</a></li>
+  <li><a href="#3.5">3.5 Inherit z/OS Qualities of Service.</a></li>
+  <li><a href="#3.6">3.6 Inherit z/OS Security Strengths.</a></li>    
 </ul>  
-  
-<li><a href="#4.0">4. Summary and Recommendations</a> 
+<li><a href="#4.0">4. z/OS Container Extensions (zCX).</a> 
 </ul>
 
 <br><hr>
@@ -85,34 +87,41 @@ This is a benefit that you will realise for software containers on any platform.
 <h3 id="3.2">3.2 A single operations team to run the entire CDC solution.</h3> 
 
 The author of this document has worked with many organisations who implement data replication solutions between mainframe and midrange platforms like Linux. It is the norm that
-1.	z/OS and midrange systems are managed by different operation teams
-2.	z/OS and midrange operations team will use different tools and different procedures.
-3.	Even if there is complete goodwill and commitment from both teams to work together there will be difficulties in managing a service that spans two operations teams.
+1. z/OS and midrange systems are managed by different operation teams
+2. z/OS and midrange operations team will use different tools and different procedures.
+3. Even if there is complete goodwill and commitment from both teams to work together there will be difficulties in managing a service that spans two operations teams.
 One anonymous example is that it was designated that the mainframe team had operational responsibility for the CDC service, but they were not allowed to have read access to the CDC log directory on the CDC for Linux Apply Server. As a generalisation with CDC, if a simple restart doesn’t fix a problem, then the critical problem determination information will probably reside in the apply log file on the target side. The consequence of this decision is elongated restart times.
-
 
 ![opsteams](/images/opsteams.png)
 
 Of course, if the Apply agent runs as a container within zCX, then the mainframe operations team will be able to access the Apply log themselves without queueing to speak with a help desk that fronts the Linux operations team.
- 
-2.3 A Better Physical Recovery Solution.
+
+<h3 id="3.3">3.3 A Better Physical Recovery Solution.</h3> 
+ 
 Any given group of CDC subscriptions can only be operated by one capture and one apply agent at once. In fact, CDC has serialization checks to ensure you don’t accidentally breach this data integrity matter. A consequence of this architectural model is that high availability configurations for CDC are based on the cluster failover model.
+
 There are several OS clustering solutions on the market for Linux. But none of them come close to the speed and sophistication of system automation for restarting address spaces elsewhere in a z/OS parallel sysplex. The zCX address space can be configured with a DVIPA so that it can be automatically restarted on another LPAR in the event of a failure. This puts CDC Apply agents on the same level as z/OS started tasks like Classic CDC for IMS.
 
 ![zcxfailover](/images/zcxfailover.png)
 
-2.4 Faster, Lower Risk Software Upgrades.
+<h3 id="3.4">3.4 Faster, Lower Risk Software Upgrades.</h3> 
+
 If you deploy CDC for Linux on a Linux Server, then a software upgrade will require the service to be stopped, a software upgrade to be applied (a few minutes) and a degree of risk the the upgraded software may have problems and require a fallback procedure.
+
 When CDC is deployed as a software container, it can be deployed and tested inside the same zCX address space as the live service. Once testing is complete, you can stop the old container, attach the shared volume with the CDC instance information to the new container, and start the subscriptions over there. If problems occur, just reverse the process to fallback to the old container.
 
 
 ![zcxdisks](/images/zcxdisks.png)
 
-2.5 Inherit z/OS Qualities of Service.
+<h3 id="3.5">3.5 Inherit z/OS Qualities of Service.</h3> 
+
+
 z/OS qualities of service are exceedingly high. (reliability, robustness, performance, automated local failover, GDPS disaster recovery etc… etc…)
 Deploying CDC inside z/OS as a docker contain is an easy way to achieve z/OS qualities of service for very little effort. The main effort will be to establish zCX as another well-managed z/OS started task, with all the standard z/OS operational practices.
 
-2.5 Inherit z/OS Security Strengths.
+<h3 id="3.6">3.6 Inherit z/OS Security Strengths.</h3> 
+
+ 
 Operating CDC Apply engines inside zCX places them inside the IBM Z protected shell. This includes a range of heightened security provisions including
 •	Pervasive encryption of all datasets
 •	In-memory networks ( hipersockets ) that can’t be snooped on
@@ -120,9 +129,11 @@ Operating CDC Apply engines inside zCX places them inside the IBM Z protected sh
 •	Etc…
 
 
-3. z/OS Container Extensions (zCX).
-z/OS Container Extensions, is essentially a framework for supporting docker within z/OS. If you know docker on Linux, Unix, Windows or Mac, then you know docker on z/OS.
-The primary scope of this document is deploying CDC inside zCX. If you want to read more about zCX then please review some other source of zCX information, including the following Redbooks.
+<h2 id="4.0">4. z/OS Container Extensions (zCX).</h2>  
+
+
+
+z/OS Container Extensions, is essentially a framework for supporting docker within z/OS. If you know docker on Linux, Unix, Windows or Mac, then you know docker on z/OS. The primary scope of this document is deploying CDC inside zCX. If you want to read more about zCX then please review some other source of zCX information, including the following Redbooks.
 
 Getting started with z/OS Container Extensions and Docker
 https://www.redbooks.ibm.com/abstracts/sg248457.html
