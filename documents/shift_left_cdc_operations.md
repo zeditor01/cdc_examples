@@ -10,7 +10,7 @@ and establishing all the CDC operational responsibilities on the target side (ty
 <ul class="toc_list">
 <li><a href="#1.0">1. Shift-Left Concepts</a>   
 <li><a href="#2.0">2. Shift-Left Operations</a>   
-<li><a href="#3.0">3. Deploying CDC agents as containers in z/OS Container Extensions (zCX)</a>
+<li><a href="#3.0">3. The Benefits of deploying CDC agents as zCX Containers</a>
     
 <ul>  
   <li><a href="#3.1">3.1 Remote Capture for Db2 z/OS</a></li>
@@ -69,11 +69,9 @@ Software Containers provide an easy solution for the common CDC use cases, as fo
 
 <br><hr>
 
-<h2 id="2.0">3. Deploying CDC agents as containers in z/OS Container Extensions (zCX)</h2> 
+<h2 id="2.0">3. The Benefits of deploying CDC agents as zCX Containers</h2> 
 
 
-
-2. The Benefits of deploying CDC agents as zCX Containers. 
 The benefits listed in this section would apply to most z/OS centric sites, but the extent of the benefit will depend on the operational situation at a given site.
 •	Some of the benefits listed in this section would apply to any container environment.
 •	Some of the benefits listed in this section are specific to zCX in z/OS.
