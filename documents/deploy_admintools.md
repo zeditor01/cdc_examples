@@ -87,18 +87,19 @@ In this example, we choose not to install the embedded access server, because we
 
 ![instmc02](/images/instmc02.JPG)
 
-
+After the installation completes, start the Management Console. You will be prompted to provide the TCPIP hostname and port of the access server, plus a userid and password that is registered at the access server (such as the root CDC administration user that we just defined).
 
 ![instmc03](/images/instmc03.JPG)
 
-Next up, you need to define the root CDC administration user. If you are not using LDAP, you must enter a userid and a password here. This a userid defined withn the Access Server, and it is totally independent of the authentcation control of the operating system where Access Server is installed.
+Now you can view the 3 main tabs of the Management Console. From right to left
 
-In a production environment, you would likely be using an LDAP server, and the root CDC administration user would be defined with a CHCCLP command 
-as covered in the [securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md) document.
+* The Access Manager Tab is where we define connections to CDC capture and apply agents
+* The Configuration Tab is where we define CDC subscriptions
+* The monitoring Tab is where we operate and monitor CDC subscriptions
 
 ![instmc04](/images/instmc04.JPG)
 
-After running the installer, open the Windows Services application, and observe that an auto-start Windows Service has been established, so that the Access Server is always available on demand.
+All Done !
 
 
 
