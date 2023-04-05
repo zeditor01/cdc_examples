@@ -66,7 +66,7 @@ This document is a basic worked example of setting up Classic CDC for IMS as a C
 
 It is part of a series of documents providing practical worked examples and 
 guidance for seting up CDC Replication between mainframe data sources and mid-range or Cloud targets.
-The complete set of articles can be accessed using the README link at the very top of this page. 
+The complete set of articles can be accessed using the link at the very top of this page. 
 
 <br><hr>
 
