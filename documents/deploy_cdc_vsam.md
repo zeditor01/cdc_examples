@@ -3,7 +3,13 @@
 # Setting Up Classic CDC for VSAM - Worked Example
 This chapter is a worked example of setting up Classic CDC for VSAM. 
 
-All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. VSAM is a file system without database recovery logs that are the source for change data capture from most data sources. CDC for VSAM uses z/OS logstreams to act as a replication log, and the VSAM datasets must be modified to write replication log records to the associated z/OS logstream for that VSAM dataset.
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. 
+
+VSAM is a file system without database recovery logs that are the source for change data capture from most data sources. CDC for VSAM uses z/OS logstreams to act as a replication log, and the VSAM datasets must be modified to write replication log records to the associated z/OS logstream for that VSAM dataset.
+
+VSAM may be deployed under either CICS control, or independently. 
+* If VSAM is deployed independently from CICS, then a separate licensed product (CICS VSAM Recovery) is required to write replication log records to the z/OS logstream. CICS VSAM Recovery is outside the scope of this implementation worked example.
+* If VSAM is deployed under CICS, then CICS TS 5.6 or later will write replication log records to the z/OS logstreams. Care must be taken to ensure that Tie-Up records are also written to the z/OS logstream so that the log records written by CICS (referring to DD cards) can be associated with the actual names of the VSAM datasets. Tie Up records can be generated automatically by deploying a CICS-provided transaction.
 
 ## Contents
 
@@ -40,6 +46,7 @@ All CDC capture and apply agents conform to the CDC standards for streaming chan
   <li><a href="#6.1">6.1 VSAM Access Service</a></li>
   <li><a href="#6.2">6.2 CICS-TS or CICS-VR to write the replication logstream</a></li>
   <li><a href="#6.3">6.3 Augment VSAM to write replication log records</a></li>
+  <li><a href="#6.4">6.4 Generate Tie-Up records</a></li>
 </ul>
 <li><a href="#7.0">7. Integrate with the wider CDC Landscape</a>
 <ul>
@@ -603,6 +610,17 @@ The second step is to ALTER the VSAM dataset to associate the logstream, shown b
   LOGREPLICATE                                    
 /*                                                
 ```
+
+
+ <h3 id="1.0">6.4 Generate Tie-Up records</h2> 
+ 
+Tie-Up Record processing is covered very clearly in the Knowldgecentre [here](https://www.ibm.com/docs/en/idr/11.4.0?topic=reading-tieup-record-tur-processing) and will not be duplicated in this document.
+
+The most sustainable way of ensuring that Tie-Up records are written to the z/OS logstream is to deploy the CICS-provided CFCT transaction (APAR PI97207).
+You should order the PTF for this APAR, and ensure that the CFCT transaction is scheduled to run periodically.
+
+Failure to generate Tie-Up records will result in an absence a records being captured and replicated !
+
 
 That's it for the Classic CDC Server !!!
 
