@@ -52,28 +52,44 @@ The diagram below illustrates the architecture of this product.
 ![rcapdb2](/images/rcapdb2.png)
 
 In this CDC agent, the Db2 z/OS log is read by a Db2 stored procedure.
-The (using the same Db2 log interface as the z/OS started task CDC agent.
-Link [RCAPDB2ZOS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
+The CHCRLRSP stored procedure uses exactly the same Db2 log interface (DB2IFI) as the z/OS started task CDC agent to read the Db2 log.
+The difference in the remote capture agent is that the logic to consume the log records and publish changes to downstream CDC apply agents 
+is performed on a remote linux server. The capture agent simply calls the CHCRLRSP stored procedure when it wants to read more Db2 log records.
+
+IBM sales presentations sometimes promote the benefit of remote capture agenst as saving mainframe CPU cycles, and executing the stored procedure against zIIP engines. 
+Whilst there is some truth in these claims, they are over-rated and not a significant as the importance of having a single operations control plane.
+
+Regarding mainframe cpu savings: The biggest element of the cost of capturing changes is the log read API, which is 
+not zIIP eligible even if it is called from a DRDA-called stored procedure. If your reason for using the remote capture agent for Db2 z/OS is 
+to save CPU cycles, a realistic expectation of savings would be 40% - 50% of general purpose CPU compared to the local CDC started task. 
+And realising that saving will require you to establish a linux server ( with HA backup etc... ) to run the Capture Server.
+
+It is the author's opinion that the primary decision criteria should be where you want to manage CDC operations from. 
+If your skilled CDC operations team is linux-based, then the remote capture agent will be ideal, and you will have the added 
+benefit of some mainframe CPU efficiencies. 
+
+A worked example of implementing the remote CDC capture agent for Db2 z/OS is available 
+at this [link](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
 
 
 ### Remote Capture for VSAM
 
-Link [RCAPVSAM](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) 
+IBM also offers a remote capture capability for VSAM.
+
+The concepts of the remote capture agent for VSAM are conceptually similar to the remote capture agent for Db2 z/OS
+* There is a lightweight agent on z/OS that performs the actual log reading
+* The remainder of the logic for the capture agent is performed on a linux server.
+
+
+A worked example of implementing the remote CDC capture agent for VSAM is not yet written, but will be available shortly 
+at this [link](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_vsam.md) 
 
 
 
 ## Summary and Recommendations
 
-remote capture agents offer the benefit of establishing a single operational control point within the enterprise on Linux or Windows.
+Remote capture agents offer the benefit of establishing a single operational control point within the enterprise on Linux or Windows.
 
-IBM sales presentations sometimes promote the benefit of remote capture agenst as saving mainframe CPU cycles. 
-Whilst there is some truth in these claims, they are over-rated and not a significant as the importance of having a single operations control plane.
-
-Picture of a Shift-Right solution.
-
-References to deploying remote capture agents.
-
-Observations about remote capture for Db2 z/OS
-
-Observations about remote capture for VSAM
+The use of remote capture agents is a great option if your CDC operations support team is linux-based and you 
+want to minimise the need to liaise with other operational teams to manage the CDC service level that the business demands.
 
