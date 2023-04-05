@@ -24,7 +24,17 @@ and establishing all the CDC operational responsibilities on the target side (ty
   <li><a href="#4.1">4.1 zCX Concepts.</a></li>
   <li><a href="#4.2">4.2 zCX Setup.</a></li> 
 </ul>    
+<li><a href="#5.0">5. Worked Example: CDC for Kafka in zCX.</a> 
+<ul>  
+  <li><a href="#5.1">5.1 zCX Concepts.</a></li>
+  <li><a href="#5.2">5.2 zCX Setup.</a></li> 
+</ul>   
 </ul>
+
+
+
+
+
 
 <br><hr>
   
@@ -132,10 +142,9 @@ Operating CDC Apply engines inside zCX places them inside the IBM Z protected sh
 •	EAL5 certified LPAR security
 •	Etc…
 
+<br><hr>
 
 <h2 id="4.0">4. z/OS Container Extensions (zCX).</h2>  
-
-
 
 z/OS Container Extensions, is essentially a framework for supporting docker within z/OS. If you know docker on Linux, Unix, Windows or Mac, then you know docker on z/OS. The primary scope of this document is deploying CDC inside zCX. If you want to read more about zCX then please review some other source of zCX information, including the following Redbooks.
 
@@ -185,7 +194,11 @@ Table of contents
 
 
 
-4. Worked Example: CDC for Kafka in zCX.
+<br><hr>
+
+<h2 id="5.0">5. Worked Example: CDC for Kafka in zCX.</h2>  
+
+ 
 Having explained why you might want to consider deploying CDC agents inside zCX, the remainder of this document is a simple worked example.
 The scenario implemented is to capture from IMS and apply to Kafka. Classic CDC for IMS is the capture agent. CDC for Kafka for linux on z390 is the Apply agent.
 
