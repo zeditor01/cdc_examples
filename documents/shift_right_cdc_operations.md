@@ -1,3 +1,5 @@
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
+
 # Shift-Right CDC Operations
 
 This section addresses the practice of minimising or eliminating CDC operational responsibility from the source platform (typically z/OS) 
