@@ -4,6 +4,10 @@
 
 This is a short, sweet and simple document, because deploying the CDC management tools is a simple task.
 
+The diagram below represents the relationship between the CDC administration tools and the CDC Agents.
+
+![cdcarch](/images/cdc/CDC_architecture.jpg)
+
 ## Description of the 3 primary components available for CDC management
 
 The primary administration tools for CDC Replication are the Management Condole GUI (Windows only) and the Access Server (Windows or Linux).
