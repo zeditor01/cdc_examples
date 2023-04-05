@@ -49,7 +49,7 @@ remotely from the database that they were operating against. The list of possibl
   
 <h2 id="2.0">2. Shift-Left Operationss</h2> 
   
-## Shift-Left Operations
+
 Separating a CDC Apply agent from a target database has always been easy to do between LUW platforms, because 
 most target databases are based on a client-server deployment model, and CDC Apply only needs to connect to a database client.
   
@@ -61,7 +61,7 @@ Software Containers provide an easy solution for the common CDC use cases.
 
 ![shift_l](/images/shift_l.png)
 
-
+<br><hr>
 
 <h2 id="2.0">3. Deploying CDC agents as containers in z/OS Container Extensions (zCX)</h2> 
 
