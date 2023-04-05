@@ -46,9 +46,14 @@ In support of Shift-Right deployments, IBM has announced two remote capture prod
 
 ### Remote Capture for Db2 z/OS
 
-Link [RCAPDB2ZOS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
+In the case fo Db2 z/OS, IBM offers a remote capture capability from a linux client. 
+The diagram below illustrates the architecture of this product.
 
 ![rcapdb2](/images/rcapdb2.png)
+
+
+Link [RCAPDB2ZOS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_remotecdccapture_db2zos.md) 
+
 
 ### Remote Capture for VSAM
 
