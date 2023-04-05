@@ -1,5 +1,7 @@
 [Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
 
+![Roadwork](/images/work_in_progress.jpg)
+
 # Devops Approaches for CDC
 
 This paper has yet to be written. The following is an indication of the nature of the content that it will address.
