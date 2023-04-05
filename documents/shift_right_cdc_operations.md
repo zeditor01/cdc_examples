@@ -20,11 +20,7 @@ remotely from the database that they were operating against. The list of possibl
 4. minimising distribution of workload from an expensive operting platform to a cheaper operating platform
 5. etc...
 
-## Shift-Left Operations
-Separating a CDC Apply agent from a target database has always been easy to do, because 
-most target databases are based on a client-server deployment model, and CDC Apply only needs to connect to a database client.
 
-![shift_l](/images/shift_l.png)
 
 ## Shift-Right Operations
 Separating a CDC Capture agent from a source database is harder because the CDC capture agent will use log APIs 
