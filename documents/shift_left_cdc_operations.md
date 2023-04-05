@@ -8,8 +8,8 @@ and establishing all the CDC operational responsibilities on the target side (ty
 ## Contents
 
 <ul class="toc_list">
-<li><a href="#1.0">1. Shift-Right Concepts</a>   
-<li><a href="#2.0">2. Shift-Right Operations</a>   
+<li><a href="#1.0">1. Shift-Left Concepts</a>   
+<li><a href="#2.0">2. Shift-Left Operations</a>   
 <li><a href="#3.0">3. IBM Remote Capture products
 <ul>  
   <li><a href="#3.1">3.1 Remote Capture for Db2 z/OS</a></li>
