@@ -20,6 +20,7 @@ without deploying the CDC started task on z/OS itself. The potential benefits of
 1. a reduction in general purpose CPU consumption compared on z/OS, compared to the z/OS started task.
 2. placing operational control responsibilities to a linux operations team, instead of a z/OS operations team.
 
+Some observations about the CDC remote capture for Db2 z/OS:
 * The administration tools (Management Console and CHCCLP) work with the remote capture agent in exactly the same way as they work wth a z/OS started task for CDC.
 * Performance benchmarks for local and remote capture agents are comparable.
 * Software licensing metrics are different, so it may be worth getting quotes from IBM for each option.
