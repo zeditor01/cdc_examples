@@ -69,19 +69,21 @@ Software Containers provide an easy solution for the common CDC use cases, as fo
 
 <br><hr>
 
-<h2 id="2.0">3. The Benefits of deploying CDC agents as zCX Containers</h2> 
+<h2 id="3.0">3. The Benefits of deploying CDC agents as zCX Containers</h2> 
 
 
 The benefits listed in this section would apply to most z/OS centric sites, but the extent of the benefit will depend on the operational situation at a given site.
-•	Some of the benefits listed in this section would apply to any container environment.
-•	Some of the benefits listed in this section are specific to zCX in z/OS.
-•	Some of the benefits listed in this section would only apply to sites who have a z/OS centric operational strengths.
+* Some of the benefits listed in this section would apply to any container environment.
+* Some of the benefits listed in this section are specific to zCX in z/OS.
+* Some of the benefits listed in this section would only apply to sites who have a z/OS centric operational strengths.
 
-2.1 Simpler, Faster Deployment.
+<h3 id="3.1">3.1 Simpler, Faster Deployment.</h3> 
+
 Software containers are designed for point and shoot provisioning. If you can package your software into a container it will easier the deploy that running through a typical install and configure process for installing software into an operating system.
 This is a benefit that you will realise for software containers on any platform. z/OS doesn’t miss out.
 
-2.2 A single operations team to run the entire CDC solution.
+<h3 id="3.2">3.2 A single operations team to run the entire CDC solution.</h3> 
+
 The author of this document has worked with many organisations who implement data replication solutions between mainframe and midrange platforms like Linux. It is the norm that
 1.	z/OS and midrange systems are managed by different operation teams
 2.	z/OS and midrange operations team will use different tools and different procedures.
