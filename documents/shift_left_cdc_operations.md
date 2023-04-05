@@ -1,4 +1,27 @@
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
+
 # Shift-Left CDC Operations
+
+This section addresses the practice of minimising or eliminating CDC operational responsibility from the target platform (typically Linux) 
+and establishing all the CDC operational responsibilities on the target side (typically z/OS)
+
+## Contents
+
+<ul class="toc_list">
+<li><a href="#1.0">1. Shift-Right Concepts</a>   
+<li><a href="#2.0">2. Shift-Right Operations</a>   
+<li><a href="#3.0">3. IBM Remote Capture products
+<ul>  
+  <li><a href="#3.1">3.1 Remote Capture for Db2 z/OS</a></li>
+  <li><a href="#3.2">3.2 Remote Capture for VSAM</a></li>
+  </ul>  
+<li><a href="#4.0">4. Summary and Recommendations</a> 
+</ul>
+
+## 1. Shift-Reight Concepts
+
+    
+    # Shift-Left CDC Operations
 
 The biggest operational challenge for CDC systems is often the challenges in getting two independent operational 
 teams (e.g. z/OS and LUW or cloud ) to form an effective alliance to manage the business service level.
