@@ -199,7 +199,7 @@ Now, create an instance called centos199db2, listening on port 10901, allocated 
 
 Next step is to define an encryption profile. This dialog is iterative, allowing you to define multiple encryption profiless, and then choose the one to use. 
 You can also return to this dialog later and change the encryption profile of the instance. The configuration of TLS and encryption profiles is handled as a separate 
-topic in [13. Security for CDC (LDAP and TLS).](C013_security.md). For now we will create an encryption profile that disables encryption. 
+topic in [Securing CDC](https://github.com/zeditor01/cdc_examples/blob/main/documents/securing_cdc.md). For now we will create an encryption profile that disables encryption. 
 
 Select 1 to manage encryption profiles, and then select 1 again to drive the "ADD encryption profile" dialog here 
 
