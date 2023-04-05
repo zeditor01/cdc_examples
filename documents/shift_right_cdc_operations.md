@@ -23,12 +23,22 @@ remotely from the database that they were operating against. The list of possibl
 
 
 ## Shift-Right Operations
-Separating a CDC Capture agent from a source database is harder because the CDC capture agent will use log APIs 
+Separating a CDC Capture agent from a source database can be hard because the CDC capture agent will use log APIs 
 supported by the DBMS vendor to access the database logs for change data capture, and normally those log APIs are
 only available on the same OS as the source database.
 
+Some RDBMS's do enable the database recovery logs to be read from a remote system. However, 
+if the source RDBMS is DB2 for z/OS (using EBCDIC code pages) and the target is a Linux RDBMS (using ascii code pages) then 
+that's not going to work.
+
+Another approach is to provide a light-touch log reader on the source database (such as a database stored procedure) and call it with an 
+SQL connections from a remote platform.
+
 ![shift_r](/images/shift_r.png)
 
+Whatever the precise mechanism, the driving force is normally the desire to have all CDC operations and automation managed on a common operating system, 
+so that a single support team can take responsibility for the CDC service levels without depending on favours from an independent operations support 
+team for a different OS platform.
 
 ## IBM Remote Capture products
 
