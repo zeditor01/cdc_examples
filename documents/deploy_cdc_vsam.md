@@ -707,23 +707,31 @@ The steps you need to follow are described in the list below, and illustrated in
 
 Scroll through the screenshots below to following the GUI dialog to Define and Verify a VSAM Table.
 
-Screenshot 1 of 15 : Create a new Data Design Project 
+***Screenshot 1 of 15*** 
+
+Create a new Data Design Project 
+
 ![CDA Imported Artefacts](../images/cdc/vsamt01.PNG)
 
 Screenshot 2 of 15 :  Call it CDCVSAM
+
 ![CDA Imported Artefacts](../images/cdc/vsamt02.PNG)
 
 Screenshot 3 of 15 :  Inside the project, create a new physical data model
+
 ![CDA Imported Artefacts](../images/cdc/vsamt03.PNG)
 
 Screenshot 4 of 15 :  Use the Classic Integration template for this data model
+
 ![CDA Imported Artefacts](../images/cdc/vsamt04.PNG)
 
 
 Screenshot 5 of 15 :  Import copybooks
+
 ![CDA Imported Artefacts](../images/cdc/vsamt05.PNG)
 
 Screenshot 6 of 15 :  Import from either 3270 or local PC files
+
 ![CDA Imported Artefacts](../images/cdc/vsamt06.PNG)
 
 Screenshot 7 of 15 :  View the object and Finish
