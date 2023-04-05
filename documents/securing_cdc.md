@@ -5,6 +5,9 @@
 This paper addresses the likely security requirements for any CDC deployment, and 
 provides worked examples of how to satisfy those requirements with a CDC solution.
 
+![Roadwork](/images/work_in_progress.jpg)
+The TLS encryption worked examples need to be re-done. Also, the LDAP and the Encryption topics should be split out.
+
 ## Contents
 
 1. Authentication and Encryption Options for CDC Components 
