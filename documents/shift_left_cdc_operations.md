@@ -10,11 +10,13 @@ and establishing all the CDC operational responsibilities on the target side (ty
 <ul class="toc_list">
 <li><a href="#1.0">1. Shift-Left Concepts</a>   
 <li><a href="#2.0">2. Shift-Left Operations</a>   
-<li><a href="#3.0">3. IBM Remote Capture products
+<li><a href="#3.0">3. Deploying CDC agents as containers in z/OS Container Extensions (zCX)</a>
+    
 <ul>  
   <li><a href="#3.1">3.1 Remote Capture for Db2 z/OS</a></li>
   <li><a href="#3.2">3.2 Remote Capture for VSAM</a></li>
-  </ul>  
+</ul>  
+  
 <li><a href="#4.0">4. Summary and Recommendations</a> 
 </ul>
 
@@ -48,15 +50,21 @@ remotely from the database that they were operating against. The list of possibl
 <h2 id="2.0">2. Shift-Left Operationss</h2> 
   
 ## Shift-Left Operations
-Separating a CDC Apply agent from a target database has always been easy to do, because 
+Separating a CDC Apply agent from a target database has always been easy to do between LUW platforms, because 
 most target databases are based on a client-server deployment model, and CDC Apply only needs to connect to a database client.
+  
+However, when the source platform is z/OS, and the CDC Apply agent is only available for linux or windows, a shift-left configuration 
+doesn't work.
+  
+Software Containers provide an easy solution for the common CDC use cases.
+  
 
 ![shift_l](/images/shift_l.png)
 
 
 
+<h2 id="2.0">3. Deploying CDC agents as containers in z/OS Container Extensions (zCX)</h2> 
 
-## Deploying CDC agents as containers in z/OS Container Extensions (zCX)
 
 
 2. The Benefits of deploying CDC agents as zCX Containers. 
