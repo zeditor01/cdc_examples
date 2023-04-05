@@ -26,7 +26,7 @@ Some observations about the CDC remote capture for Db2 z/OS:
 * Software licensing metrics are different, so it may be worth getting quotes from IBM for each option.
 
 ***The Choice*** of whether to use the z/OS started task capture agent for Db2 z/OS, or the linux remote capture agent will be influenced by all of these factors, 
-but the best technical descision will be determined by co-locating the operations responsibility for as many CDC agents as possible on the same platform (be it linux or z/OS).
+but ***the best technical descision will be determined by co-locating the operations responsibility for as many CDC agents as possible on the same platform (be it linux or z/OS).***
 
 The design of the remote capture agent for Db2 z/OS is illustrated in the diagram below
 
