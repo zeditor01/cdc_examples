@@ -17,8 +17,12 @@ Collectively these tools cater for the entire range of administration and operat
 
 Any administration or operation task can be done via either the GUI or by CHCCLP scripts.
 CHCCLP scripts can be created with parameterised variables.
+CHCCLP scripts are supported
+1. at the management console
+2. at the access server
+3. on z/OS
 
-CHCCLP for z/OS is the CHCCLP script package, deployed to z/OS, accessible via USS command line or JCL.
+***CHCCLP for z/OS*** is the CHCCLP script package, deployed to z/OS, accessible via USS command line or JCL.
 
 ## Why would you use CHCCLP for z/OS ?
 
