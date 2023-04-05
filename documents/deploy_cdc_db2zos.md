@@ -1,7 +1,9 @@
-[Back to README.md and Table of Contents.](README.md)
+[Back to main document](https://github.com/zeditor01/cdc_examples/blob/main/create_scale_sustain_cdc_systems.md).
 
 # Setting Up CDC for Db2 z/OS - Worked Example
 This chapter is a worked example of setting up CDC for Db2 z/OS. 
+
+All CDC capture and apply agents conform to the CDC standards for streaming changes between capture and apply agents, and for supporting administration tools and interfaces. Each CDC implementation for a specific source has to bridge from the generic CDC standards to the specific characteristics of the source. Db2 z/OS is a standards-compiant relational database, making CDC integration very straigtforward.
 
 ## Contents
 
