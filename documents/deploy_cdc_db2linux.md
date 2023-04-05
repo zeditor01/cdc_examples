@@ -299,7 +299,8 @@ to automate the execution and operation of the CDC instance.
 
 This document is primarily concerned with everything that needs to be done to establish CDC for Db2 as a CDC source and target. 
 
-Using the the CDC administration tools is now a standard CDC task which is covered in [11. Devops Options for CDC.](C011_devops.md)
+Using the the CDC administration tools is now a standard CDC task which is covered in 
+the [Developing CDC Subscriptions](https://github.com/zeditor01/cdc_examples/blob/main/documents/develop_subscriptions.md) paper
 
 <h3 id="6.3">6.3 Use CHCCLP Scripting</h3>
 
@@ -313,8 +314,8 @@ The CHCCLP scripting option will be attractive to all shops that wish to impleme
 CDC replication environments. Shops with a z/OS operation bridge should know that the CHCCLP scripting environment can also be deployed 
 inside z/OS, either from unix system services (USS) or from JCL (using the java batch scheduler). 
 
-All of these devops options are covered in the  [11. Devops Options for CDC.](C011_devops.md) paper 
-and the [12. CHCCLP Scripting.](C012_chcclp.md) paper.
+All of these devops options are covered in the the [CDC Devops](https://github.com/zeditor01/cdc_examples/blob/main/documents/devops_cdc.md)
+and [CHCCLP for z/OS](https://github.com/zeditor01/cdc_examples/blob/main/documents/deploy_chcclp_zos.md) paper in this series of articles. 
 
 <h3 id="6.4">6.4 Conforming to site standards for cross-platform devops and security</h3> 
 
