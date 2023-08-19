@@ -816,7 +816,7 @@ The following job was submitted to perform the ACBGEN.
 Having made the changes to support the Partner Program Notification interface, and the Enhanced IMS database logging, 
 you need to copy the IBM-Supplied Exits from CCDC.SCACLOAD into IMS RESLIB. 
 
-1. Copy CCDC.SCACLOAD(SDFSRESL) to IMS RESLIB, or a concatenated library.
+1. Copy CCDC.SCACLOAD(DFSFLGX0) to IMS RESLIB, or a concatenated library.
 2. Copy DFSPPUE0 from wherever you created in to IMS RESLIB, or a concatenated library.
 
 
