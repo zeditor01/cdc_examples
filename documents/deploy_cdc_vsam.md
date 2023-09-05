@@ -33,6 +33,7 @@ VSAM may be deployed under either CICS control, or independently.
   <li><a href="#4.7">4.7 Create the Metadata Catalog</a></li>
   <li><a href="#4.8">4.8 Create the Replication Mapping Datasets</a></li>  
   <li><a href="#4.9">4.9 Setup Encrypted Passwords</a></li>  
+  <li>(<a href="#4.10:>4.10 Installation Verification Job</a></li>
 </ul> 
 <li><a href="#5.0">5. Configure the z/OS Environment</a>
 <ul>
@@ -461,7 +462,7 @@ This is performed using job CECCDSUB. Review the generated JCL and submit when h
 ```
 
 
-<h3 id="4.8">4.9 Setup Encrypted Passwords</h3> 
+<h3 id="4.9">4.9 Setup Encrypted Passwords</h3> 
 
 Assuming that you enabled security in the CACCUSPC parameters file earlier: <code>CDCPSAFX="CACSX04"</code> 
 you will need to setup encrypted passwords for connections to the Classic CDC instance. (Enabling security requires providing a password for all user access. 
@@ -493,9 +494,20 @@ Edit <code>CDCV.I2.USERSAMP(CACQRSYS)</code> and replace the second line of the 
 
 
 
-
 <code>CDCV.I2.USERCONF(CACMUCON)</code> and <code>CDCV.I2.USERSAMP(CACQRSYS)</code> will be 
 referenced by the Installation Verification Jobs, and other utility jobs. Click through the slideshow sequence below to follow the example above.
+
+<h3 id="4.10">4.10 Installation Verification Job</h3> 
+
+Edit and submit job CDCV.I2.USERSAMP(CECCDVCD)  
+
+```
+//*      *  RUNS THE METADATA UTILITY TO GRANT SYSADM TO THE USER    *
+//*          SPECIFIED FOR THE KEYWORD CDCADMUS IN THE CACCUSPC      *
+//*          FILE                                                    *
+//*      *  RUNS THE CACSAMP CLIENT TO ACCESS THE DATASERVER AND     *
+//*          DISPLAY THE CONTENTS OF THE SYSIBM.SYSTABLES            * 
+```
 
 
 <br><hr>
@@ -620,6 +632,14 @@ The most sustainable way of ensuring that Tie-Up records are written to the z/OS
 You should order the PTF for this APAR, and ensure that the CFCT transaction is scheduled to run periodically.
 
 Failure to generate Tie-Up records will result in an absence a records being captured and replicated !
+
+To enable CFCT, specify the INITPARM system initialization parameter in the format INITPARM=(DFHFCLJ1='nn') where nn is a two-digit number in the range 01 - 60 defining an interval in minutes
+
+
+
+```
+INITPARM=(DFHFCLJ1='30')
+```
 
 
 That's it for the Classic CDC Server !!!
